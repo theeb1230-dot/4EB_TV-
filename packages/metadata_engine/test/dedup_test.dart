@@ -8,13 +8,14 @@ CanonicalContent item(
   int? year,
   List<ExternalId> ids = const [],
   ContentType type = ContentType.movie,
-}) => CanonicalContent(
-  canonicalId: id,
-  type: type,
-  titles: [LocalizedTitle(languageTag: 'ar', value: title)],
-  year: year,
-  externalIds: ids,
-);
+}) =>
+    CanonicalContent(
+      canonicalId: id,
+      type: type,
+      titles: [LocalizedTitle(languageTag: 'ar', value: title)],
+      year: year,
+      externalIds: ids,
+    );
 
 void main() {
   test('external identifier is authoritative', () {
