@@ -71,6 +71,13 @@ Observed signals include:
 - Added tests asserting stream does not imply download and checkpoints remain provider-independent.
 - Tests are committed but not claimed executed: repository still has no CI workflow and this run has no attached Dart toolchain execution evidence.
 
+## Provider/CI work in this run
+
+- Added `packages/provider_sdk` with provider interface, capability-filtered registry, duplicate-ID rejection and fail-closed provider policy.
+- Added contract tests for capability filtering, duplicate registration and unknown-provider disabled behavior.
+- Added minimal GitHub Actions quality gate for both Dart packages: dependency resolution, format check, analyzer and tests on PR/main changes.
+- Signed-config cryptography remains intentionally unimplemented until primitive/dependency compatibility audit; no home-grown crypto was introduced.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
