@@ -24,9 +24,8 @@ MetadataMatch? matchCanonical(
   CanonicalContent incoming,
   Iterable<CanonicalContent> existing,
 ) {
-  final incomingIds = incoming.externalIds
-      .map((id) => id.namespace + ':' + id.value)
-      .toSet();
+  final incomingIds =
+      incoming.externalIds.map((id) => id.namespace + ':' + id.value).toSet();
 
   for (final candidate in existing) {
     final candidateIds = candidate.externalIds
