@@ -78,6 +78,12 @@ Observed signals include:
 - Added minimal GitHub Actions quality gate for both Dart packages: dependency resolution, format check, analyzer and tests on PR/main changes.
 - Signed-config cryptography remains intentionally unimplemented until primitive/dependency compatibility audit; no home-grown crypto was introduced.
 
+## CI defect handling in this run
+
+- Workflow run 35287715964 provided real execution evidence: `core_domain` completed dependency resolution, format, analyzer and tests successfully.
+- `provider_sdk` failed specifically at the format gate; analyzer/tests were correctly blocked rather than bypassed.
+- Inspected the failed job log and applied the exact formatter-required change to `provider_registry_test.dart` on the same PR branch. No quality gate was weakened and no blind rerun was requested; the new commit triggers fresh exact-head validation.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
