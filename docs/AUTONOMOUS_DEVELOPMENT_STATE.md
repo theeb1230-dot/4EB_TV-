@@ -25,7 +25,9 @@
 - [x] Seeded `EXPERIENCE_MATRIX`, `PROVIDER_MATRIX`, `CAPABILITY_MATRIX`, and `LICENSE_SECURITY_AUDIT` from observed evidence.
 - [ ] Deep-read manifests/licenses/source code for first-wave sources.
 - [ ] Produce evidence cards for all 30 sources.
-- [ ] Produce Migration Plan.
+- [x] Draft evidence-driven Migration Plan created.
+- [x] Architecture-critical inventory cards expanded to Cinemax, CineSpot, Anthology, Al-Qahtani, Turkish-Series, xoxixoxi and Ytvplus2.
+- [ ] Deep-read manifests/licenses/source code for all architecture-critical sources.
 
 ## Evidence from this run
 
@@ -47,10 +49,10 @@ Observed signals include:
 
 ## Next highest-value work
 
-1. Continue on this same PR/branch until first-wave evidence is coherent.
+1. Continue on this same PR/branch until architecture-critical evidence is coherent.
 2. Obtain file-content access for manifests/licenses and source entry points, beginning Aniyomi, AIOStreams, FlixQuest and AIOMetadata.
-3. Extend evidence cards to Cinemax, CineSpot, Anthology, Al-Qahtani, Turkish-Series and xoxixoxi/Ytvplus2.
-4. Convert provisional matrices into code-evidenced decisions and create `MIGRATION_PLAN`.
+3. Promote inventory cards to code-evidenced deep audits and expand the remaining 30-source queue.
+4. Convert provisional matrices into code-evidenced decisions; the draft `MIGRATION_PLAN` now exists and must be refined from deep evidence.
 5. Freeze `MASTER_ARCHITECTURE` only after architecture-critical evidence is sufficient.
 6. Establish `DESIGN_SYSTEM` before production UI implementation.
 
