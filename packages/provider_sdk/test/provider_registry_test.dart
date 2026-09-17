@@ -24,7 +24,8 @@ final class _StreamOnlyProvider implements Provider {
 
 void main() {
   test('registry filters by declared capability', () {
-    final registry = ProviderRegistry()..register(const _StreamOnlyProvider('a'));
+    final registry = ProviderRegistry()
+      ..register(const _StreamOnlyProvider('a'));
     expect(registry.supporting(Capability.stream), hasLength(1));
     expect(registry.supporting(Capability.download), isEmpty);
   });
