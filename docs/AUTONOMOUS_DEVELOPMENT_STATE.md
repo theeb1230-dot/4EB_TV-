@@ -56,6 +56,13 @@ Observed signals include:
 - Added language-neutral `CONTRACTS_FOUNDATION` for canonical content, capabilities, provider descriptors, playback candidates, resolver, checkpoints, experiences, signed config and local health observations.
 - This is a contract freeze, not a runtime/dependency freeze; source-level Deep Audit remains required before package selection or third-party code reuse.
 
+## Design-system work in this run
+
+- Added `DESIGN_SYSTEM.md` for 4BA Cinematic Gold covering semantic color/typography/spacing/radius/focus/card/button/navigation/player/motion/responsive/accessibility/RTL rules.
+- Added ADR-0005 to constrain Experience token overrides without allowing Experiences to break accessibility/core semantics.
+- Added dedicated TV focus and responsive contracts before UI implementation.
+- Exact visual values remain intentionally unfrozen until contrast/device evidence exists; the semantic system is now defined.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
