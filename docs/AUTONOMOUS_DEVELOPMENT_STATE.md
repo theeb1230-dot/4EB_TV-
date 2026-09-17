@@ -98,6 +98,13 @@ Observed signals include:
 - Added tests for health dominance, Data Saver and deterministic ties.
 - Extended CI to validate resolver_engine and corrected workflow path coverage.
 
+## Fallback orchestration in this run
+
+- PR #7 exact-head CI run `35288046694` completed green across core_domain, provider_sdk and resolver_engine; each job passed dependency resolution, formatting, analyzer and tests.
+- PR #7 was squash-merged at exact head `e6dda51efdbea37fb3e89aa6eee1c4220caa06b4`; new main is `ae88c38adfb25ea675dda64d7febdd68713208b5`.
+- Added resolver fallback orchestration that consumes ranked candidates, retries retryable failures, stops immediately on policy failures, and passes the same resume position to every source attempt.
+- Added tests for resume-preserving source switching, policy-stop behavior and candidate exhaustion.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
