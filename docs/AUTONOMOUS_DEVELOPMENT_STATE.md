@@ -1,50 +1,58 @@
 # 4BA Autonomous Development State
 
-## Run baseline
+## Current repository baseline
 
-- Baseline main SHA: `bdbd526fc2106c586a65afe0beaad79e5b43f2b7`
-- Baseline branches: only `main`; unprotected at audit time.
-- Baseline open PRs: none.
-- Baseline Actions workflow runs: none.
-- Baseline Releases: none.
-- Baseline root: `README.md` and `CinemaPress-master.zip` only.
-- Working branch: `build/foundation-constitution`
+- Current main SHA at start of this run: `bf178321f43e5c81cb377392931d1070addd3d75`.
+- PR #1 was merged before this run and its governance baseline is now on main.
+- Actions runs at start of this run: none.
+- Releases at start of this run: none.
+- Executable 4BA workspace: not created yet.
+- Current working branch: `audit/source-ingestion`.
 
-## Work completed in this run
+## Completed
 
-1. Established the locked Product Constitution in `docs/PRODUCT_CONSTITUTION.md`.
-2. Seeded the complete 30-source audit queue in `docs/SOURCE_MATRIX.md` with provisional Experience/Provider/Engine/Reference classification and mandatory audit-card fields.
-3. Established this state ledger so subsequent runs can resume from repository evidence rather than conversation state.
+### Phase 0 — Baseline/Governance
 
-## Current phase
+- [x] Product Constitution committed and merged.
+- [x] 30-source inventory/audit queue committed and merged.
+- [x] Autonomous state ledger committed and merged.
+- [x] ZERO_COST / ZERO_ADS / Privacy / Native-first / license-security gates documented.
 
-Phase 0: Baseline/Governance is in progress.
-Phase 1: Deep Audit is queued and is the next high-value work.
+Phase 0 governance baseline is complete. Architecture and Design System are deliberately not frozen here; they belong to later phases and require source evidence.
 
-## Acceptance criteria for Phase 0
+### Phase 1 — Deep Audit / Source ingestion
 
-- [x] Product Constitution committed on working branch.
-- [x] Source inventory/audit queue committed on working branch.
-- [x] Autonomous state ledger committed on working branch.
-- [ ] Master architecture document created after source evidence is sufficient.
-- [ ] Design-system specification created before production UI implementation.
-- [ ] CI/quality baseline established once an executable workspace exists.
+- [x] Authoritative aggregate Drive bundle resolved: `1ZRjuUdB3lctpsMfFTgVIiipaXoRtuldl`, `مشاريع مختلفه زايد مشروع القحطاني tv.zip`, observed size `215407865` bytes.
+- [x] Added `docs/SOURCE_INGESTION.md` defining evidence, security, licensing and completion rules for the 30-source audit.
+- [ ] Produce evidence cards for all 30 sources.
+- [ ] Populate Experience Matrix.
+- [ ] Populate Provider Matrix.
+- [ ] Populate Capability Matrix.
+- [ ] Populate License/Security Audit.
+- [ ] Produce Migration Plan.
 
-## Risks and blockers
+## Tooling finding
 
-- The repository currently contains only one source ZIP (`CinemaPress-master.zip`), while the product plan depends on 30 source projects. Deep audit must use the authoritative source bundle or individually imported sources before claiming completeness.
-- No executable 4BA application/workspace exists yet, so there are currently no meaningful build/test gates to run.
-- No GitHub Actions runs or Releases exist yet.
-- Android API 24 and iOS 15 remain provisional until player/dependency compatibility audit.
-- Source licensing and secrets must be verified before code reuse.
+The authoritative aggregate bundle is larger than the conversation-file materialization limit (100 MiB). Drive can stream the raw bundle, but local archive listing/extraction attempts in this run hit the container execution transport timeout. This is a tooling/ingestion constraint, not evidence that the source bundle is invalid. No source is marked audited from filenames alone.
 
-## Next work
+The repository's `CinemaPress-master.zip` is binary and the GitHub text fetch interface cannot inspect it as UTF-8. It remains reference input, not audited production code.
 
-1. Obtain/inspect the authoritative 30-project source bundle and create evidence-backed audit cards, starting with architecture-critical sources: aniyomi, AIOStreams, FlixQuest, aiometadata, Cinemax, CineSpot, anthology, Al-Qahtani, turkish-series, and xoxixoxi/Ytvplus2.
-2. Populate `EXPERIENCE_MATRIX`, `PROVIDER_MATRIX`, `CAPABILITY_MATRIX`, and `LICENSE_SECURITY_AUDIT` from code evidence.
-3. Freeze Master Architecture only after the first architecture-critical audits are complete.
-4. Establish the 4BA Design System before production UI implementation.
-5. Bootstrap the executable workspace only after architecture boundaries and compatibility constraints are sufficiently evidenced.
+## Risks / blockers
+
+- Source-level evidence is still required before architectural freeze or code reuse.
+- License status must be verified per source; unknown/no-license code is not copied into production.
+- Secrets/credentials must be quarantined and never reproduced in audit documents. `orien.live-main` remains high-risk pending inspection.
+- No executable workspace exists, therefore no meaningful application build/test/CI gate can yet run.
+- Android API 24 and iOS 15 remain provisional pending player/dependency compatibility evidence.
+
+## Next highest-value work
+
+1. Make architecture-critical source trees inspectable without committing caches/binaries/secrets.
+2. Audit first wave: Aniyomi, AIOStreams, FlixQuest, AIOMetadata, Cinemax, CineSpot, Anthology, Al-Qahtani, Turkish-Series, xoxixoxi/Ytvplus2.
+3. Create evidence-backed `EXPERIENCE_MATRIX`, `PROVIDER_MATRIX`, `CAPABILITY_MATRIX`, `LICENSE_SECURITY_AUDIT`, and `MIGRATION_PLAN`.
+4. Freeze `MASTER_ARCHITECTURE` only after architecture-critical evidence is sufficient.
+5. Establish `DESIGN_SYSTEM` before production UI implementation.
+6. Bootstrap executable Flutter workspace only after platform/player/provider boundaries are evidenced enough to avoid premature dependency lock-in.
 
 ## Permanent gates
 
