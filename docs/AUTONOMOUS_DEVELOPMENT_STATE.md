@@ -105,6 +105,12 @@ Observed signals include:
 - Added resolver fallback orchestration that consumes ranked candidates, retries retryable failures, stops immediately on policy failures, and passes the same resume position to every source attempt.
 - Added tests for resume-preserving source switching, policy-stop behavior and candidate exhaustion.
 
+## Metadata CI defect handling
+
+- Exact-head run `35288285905` failed only at the metadata_engine format gate; other matrix jobs were cancelled after the failure rather than treated as evidence.
+- Job log identified `lib/src/dedup.dart` and `test/dedup_test.dart` as formatter deltas.
+- Applied formatter-equivalent changes to both files on PR #9 without weakening format/analyzer/test gates. Fresh exact-head validation is required before merge.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
