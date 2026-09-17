@@ -31,7 +31,8 @@ void main() {
   });
 
   test('duplicate provider ids are rejected', () {
-    final registry = ProviderRegistry()..register(const _StreamOnlyProvider('a'));
+    final registry = ProviderRegistry()
+      ..register(const _StreamOnlyProvider('a'));
     expect(
       () => registry.register(const _StreamOnlyProvider('a')),
       throwsStateError,
