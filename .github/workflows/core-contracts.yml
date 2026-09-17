@@ -5,12 +5,14 @@ on:
     paths:
       - 'packages/core_domain/**'
       - 'packages/provider_sdk/**'
+      - 'packages/resolver_engine/**'
       - '.github/workflows/core-contracts.yml'
   push:
     branches: [main]
     paths:
       - 'packages/core_domain/**'
       - 'packages/provider_sdk/**'
+      - 'packages/resolver_engine/**'
       - '.github/workflows/core-contracts.yml'
 
 permissions:
@@ -21,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: [core_domain, provider_sdk]
+        package: [core_domain, provider_sdk, resolver_engine]
     defaults:
       run:
         working-directory: packages/${{ matrix.package }}
