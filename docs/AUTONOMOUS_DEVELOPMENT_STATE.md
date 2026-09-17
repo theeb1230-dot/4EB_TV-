@@ -2,13 +2,13 @@
 
 ## Current repository baseline
 
-- Exact main SHA at start of this run: `8bcf806f8a878cd89d2ef8c9014b4e37267f96c1`.
-- Open PRs at start: PR #4 only; it was rechecked mergeable with exact head and no checks/reviews, then squash-merged.
+- Exact main SHA at start of this run: `3a71030092e5c94b73e0dd07945f0d53641a1ae3`.
+- Open PRs at start: PR #5 only; rechecked exact head, mergeable=true, no Actions/status checks/reviews, then squash-merged.
 - Branches observed: `main`, `audit/source-ingestion`, `build/foundation-constitution`; none protected.
 - Actions workflow runs/status checks on current main: none.
 - Releases: none.
 - Executable 4BA workspace: not created yet.
-- Current working branch: `architecture/contracts-foundation`.
+- Current working branch: `core/domain-contracts`.
 
 ## Completed
 
@@ -62,6 +62,14 @@ Observed signals include:
 - Added ADR-0005 to constrain Experience token overrides without allowing Experiences to break accessibility/core semantics.
 - Added dedicated TV focus and responsive contracts before UI implementation.
 - Exact visual values remain intentionally unfrozen until contrast/device evidence exists; the semantic system is now defined.
+
+## Core implementation in this run
+
+- PR #5 merged at exact head `6c725c8cba9228da16966f88b7869ec333fd6ab2`; new main is `e6bd6940c4262a737b6fe1e8f3bd5d1fb55cd362`.
+- Created the first executable-language 4BA package: `packages/core_domain`, deliberately Flutter-free and provider-independent.
+- Implemented canonical content/episode identity, independent capability declarations, provider descriptor, playback candidates/checkpoints and resolver request/result/failure contracts.
+- Added tests asserting stream does not imply download and checkpoints remain provider-independent.
+- Tests are committed but not claimed executed: repository still has no CI workflow and this run has no attached Dart toolchain execution evidence.
 
 ## Risks / blockers
 
