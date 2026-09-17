@@ -111,6 +111,12 @@ Observed signals include:
 - Job log identified `lib/src/dedup.dart` and `test/dedup_test.dart` as formatter deltas.
 - Applied formatter-equivalent changes to both files on PR #9 without weakening format/analyzer/test gates. Fresh exact-head validation is required before merge.
 
+## Exact formatter correction
+
+- Exact-head run `35288608404` validated core_domain, provider_sdk and resolver_engine fully green; metadata_engine alone failed the formatting gate.
+- The improved gate exposed the exact Dart 3.13.4 diff. Applied those exact formatter changes to `lib/src/dedup.dart` and `test/dedup_test.dart` on PR #9.
+- No analyzer/test/security gate was weakened. Fresh exact-head CI remains mandatory before merge.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
