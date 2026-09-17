@@ -2,13 +2,13 @@
 
 ## Current repository baseline
 
-- Exact main SHA at start of this run: `9a754a5830d74899251ee522354dba827528793a`.
-- Open PRs at start: none.
+- Exact main SHA at start of this run: `8bcf806f8a878cd89d2ef8c9014b4e37267f96c1`.
+- Open PRs at start: none; PR #3 was merged by exact expected head SHA after rechecking mergeability and empty checks/reviews.
 - Branches observed: `main`, `audit/source-ingestion`, `build/foundation-constitution`; none protected.
 - Actions workflow runs/status checks on current main: none.
 - Releases: none.
 - Executable 4BA workspace: not created yet.
-- Current working branch: `audit/wave1-inventory-evidence`.
+- Current working branch: `audit/wave2-source-coverage`.
 
 ## Completed
 
@@ -24,7 +24,8 @@
 - [x] Evidence cards created for those four sources with explicit INVENTORY_EVIDENCED / DEEP_AUDIT_PENDING state.
 - [x] Seeded `EXPERIENCE_MATRIX`, `PROVIDER_MATRIX`, `CAPABILITY_MATRIX`, and `LICENSE_SECURITY_AUDIT` from observed evidence.
 - [ ] Deep-read manifests/licenses/source code for first-wave sources.
-- [ ] Produce evidence cards for all 30 sources.
+- [x] Inventory-level evidence cards now exist for all 30 sources.
+- [ ] Promote all 30 cards to code-evidenced deep audits.
 - [x] Draft evidence-driven Migration Plan created.
 - [x] Architecture-critical inventory cards expanded to Cinemax, CineSpot, Anthology, Al-Qahtani, Turkish-Series, xoxixoxi and Ytvplus2.
 - [ ] Deep-read manifests/licenses/source code for all architecture-critical sources.
@@ -38,6 +39,14 @@ Observed signals include:
 - AIOStreams: pnpm workspace, packages, TypeScript configs, Docker/Compose, environment sample and LICENSE.
 - FlixQuest: Flutter pubspec/lib/android/test/assets plus Cast receiver, OpenAPI schema and UI/design references.
 - AIOMetadata: TypeScript app/backend configs, addon/configure/data boundaries, Vite, Docker and environment example.
+
+## This run
+
+- Merged PR #3 after verifying head `39a1b8430ef2ca5247227ea4a15dd72ae6adea1f`, mergeable=true, no Actions/status checks, no comments/reviewers.
+- New main after squash merge: `8bcf806f8a878cd89d2ef8c9014b4e37267f96c1`.
+- Added inventory evidence cards for the 19 sources that did not yet have cards, completing 30/30 inventory-card coverage.
+- `orien.live-main` is explicitly quarantined as security-risk reference; credential harvesting is excluded and no credential values are reproduced.
+- Inventory coverage is not Deep Audit completion.
 
 ## Risks / blockers
 
