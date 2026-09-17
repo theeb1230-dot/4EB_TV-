@@ -6,13 +6,13 @@ on:
       - 'packages/core_domain/**'
       - 'packages/provider_sdk/**'
       - 'packages/resolver_engine/**'
-      - 'packages/resolver_engine/**'
       - '.github/workflows/core-contracts.yml'
   push:
     branches: [main]
     paths:
       - 'packages/core_domain/**'
       - 'packages/provider_sdk/**'
+      - 'packages/resolver_engine/**'
       - '.github/workflows/core-contracts.yml'
 
 permissions:
