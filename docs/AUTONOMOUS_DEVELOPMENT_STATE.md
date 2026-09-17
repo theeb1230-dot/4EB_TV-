@@ -90,6 +90,14 @@ Observed signals include:
 - The job log identified the exact file; the remaining cascade was reformatted on the same branch. Analyzer/tests remain gated behind formatting and were not bypassed.
 - Awaiting the newly triggered exact-head run before any merge decision.
 
+## Resolver implementation in this run
+
+- PR #6 passed both CI matrix jobs and was squash-merged with exact-head verification. New main: `e57dade2a7a8a341dc297075c8d01c2c649cc4c5`.
+- Added `packages/resolver_engine` with local privacy-preserving health observations, health summarization and deterministic candidate ranking.
+- Ranking weighs success, latency and quality/bitrate; Data Saver favors lower bitrate while health remains dominant.
+- Added tests for health dominance, Data Saver and deterministic ties.
+- Extended CI to validate resolver_engine and corrected workflow path coverage.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
