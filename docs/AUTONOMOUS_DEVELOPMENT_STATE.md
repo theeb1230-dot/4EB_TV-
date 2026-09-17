@@ -117,6 +117,13 @@ Observed signals include:
 - The improved gate exposed the exact Dart 3.13.4 diff. Applied those exact formatter changes to `lib/src/dedup.dart` and `test/dedup_test.dart` on PR #9.
 - No analyzer/test/security gate was weakened. Fresh exact-head CI remains mandatory before merge.
 
+## Deep Audit Wave 1 resumed after PR #9
+
+- Start main SHA after exact-head-green merge: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`.
+- PR #9 exact-head run `35288760605` passed format, analyzer and tests for core_domain, provider_sdk, resolver_engine and metadata_engine, then merged by expected head SHA.
+- Returned to Phase 1 ordering. Added `audits/DEEP_AUDIT_WAVE1.md` for Aniyomi, AIOStreams, FlixQuest and AIOMetadata.
+- Current repository cards are inventory evidence, not code-level audit evidence. Connected Drive search did not return the authoritative source trees/archive in this run, so no license/code claim was fabricated and no third-party code was copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
