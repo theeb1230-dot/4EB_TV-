@@ -2,57 +2,57 @@
 
 ## Current repository baseline
 
-- Current main SHA at start of this run: `bf178321f43e5c81cb377392931d1070addd3d75`.
-- PR #1 was merged before this run and its governance baseline is now on main.
-- Actions runs at start of this run: none.
-- Releases at start of this run: none.
+- Exact main SHA at start of this run: `9a754a5830d74899251ee522354dba827528793a`.
+- Open PRs at start: none.
+- Branches observed: `main`, `audit/source-ingestion`, `build/foundation-constitution`; none protected.
+- Actions workflow runs/status checks on current main: none.
+- Releases: none.
 - Executable 4BA workspace: not created yet.
-- Current working branch: `audit/source-ingestion`.
+- Current working branch: `audit/wave1-inventory-evidence`.
 
 ## Completed
 
 ### Phase 0 — Baseline/Governance
-
-- [x] Product Constitution committed and merged.
-- [x] 30-source inventory/audit queue committed and merged.
-- [x] Autonomous state ledger committed and merged.
+- [x] Product Constitution merged.
+- [x] 30-source inventory merged.
+- [x] Source ingestion/security protocol merged.
 - [x] ZERO_COST / ZERO_ADS / Privacy / Native-first / license-security gates documented.
 
-Phase 0 governance baseline is complete. Architecture and Design System are deliberately not frozen here; they belong to later phases and require source evidence.
-
 ### Phase 1 — Deep Audit / Source ingestion
-
-- [x] Authoritative aggregate Drive bundle resolved: `1ZRjuUdB3lctpsMfFTgVIiipaXoRtuldl`, `مشاريع مختلفه زايد مشروع القحطاني tv.zip`, observed size `215407865` bytes.
-- [x] Added `docs/SOURCE_INGESTION.md` defining evidence, security, licensing and completion rules for the 30-source audit.
+- [x] Authoritative aggregate Drive bundle resolved: `1ZRjuUdB3lctpsMfFTgVIiipaXoRtuldl`, observed size `215407865` bytes.
+- [x] First-wave low-level archive inventory evidence captured for Aniyomi, AIOStreams, FlixQuest and AIOMetadata without extracting/copying secrets.
+- [x] Evidence cards created for those four sources with explicit INVENTORY_EVIDENCED / DEEP_AUDIT_PENDING state.
+- [x] Seeded `EXPERIENCE_MATRIX`, `PROVIDER_MATRIX`, `CAPABILITY_MATRIX`, and `LICENSE_SECURITY_AUDIT` from observed evidence.
+- [ ] Deep-read manifests/licenses/source code for first-wave sources.
 - [ ] Produce evidence cards for all 30 sources.
-- [ ] Populate Experience Matrix.
-- [ ] Populate Provider Matrix.
-- [ ] Populate Capability Matrix.
-- [ ] Populate License/Security Audit.
 - [ ] Produce Migration Plan.
 
-## Tooling finding
+## Evidence from this run
 
-The authoritative aggregate bundle is larger than the conversation-file materialization limit (100 MiB). Drive can stream the raw bundle, but local archive listing/extraction attempts in this run hit the container execution transport timeout. This is a tooling/ingestion constraint, not evidence that the source bundle is invalid. No source is marked audited from filenames alone.
+The aggregate ZIP still times out when conventional central-directory listing is attempted in the execution environment. A bounded raw-string scan succeeded and exposed real archived path names for architecture-critical projects. This is weaker than source-content inspection, so the four cards are deliberately not marked Audited.
 
-The repository's `CinemaPress-master.zip` is binary and the GitHub text fetch interface cannot inspect it as UTF-8. It remains reference input, not audited production code.
+Observed signals include:
+- Aniyomi: app/core/data/domain/source-api/source-local/presentation/i18n/macrobenchmark multi-module structure and Gradle Kotlin manifests.
+- AIOStreams: pnpm workspace, packages, TypeScript configs, Docker/Compose, environment sample and LICENSE.
+- FlixQuest: Flutter pubspec/lib/android/test/assets plus Cast receiver, OpenAPI schema and UI/design references.
+- AIOMetadata: TypeScript app/backend configs, addon/configure/data boundaries, Vite, Docker and environment example.
 
 ## Risks / blockers
 
-- Source-level evidence is still required before architectural freeze or code reuse.
-- License status must be verified per source; unknown/no-license code is not copied into production.
-- Secrets/credentials must be quarantined and never reproduced in audit documents. `orien.live-main` remains high-risk pending inspection.
-- No executable workspace exists, therefore no meaningful application build/test/CI gate can yet run.
-- Android API 24 and iOS 15 remain provisional pending player/dependency compatibility evidence.
+- License text and implementation code are still unread; no production code reuse is approved.
+- Secret/config samples must be inspected without reproducing values.
+- Ads/tracking status remains unknown until code-level scans.
+- No executable workspace exists yet, so application CI/build tests are not meaningful.
+- Android API 24 and iOS 15 remain provisional pending dependency/player evidence.
 
 ## Next highest-value work
 
-1. Make architecture-critical source trees inspectable without committing caches/binaries/secrets.
-2. Audit first wave: Aniyomi, AIOStreams, FlixQuest, AIOMetadata, Cinemax, CineSpot, Anthology, Al-Qahtani, Turkish-Series, xoxixoxi/Ytvplus2.
-3. Create evidence-backed `EXPERIENCE_MATRIX`, `PROVIDER_MATRIX`, `CAPABILITY_MATRIX`, `LICENSE_SECURITY_AUDIT`, and `MIGRATION_PLAN`.
-4. Freeze `MASTER_ARCHITECTURE` only after architecture-critical evidence is sufficient.
-5. Establish `DESIGN_SYSTEM` before production UI implementation.
-6. Bootstrap executable Flutter workspace only after platform/player/provider boundaries are evidenced enough to avoid premature dependency lock-in.
+1. Continue on this same PR/branch until first-wave evidence is coherent.
+2. Obtain file-content access for manifests/licenses and source entry points, beginning Aniyomi, AIOStreams, FlixQuest and AIOMetadata.
+3. Extend evidence cards to Cinemax, CineSpot, Anthology, Al-Qahtani, Turkish-Series and xoxixoxi/Ytvplus2.
+4. Convert provisional matrices into code-evidenced decisions and create `MIGRATION_PLAN`.
+5. Freeze `MASTER_ARCHITECTURE` only after architecture-critical evidence is sufficient.
+6. Establish `DESIGN_SYSTEM` before production UI implementation.
 
 ## Permanent gates
 
