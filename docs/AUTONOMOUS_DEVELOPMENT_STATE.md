@@ -84,6 +84,12 @@ Observed signals include:
 - `provider_sdk` failed specifically at the format gate; analyzer/tests were correctly blocked rather than bypassed.
 - Inspected the failed job log and applied the exact formatter-required change to `provider_registry_test.dart` on the same PR branch. No quality gate was weakened and no blind rerun was requested; the new commit triggers fresh exact-head validation.
 
+## Exact-head CI follow-up
+
+- Exact-head run `35287780321` confirmed `core_domain` green again and exposed a second remaining formatter delta in the duplicate-ID test of `provider_sdk`.
+- The job log identified the exact file; the remaining cascade was reformatted on the same branch. Analyzer/tests remain gated behind formatting and were not bypassed.
+- Awaiting the newly triggered exact-head run before any merge decision.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
