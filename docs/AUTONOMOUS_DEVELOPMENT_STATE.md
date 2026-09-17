@@ -3,12 +3,12 @@
 ## Current repository baseline
 
 - Exact main SHA at start of this run: `8bcf806f8a878cd89d2ef8c9014b4e37267f96c1`.
-- Open PRs at start: none; PR #3 was merged by exact expected head SHA after rechecking mergeability and empty checks/reviews.
+- Open PRs at start: PR #4 only; it was rechecked mergeable with exact head and no checks/reviews, then squash-merged.
 - Branches observed: `main`, `audit/source-ingestion`, `build/foundation-constitution`; none protected.
 - Actions workflow runs/status checks on current main: none.
 - Releases: none.
 - Executable 4BA workspace: not created yet.
-- Current working branch: `audit/wave2-source-coverage`.
+- Current working branch: `architecture/contracts-foundation`.
 
 ## Completed
 
@@ -47,6 +47,21 @@ Observed signals include:
 - Added inventory evidence cards for the 19 sources that did not yet have cards, completing 30/30 inventory-card coverage.
 - `orien.live-main` is explicitly quarantined as security-risk reference; credential harvesting is excluded and no credential values are reproduced.
 - Inventory coverage is not Deep Audit completion.
+
+## Architecture work in this run
+
+- PR #4 merged by exact expected head `6607ce52222d5195642c701895b3b8f8006b376a`; new main is `3a71030092e5c94b73e0dd07945f0d53641a1ae3`.
+- Added provisional `MASTER_ARCHITECTURE` with explicit Core/Kernel/Experience/Provider/Metadata/Resolver/Player/Local Data/Gateway dependency rules.
+- Added ADRs for capability boundaries, native playback boundary, zero-cost runtime and Experience isolation.
+- Added language-neutral `CONTRACTS_FOUNDATION` for canonical content, capabilities, provider descriptors, playback candidates, resolver, checkpoints, experiences, signed config and local health observations.
+- This is a contract freeze, not a runtime/dependency freeze; source-level Deep Audit remains required before package selection or third-party code reuse.
+
+## Design-system work in this run
+
+- Added `DESIGN_SYSTEM.md` for 4BA Cinematic Gold covering semantic color/typography/spacing/radius/focus/card/button/navigation/player/motion/responsive/accessibility/RTL rules.
+- Added ADR-0005 to constrain Experience token overrides without allowing Experiences to break accessibility/core semantics.
+- Added dedicated TV focus and responsive contracts before UI implementation.
+- Exact visual values remain intentionally unfrozen until contrast/device evidence exists; the semantic system is now defined.
 
 ## Risks / blockers
 
