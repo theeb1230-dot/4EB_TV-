@@ -1,0 +1,6 @@
+name: core_domain
+description: Language-level domain contracts owned by 4BA.
+version: 0.0.1
+publish_to: none
+environment:
+  sdk: ">=3.4.0 <4.0.0"
