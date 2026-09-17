@@ -1,0 +1,36 @@
+name: Core contracts
+
+on:
+  pull_request:
+    paths:
+      - 'packages/core_domain/**'
+      - 'packages/provider_sdk/**'
+      - '.github/workflows/core-contracts.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/core_domain/**'
+      - 'packages/provider_sdk/**'
+      - '.github/workflows/core-contracts.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [core_domain, provider_sdk]
+    defaults:
+      run:
+        working-directory: packages/${{ matrix.package }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - run: dart pub get
+      - run: dart format --output=none --set-exit-if-changed .
+      - run: dart analyze --fatal-infos
+      - run: dart test
