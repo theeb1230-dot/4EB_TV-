@@ -143,6 +143,17 @@ Observed signals include:
 - Updated Deep Audit and License/Security audit with authoritative evidence and explicit clean-room/direct-reuse gates.
 - No Actions run exists for this documentation-only PR head; no CI success is claimed.
 
+## Wave 1 file-level contract extraction
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remained the only open PR and mergeable.
+- Reused the authoritative Drive ZIP locally and read high-value implementation files directly for all four Wave 1 projects.
+- Aniyomi: verified source catalog/search/update -> hoster -> video separation; video candidates include resolution/bitrate, headers, audio/subtitle tracks and trusted chapter timestamps.
+- AIOStreams: verified staged stream sorting/deduplication architecture; only generic deterministic pipeline concepts are retained. Torrent/Usenet/debrid/proxy/bypass implementation remains excluded.
+- FlixQuest: verified player metadata, observable offline queue lifecycle and next-episode timing policy tests; GPL implementation remains reference-only and ad/analytics integrations remain excluded.
+- AIOMetadata: verified bounded TMDB export retrieval + optional Redis cache and discovered watch-account check-ins coupled to subtitle handling; 4BA explicitly separates optional sync/tracking from subtitle/metadata resolution.
+- Updated `audits/DEEP_AUDIT_WAVE1.md` and promoted only verified evidence in `docs/CAPABILITY_MATRIX.md`.
+- This docs-only branch has no Actions run; no CI status is claimed.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
