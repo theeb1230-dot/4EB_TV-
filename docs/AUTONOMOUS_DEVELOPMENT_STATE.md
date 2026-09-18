@@ -227,6 +227,15 @@ Observed signals include:
 - Connected every capability row to a 4BA owner/boundary and a pre-implementation gate so source evidence cannot bypass migration/license/authorization review.
 - No third-party implementation code or sensitive provider data was copied and no provider was enabled.
 
+## File-level evidence closure: CineSpot + Cinemax
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Re-opened the authoritative 215,407,865-byte 30-project archive and inspected actual CineSpot/Cinemax bundle files rather than relying on inventory labels.
+- CineSpot: verified 479-file tree, Dart ^3.9.2 pubspec dependencies including Firebase Auth/Firestore, Dio/Retrofit, pretty_dio_logger, Google Sign-In, url_launcher, YouTube player and WebView; confirmed bundled google-services configuration exists without recording its values; no root LICENSE file was found, so direct reuse is blocked.
+- Cinemax: verified 378-file tree, Apache-2.0 root license, major Gradle version-catalog dependencies (Compose/Room/DataStore/Paging/Hilt/OkHttp/Retrofit/Coil/benchmark tooling), INTERNET + ACCESS_NETWORK_STATE permissions, baseline-profile benchmark sources, and no audited player module evidence.
+- Updated both source cards and the Phase-1 acceptance ledger. CineSpot remains EXPERIENCE_REFERENCE only; Cinemax remains CONTRACT_REFERENCE/EXPERIENCE_REFERENCE pending NOTICE/assets/API-term closure.
+- No credential values, google-services values, API keys, third-party implementation code or restricted endpoints were copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
