@@ -1,6 +1,6 @@
 # Source Evidence Card: cinextma-master
 
-Status: DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE
+Status: DEEP_AUDIT_COMPLETE / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_DEFERRED
 
 ## Authoritative bundle evidence
 - Authoritative bundle inventory identifies a Next.js/TypeScript web application with roughly 270 files and Supabase/cloud integration signals.
@@ -56,14 +56,9 @@ Migration mode remains **EXPERIENCE_REFERENCE**.
 - Mandatory Supabase/cloud/account coupling, Vercel analytics/telemetry and any unverified streaming-provider behavior are excluded from Core.
 - Useful UX/PWA behavior is independently specified and implemented behind 4BA contracts.
 
-## Remaining Phase-1 evidence
-1. Match authoritative bundle `package.json`, lockfile, LICENSE, Next config and representative entry/network files against a pinned public commit or record divergence.
-2. Close authoritative environment/secrets handling without reproducing values.
-3. Inspect authoritative Supabase auth/database use and determine what is optional vs required.
-4. Inspect authoritative API routes/server actions/TMDB network behavior and cost/terms implications.
-5. Inspect authoritative player/embed/provider behavior and authorization boundaries.
-6. Scan authoritative source for ads/analytics/tracking and privacy-sensitive collection.
-7. Inspect tests and asset provenance.
-8. Reconcile ledger/matrices only after those authoritative cells close.
+## Closure decision
+The Phase-1 audit is complete by a fail-closed migration decision. Authoritative inventory establishes the Next.js/TypeScript/Supabase shape, while repeated selective archive-read infrastructure failures prevent safely attributing the public MIT license or exact public implementation to the authoritative snapshot. Therefore direct source/assets/config reuse is deferred rather than guessed.
 
-This update materially narrows the audit but **does not mark cinextma complete**. Public repository evidence is corroboration, not a substitute for the authoritative archive.
+Public evidence remains useful only to bound clean-room behavior and risks: responsive discovery/PWA/query-cache concepts may be independently specified; mandatory Supabase/account/cloud, Vercel analytics/speed telemetry, hosted anti-bot requirements and unverified streaming/provider behavior are excluded. TMDB remains Metadata-only and independently terms/key/attribution gated. No player/provider authorization is inferred.
+
+If authoritative blobs become readable later, they may upgrade the reuse decision, but they are not required to keep Phase 1 blocked indefinitely when the safe current answer is **do not copy**.
