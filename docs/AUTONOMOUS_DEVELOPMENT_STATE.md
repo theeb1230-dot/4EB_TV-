@@ -1,138 +1,139 @@
-# 4BA Autonomous Development State
+## Capability-boundary reconciliation
 
-## Current repository baseline
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start was `b1e95353b37bb721742667ebee69509ab6eded8a`, sole open PR and mergeable=true. No Releases and no exact-head Actions runs.
+- Expanded CAPABILITY_MATRIX from source mapping into explicit ownership/invariant contracts for Catalog/Search, Metadata, Stream, Download, Subtitle, Live, EPG, Health, Experience and optional Sync.
+- Formalized Watch/Download separation so a Stream capability can never silently authorize or generate Download behavior.
+- Formalized Metadata/Stream separation so canonical identity and user state survive provider outage/revocation and never use ephemeral stream/provider IDs as primary keys.
+- Formalized Live/EPG separation so schedule metadata remains canonical independently of stream availability/authorization.
+- Hardened Advanced Sources/Developer Mode boundary: provider labels and safe health evidence may be exposed, but credentials, tokens, private headers, cookies and secret-bearing URLs may not.
+- Phase 1 remains NOT ACCEPTED; this reconciliation closes a matrix-consistency gap but does not substitute for remaining file-level source evidence.
 
-- Exact main SHA at start of this run: `3a71030092e5c94b73e0dd07945f0d53641a1ae3`.
-- Open PRs at start: PR #5 only; rechecked exact head, mergeable=true, no Actions/status checks/reviews, then squash-merged.
-- Branches observed: `main`, `audit/source-ingestion`, `build/foundation-constitution`; none protected.
-- Actions workflow runs/status checks on current main: none.
-- Releases: none.
-- Executable 4BA workspace: not created yet.
-- Current working branch: `core/domain-contracts`.
+## Canonical source-matrix reconciliation
 
-## Completed
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start was `872b934fdcc70760ae7806cfd12a2317063cc7e2`, sole open PR and mergeable=true. No Releases and no exact-head Actions runs.
+- Reconciled the stale SOURCE_MATRIX, which still labeled all 30 roots as `Pending deep audit`, with the evidence already captured by source cards, Deep Audit waves and PHASE1_ACCEPTANCE_LEDGER.
+- SOURCE_MATRIX now distinguishes PARTIAL evidence from production admission and records EXPERIENCE_REFERENCE, CONTRACT_REFERENCE, PROVIDER_PENDING, direct-reuse BLOCKED, QUARANTINED and EXCLUDED_RUNTIME states without falsely declaring any root fully audited.
+- Corrected current classifications for outliers and architecture references, including ProxyFill as Unrelated/Reference + EXCLUDED_RUNTIME, CinemaPress as Engine/Reference, Al-Qahtani as Provider/Engine/Reference, and addon/live families as authorization-gated Provider references.
+- Added explicit status semantics and reinforced that working URLs, public repositories, successful playback, addon compatibility or package-level license declarations cannot promote production admission.
+- Phase 1 remains NOT ACCEPTED. No provider or third-party Experience was enabled and no implementation/secrets were copied.
 
-### Phase 0 — Baseline/Governance
-- [x] Product Constitution merged.
-- [x] 30-source inventory merged.
-- [x] Source ingestion/security protocol merged.
-- [x] ZERO_COST / ZERO_ADS / Privacy / Native-first / license-security gates documented.
+## Acceptance-ledger integrity repair
 
-### Phase 1 — Deep Audit / Source ingestion
-- [x] Authoritative aggregate Drive bundle resolved: `1ZRjuUdB3lctpsMfFTgVIiipaXoRtuldl`, observed size `215407865` bytes.
-- [x] First-wave low-level archive inventory evidence captured for Aniyomi, AIOStreams, FlixQuest and AIOMetadata without extracting/copying secrets.
-- [x] Evidence cards created for those four sources with explicit INVENTORY_EVIDENCED / DEEP_AUDIT_PENDING state.
-- [x] Seeded `EXPERIENCE_MATRIX`, `PROVIDER_MATRIX`, `CAPABILITY_MATRIX`, and `LICENSE_SECURITY_AUDIT` from observed evidence.
-- [ ] Deep-read manifests/licenses/source code for first-wave sources.
-- [x] Inventory-level evidence cards now exist for all 30 sources.
-- [ ] Promote all 30 cards to code-evidenced deep audits.
-- [x] Draft evidence-driven Migration Plan created.
-- [x] Architecture-critical inventory cards expanded to Cinemax, CineSpot, Anthology, Al-Qahtani, Turkish-Series, xoxixoxi and Ytvplus2.
-- [ ] Deep-read manifests/licenses/source code for all architecture-critical sources.
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; source-truth PR #10 head at start was `327d61b3ad8937bf005d9e9289700ebc8d118092`, sole open PR, mergeable=true. No Releases, workflow runs or check-runs existed for that exact docs head.
+- Detected a real Phase-1 accounting defect: PHASE1_ACCEPTANCE_LEDGER claimed exactly one row for each of 30 authoritative roots but mechanically contained only 29 rows. `ARB-S33-3` was missing despite having an evidence card/provider classification.
+- Restored the missing ARB-S33-3 ledger row as Provider/Reference with Node/Stremio evidence, per-source behavior/config still pending and production blocked pending authorization.
+- Re-read the updated ledger mechanically: 30 rows, 30 unique source names, zero duplicates. This repairs audit-accountability coverage without promoting any source or inventing evidence.
+- Authoritative Drive archive was also re-fetched by exact file ID in this run (215,407,865 bytes) for continued file-level work; local central-directory inspection hit an execution-environment timeout, so no unsupported file-content claim was added.
+- Phase 1 remains NOT ACCEPTED. The next evidence work remains file-level license/provenance/dependency/network/secrets/ads/player/test closure, not additional generic governance prose.
 
-## Evidence from this run
+## Exact-head source-truth and archive-read failure classification
 
-The aggregate ZIP still times out when conventional central-directory listing is attempted in the execution environment. A bounded raw-string scan succeeded and exposed real archived path names for architecture-critical projects. This is weaker than source-content inspection, so the four cards are deliberately not marked Audited.
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `378afcf63e88eef01e431e8dfe77bf7e994a5ed4`, sole open PR, mergeable=true. Branch inventory was re-read; no Releases, exact-head workflow runs or check-runs exist.
+- Re-attempted direct file-level inspection of CinemaPress from the authoritative 215,407,865-byte Drive ZIP using a bounded project-root query. The execution environment again timed out while opening/reading the ZIP central directory, so the failure is classified as tooling/archive-read infrastructure rather than source evidence.
+- No CinemaPress license, dependency, route, auth, test, secret, ad/tracking or persistence claim was promoted from the failed read. Its existing DEEP_AUDIT_PARTIAL / REFERENCE_ONLY state remains fail-closed.
+- The acceptance ledger remains mechanically reconciled at 30 unique authoritative roots after the prior repair; no source was promoted or removed in this run.
+- Phase 1 remains NOT ACCEPTED. File-level evidence closure remains the highest-value work; archive access failures must not be converted into guessed audit facts.
 
-Observed signals include:
-- Aniyomi: app/core/data/domain/source-api/source-local/presentation/i18n/macrobenchmark multi-module structure and Gradle Kotlin manifests.
-- AIOStreams: pnpm workspace, packages, TypeScript configs, Docker/Compose, environment sample and LICENSE.
-- FlixQuest: Flutter pubspec/lib/android/test/assets plus Cast receiver, OpenAPI schema and UI/design references.
-- AIOMetadata: TypeScript app/backend configs, addon/configure/data boundaries, Vite, Docker and environment example.
+## Repository hygiene remediation
 
-## This run
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `e34ba49944f9839e28c790392320da22719e7615`, sole open PR, mergeable=true. No Releases, exact-head workflow runs or check-runs.
+- Repository-root inspection found `CinemaPress-master.zip` committed directly on the audit branch (24,121,537 bytes). This contradicted the clean-room rule that third-party implementation archives are evidence inputs, not 4BA product source artifacts.
+- Added the finding to the CinemaPress evidence card, then removed the raw third-party ZIP from `audit/deep-wave1` in commit `63e342754569cd78f8552846799c3f76a7453cdc`. Evidence notes remain; the archive itself is no longer present at branch root.
+- This removal does not claim license clearance and does not promote CinemaPress. It reduces redistribution/repository-hygiene risk while preserving the fail-closed REFERENCE_ONLY decision.
+- Phase 1 remains NOT ACCEPTED; file-level evidence closure remains outstanding.
 
-- Merged PR #3 after verifying head `39a1b8430ef2ca5247227ea4a15dd72ae6adea1f`, mergeable=true, no Actions/status checks, no comments/reviewers.
-- New main after squash merge: `8bcf806f8a878cd89d2ef8c9014b4e37267f96c1`.
-- Added inventory evidence cards for the 19 sources that did not yet have cards, completing 30/30 inventory-card coverage.
-- `orien.live-main` is explicitly quarantined as security-risk reference; credential harvesting is excluded and no credential values are reproduced.
-- Inventory coverage is not Deep Audit completion.
+## Repository-hygiene regression gate
 
-## Architecture work in this run
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `bfec73d799a67959d7e7bda45e7e13a517577328`, sole open PR, mergeable=true. No Releases, exact-head workflow runs or check-runs existed at inspection time.
+- Recursively inspected the current PR tree: 106 tracked entries and no remaining ZIP/APK/IPA/AAB/EXE/DLL/JAR/WAR/7z/RAR artifact or tracked file above 5 MiB after the CinemaPress archive removal.
+- Added `.github/workflows/audit-hygiene.yml` so future PR/push validation fails if raw archives/build binaries are committed or any tracked file exceeds the 5 MiB audit/product-source ceiling.
+- The gate is intentionally repository hygiene only; it does not treat a passing file-size/archive check as license/security/provider approval.
+- A fresh exact-head Actions run is required before claiming this new gate green. Phase 1 remains NOT ACCEPTED.
 
-- PR #4 merged by exact expected head `6607ce52222d5195642c701895b3b8f8006b376a`; new main is `3a71030092e5c94b73e0dd07945f0d53641a1ae3`.
-- Added provisional `MASTER_ARCHITECTURE` with explicit Core/Kernel/Experience/Provider/Metadata/Resolver/Player/Local Data/Gateway dependency rules.
-- Added ADRs for capability boundaries, native playback boundary, zero-cost runtime and Experience isolation.
-- Added language-neutral `CONTRACTS_FOUNDATION` for canonical content, capabilities, provider descriptors, playback candidates, resolver, checkpoints, experiences, signed config and local health observations.
-- This is a contract freeze, not a runtime/dependency freeze; source-level Deep Audit remains required before package selection or third-party code reuse.
+## Hygiene CI exact-head verification and correction
 
-## Design-system work in this run
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `90831fe1ec01ba2deefb28adea796c8873e1d4d0`, sole open PR, mergeable=true; no Releases.
+- The newly introduced Audit hygiene workflow actually executed on exact head: run `35294971889` completed success and repository-hygiene check passed. A second check-suite instance on the same SHA also passed.
+- Review found a mismatch between the documented blocked-artifact set and the workflow regex: documentation/tree inspection included JAR while CI did not. Corrected the workflow to block `.jar` as well in commit `0f910f806c0e7a0449a9703a8a14c845eb5ed306`.
+- Because that correction changes the exact head, the previous green run is evidence for `90831fe...` only. The corrected head requires its own Actions result before it can be called green.
+- Phase 1 remains NOT ACCEPTED; no source/provider/Experience was promoted.
 
-- Added `DESIGN_SYSTEM.md` for 4BA Cinematic Gold covering semantic color/typography/spacing/radius/focus/card/button/navigation/player/motion/responsive/accessibility/RTL rules.
-- Added ADR-0005 to constrain Experience token overrides without allowing Experiences to break accessibility/core semantics.
-- Added dedicated TV focus and responsive contracts before UI implementation.
-- Exact visual values remain intentionally unfrozen until contrast/device evidence exists; the semantic system is now defined.
+## Hygiene CI exact-head closure and duplicate-run fix
 
-## Core implementation in this run
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `05b127b93886e9138128d04300ed121ac17e71f4`, sole open PR, mergeable=true; no Releases.
+- Corrected JAR-aware hygiene gate is now proven on exact head: Audit hygiene run `35295127955` completed success; repository-hygiene check completed success. A second success check on the same SHA exposed duplicate execution from overlapping push + pull_request triggers.
+- Reduced CI waste without weakening coverage: pull_request is now scoped to base `main`, while push continues to cover `main` and `audit/**`. This preserves PR validation and branch validation but prevents unrelated PR targets from triggering the workflow; duplicate events for audit PR updates remain observable and will be revisited if GitHub continues emitting both required contexts.
+- No product/provider/source classification changed. Phase 1 remains NOT ACCEPTED.
 
-- PR #5 merged at exact head `6c725c8cba9228da16966f88b7869ec333fd6ab2`; new main is `e6bd6940c4262a737b6fe1e8f3bd5d1fb55cd362`.
-- Created the first executable-language 4BA package: `packages/core_domain`, deliberately Flutter-free and provider-independent.
-- Implemented canonical content/episode identity, independent capability declarations, provider descriptor, playback candidates/checkpoints and resolver request/result/failure contracts.
-- Added tests asserting stream does not imply download and checkpoints remain provider-independent.
-- Tests are committed but not claimed executed: repository still has no CI workflow and this run has no attached Dart toolchain execution evidence.
+## Duplicate CI trigger root-cause fix
 
-## Provider/CI work in this run
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `81095d077efb27072a296f8ff6e5222ee59bf699`, sole open PR, mergeable=true; no Releases.
+- Exact-head Audit hygiene run `35296304712` on `81095d0...` completed success, but two repository-hygiene checks were still emitted for the same PR update.
+- Root cause: the audit branch update matched both `push: audit/**` and `pull_request: main`. The prior scoping reduced unrelated PR triggers but did not eliminate duplicate runs for audit PRs.
+- Fixed the trigger model in commit `9ba055c34757fcf4482142dc5d0e175d1e2339ec`: PR validation remains on pull requests targeting `main`; push validation is now limited to `main`. This preserves branch-after-merge protection and exact PR validation without double-running on every audit branch push.
+- Verified `docs/SOURCE_MATRIX.md` exists and already contains all 30 authoritative roots; no duplicate replacement file was created. The Acceptance Ledger remains the Phase 1 completion authority.
+- No source/provider/Experience classification changed. Phase 1 remains NOT ACCEPTED.
 
-- Added `packages/provider_sdk` with provider interface, capability-filtered registry, duplicate-ID rejection and fail-closed provider policy.
-- Added contract tests for capability filtering, duplicate registration and unknown-provider disabled behavior.
-- Added minimal GitHub Actions quality gate for both Dart packages: dependency resolution, format check, analyzer and tests on PR/main changes.
-- Signed-config cryptography remains intentionally unimplemented until primitive/dependency compatibility audit; no home-grown crypto was introduced.
+## ProxyFill evidence closure progress
 
-## CI defect handling in this run
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `8198aa2cd5872d0481b5c50fe0d6b090b25035b0`, sole open PR, mergeable=true; no Releases.
+- The duplicate CI trigger fix is now proven: exact-head Audit hygiene run `35298624700` completed success and only one `repository-hygiene` check exists on `8198aa2...`.
+- Highest-value Phase-1 work then moved back to source evidence. Public `hfip/ProxyFill` was inspected as corroborating evidence only, not as a substitute for the authoritative archived snapshot.
+- Corroborating code confirms Blazor WebAssembly/.NET, Pokémon proxy-card printing scope, Selenium/PDF/UI dependencies, a Pokémon API service, and a hard-coded API credential. The credential value was deliberately not copied into any 4BA document or commit.
+- Updated `audits/sources/ProxyFill-main.md`, the Phase-1 Acceptance Ledger, and `docs/LICENSE_SECURITY_AUDIT.md`. Runtime remains EXCLUDED; the audit is not yet complete because bundle-local blob/provenance/license matching is still pending.
+- No source/provider/Experience was promoted. Phase 1 remains NOT ACCEPTED.
 
-- Workflow run 35287715964 provided real execution evidence: `core_domain` completed dependency resolution, format, analyzer and tests successfully.
-- `provider_sdk` failed specifically at the format gate; analyzer/tests were correctly blocked rather than bypassed.
-- Inspected the failed job log and applied the exact formatter-required change to `provider_registry_test.dart` on the same PR branch. No quality gate was weakened and no blind rerun was requested; the new commit triggers fresh exact-head validation.
+## ProxyFill exclusion evidence strengthened
 
-## Exact-head CI follow-up
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start of this run: `ec15aba34edc35b3f5668c157798fa205437a9de`, sole open PR and mergeable=true; no Releases and no exact-head checks at start.
+- Continued Phase-1 evidence closure instead of creating unrelated implementation work.
+- Pinned corroborating `hfip/ProxyFill` evidence to public commit `1a49d164d10aa24ae5ef57b6a275758500310bae` and recorded exact blob hashes for README, root project manifest, Program.cs, shared project manifest and Pokémon API service.
+- Verified the public project manifest declares Blazor WebAssembly plus concrete AutoMapper/MudBlazor/Selenium/Syncfusion dependencies and references a bundled Pokémon SDK DLL. These remain corroborating until authoritative bundle blob matching closes provenance.
+- Verified two concrete secret-handling failures in the corroborating source without copying secret material into 4BA: a hard-coded API credential exists in the service implementation, and `wwwroot/credentials.json` is configured with `CopyToOutputDirectory=Always`, which would ship a credentials file into client output. Secret contents/values were deliberately not reproduced.
+- Updated the ProxyFill source card, Phase-1 Acceptance Ledger and LICENSE_SECURITY_AUDIT consistently. Runtime remains EXCLUDED and no 4BA capability/provider/Experience was promoted.
+- Authoritative bundle matching and bundle-local root license/provenance remain open, so ProxyFill is not yet Phase-1 complete despite stronger exclusion evidence.
+- Resulting branch head before this state update: `2f0e3faa1e511a2745f027eb6572e7f91451ecd0`.
 
-- Exact-head run `35287780321` confirmed `core_domain` green again and exposed a second remaining formatter delta in the duplicate-ID test of `provider_sdk`.
-- The job log identified the exact file; the remaining cascade was reformatted on the same branch. Analyzer/tests remain gated behind formatting and were not bypassed.
-- Awaiting the newly triggered exact-head run before any merge decision.
+## ProxyFill authoritative snapshot closure
 
-## Resolver implementation in this run
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `90a6fa4158ff90fd12a183af7f577ecd1d75337a`, sole open PR, mergeable=true; no Releases. Exact-head Audit hygiene run `35298903032` completed success with a single `repository-hygiene` check.
+- Re-fetched the authoritative Drive archive by exact file ID `1ZRjuUdB3lctpsMfFTgVIiipaXoRtuldl` and materialized the complete 215,407,865-byte ZIP locally.
+- Read only the authoritative `ProxyFill-main` root (90 non-`__MACOSX` entries) and compared decisive files against pinned public commit `1a49d164d10aa24ae5ef57b6a275758500310bae`.
+- Exact Git blob SHA-1 matches were proven for README, `ProxyFill.csproj`, `Program.cs`, `ProxyFill.Shared/ProxyFill.Shared.csproj`, `ProxyFill.Shared/Services/PokemonAPIService.cs`, and `global.json`. This closes snapshot identity for the files material to the exclusion decision.
+- No LICENSE/NOTICE-named file exists in the authoritative ProxyFill root, so direct reuse remains fail-closed. Because ProxyFill is unrelated and no code/assets are migrated, this is an explicit evidence-backed exclusion rather than an unresolved reuse request.
+- The authoritative service blob proves the hard-coded API credential defect exists in the archive itself; no credential value was copied or logged. The authoritative project manifest also proves an unsafe `wwwroot/credentials.json` output-copy directive; that credential file path itself is absent from the archive.
+- A bounded scan of authoritative text/code files found no selected advertising/analytics/telemetry signatures. Network evidence is Pokémon/Drive-oriented and unrelated to 4BA entertainment capabilities.
+- Updated the ProxyFill evidence card, Acceptance Ledger, SOURCE_MATRIX, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN consistently. ProxyFill is now `DEEP_AUDIT_COMPLETE / EXCLUDED_RUNTIME` and counts as a Phase-1 evidence-backed rejection. This does not mean Phase 1 overall is complete.
+- Resulting branch head before this state update: `4309206f58de80397e852877eb9d9f7637117bf6`.
 
-- PR #6 passed both CI matrix jobs and was squash-merged with exact-head verification. New main: `e57dade2a7a8a341dc297075c8d01c2c649cc4c5`.
-- Added `packages/resolver_engine` with local privacy-preserving health observations, health summarization and deterministic candidate ranking.
-- Ranking weighs success, latency and quality/bitrate; Data Saver favors lower bitrate while health remains dominant.
-- Added tests for health dominance, Data Saver and deterministic ties.
-- Extended CI to validate resolver_engine and corrected workflow path coverage.
+## CinemaPress authoritative closure
 
-## Fallback orchestration in this run
-
-- PR #7 exact-head CI run `35288046694` completed green across core_domain, provider_sdk and resolver_engine; each job passed dependency resolution, formatting, analyzer and tests.
-- PR #7 was squash-merged at exact head `e6dda51efdbea37fb3e89aa6eee1c4220caa06b4`; new main is `ae88c38adfb25ea675dda64d7febdd68713208b5`.
-- Added resolver fallback orchestration that consumes ranked candidates, retries retryable failures, stops immediately on policy failures, and passes the same resume position to every source attempt.
-- Added tests for resume-preserving source switching, policy-stop behavior and candidate exhaustion.
-
-## Metadata CI defect handling
-
-- Exact-head run `35288285905` failed only at the metadata_engine format gate; other matrix jobs were cancelled after the failure rather than treated as evidence.
-- Job log identified `lib/src/dedup.dart` and `test/dedup_test.dart` as formatter deltas.
-- Applied formatter-equivalent changes to both files on PR #9 without weakening format/analyzer/test gates. Fresh exact-head validation is required before merge.
-
-## Exact formatter correction
-
-- Exact-head run `35288608404` validated core_domain, provider_sdk and resolver_engine fully green; metadata_engine alone failed the formatting gate.
-- The improved gate exposed the exact Dart 3.13.4 diff. Applied those exact formatter changes to `lib/src/dedup.dart` and `test/dedup_test.dart` on PR #9.
-- No analyzer/test/security gate was weakened. Fresh exact-head CI remains mandatory before merge.
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `bb34e11d8acb836c47b55a384fde6fba17ad3956`, sole open PR, mergeable=true; no Releases. Exact-head Audit hygiene run `35300126245` completed success with one `repository-hygiene` check.
+- Reused the already materialized authoritative Drive ZIP and inspected only the `CinemaPress-master` root. Authoritative Git blob SHA-1 values for `package.json`, `LICENSE.txt`, `README.md` and `app.js` exactly match public `CinemaPress/CinemaPress` master commit `2a9d3fa4bcd9cb92ce031b3e7324f1d7e76050b5`.
+- Verified version `5.0.0`, root MIT license, Node/Express/EJS CMS architecture and the authoritative dependency manifest. No `package-lock.json` and no conventional test/spec files are present; both absences are recorded as evidence.
+- Verified authoritative admin/API/player/embed/iframe/CinemaPlayer routes and configurable external metadata/network surfaces. Default source configuration contains non-empty third-party API credentials/keys; values were deliberately not copied or logged.
+- Verified privacy-incompatible IP/forwarded-IP, MaxMind/WHOIS/geolocation/ASN and cookie behavior plus player paths that can carry IP-derived fields/hashes. These are excluded under Zero-PII.
+- Verified advertising-oriented surfaces including `modules/CP_adv.js` and `prebid-ads.js`; all advertising/prebid/banner behavior is excluded under ZERO_ADS.
+- Native Playback First excludes CinemaPress server/embed/iframe/player runtime and configurable remote CinemaPlayer scripts. No backend/player/provider code is migrated.
+- Updated the CinemaPress source card, Acceptance Ledger, SOURCE_MATRIX, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN consistently. CinemaPress is now `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE_ONLY`.
+- This closes one additional root but does not close Phase 1 overall.
 
 ## Risks / blockers
 
-- License text and implementation code are still unread; no production code reuse is approved.
-- Secret/config samples must be inspected without reproducing values.
-- Ads/tracking status remains unknown until code-level scans.
-- No executable workspace exists yet, so application CI/build tests are not meaningful.
-- Android API 24 and iOS 15 remain provisional pending dependency/player evidence.
+- Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
+- Secret/config samples must continue to be inspected without reproducing values.
+- No source with unresolved authorization may be promoted to production merely because its endpoint/addon is technically reachable.
+- This PR is documentation/audit-only at the current head, so there is no exact-head Actions run to claim; existing executable package CI evidence belongs to previously merged implementation PRs.
+- Android API 24 and iOS 15 remain provisional pending compatibility evidence from eventual player/platform dependency selection.
 
 ## Next highest-value work
 
-1. Continue on this same PR/branch until architecture-critical evidence is coherent.
-2. Obtain file-content access for manifests/licenses and source entry points, beginning Aniyomi, AIOStreams, FlixQuest and AIOMetadata.
-3. Promote inventory cards to code-evidenced deep audits and expand the remaining 30-source queue.
-4. Convert provisional matrices into code-evidenced decisions; the draft `MIGRATION_PLAN` now exists and must be refined from deep evidence.
-5. Freeze `MASTER_ARCHITECTURE` only after architecture-critical evidence is sufficient.
-6. Establish `DESIGN_SYSTEM` before production UI implementation.
+1. Continue on PR #10 and close remaining Phase-1 ledger cells with authoritative file-level evidence, prioritizing root license/provenance and dependency/config/network evidence that can convert `P` into verified or evidence-backed rejected states.
+2. Reconcile each updated source card back into SOURCE_MATRIX, EXPERIENCE_MATRIX, PROVIDER_MATRIX, CAPABILITY_MATRIX, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN in the same change so central documents cannot drift again.
+3. Do not enable Providers or Experiences during audit closure; technical playability is not authorization.
+4. Close Phase 1 only when every root satisfies the nine acceptance criteria or has an evidence-backed rejection/exclusion.
+5. After Phase 1 acceptance, freeze the evidence-informed MASTER_ARCHITECTURE/ADRs and resume executable implementation in declared phase order.
+6. Preserve existing core/provider/resolver/metadata packages and their previously green CI evidence; do not rewrite working foundations merely to accommodate a source project.
 
 ## Permanent gates
 

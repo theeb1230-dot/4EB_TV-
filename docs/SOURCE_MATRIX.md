@@ -1,39 +1,48 @@
 # 4BA Source Matrix
 
-This is the audit queue. Classification is provisional until code, dependencies and licenses are verified. A source may contribute to multiple categories.
+This is the canonical 30-root audit queue. Classification is evidence-backed where a source card exists, but **audit completion is controlled by `audits/PHASE1_ACCEPTANCE_LEDGER.md`**. A source may contribute to multiple categories. `PARTIAL` never means production admission.
 
-| # | Source | Initial classification | Primary audit focus | Status |
+| # | Source | Current classification | Primary audit focus | Audit status |
 |---|---|---|---|---|
-| 01 | cinemalist-official-master | Experience / Reference | Flutter discovery UI, TMDB/BLoC | Pending deep audit |
-| 02 | cinextma-master | Experience / Engine | Next.js UX, Supabase boundaries | Pending deep audit |
-| 03 | ARB-S33-3-main | Provider | ArabSeed/Stremio contracts | Pending deep audit |
-| 04 | Cinemax-main | Experience / Reference | Android/Kotlin architecture and UX | Pending deep audit |
-| 05 | ProxyFill-main | Reference / Outlier | Relevance and licensing | Pending deep audit |
-| 06 | Mstch_Server2-main | Provider | Sports scraper/data contracts | Pending deep audit |
-| 07 | Match-Archive-main | Provider | Match archive contracts | Pending deep audit |
-| 08 | kiro-drama-main | Provider | Drama catalog/source behavior | Pending deep audit |
-| 09 | alooytv-addon-main | Provider | Stremio addon contract | Pending deep audit |
-| 10 | Filmex-main | Experience / Reference | Flutter UI patterns | Pending deep audit |
-| 11 | getChanelFraom_dlstreams-main | Provider / Tool | Live channel data | Pending deep audit |
-| 12 | anthology-main | Provider / Engine / Reference | Turkish addon ecosystem, health/tests | Pending deep audit |
-| 13 | Al-Qahtani-main | Experience / Provider / Engine | Arabic/sports/provider migration | Pending deep audit |
-| 14 | NuvioStreamsAddon-master | Provider / Engine | Aggregation architecture | Pending deep audit |
-| 15 | AIOStreams-main | Engine / Provider / Reference | Provider aggregation/capabilities | Pending deep audit |
-| 16 | aniyomi-main | Engine / Experience / Reference | Extensions, player, source architecture | Pending deep audit |
-| 17 | YacinTv--main | Provider | Live TV data/source | Pending deep audit |
-| 18 | xoxixoxi-main | Provider / Engine | Backend scraper dependencies and risk | Pending deep audit |
-| 19 | TRK_S-main | Provider | Turkish Stremio source | Pending deep audit |
-| 20 | orien.live-main | Reference / Security risk | Credential exposure/staleness; never copy secrets | Pending deep audit |
-| 21 | Ytvplus2-main | Provider / Engine | Multi-source backend | Pending deep audit |
-| 22 | SportFree-main | Provider | Sports backend | Pending deep audit |
-| 23 | flixquest-main | Experience / Reference | Flutter adaptive Mobile/TV shell | Pending deep audit |
-| 24 | stremio-akwam.X-main | Provider / Engine | FastAPI Akwam provider contract | Pending deep audit |
-| 25 | CinemaPress-master | Experience / Reference | CMS/catalog concepts, legacy stack | Pending deep audit |
-| 26 | Cannels-arap-streem-main | Provider | Arabic live channel data | Pending deep audit |
-| 27 | CineSpot-main | Experience / Reference | Flutter discovery/search/watchlist UX | Pending deep audit |
-| 28 | aiometadata-dev | Engine | Metadata aggregation/mapping | Pending deep audit |
-| 29 | turkish-series-main | Provider / Engine / Reference | Turkish dataset/update architecture | Pending deep audit |
-| 30 | kiro-main | Provider | Source behavior | Pending deep audit |
+| 01 | cinemalist-official-master | Experience / Reference | Flutter discovery UI, TMDB/BLoC, license/API/player evidence | PARTIAL — EXPERIENCE_REFERENCE |
+| 02 | cinextma-master | Experience / Reference | Next.js UX, Supabase/cloud/account boundaries | PARTIAL — EXPERIENCE_REFERENCE |
+| 03 | ARB-S33-3-main | Provider / Reference | ArabSeed/Stremio contracts, authorization/license | PARTIAL — PROVIDER_PENDING |
+| 04 | Cinemax-main | Experience / Reference | Android/Kotlin architecture, NOTICE/assets/API/player evidence | PARTIAL — reuse gated |
+| 05 | ProxyFill-main | Unrelated / Reference | Evidence-backed exclusion complete: exact snapshot blobs, no bundle license, secret-handling defects, unrelated domain | AUDIT COMPLETE — EXCLUDED_RUNTIME |
+| 06 | Mstch_Server2-main | Provider / Reference | Sports contracts and stream authorization | PARTIAL — PROVIDER_PENDING |
+| 07 | Match-Archive-main | Provider / Reference | Match archive contracts and authorization | PARTIAL — PROVIDER_PENDING |
+| 08 | kiro-drama-main | Provider / Reference | Drama source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
+| 09 | alooytv-addon-main | Provider / Reference | Stremio addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
+| 10 | Filmex-main | Experience / Reference | Flutter UX retained only as clean-room reference; missing license, Firebase/cloud, ads and WebView-first player excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE |
+| 11 | getChanelFraom_dlstreams-main | Provider / Reference | Live channel data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
+| 12 | anthology-main | Provider / Engine / Reference | Turkish addon ecosystem, root license, per-provider authorization | PARTIAL — PROVIDER_PENDING |
+| 13 | Al-Qahtani-main | Provider / Engine / Reference | Arabic/sports contracts; relay/WebView/IP telemetry/ads excluded | PARTIAL — CONTRACT_REFERENCE |
+| 14 | NuvioStreamsAddon-master | Provider / Engine / Reference | Aggregation contracts, authorization/config/network evidence | PARTIAL — PROVIDER_PENDING |
+| 15 | AIOStreams-main | Engine / Provider / Reference | Aggregation/capabilities; license conflict and restricted behavior | PARTIAL — direct reuse BLOCKED |
+| 16 | aniyomi-main | Engine / Experience / Reference | Extensions/player/source architecture, remaining dependency/network/privacy evidence | PARTIAL — reference only |
+| 17 | YacinTv--main | Provider / Reference | Live TV source; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
+| 18 | xoxixoxi-main | Provider / Engine / Reference | Scraper/process security, authorization/license; bypass/relay excluded | PARTIAL — CONTRACT_REFERENCE |
+| 19 | TRK_S-main | Provider / Reference | Turkish addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
+| 20 | orien.live-main | Security-risk Reference | Credential-discovery risk; never harvest/replay/share credentials | PARTIAL — QUARANTINED |
+| 21 | Ytvplus2-main | Provider / Engine / Reference | Multi-source aggregation/fallback, authorization | PARTIAL — PROVIDER_PENDING |
+| 22 | SportFree-main | Provider / Reference | Sports contracts and stream authorization | PARTIAL — PROVIDER_PENDING |
+| 23 | flixquest-main | Experience / Reference | Flutter adaptive shell; GPL/ad/tracking boundaries | PARTIAL — direct code BLOCKED |
+| 24 | stremio-akwam.X-main | Provider / Engine / Reference | FastAPI/Stremio contracts, authorization/license/network evidence | PARTIAL — PROVIDER_PENDING |
+| 25 | CinemaPress-master | Engine / Reference | Exact snapshot + MIT verified; CMS/catalog contracts retained, ads/privacy/player/backend runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE |
+| 26 | Cannels-arap-streem-main | Provider / Reference | Arabic live data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
+| 27 | CineSpot-main | Experience / Reference | Flutter discovery UX; no root license, Firebase/cloud coupling | PARTIAL — direct reuse BLOCKED |
+| 28 | aiometadata-dev | Metadata / Engine / Reference | Metadata mapping/cache; license conflict/tracking coupling | PARTIAL — direct reuse BLOCKED |
+| 29 | turkish-series-main | Provider / Engine / Reference | Dataset provenance/freshness/update architecture and authorization | PARTIAL — PROVIDER_PENDING |
+| 30 | kiro-main | Provider / Reference | Source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
+
+## Status semantics
+
+- **PARTIAL:** source-card evidence exists but one or more Phase-1 acceptance fields remain unresolved.
+- **EXPERIENCE_REFERENCE / CONTRACT_REFERENCE:** clean-room behavior/contracts may inform 4BA; this is not implementation reuse approval.
+- **PROVIDER_PENDING:** technical capability is known, but production admission is blocked pending evidence such as authorization/license/config/network safety.
+- **BLOCKED:** direct code/runtime reuse is rejected under current evidence; clean-room concepts may still be allowed where documented.
+- **QUARANTINED:** security/provenance risk forbids implementation/runtime use.
+- **EXCLUDED_RUNTIME:** source is intentionally outside 4BA runtime; audit evidence must still justify exclusion.
 
 ## Required audit card per source
 
@@ -41,4 +50,4 @@ For every source record: provenance/version, language/framework, architecture, U
 
 ## Gate
 
-No source implementation is merged into 4BA Core merely because it works in isolation. It must pass license/security review and be adapted behind 4BA contracts. Providers never bind directly to UI. Credentials are never copied. Advertising/tracking is rejected. DRM/paywall/access-control bypass is rejected.
+No source implementation is merged into 4BA Core merely because it works in isolation. It must pass license/security review and be adapted behind 4BA contracts. Providers never bind directly to UI. Credentials are never copied. Advertising SDKs, ad tracking, popups and pre-roll are rejected. Paid dependencies cannot become mandatory. DRM/paywall/access-control bypass is excluded. Source assets require their own licensing evidence where applicable.

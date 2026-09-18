@@ -1,15 +1,25 @@
 # Source Evidence Card: Ytvplus2-main
 
-Status: INVENTORY_EVIDENCED / DEEP_AUDIT_PENDING
+Status: DEEP_AUDIT_PARTIAL / PROVIDER_PENDING
 
-## Bundle evidence
-The authoritative inventory classifies Ytvplus2 as a multi-source backend/provider project.
+## Authoritative bundle evidence
+- Multi-source backend/provider project in the authoritative corpus.
+- Existing audit evidence identifies aggregation, fallback and normalization as its primary architectural signals.
 
 ## 4BA relevance
-Primary candidate: Provider / Engine / Reference. Inspect source aggregation, fallback/error handling, catalog/stream separation and health concepts.
+Classification: **Provider + Engine + Reference**.
+Candidate clean-room concepts: provider aggregation boundaries, normalized candidate failures and source replacement without UI coupling.
 
-## Admission gates
-4BA production providers must be replaceable behind Provider SDK contracts, Zero-Ads, Zero-PII and Zero-Cost compatible, and must not implement access-control/DRM/paywall bypass. Watch and Download remain separate capabilities.
+## Admission boundaries
+- Every source remains independently authorization-gated.
+- Watch and Download are separate capabilities; one never implies the other.
+- Metadata/catalog identity cannot be coupled to a stream endpoint.
+- No single provider may become required for application startup/search/library.
+- Backend/proxy infrastructure is not accepted as a mandatory runtime dependency.
+- Credentials/cookies/tokens/private playlists are never migrated.
 
-## Next evidence required
-Extract manifests, source/provider modules, APIs/network calls, resolver behavior, health/fallback logic, tests, license, secrets/config and runtime infrastructure requirements.
+## Migration decision
+Migration modes: **CONTRACT_REFERENCE + PROVIDER_PENDING**. Aggregation concepts may inform 4BA Resolver/Provider SDK contracts; provider implementations require per-source evidence.
+
+## Remaining evidence
+Verify manifests/license, provider module inventory, API/network targets, fallback/error code, tests, secret/config loading, runtime infrastructure and authorization/provenance per source.

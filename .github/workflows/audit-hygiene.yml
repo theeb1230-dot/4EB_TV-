@@ -1,0 +1,45 @@
+name: Audit hygiene
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  repository-hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Reject committed third-party archives and build binaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          blocked='\.(zip|7z|rar|apk|aab|ipa|exe|dll|war)$'
+          found="$(git ls-files | grep -Ei "$blocked" || true)"
+          if [[ -n "$found" ]]; then
+            echo "::error::Blocked binary/archive artifacts are committed:"
+            printf '%s\n' "$found"
+            exit 1
+          fi
+      - name: Reject oversized tracked files
+        shell: bash
+        run: |
+          set -euo pipefail
+          max_bytes=$((5 * 1024 * 1024))
+          failed=0
+          while IFS= read -r -d '' path; do
+            size="$(wc -c < "$path")"
+            if (( size > max_bytes )); then
+              echo "::error file=$path::Tracked file is $size bytes; audit/product sources must stay under $max_bytes bytes."
+              failed=1
+            fi
+          done < <(git ls-files -z)
+          exit "$failed"
