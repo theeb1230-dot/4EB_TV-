@@ -3,7 +3,7 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main` at this execution start: `0071cc771cff8bdf372667a2e4df9c6c2dc2847f`.
+- Exact merged `main` at this execution start: `943977c30b5f12820751cd6a88f72059556c82c7`.
 - PR #20 (`audit/deep-wave11`) merged at `b49e651fc63e8b08050d710b30eea6dee8e49cde` only after exact head `8202d893de3903cbfebb3600b25b11a8c5ffcefb` passed Audit hygiene run `35395162508` / `repository-hygiene` job `105762209956`.
 - PR #21 (`audit/deep-wave12`) merged at `eb7d9654582cc50e3d22af4969e6edc5fc35f44d` after exact head `9a9db1af6b57abaa779aac80f94969ea19ba300b` passed Audit hygiene run `35401863568` / check `105783299796`.
 - PR #22 (`audit/deep-wave13`) merged at `5ee91ab842c8aa6eb9ab636adddbc532850aeaa4`; main Audit hygiene push run `35402633060` passed on that exact SHA.
@@ -42,6 +42,10 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 - No merge is permitted from `audit/deep-wave17` until its exact head has a green Audit hygiene run.
 
 ## Work completed in this execution
+- Re-read source truth and found sole PR #26 on exact head `6cbb31ce03c302b210e8b65895878c83f8ffd38f`; Audit hygiene run `35404586110` / check `105791588846` was green. Merged it with expected-head protection to main `943977c30b5f12820751cd6a88f72059556c82c7`.
+- Confirmed zero open PRs and created `audit/deep-wave18` exactly from that merged main.
+- Closed `anthology-main` fail-closed as `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED`: provider qualification methodology is reference-eligible, while package-level MIT cannot authorize unresolved root/per-provider code, endpoints, credentials or content rights. Every runtime provider remains independently gated.
+
 - Re-read GitHub source truth: exact main `0071cc771cff8bdf372667a2e4df9c6c2dc2847f`, zero open PRs, zero Releases, and exact-main Audit hygiene run `35404362707` / repository-hygiene job `105790915309` passed all configured gates.
 - Created `audit/deep-wave17` from exact main and closed `aiometadata-dev` fail-closed. The Apache-2.0 package declaration vs GPL-3.0 root-license conflict blocks direct implementation reuse; credentials, external metadata APIs, mandatory server stores, proxy/account/metrics surfaces remain excluded or independently gated.
 
