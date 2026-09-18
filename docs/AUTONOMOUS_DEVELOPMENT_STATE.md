@@ -42,6 +42,14 @@
 - This removal does not claim license clearance and does not promote CinemaPress. It reduces redistribution/repository-hygiene risk while preserving the fail-closed REFERENCE_ONLY decision.
 - Phase 1 remains NOT ACCEPTED; file-level evidence closure remains outstanding.
 
+## Repository-hygiene regression gate
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `bfec73d799a67959d7e7bda45e7e13a517577328`, sole open PR, mergeable=true. No Releases, exact-head workflow runs or check-runs existed at inspection time.
+- Recursively inspected the current PR tree: 106 tracked entries and no remaining ZIP/APK/IPA/AAB/EXE/DLL/JAR/WAR/7z/RAR artifact or tracked file above 5 MiB after the CinemaPress archive removal.
+- Added `.github/workflows/audit-hygiene.yml` so future PR/push validation fails if raw archives/build binaries are committed or any tracked file exceeds the 5 MiB audit/product-source ceiling.
+- The gate is intentionally repository hygiene only; it does not treat a passing file-size/archive check as license/security/provider approval.
+- A fresh exact-head Actions run is required before claiming this new gate green. Phase 1 remains NOT ACCEPTED.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
