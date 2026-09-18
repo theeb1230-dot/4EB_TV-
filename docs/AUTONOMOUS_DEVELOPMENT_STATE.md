@@ -17,6 +17,15 @@
 - Added explicit status semantics and reinforced that working URLs, public repositories, successful playback, addon compatibility or package-level license declarations cannot promote production admission.
 - Phase 1 remains NOT ACCEPTED. No provider or third-party Experience was enabled and no implementation/secrets were copied.
 
+## Acceptance-ledger integrity repair
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; source-truth PR #10 head at start was `327d61b3ad8937bf005d9e9289700ebc8d118092`, sole open PR, mergeable=true. No Releases, workflow runs or check-runs existed for that exact docs head.
+- Detected a real Phase-1 accounting defect: PHASE1_ACCEPTANCE_LEDGER claimed exactly one row for each of 30 authoritative roots but mechanically contained only 29 rows. `ARB-S33-3` was missing despite having an evidence card/provider classification.
+- Restored the missing ARB-S33-3 ledger row as Provider/Reference with Node/Stremio evidence, per-source behavior/config still pending and production blocked pending authorization.
+- Re-read the updated ledger mechanically: 30 rows, 30 unique source names, zero duplicates. This repairs audit-accountability coverage without promoting any source or inventing evidence.
+- Authoritative Drive archive was also re-fetched by exact file ID in this run (215,407,865 bytes) for continued file-level work; local central-directory inspection hit an execution-environment timeout, so no unsupported file-content claim was added.
+- Phase 1 remains NOT ACCEPTED. The next evidence work remains file-level license/provenance/dependency/network/secrets/ads/player/test closure, not additional generic governance prose.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
