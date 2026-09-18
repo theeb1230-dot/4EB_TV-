@@ -338,6 +338,15 @@ Observed signals include:
 - Preserved fail-closed authorization: repository presence, reachable URLs, addon compatibility and successful playability cannot promote a provider.
 - No provider is ENABLED. Phase 1 remains NOT ACCEPTED pending file-level evidence closure and the current PR mergeability issue must be diagnosed from GitHub before eventual merge.
 
+## Experience isolation/admission reconciliation
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start was `15ccc5ea9997dbb7565a313aa1c8fec87e913c6a`, sole open PR and mergeable=true. No Releases and no exact-head Actions runs.
+- Updated EXPERIENCE_MATRIX stale candidate language for cinemalist, cinextma, Filmex and Al-Qahtani to the evidence-backed EXPERIENCE_REFERENCE/CONTRACT_REFERENCE decisions already established by source cards and migration policy.
+- Added an explicit Experience isolation contract: canonical view models only, side-effect-free Preview, presentation-only Apply, immutable canonical user state, no provider credentials/models in UI, Native Playback First, final-fallback internal WebView only, and non-overridable ZERO_ADS/Zero-PII.
+- Added Experience admission states EXPERIENCE_REFERENCE, CANDIDATE_DISABLED, ELIGIBLE_DISABLED, ENABLED and REVOKED so selectable UI cannot be promoted from a source audit by implication.
+- Reaffirmed 4BA Cinematic Gold as default official identity and true 10-foot TV layout as an independent presentation surface sharing canonical state.
+- Phase 1 remains NOT ACCEPTED pending file-level evidence closure; no third-party Experience was enabled.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
