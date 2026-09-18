@@ -20,22 +20,22 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | Ytvplus2 | Provider/Engine | P | P | P per-source | P secrets/config pending | P | V aggregation/fallback concept | B production pending auth |
 | Mstch_Server2 | Provider/Ref | P | P | P sports targets | P | P | V live metadata/stream split | B production pending auth |
 | Match-Archive | Provider/Ref | P | P | P archive targets | P | P | V live metadata/stream split | B production pending auth |
-| kiro-drama | Provider/Ref | P | P | P | P | P | P | P |
-| alooytv-addon | Provider/Ref | P | P | P | P | P | P | P |
+| kiro-drama | Provider/Ref | P | P JS/JSON | P per-source | P config pending | P | P capability surface | B production pending auth |
+| alooytv-addon | Provider/Ref | P | P Node/Stremio | P per-source | P config pending | P | P capability surface | B production pending auth |
 | Filmex | Experience/Ref | P | P | P | P | P | B no player evidence yet | B direct reuse pending license |
 | getChanelFraom_dlstreams | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
-| NuvioStreamsAddon | Provider/Engine | P | P | P | P | P | P | P |
+| NuvioStreamsAddon | Provider/Engine | P | P Node/addon | P per-source | P config pending | P | P aggregation/capabilities | B production pending auth |
 | YacinTv | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
-| TRK_S | Provider/Ref | P | P | P | P | P | P | P |
+| TRK_S | Provider/Ref | P | P Stremio | P per-source | P config pending | P | P capability surface | B production pending auth |
 | orien.live | Quarantine | B | B | B | B credential-discovery risk | P | B | B |
 | SportFree | Provider/Ref | P | P | P sports targets | P | P | V live metadata/stream split | B production pending auth |
-| stremio-akwam.X | Provider/Engine | P | P | P | P | P | P | P |
-| CinemaPress | Engine/Ref | P | P | P | P | P | N/A | P |
+| stremio-akwam.X | Provider/Engine | P | P Python/FastAPI | P per-source | P config pending | P | P Stremio capability surface | B production pending auth |
+| CinemaPress | Engine/Ref | P root/provenance | P Node deps | P Express/CMS routes | P admin/config scan | P ads/tracking scan | B CMS/player not runtime requirement | B contract reference only |
 | Cannels-arap-streem | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
-| kiro | Provider/Ref | P | P | P | P | P | P | P |
+| kiro | Provider/Ref | P | P small source | P per-source | P config pending | P | P capability surface | B production pending auth |
 | cinemalist | Experience/Ref | P | P Flutter/BLoC | P TMDB terms/key path | P key/config pending | P | B no player evidence | B experience reference pending license |
 | cinextma | Experience/Ref | P | P Next/TS | P Supabase/cloud | B mandatory cloud/account excluded | P analytics scan | N/A | B experience reference pending license |
-| ProxyFill | Unrelated/Ref | P | P | N/A | P | P | N/A | B runtime |
+| ProxyFill | Unrelated/Ref | P root/provenance | P .NET/Blazor deps | N/A unless contradictory evidence | P config/telemetry scan | N/A | N/A | B EXCLUDED runtime |
 
 > The ledger contains exactly one row per authoritative bundle root. SOURCE_MATRIX remains the canonical root-name/count authority.
 
