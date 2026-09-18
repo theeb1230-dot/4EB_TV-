@@ -1,21 +1,42 @@
 # Source Evidence Card: aiometadata-dev
 
-Status: INVENTORY_EVIDENCED / DEEP_AUDIT_PENDING
+Status: DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED
 
-## Bundle evidence
-The bundle contains `aiometadata-dev` with `addon/`, `configure/`, `data/`, `docker/`, `docs/`, `public/`, `scripts/`, `package.json`, `package-lock.json`, multiple TypeScript configs including backend/node/app variants, `vite.config.mts`, `tailwind.config.mts`, `Dockerfile`, `.env.example`, `README.md`, `CHANGELOG.md`, and `LICENSE`.
+## Authoritative bundle evidence
+- The authoritative bundle identifies this root as `aiometadata-dev` and earlier archive inspection pinned the bundled application version to **2.7.1**.
+- Bundle structure contains `addon/`, `configure/`, `data/`, `docker/`, `docs/`, `public/`, `scripts/`, `package.json`, `package-lock.json`, TypeScript configs, Vite/Tailwind config, Dockerfile, `.env.example`, README, CHANGELOG and LICENSE.
+- Stack is Node/TypeScript with separate backend and React/Vite configuration UI surfaces.
 
-## Evidence-backed interpretation
-- Stack family: TypeScript with separate app/backend build concerns and Vite-based web/configuration surface.
-- Architecture signal: addon/configure/data boundaries make it a key Metadata Engine reference.
-- Deployment signal: Docker support exists but is not a requirement 4BA will inherit.
-- Configuration signal: environment example exists; secrets and external-service requirements must be audited.
+## Pinned public 2.7.1 corroboration
+Public upstream `cedya77/aiometadata` tag **v2.7.1** is used only as corroborating evidence until decisive authoritative archive blobs are hash-matched.
+- `package.json` at v2.7.1 reports version 2.7.1, Node >=24 <25 and declares **Apache-2.0**.
+- Root `LICENSE` at the same tag is **GNU GPL v3**. This is a direct license-declaration conflict, so direct code reuse fails closed.
+- Dependencies include Express, SQLite, PostgreSQL, Redis, axios/undici, SOCKS fetching, React/Vite, Fanart API, Kitsu, image processing and metadata/data tooling.
+- `.env.example` exposes configuration names for SQLite/PostgreSQL, Redis, admin/password protection, metrics, TMDB, TVDB, Fanart, RPDB, MDBList, Gemini, SimKL, AniList and Trakt. No credential value is reproduced or inherited.
+- The v2.7.1 changelog records bounded/redacted log buffering and explicitly avoids caching degraded provider fallbacks on transient upstream errors. Those are useful clean-room reliability/privacy concepts, not reusable implementation.
 
-## 4BA relevance
-Primary candidate: Metadata Engine / Reference. Inspect metadata normalization, identifier mapping, deduplication, artwork/provider separation, cache strategy, schemas and failure behavior. 4BA must keep metadata independent from stream providers.
+## 4BA classification
+Classification: **Metadata Engine + Reference**.
 
-## Security/license gate
-LICENSE exists but terms are pending extraction. Environment/config values are not copied. Any paid-service dependency must remain optional or be replaced to preserve ZERO_COST.
+Useful clean-room concepts:
+- canonical metadata normalization and external-ID mapping;
+- provider-independent metadata cache boundaries;
+- bounded caches/log buffers;
+- transient-upstream fallback behavior that avoids poisoning caches;
+- optional storage tiers and explicit concurrency/rate-limit controls.
 
-## Next evidence required
-Read LICENSE/package manifests, addon entry points, metadata schemas/mappers, provider integrations, cache/storage, API-key handling, tests, telemetry, rate-limit behavior and fallback strategy.
+## Constitution conflicts / boundaries
+- Metadata remains independent from Streams and from the Player.
+- Redis/PostgreSQL/Docker/server deployment cannot become mandatory for 4BA core; local-first storage must work without paid infrastructure.
+- TMDB/TVDB/Fanart/RPDB/MDBList/Gemini/SimKL/AniList/Trakt integrations require their own terms, authorization, cost and privacy review. Paid/credentialed integrations remain optional or excluded.
+- Watch/check-in or account-linked tracking is not inherited into default local mode. 4BA progress/history stays local by default and Zero-PII.
+- Metrics/telemetry are not inherited merely because they can be disabled upstream; 4BA diagnostics remain local/anonymous/optional.
+- SOCKS/proxy behavior is not a Metadata Engine requirement and is not promoted into 4BA.
+- No secrets, OAuth client secrets, API keys or database credentials may enter the public repository.
+
+## Admission decision
+Migration modes: **CLEAN_ROOM_BEHAVIOR + CONTRACT_REFERENCE**.
+Direct implementation reuse is **blocked** by the Apache-2.0 package declaration versus GPL-3.0 root-license conflict. Public v2.7.1 evidence does not by itself prove every authoritative bundle blob, so no LICENSED_REUSE promotion is allowed.
+
+## Remaining evidence
+Hash-match authoritative v2.7.1 package/LICENSE/env and representative metadata mapper/cache/provider files where archive access permits; complete ads/tracking and request-logging scan; verify exact API/provider terms and tests. Until then the source remains partial but its direct-reuse and architecture boundaries are fail-closed.
