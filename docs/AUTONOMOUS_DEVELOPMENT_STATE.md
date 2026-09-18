@@ -10,7 +10,8 @@ GitHub is the source of truth. This handoff never overrides newer repository sta
 - PR #23 (`audit/deep-wave14`) merged at `d4da2a9251fd95343114d1a3ebd9e7553e96ad69` after exact head `b64a4ea80ff306aeb64c230b4ccfc75b8d0fa74f` passed Audit hygiene run `35402792633` / job `105786110136`.
 - PR #24 (`audit/deep-wave15`) merged at `9ace30395217b4416a9ae7ad535cbf29a8578072` after exact head `712d801a2712b428ab606c2f5ca41ff776282b46` passed Audit hygiene run `35403033929` / job `105786869224`.
 - PR #25 (`audit/deep-wave16`) merged at `0071cc771cff8bdf372667a2e4df9c6c2dc2847f`; exact-main Audit hygiene push run `35404362707` / job `105790915309` passed.
-- Continuation branch: `audit/deep-wave17`, created from exact merged main `0071cc771cff8bdf372667a2e4df9c6c2dc2847f`.
+- PR #26 (`audit/deep-wave17`) merged at `943977c30b5f12820751cd6a88f72059556c82c7` after exact head `6cbb31ce03c302b210e8b65895878c83f8ffd38f` passed Audit hygiene run `35404586110` / check `105791588846`; exact-main push run `35406248165` / job `105796501304` also passed.
+- Continuation branch: `audit/deep-wave18`, created from exact merged main `943977c30b5f12820751cd6a88f72059556c82c7`.
 - Phase 1 remains **NOT ACCEPTED**. Do not claim completion until all 30 roots satisfy the Acceptance Ledger.
 
 ## Product invariants
@@ -26,7 +27,7 @@ These foundations remain authoritative and are not rewritten around source-proje
 ## Phase 1 audit state
 The 30-root Acceptance Ledger remains the completion authority and `SOURCE_MATRIX` remains the canonical exact-root authority. A root closes only with evidence for provenance/version, architecture, license/reuse, dependencies, network/API/cost, secrets/privacy/telemetry/ads, player/provider behavior where applicable, migration destination/exclusion, and risks/clean-room boundary. Evidence-backed rejection/quarantine/exclusion can close an audit but never authorizes runtime admission.
 
-Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, `Cinemax-main`, `CineSpot-main`, `cinextma-master`, `AIOStreams-main`, `aniyomi-main`, `flixquest-main`, and `aiometadata-dev`. AIOStreams is closed fail-closed as `CLEAN_ROOM_ONLY / CONTRACT_REFERENCE / DIRECT_REUSE_BLOCKED`; restricted runtime remains rejected.
+Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, `Cinemax-main`, `CineSpot-main`, `cinextma-master`, `AIOStreams-main`, `aniyomi-main`, `flixquest-main`, `aiometadata-dev`, and `anthology-main`. AIOStreams is closed fail-closed as `CLEAN_ROOM_ONLY / CONTRACT_REFERENCE / DIRECT_REUSE_BLOCKED`; restricted runtime remains rejected.
 
 `Cinemax-main` is `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / EXPERIENCE_REFERENCE / DIRECT_REUSE_DEFERRED`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Unresolved third-party NOTICE/assets/API-term provenance is handled fail-closed by deferring direct reuse. No player or TV/D-pad capability is inferred, and this source does not freeze Android API 24.
 
@@ -39,9 +40,11 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 ## CI integrity
 - `main` at execution start is `d4da2a9251fd95343114d1a3ebd9e7553e96ad69` after PR #23 merged. PR #23 exact head passed Audit hygiene run `35402792633` / job `105786110136` before merge.
 - Audit hygiene remains mandatory for audit PRs: third-party archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity must pass on the exact PR head before merge.
-- No merge is permitted from `audit/deep-wave17` until its exact head has a green Audit hygiene run.
+- No merge is permitted from `audit/deep-wave18` until its exact head has a green Audit hygiene run.
 
 ## Work completed in this execution
+- Verified exact-main Audit hygiene run `35406248165` / job `105796501304` passed on merged main `943977c30b5f12820751cd6a88f72059556c82c7`.
+- Reconciled stale `SOURCE_MATRIX` statuses for AIOStreams, aniyomi, flixquest and aiometadata, and recorded Anthology license/security/migration boundaries. Phase 1 remains NOT ACCEPTED.
 - Re-read source truth and found sole PR #26 on exact head `6cbb31ce03c302b210e8b65895878c83f8ffd38f`; Audit hygiene run `35404586110` / check `105791588846` was green. Merged it with expected-head protection to main `943977c30b5f12820751cd6a88f72059556c82c7`.
 - Confirmed zero open PRs and created `audit/deep-wave18` exactly from that merged main.
 - Closed `anthology-main` fail-closed as `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED`: provider qualification methodology is reference-eligible, while package-level MIT cannot authorize unresolved root/per-provider code, endpoints, credentials or content rights. Every runtime provider remains independently gated.
@@ -77,7 +80,7 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 - No source was promoted merely from technical capability; license, provenance, authorization, privacy and constitution gates remain independent.
 
 ## Highest-value next work
-1. Keep work on `audit/deep-wave17` until its exact head CI is green and mergeable; do not create a competing PR.
+1. Keep work on `audit/deep-wave18` until its exact head CI is green and mergeable; do not create a competing PR.
 2. Continue the highest-risk remaining provider/live/sports roots with evidence-backed authorization/provenance decisions.
 4. Continue remaining provider/live/sports roots with authorization/provenance evidence; rejection can satisfy audit closure but never runtime admission.
 5. Reconcile every closed root into the Acceptance Ledger and affected matrices in the same PR.
