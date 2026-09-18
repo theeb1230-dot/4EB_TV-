@@ -193,6 +193,14 @@ Observed signals include:
 - Current Phase-1 decision remains NOT ACCEPTED; work stays on PR #10 until missing evidence is resolved or sources are evidence-backed as rejected.
 - No third-party implementation code, credentials, private endpoints or restricted behavior were copied.
 
+## Acceptance-ledger integrity correction
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only branch.
+- Audited the newly added Phase-1 ledger itself and found duplicate rows for CineSpot and turkish-series, which would have made the acceptance count misleading.
+- Removed the duplicate rows and changed the ledger invariant to exactly one row per authoritative bundle root; SOURCE_MATRIX remains the canonical root-name/count authority.
+- This is a governance correctness fix: Phase 1 remains NOT ACCEPTED and no completion percentage is inferred from duplicated table rows.
+- No third-party code or sensitive source values were introduced.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
