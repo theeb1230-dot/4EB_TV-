@@ -10,7 +10,7 @@ Status: Phase 1 evidence matrix. Experience candidacy is not direct-code reuse a
 | CineSpot | High for Flutter discovery | Flutter/BLoC/localization + Firebase account coupling | Experience reference; local-first 4BA rules override cloud coupling |
 | cinemalist | Medium/High | Flutter/TMDB/BLoC deep-audit evidence | EXPERIENCE_REFERENCE; license/assets/API terms/key handling/player evidence pending |
 | cinextma | Medium/High for Web | Next.js/TypeScript responsive web + Supabase deep-audit evidence | EXPERIENCE_REFERENCE; no mandatory Supabase/cloud/account dependency |
-| Filmex | Medium | Compact Flutter UI/navigation deep-audit evidence | EXPERIENCE_REFERENCE; license/dependencies/player/assets pending |
+| Filmex | Medium reference only | Authoritative Flutter/Firebase/WebView audit complete; no root license; Google Mobile Ads configured; WebView/Drive playback; Firebase account/cloud coupling | EXPERIENCE_REFERENCE only; direct reuse blocked, ads/cloud/WebView-first player excluded |
 | Aniyomi | Medium/reference-heavy | Android presentation/source/player architecture | Architecture/reference; not automatically a selectable Experience |
 | Al-Qahtani | Medium | Flutter/web clean-room migration surfaces + fallback/bridge audit | CONTRACT_REFERENCE + EXPERIENCE_REFERENCE; legacy WebView bridge, relay/proxy, IP telemetry and inherited ads/tracking excluded |
 | AIOStreams | Low as UI | TypeScript aggregation workspace | Engine/Resolver reference, not Experience |
@@ -23,9 +23,7 @@ A selectable Experience must provide a distinctive maintainable UX while preserv
 
 Projects that are primarily providers, scrapers, metadata engines, CMSs or unrelated tools are deliberately **not** forced into the Experience selector.
 
-
 ## Experience isolation contract
-
 1. An Experience receives canonical 4BA view models and capability availability only; it never imports provider-specific response models, credentials or endpoint logic.
 2. Preview is side-effect free. Apply changes presentation state only and cannot mutate favorites, history, progress, downloads, provider authorization or account/local-mode state.
 3. 4BA Cinematic Gold remains the default and owns the official champagne-gold identity. Alternate Experiences may vary approved accent/layout tokens but cannot impersonate the official identity.
@@ -35,7 +33,6 @@ Projects that are primarily providers, scrapers, metadata engines, CMSs or unrel
 7. ZERO_ADS and Zero-PII are non-overridable. An inherited ad, analytics, crash-reporting or cloud-account dependency is removed or replaced before an Experience can become selectable.
 
 ## Admission states
-
 - **EXPERIENCE_REFERENCE:** evidence may inform clean-room UX/contracts; not selectable.
 - **CANDIDATE_DISABLED:** implementation exists behind Core contracts but acceptance gates are incomplete.
 - **ELIGIBLE_DISABLED:** all required gates pass; explicit product decision still required.
