@@ -53,6 +53,13 @@ The 30-root acceptance ledger remains the authority. A root closes only with evi
 - Updated the cinextma source card, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN. Cinextma intentionally remains `DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE` until authoritative blob/security/player/test/asset evidence closes.
 - First resulting evidence commit: `527560ce9619207995f33d198de1f2cba996927f`.
 
+### Exact-head verification after cinextma boundary update
+- Re-read GitHub after the previous cinextma evidence commits. Exact PR #12 head at this execution start was `b88f2ff7746c3255ef5253006c593ce586380e55`; GitHub now reports mergeable=true.
+- Exact-head Audit hygiene run `35352545678` completed `success`; check `repository-hygiene` is green on that exact SHA. This supersedes the earlier transient mergeability/CI uncertainty.
+- Re-fetched the authoritative Drive ZIP again. A fresh selective archive listing attempt for `cinextma-master` timed out at the container transport layer before yielding file evidence. No bundle provenance/license/player/security claim was inferred from the timeout.
+- This is now a repeated infrastructure limitation, so the audit remains fail-closed and the next useful step is to close other roots with directly retrievable authoritative/public blob evidence rather than repeatedly burning runs on the same archive operation.
+- No Releases exist and no conflicting PR/branch was created.
+
 ## Current Phase 1 decision
 **NOT ACCEPTED.** Four roots are evidence-complete. Remaining roots still have unresolved evidence cells. No source/provider/Experience is promoted merely because its audit closed.
 
