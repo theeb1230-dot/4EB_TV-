@@ -273,6 +273,15 @@ Observed signals include:
 - Ytvplus2: multi-source aggregation/fallback reference; every source remains authorization-gated, Watch != Download, Metadata != Stream, and no backend/provider may become a startup dependency or single point of failure.
 - No provider endpoints, credentials, datasets or third-party implementation were copied.
 
+## Live/sports evidence wave
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Advanced six live/sports sources from inventory-only to DEEP_AUDIT_PARTIAL / PROVIDER_PENDING: Mstch_Server2, Match-Archive, getChanelFraom_dlstreams, YacinTv, SportFree and Cannels-arap-streem.
+- Formalized the live split: LiveMetadataProvider owns canonical channel/EPG/match data; LiveStreamProvider owns authorized playback candidates. EPG/public playlist reachability never implies stream authorization.
+- Canonical channel identity remains provider-independent so outages do not erase favorites/history; health stays bounded/local and Watch remains separate from Download.
+- Advanced orien.live to DEEP_AUDIT_PARTIAL / QUARANTINED. Credential harvesting/discovery/replay/sharing and any runtime migration are explicitly excluded; safe audit completion does not require executing credential-oriented paths.
+- No playlist, endpoint, token, cookie, credential, username/password or third-party implementation was copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
