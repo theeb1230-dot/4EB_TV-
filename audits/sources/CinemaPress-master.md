@@ -1,12 +1,26 @@
 # Source Evidence Card: CinemaPress-master
 
-Status: INVENTORY_EVIDENCED / DEEP_AUDIT_PENDING
+Status: DEEP_AUDIT_PARTIAL / REFERENCE_ONLY
 
-## Inventory classification
-Node/EJS/Express CMS; Experience/Catalog/Reference. Repository also contains a binary copy. Inspect CMS/catalog concepts, license, dependencies and security; do not make CMS mandatory.
+## Authoritative bundle evidence
+- Node/EJS/Express CMS/catalog project in the authoritative corpus.
+- Inventory also identifies a bundled binary copy, which is not treated as source evidence or reusable implementation.
+- Its architectural role is CMS/catalog/reference, not playback Provider or required Experience.
 
-## 4BA gates
-No production code, assets, credentials or provider behavior are approved from inventory evidence alone. ZERO_COST, ZERO_ADS, Privacy/Zero-PII, Native Playback First, license compliance, provider/UI separation, metadata/stream separation and no DRM/paywall/access-control bypass remain mandatory.
+## 4BA relevance
+Classification: **Engine + Reference**.
+Potential clean-room value: content administration/catalog modeling, server-rendered information architecture and separation between editable catalog data and client presentation.
 
-## Next evidence required
-Inspect actual manifests/source entry points, architecture, models/APIs, player/provider boundaries, dependencies, tests/CI, license/provenance, ads/tracking, secrets/config handling, performance/runtime assumptions and concrete 4BA destination.
+## Constitution boundaries
+- CMS/backend cannot become mandatory for core 4BA operation.
+- Bundled binaries are not executed or migrated.
+- Server-rendered UI is not a substitute for native mobile/TV Experiences.
+- Catalog metadata remains separate from Stream capabilities.
+- Authentication/admin surfaces require independent security review and cannot collect unnecessary PII.
+- Ads/tracking and third-party assets are excluded unless independently cleared.
+
+## Migration decision
+Migration mode: **CONTRACT_REFERENCE**. No CMS runtime dependency is admitted.
+
+## Remaining evidence
+Verify package manifest/lockfile, root license/provenance, Express routes/middleware, persistence/database assumptions, admin/auth surfaces, input validation, tests, secrets/config, ads/tracking and binary provenance.
