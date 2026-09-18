@@ -14,27 +14,27 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | Cinemax | Experience/Ref | V Apache-2.0 | V major version catalog | V network/db + INTERNET/NETWORK_STATE | V API-key external config pattern | P | B no player evidence | P NOTICE/assets/API terms |
 | CineSpot | Experience/Ref | B no license file in bundle | V major pubspec | P Dio/Retrofit + cloud deps | V Firebase config/coupling; values not recorded | P | P YouTube/WebView deps | B direct reuse |
 | Anthology | Provider/Engine | P package MIT; root LICENSE pending | V test/parser dependency signals | P per-provider targets | P secrets/config patterns pending | P | V catalog/provider/playability scripts | B production until per-provider authorization |
-| Al-Qahtani | Provider/Engine/Ref | P | P | V fallback/probe/relay | P | P | V relay excluded | P |
-| turkish-series | Provider/Engine | P | P | P | P | P | P | P |
-| xoxixoxi | Provider/Engine | P | P backend tooling | P | P | P | P | P |
-| Ytvplus2 | Provider/Engine | P | P | P | P | P | P | P |
-| Mstch_Server2 | Provider/Ref | P | P | P | P | P | P | P |
-| Match-Archive | Provider/Ref | P | P | P | P | P | P | P |
+| Al-Qahtani | Provider/Engine/Ref | P root/provenance | V Flutter/Node signals | V fallback/hardening runtime | B IP/address telemetry excluded; config scan pending | B inherited ads/tracking excluded | V legacy bridge; relay/primary WebView excluded | B relay; reference only |
+| turkish-series | Provider/Engine | P data provenance/license | P Android/Python/data manifests | P static/update/provider paths | P config scan | P | P provider pending | B runtime until provenance/auth |
+| xoxixoxi | Provider/Engine | P | V Puppeteer/ffmpeg signals | P extraction/network targets | P process/config scan | P | B runtime extraction unapproved | B contract reference only |
+| Ytvplus2 | Provider/Engine | P | P | P per-source | P secrets/config pending | P | V aggregation/fallback concept | B production pending auth |
+| Mstch_Server2 | Provider/Ref | P | P | P sports targets | P | P | V live metadata/stream split | B production pending auth |
+| Match-Archive | Provider/Ref | P | P | P archive targets | P | P | V live metadata/stream split | B production pending auth |
 | kiro-drama | Provider/Ref | P | P | P | P | P | P | P |
 | alooytv-addon | Provider/Ref | P | P | P | P | P | P | P |
-| Filmex | Experience/Ref | P | P | P | P | P | P | P |
-| getChanelFraom_dlstreams | Provider/Ref | P | P | P | P | P | P | P |
+| Filmex | Experience/Ref | P | P | P | P | P | B no player evidence yet | B direct reuse pending license |
+| getChanelFraom_dlstreams | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
 | NuvioStreamsAddon | Provider/Engine | P | P | P | P | P | P | P |
-| YacinTv | Provider/Ref | P | P | P | P | P | P | P |
+| YacinTv | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
 | TRK_S | Provider/Ref | P | P | P | P | P | P | P |
 | orien.live | Quarantine | B | B | B | B credential-discovery risk | P | B | B |
-| SportFree | Provider/Ref | P | P | P | P | P | P | P |
+| SportFree | Provider/Ref | P | P | P sports targets | P | P | V live metadata/stream split | B production pending auth |
 | stremio-akwam.X | Provider/Engine | P | P | P | P | P | P | P |
 | CinemaPress | Engine/Ref | P | P | P | P | P | N/A | P |
-| Cannels-arap-streem | Provider/Ref | P | P | P | P | P | P | P |
+| Cannels-arap-streem | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
 | kiro | Provider/Ref | P | P | P | P | P | P | P |
-| cinemalist | Experience/Ref | P | P | P | P | P | P | P |
-| cinextma | Experience/Ref | P | P | P | P cloud coupling signal | P | N/A | P |
+| cinemalist | Experience/Ref | P | P Flutter/BLoC | P TMDB terms/key path | P key/config pending | P | B no player evidence | B experience reference pending license |
+| cinextma | Experience/Ref | P | P Next/TS | P Supabase/cloud | B mandatory cloud/account excluded | P analytics scan | N/A | B experience reference pending license |
 | ProxyFill | Unrelated/Ref | P | P | N/A | P | P | N/A | B runtime |
 
 > The ledger contains exactly one row per authoritative bundle root. SOURCE_MATRIX remains the canonical root-name/count authority.
