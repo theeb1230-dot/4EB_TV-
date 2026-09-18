@@ -175,6 +175,15 @@ Observed signals include:
 - Rejected mandatory Puppeteer/ffmpeg scraping backends and any private video relay/proxy as ZERO_COST/scalability violations.
 - Phase 1 remains incomplete: file-level license/dependency/network/authorization evidence is still required before enabling any production provider.
 
+## Deep Audit Wave 4: 30/30 classification coverage
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the only open PR and mergeable. No Release or exact-head Actions run exists for this docs-only branch.
+- Added `audits/DEEP_AUDIT_WAVE4.md` covering remaining Experience/addon/provider/reference candidates: cinemalist, cinextma, Filmex, CinemaPress, ARB-S33-3, alooytv-addon, NuvioStreamsAddon, TRK_S, stremio-akwam.X, kiro-drama, kiro and ProxyFill.
+- All 30 bundle roots now have evidence-backed architectural classification across source cards + Deep Audit waves 1–4.
+- Expanded `docs/EXPERIENCE_MATRIX.md` so real UI candidates are separated from Engine/Provider/reference projects; ProxyFill is explicitly excluded from runtime rather than forced into the product.
+- This closes classification coverage only. Phase 1 is NOT complete because file-level license/dependency/network/secrets/ads-tracking/provider-authorization/player/provenance evidence remains incomplete for multiple sources.
+- No third-party implementation code, credentials or restricted endpoints were copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
