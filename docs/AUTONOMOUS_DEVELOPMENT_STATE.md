@@ -264,6 +264,15 @@ Observed signals include:
 - All three are explicitly Experience references only. Useful UX must be independently expressed through 4BA Design System and canonical contracts; no branding/assets/provider implementation is admitted.
 - No credentials, third-party implementation or provider endpoints were copied.
 
+## Engine/data evidence wave
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Advanced turkish-series-main, xoxixoxi-main and Ytvplus2-main from inventory-only to DEEP_AUDIT_PARTIAL with explicit migration boundaries.
+- turkish-series: ~18,082-file Android/Kotlin/Python/JSON corpus; treated as Turkish data/update reference. Large mutable catalogs stay outside Core/app binaries; static hosting is metadata/config only and requires provenance/license/freshness/rollback evidence.
+- xoxixoxi: ~6,711-file Node/backend corpus with Puppeteer/ffmpeg signals; runtime implementation blocked. Only generic worker/failure/timeout concepts may be clean-room referenced; scraping/bypass/media relay and unsafe process execution are excluded.
+- Ytvplus2: multi-source aggregation/fallback reference; every source remains authorization-gated, Watch != Download, Metadata != Stream, and no backend/provider may become a startup dependency or single point of failure.
+- No provider endpoints, credentials, datasets or third-party implementation were copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
