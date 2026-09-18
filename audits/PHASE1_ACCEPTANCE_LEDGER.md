@@ -34,7 +34,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | CinemaPress | Engine/Ref | V MIT + exact public snapshot match | V package manifest; no lockfile | V Express/CMS/API/network surfaces | B embedded default API credentials + IP/WHOIS/geolocation/cookies excluded | B ad/prebid/advertising surfaces excluded | B server/embed/iframe/CinemaPlayer runtime excluded | V AUDIT COMPLETE — CONTRACT_REFERENCE only |
 | Cannels-arap-streem | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
 | kiro | Provider/Ref | P | P small source | P per-source | P config pending | P | P capability surface | B production pending auth |
-| cinemalist | Experience/Ref | P | P Flutter/BLoC | P TMDB terms/key path | P key/config pending | P | B no player evidence | B experience reference pending license |
+| cinemalist | Experience/Ref | B authoritative GPL-3.0 snapshot matched | V pubspec/lock + Flutter/BLoC deps | V TMDB v3 metadata client; terms/auth separate | B non-empty default TMDB key excluded; privacy-policy IP/device log collection rejected | V bounded code scan found no selected ad/analytics SDK signatures | B YouTube trailer + url_launcher only; no movie/episode stream player | V AUDIT COMPLETE — EXPERIENCE_REFERENCE + CLEAN_ROOM only |
 | cinextma | Experience/Ref | P | P Next/TS | P Supabase/cloud | B mandatory cloud/account excluded | P analytics scan | N/A | B experience reference pending license |
 | ProxyFill | Unrelated/Ref | B no bundle LICENSE/NOTICE; V exact decisive blob match | V exact Blazor/.NET manifests + relevant deps | V Pokémon API/Drive network behavior; unrelated | B authoritative hard-coded credential proven + unsafe credential-output directive; value never recorded | V bounded scan: no selected ad/analytics/telemetry signatures | N/A | V AUDIT COMPLETE — EXCLUDED runtime |
 
@@ -55,4 +55,4 @@ Phase 1 can close only when every 30-root source has:
 A provider may remain **rejected/quarantined** and still satisfy audit completion if the rejection is evidence-backed. Audit completion never means provider approval.
 
 ## Current decision
-**NOT ACCEPTED.** Classification coverage is 30/30, but the ledger still exposes material evidence gaps in the remaining PARTIAL roots. Work remains in Phase 1 and on PR #10 until those gates are resolved or explicitly evidence-backed as rejected.
+**NOT ACCEPTED.** Classification coverage is 30/30, but the ledger still exposes material evidence gaps in the remaining PARTIAL roots. Work remains in Phase 1 and on the current sole audit PR (#12 while open) until those gates are resolved or explicitly evidence-backed as rejected.

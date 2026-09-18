@@ -8,7 +8,7 @@ Status: Phase 1 evidence matrix. Experience candidacy is not direct-code reuse a
 | FlixQuest | High | Flutter UI/player/offline/Cast evidence | Clean-room Experience reference; GPL + ads/tracking exclusions |
 | Cinemax | High for Android/TV patterns | Modular Compose + dark design system + baseline profiles | Experience/Reference; deeper dependency audit pending |
 | CineSpot | High for Flutter discovery | Flutter/BLoC/localization + Firebase account coupling | Experience reference; local-first 4BA rules override cloud coupling |
-| cinemalist | Medium/High | Flutter/TMDB/BLoC deep-audit evidence | EXPERIENCE_REFERENCE; license/assets/API terms/key handling/player evidence pending |
+| cinemalist | Medium/High reference only | Authoritative snapshot matched to public master; Flutter/BLoC discovery, TMDB client, saved/local JSON behavior; GPLv3; non-empty default TMDB key; YouTube trailer + external URI launcher | EXPERIENCE_REFERENCE + CLEAN_ROOM only; direct code/assets copy blocked; TMDB production use separately gated; no Player/Provider admission |
 | cinextma | Medium/High for Web | Next.js/TypeScript responsive web + Supabase deep-audit evidence | EXPERIENCE_REFERENCE; no mandatory Supabase/cloud/account dependency |
 | Filmex | Medium reference only | Authoritative Flutter/Firebase/WebView audit complete; no root license; Google Mobile Ads configured; WebView/Drive playback; Firebase account/cloud coupling | EXPERIENCE_REFERENCE only; direct reuse blocked, ads/cloud/WebView-first player excluded |
 | Aniyomi | Medium/reference-heavy | Android presentation/source/player architecture | Architecture/reference; not automatically a selectable Experience |

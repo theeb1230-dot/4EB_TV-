@@ -3,8 +3,8 @@
 This is the canonical 30-root audit queue. Classification is evidence-backed where a source card exists, but **audit completion is controlled by `audits/PHASE1_ACCEPTANCE_LEDGER.md`**. A source may contribute to multiple categories. `PARTIAL` never means production admission.
 
 | # | Source | Current classification | Primary audit focus | Audit status |
-|---|---|---|---|---|
-| 01 | cinemalist-official-master | Experience / Reference | Flutter discovery UI, TMDB/BLoC, license/API/player evidence | PARTIAL — EXPERIENCE_REFERENCE |
+|---:|---|---|---|---|
+| 01 | cinemalist-official-master | Experience / Reference | Exact GPLv3 snapshot matched; Flutter/TMDB/BLoC/local-state behavior retained only as clean-room reference; embedded default key/privacy-policy telemetry/external launcher excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
 | 02 | cinextma-master | Experience / Reference | Next.js UX, Supabase/cloud/account boundaries | PARTIAL — EXPERIENCE_REFERENCE |
 | 03 | ARB-S33-3-main | Provider / Reference | ArabSeed/Stremio contracts, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 04 | Cinemax-main | Experience / Reference | Android/Kotlin architecture, NOTICE/assets/API/player evidence | PARTIAL — reuse gated |

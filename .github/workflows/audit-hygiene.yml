@@ -43,3 +43,45 @@ jobs:
             fi
           done < <(git ls-files -z)
           exit "$failed"
+      - name: Enforce Phase 1 evidence-card integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          ledger='audits/PHASE1_ACCEPTANCE_LEDGER.md'
+          matrix='docs/SOURCE_MATRIX.md'
+          mapfile -t cards < <(find audits/sources -maxdepth 1 -type f -name '*.md' -printf '%f\n' | sort)
+
+          if (( ${#cards[@]} != 30 )); then
+            echo "::error::Phase 1 requires exactly 30 source evidence cards; found ${#cards[@]}."
+            exit 1
+          fi
+
+          ledger_rows="$(awk -F'|' '/^\|/ { key=$2; gsub(/^[[:space:]]+|[[:space:]]+$/, "", key); if (key != "Source" && key !~ /^-+$/) count++ } END { print count+0 }' "$ledger")"
+          if (( ledger_rows != 30 )); then
+            echo "::error file=$ledger::Phase 1 ledger must contain exactly 30 source rows; found $ledger_rows."
+            exit 1
+          fi
+
+          matrix_rows="$(awk -F'|' '/^\|[[:space:]]*[0-9]+[[:space:]]*\|/ { count++ } END { print count+0 }' "$matrix")"
+          if (( matrix_rows != 30 )); then
+            echo "::error file=$matrix::SOURCE_MATRIX must contain exactly 30 numbered roots; found $matrix_rows."
+            exit 1
+          fi
+
+          failed=0
+          for card_name in "${cards[@]}"; do
+            card="audits/sources/$card_name"
+            root="${card_name%.md}"
+
+            if ! grep -q '^Status:' "$card"; then
+              echo "::error file=$card::Missing explicit Status line."
+              failed=1
+            fi
+
+            if ! grep -Fq "| $root |" "$matrix"; then
+              echo "::error file=$matrix::Evidence-card root $root is not represented exactly in SOURCE_MATRIX."
+              failed=1
+            fi
+          done
+
+          exit "$failed"
