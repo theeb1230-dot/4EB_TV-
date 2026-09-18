@@ -184,6 +184,15 @@ Observed signals include:
 - This closes classification coverage only. Phase 1 is NOT complete because file-level license/dependency/network/secrets/ads-tracking/provider-authorization/player/provenance evidence remains incomplete for multiple sources.
 - No third-party implementation code, credentials or restricted endpoints were copied.
 
+## Phase 1 acceptance control
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the only open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only branch.
+- Added `audits/PHASE1_ACCEPTANCE_LEDGER.md` to convert the 30/30 classification result into explicit per-source evidence gates for license, dependencies, network/API, secrets/privacy, ads/tracking, player/provider behavior and reuse status.
+- The ledger explicitly marks known blockers: AIOStreams and AIOMetadata license conflicts, FlixQuest GPL direct-code block plus ad/analytics exclusions, CineSpot license gap, and orien.live quarantine.
+- Defined objective Phase-1 acceptance criteria so classification coverage can no longer be mistaken for Deep Audit completion.
+- Current Phase-1 decision remains NOT ACCEPTED; work stays on PR #10 until missing evidence is resolved or sources are evidence-backed as rejected.
+- No third-party implementation code, credentials, private endpoints or restricted behavior were copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
