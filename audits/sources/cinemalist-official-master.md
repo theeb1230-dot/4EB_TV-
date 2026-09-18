@@ -1,12 +1,25 @@
 # Source Evidence Card: cinemalist-official-master
 
-Status: INVENTORY_EVIDENCED / DEEP_AUDIT_PENDING
+Status: DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE
 
-## Inventory classification
-Flutter client; Experience/Reference; inspect TMDB/BLoC, UI, license, player/network, ads/tracking.
+## Authoritative bundle evidence
+- Flutter client with roughly 250 files in the authoritative archive.
+- Inventory/source evidence identifies TMDB-oriented discovery and BLoC/state-management architecture signals.
+- Primary value is presentation/discovery structure, not a production provider or playback engine.
 
-## 4BA gates
-No production code, assets, credentials or provider behavior are approved from inventory evidence alone. ZERO_COST, ZERO_ADS, Privacy/Zero-PII, Native Playback First, license compliance, provider/UI separation, metadata/stream separation and no DRM/paywall/access-control bypass remain mandatory.
+## 4BA relevance
+Classification: **Experience + Reference**.
+Candidate clean-room concepts: discovery/home composition, content cards/details, Flutter state separation and responsive interaction patterns. Official/default Experience remains 4BA Cinematic Gold.
 
-## Next evidence required
-Inspect actual manifests/source entry points, architecture, models/APIs, player/provider boundaries, dependencies, tests/CI, license/provenance, ads/tracking, secrets/config handling, performance/runtime assumptions and concrete 4BA destination.
+## Admission boundaries
+- TMDB/API usage requires independent API-term, key-storage and ZERO_COST review.
+- UI may consume canonical 4BA metadata/search contracts only; it cannot bind directly to a TMDB/provider response model.
+- No assets/branding/code are reusable until root license and asset provenance are verified.
+- No player capability is inferred without file-level player evidence.
+- Ads/tracking/telemetry and secret/config handling remain explicit open gates.
+
+## Migration decision
+Migration mode: **EXPERIENCE_REFERENCE**. Recreate useful interaction concepts through the 4BA Design System and canonical contracts.
+
+## Remaining evidence
+Verify pubspec, root license, BLoC/router entry points, TMDB/network client and key loading, storage, tests, platform manifests, player absence/presence, ads/tracking and asset provenance.
