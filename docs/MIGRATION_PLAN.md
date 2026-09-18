@@ -29,9 +29,7 @@ Status: DRAFT / EVIDENCE-DRIVEN. This document does not authorize third-party co
 ## Non-negotiable target boundaries
 Core owns domain/storage/config/security/localization/accessibility. Experience Engine owns presentation only. Provider SDK owns source capabilities. Metadata Engine owns identity/mapping/deduplication. Resolver owns ranking/fallback. Player owns playback state and native platform integration. Optional gateway may assist only when necessary and may never be a mandatory paid/video-proxy dependency.
 
-
 ## Evidence-gated migration modes
-
 Every source contribution must use exactly one migration mode before implementation begins:
 
 | Mode | Meaning | Allowed output |
@@ -57,7 +55,7 @@ Every source contribution must use exactly one migration mode before implementat
 - Anthology: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; per-provider authorization and root-license evidence remain mandatory.
 - cinemalist-official: `EXPERIENCE_REFERENCE`; TMDB/API terms, key handling, license and asset provenance remain gates.
 - cinextma: `EXPERIENCE_REFERENCE`; mandatory Supabase/cloud/account coupling is excluded from Core.
-- Filmex: `EXPERIENCE_REFERENCE`; direct reuse remains blocked pending license/dependency/player evidence.
+- Filmex: `EXPERIENCE_REFERENCE` only; Phase-1 audit is complete. Direct code/assets reuse is blocked by missing root license. Mandatory Firebase/account/cloud coupling, Google Mobile Ads configuration and WebView/Google-Drive-preview playback are excluded; only clean-room UX ideas may inform 4BA Design System behind canonical contracts.
 - CinemaPress: `CONTRACT_REFERENCE` only; Phase-1 audit is complete. Root MIT/provenance are verified, but mandatory CMS/backend, server-rendered Experience, ads/prebid, IP/WHOIS profiling, embedded/default credentials and server/embed/iframe/CinemaPlayer runtime are excluded.
 - turkish-series: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; large mutable catalogs stay outside Core/app binaries.
 - xoxixoxi: `CONTRACT_REFERENCE`; unapproved extraction runtime, bypass behavior and media relay are excluded.
