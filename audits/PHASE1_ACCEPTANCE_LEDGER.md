@@ -36,7 +36,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | kiro | Provider/Ref | P | P small source | P per-source | P config pending | P | P capability surface | B production pending auth |
 | cinemalist | Experience/Ref | P | P Flutter/BLoC | P TMDB terms/key path | P key/config pending | P | B no player evidence | B experience reference pending license |
 | cinextma | Experience/Ref | P | P Next/TS | P Supabase/cloud | B mandatory cloud/account excluded | P analytics scan | N/A | B experience reference pending license |
-| ProxyFill | Unrelated/Ref | P root/provenance | P .NET/Blazor deps | N/A unless contradictory evidence | P config/telemetry scan | N/A | N/A | B EXCLUDED runtime |
+| ProxyFill | Unrelated/Ref | P bundle provenance/license; public matching repo inspected | V public .NET/Blazor manifest; bundle hash match pending | P public HttpClient/Pokémon API evidence; bundle match pending | B hard-coded API credential in corroborating repo; value excluded; bundle presence pending | N/A | N/A | B EXCLUDED runtime |
 
 > Mechanical reconciliation: 30/30 authoritative roots, exactly one row each. The ledger contains exactly one row per authoritative bundle root. SOURCE_MATRIX remains the canonical root-name/count authority.
 
