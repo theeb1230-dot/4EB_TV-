@@ -211,6 +211,14 @@ Observed signals include:
 - Kill-switch semantics preserve canonical user state and fail closed; signed config remains deliberately unimplemented pending vetted crypto/key-lifecycle audit.
 - No bundled provider is promoted to production by this change and no sensitive endpoint/credential was copied.
 
+## Evidence-gated migration enforcement
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only branch.
+- Upgraded `docs/MIGRATION_PLAN.md` from provisional destinations to explicit migration modes: LICENSED_REUSE, CLEAN_ROOM_BEHAVIOR, CONTRACT_REFERENCE, EXPERIENCE_REFERENCE, PROVIDER_PENDING, QUARANTINE and EXCLUDED.
+- Applied current hard mappings: AIOStreams/AIOMetadata clean-room only while license conflicts exist; FlixQuest Experience/clean-room only with ads/analytics excluded; orien.live quarantined; ProxyFill runtime-excluded; CineSpot direct reuse blocked pending license; Al-Qahtani video relay/proxy excluded.
+- Added a migration invariant: any source promotion requires synchronized evidence updates in its source card, acceptance ledger and relevant matrix. Implementation PRs cannot silently promote pending/quarantined/excluded material.
+- No third-party implementation, credential or private endpoint was copied and no provider was enabled.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
