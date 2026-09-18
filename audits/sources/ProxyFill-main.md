@@ -1,12 +1,21 @@
 # Source Evidence Card: ProxyFill-main
 
-Status: INVENTORY_EVIDENCED / DEEP_AUDIT_PENDING
+Status: DEEP_AUDIT_PARTIAL / EXCLUDED_RUNTIME
 
-## Inventory classification
-.NET/Blazor Pokémon proxy-printing tool; Reference/outlier. Likely no runtime destination in 4BA; audit license/tooling ideas only.
+## Authoritative bundle evidence
+- .NET/Blazor Pokémon proxy-printing tool in the authoritative 30-root corpus.
+- Domain is unrelated to 4BA entertainment discovery/playback.
+- Its presence is retained in the audit so the 30/30 corpus remains accountable rather than quietly deleting inconvenient roots.
 
-## 4BA gates
-No production code, assets, credentials or provider behavior are approved from inventory evidence alone. ZERO_COST, ZERO_ADS, Privacy/Zero-PII, Native Playback First, license compliance, provider/UI separation, metadata/stream separation and no DRM/paywall/access-control bypass remain mandatory.
+## 4BA relevance
+Classification: **Unrelated + Reference**.
+No product capability, Experience, Provider, Metadata, Player or Backend destination is required.
 
-## Next evidence required
-Inspect actual manifests/source entry points, architecture, models/APIs, player/provider boundaries, dependencies, tests/CI, license/provenance, ads/tracking, secrets/config handling, performance/runtime assumptions and concrete 4BA destination.
+## Admission boundary
+Runtime migration is **EXCLUDED**. Do not import Pokémon/domain assets, printing workflows, unrelated data models or dependencies merely to claim reuse.
+
+## Migration decision
+Migration mode: **EXCLUDED**. Phase-1 closure for this root requires provenance/license/dependency/security evidence sufficient to justify exclusion, not artificial integration.
+
+## Remaining evidence
+Verify root license/provenance, project/solution manifests, major dependencies, secret/config scan and any telemetry/network behavior. No runtime/player/provider audit is required unless contradictory implementation evidence appears.
