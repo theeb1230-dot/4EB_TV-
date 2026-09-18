@@ -24,3 +24,25 @@ Never reproduce credential/token/cookie/private-key values in commits, issues, P
 3. Resolve AIOMetadata bundled Apache-2.0 declaration versus GPL-3.0 root license before any direct reuse.
 4. Treat FlixQuest GPL source as reference/clean-room unless a compatible licensing decision is explicitly made; ZERO_ADS/Zero-PII exclusions apply regardless.
 5. Continue provenance matching by bundle version/blob hashes instead of assuming current upstream equals the archived snapshot.
+
+
+## Evidence expansion beyond Wave 1
+
+The acceptance ledger and per-source evidence cards are authoritative for detailed gates. The following decisions are now also security/license invariants:
+
+- **Cinemax:** Apache-2.0 root evidence is verified; direct reuse still waits on NOTICE/assets/API terms and dependency obligations. API keys stay outside source control.
+- **CineSpot:** no root license was found in the authoritative bundle, therefore direct implementation reuse is blocked. Firebase configuration values are never copied; mandatory Firebase/cloud coupling is not a Core dependency.
+- **Anthology:** package-level MIT declaration is insufficient while root-license evidence is pending. Each provider remains independently authorization-gated.
+- **Al-Qahtani:** media relay/proxy, client-IP/address telemetry, inherited ads/tracking and primary legacy WebView bridges are excluded. Only contract/Experience concepts may be referenced.
+- **cinemalist / cinextma / Filmex:** Experience-reference only until root license, dependency, asset provenance, network/config and player evidence closes. TMDB/Supabase presence does not authorize API use or make cloud services mandatory.
+- **turkish-series:** large mutable datasets require license/data provenance and freshness/rollback evidence; they are not compiled wholesale into Core or application binaries.
+- **xoxixoxi:** Puppeteer/ffmpeg/extraction runtime is blocked pending license, authorization and process-security evidence. Bypass and media relay behavior are excluded.
+- **Live/sports family:** public playlist or EPG reachability never proves stream redistribution authority. Private playlists, captured cookies/tokens and credentials are excluded.
+- **Addon/provider family:** Stremio/addon compatibility, public code and successful discovery do not prove source/content authorization.
+- **orien.live:** quarantined. Credential discovery/harvesting/replay/sharing is not executed or migrated.
+- **CinemaPress:** CMS/catalog concepts are contract-reference only; bundled binaries are not executed or migrated and CMS/backend cannot be mandatory.
+- **ProxyFill:** unrelated .NET/Blazor printing runtime is excluded; audit closure requires only evidence sufficient to justify exclusion.
+
+### Fail-closed reuse rule
+
+Unknown or unresolved license/provenance is never treated as permissive. A source stays reference-only, provider-pending, quarantined or excluded until the evidence required by its migration mode is complete. Successful tests, public availability, repository presence or technical compatibility cannot override this rule.
