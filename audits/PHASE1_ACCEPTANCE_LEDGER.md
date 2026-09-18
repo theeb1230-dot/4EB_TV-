@@ -11,8 +11,8 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | AIOStreams | Engine/Provider | B MIT/GPL conflict | P | P | P | P | V generic pipeline; restricted behaviors excluded | B |
 | flixquest | Experience/Ref | V GPL-3.0 | V major pubspec | P | V telemetry deps identified | V ad/analytics deps excluded | V player/offline tests | B direct code |
 | aiometadata | Metadata/Engine | B Apache/GPL conflict | P | V metadata/cache surfaces | P | P tracking coupling identified | N/A | B |
-| Cinemax | Experience/Ref | V Apache-2.0 | P | V network/db separation | P API-key config | P | P | P |
-| CineSpot | Experience/Ref | P | V major pubspec | P | V Firebase coupling | P | P | B until license |
+| Cinemax | Experience/Ref | V Apache-2.0 | V major version catalog | V network/db + INTERNET/NETWORK_STATE | V API-key external config pattern | P | B no player evidence | P NOTICE/assets/API terms |
+| CineSpot | Experience/Ref | B no license file in bundle | V major pubspec | P Dio/Retrofit + cloud deps | V Firebase config/coupling; values not recorded | P | P YouTube/WebView deps | B direct reuse |
 | Anthology | Provider/Engine | P package says MIT | P | P per provider | P | P | V provider/playability tests | P per provider |
 | Al-Qahtani | Provider/Engine/Ref | P | P | V fallback/probe/relay | P | P | V relay excluded | P |
 | turkish-series | Provider/Engine | P | P | P | P | P | P | P |
