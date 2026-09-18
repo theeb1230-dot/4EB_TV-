@@ -74,6 +74,15 @@
 - Verified `docs/SOURCE_MATRIX.md` exists and already contains all 30 authoritative roots; no duplicate replacement file was created. The Acceptance Ledger remains the Phase 1 completion authority.
 - No source/provider/Experience classification changed. Phase 1 remains NOT ACCEPTED.
 
+## ProxyFill evidence closure progress
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `8198aa2cd5872d0481b5c50fe0d6b090b25035b0`, sole open PR, mergeable=true; no Releases.
+- The duplicate CI trigger fix is now proven: exact-head Audit hygiene run `35298624700` completed success and only one `repository-hygiene` check exists on `8198aa2...`.
+- Highest-value Phase-1 work then moved back to source evidence. Public `hfip/ProxyFill` was inspected as corroborating evidence only, not as a substitute for the authoritative archived snapshot.
+- Corroborating code confirms Blazor WebAssembly/.NET, Pokémon proxy-card printing scope, Selenium/PDF/UI dependencies, a Pokémon API service, and a hard-coded API credential. The credential value was deliberately not copied into any 4BA document or commit.
+- Updated `audits/sources/ProxyFill-main.md`, the Phase-1 Acceptance Ledger, and `docs/LICENSE_SECURITY_AUDIT.md`. Runtime remains EXCLUDED; the audit is not yet complete because bundle-local blob/provenance/license matching is still pending.
+- No source/provider/Experience was promoted. Phase 1 remains NOT ACCEPTED.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
