@@ -219,6 +219,14 @@ Observed signals include:
 - Added a migration invariant: any source promotion requires synchronized evidence updates in its source card, acceptance ledger and relevant matrix. Implementation PRs cannot silently promote pending/quarantined/excluded material.
 - No third-party implementation, credential or private endpoint was copied and no provider was enabled.
 
+## Cross-source capability consolidation
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only branch.
+- Rebuilt `docs/CAPABILITY_MATRIX.md` from the original four-source provisional table into a cross-source evidence map spanning canonical models, provider contracts, metadata, search, resolver/health, native player, tracks, intro/outro timing, download, Cast, Live/EPG, Experiences, TV focus, localization, offline, config, diagnostics and performance.
+- Added explicit capability invariants enforcing Stream != Download, Metadata != Stream, Experience != Provider, local health != mandatory telemetry, backend != video path, WebView != primary player, and repository evidence != authorization.
+- Connected every capability row to a 4BA owner/boundary and a pre-implementation gate so source evidence cannot bypass migration/license/authorization review.
+- No third-party implementation code or sensitive provider data was copied and no provider was enabled.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
