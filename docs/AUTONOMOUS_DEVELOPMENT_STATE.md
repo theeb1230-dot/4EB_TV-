@@ -5,8 +5,10 @@ GitHub is the source of truth. This file is a compact handoff summary and must n
 ## Current source truth
 - PR #10 was squash-merged into `main` at `9404e1e2ec8bc8e22f050c4e3d0ac1f91a7d44c2` on 2026-09-18.
 - PR #10 included the authoritative Filmex source card, Acceptance Ledger reconciliation, SOURCE_MATRIX update and EXPERIENCE_MATRIX decision through head `61550d07c5a8fcac989d1d9d8d3e1b59adc5060c`.
-- No PR was open after #10 merged, so a clean continuation branch `audit/deep-wave2` was created directly from `main` at `9404e1e2...` to carry the remaining post-merge Filmex reconciliation without mixing squash history.
-- On `audit/deep-wave2`, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN now carry the Filmex closure evidence. Resulting head before this state update: `c6d308e8b1645a4549e23f14b40726879d89d782`.
+- After #10 merged with no open PRs, continuation branch `audit/deep-wave2` was created directly from exact merged `main` to carry only the post-merge reconciliation that missed the squash boundary.
+- PR #11 `Audit: continue Phase 1 source closure` is now the sole continuation PR from `audit/deep-wave2` to `main`.
+- PR #11 started at head `4faf62685131bf0775b196cc919a22bbe60394e2`; exact-head Audit hygiene run `35343080662` was queued immediately after PR creation, so it was not claimed green at that point.
+- LICENSE_SECURITY_AUDIT and MIGRATION_PLAN on PR #11 carry the Filmex closure evidence that was not included by the PR #10 squash race.
 - No Releases existed at the start of this continuation.
 
 ## Product constitution invariants
@@ -50,16 +52,16 @@ A root is Phase-1 complete only when evidence covers provenance/version, archite
 
 ## Audit/accounting integrity
 - `docs/SOURCE_MATRIX.md` tracks exactly 30 authoritative roots.
-- `audits/PHASE1_ACCEPTANCE_LEDGER.md` has one row per root and now correctly marks ProxyFill and Filmex audit-complete.
+- `audits/PHASE1_ACCEPTANCE_LEDGER.md` has one row per root and correctly marks ProxyFill and Filmex audit-complete.
 - Filmex source card, ledger, SOURCE_MATRIX and EXPERIENCE_MATRIX were merged in PR #10.
-- `audit/deep-wave2` carries the remaining Filmex LICENSE_SECURITY_AUDIT and MIGRATION_PLAN reconciliation after the squash merge race.
+- PR #11 carries the remaining Filmex LICENSE_SECURITY_AUDIT and MIGRATION_PLAN reconciliation after the squash merge race.
 - No Provider or third-party Experience has been promoted to enabled/eligible runtime status.
 
 ## Current Phase 1 decision
 **NOT ACCEPTED.** Three roots are evidence-complete; remaining PARTIAL roots still have unresolved evidence cells.
 
 ## Highest-value next work
-1. Keep work on the sole continuation PR/branch once opened from `audit/deep-wave2`.
+1. Continue only on PR #11 / `audit/deep-wave2` while it remains open.
 2. Close small Experience roots next from the authoritative archive, prioritizing `cinemalist-official-master`, `cinextma-master`, `CineSpot-main`, then `Cinemax-main`.
 3. Close remaining Wave-1 dependency/network/privacy evidence for Aniyomi, AIOStreams, FlixQuest and AIOMetadata without copying incompatible code.
 4. Close Anthology and Al-Qahtani provenance/config/network/security boundaries.
