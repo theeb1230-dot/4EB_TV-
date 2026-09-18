@@ -65,6 +65,15 @@
 - Reduced CI waste without weakening coverage: pull_request is now scoped to base `main`, while push continues to cover `main` and `audit/**`. This preserves PR validation and branch validation but prevents unrelated PR targets from triggering the workflow; duplicate events for audit PR updates remain observable and will be revisited if GitHub continues emitting both required contexts.
 - No product/provider/source classification changed. Phase 1 remains NOT ACCEPTED.
 
+## Duplicate CI trigger root-cause fix
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `81095d077efb27072a296f8ff6e5222ee59bf699`, sole open PR, mergeable=true; no Releases.
+- Exact-head Audit hygiene run `35296304712` on `81095d0...` completed success, but two repository-hygiene checks were still emitted for the same PR update.
+- Root cause: the audit branch update matched both `push: audit/**` and `pull_request: main`. The prior scoping reduced unrelated PR triggers but did not eliminate duplicate runs for audit PRs.
+- Fixed the trigger model in commit `9ba055c34757fcf4482142dc5d0e175d1e2339ec`: PR validation remains on pull requests targeting `main`; push validation is now limited to `main`. This preserves branch-after-merge protection and exact PR validation without double-running on every audit branch push.
+- Verified `docs/SOURCE_MATRIX.md` exists and already contains all 30 authoritative roots; no duplicate replacement file was created. The Acceptance Ledger remains the Phase 1 completion authority.
+- No source/provider/Experience classification changed. Phase 1 remains NOT ACCEPTED.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
