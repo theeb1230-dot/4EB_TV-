@@ -245,6 +245,15 @@ Observed signals include:
 - Updated Anthology source card and Phase-1 acceptance ledger. Root LICENSE, provider manifests/config schemas, network-target classification and secret/config patterns remain open evidence gates.
 - No provider endpoint, credential, token, cookie, private playlist or third-party implementation was copied.
 
+## File-level evidence closure: Al-Qahtani
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Advanced Al-Qahtani from inventory-only to DEEP_AUDIT_PARTIAL / REFERENCE_ONLY using authoritative bundle evidence: 163-file hybrid Flutter/Node/Web/Python tree, Flutter 1.0.33+33 dependency signals, Node >=22 private ESM runtime, checks/tests, legacy player bridge paths, fallback runtime and hardening behavior.
+- Preserved only clean-room concepts that fit 4BA: bounded provider probes, TTL/timeouts/rate limits, strict media/content validation, deterministic health/fallback and Arabic migration lessons.
+- Explicitly excluded media relay/proxy, client-IP/address telemetry, inherited ads/tracking and primary WebView/legacy bridge playback. Provider behavior remains authorization-gated.
+- Updated Al-Qahtani source card and Phase-1 acceptance ledger. Root license/provenance, exact dependency manifests, secrets/config scan, workers/API schemas and provider authorization remain open.
+- No IP values, credentials, endpoints, third-party implementation or legacy ad/tracking code was copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
