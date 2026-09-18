@@ -23,7 +23,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | kiro-drama | Provider/Ref | P | P JS/JSON | P per-source | P config pending | P | P capability surface | B production pending auth |
 | alooytv-addon | Provider/Ref | P | P Node/Stremio | P per-source | P config pending | P | P capability surface | B production pending auth |
 | ARB-S33-3 | Provider/Ref | P | P Node/Stremio | P ArabSeed-oriented per-source behavior | P config pending | P | P capability surface | B production pending auth |
-| Filmex | Experience/Ref | P | P | P | P | P | B no player evidence yet | B direct reuse pending license |
+| Filmex | Experience/Ref | B no LICENSE/NOTICE/COPYING in bundle | V pubspec + lockfile + Android deps | V Firebase/Google/Drive network coupling | B Firebase identity/token/cloud coupling excluded from Core | B google_mobile_ads + AdMob manifest config excluded | B WebView-first/Drive preview + third-party cookies excluded; no VideoPlayer usage found | V AUDIT COMPLETE — EXPERIENCE_REFERENCE only |
 | getChanelFraom_dlstreams | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
 | NuvioStreamsAddon | Provider/Engine | P | P Node/addon | P per-source | P config pending | P | P aggregation/capabilities | B production pending auth |
 | YacinTv | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
@@ -36,7 +36,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | kiro | Provider/Ref | P | P small source | P per-source | P config pending | P | P capability surface | B production pending auth |
 | cinemalist | Experience/Ref | P | P Flutter/BLoC | P TMDB terms/key path | P key/config pending | P | B no player evidence | B experience reference pending license |
 | cinextma | Experience/Ref | P | P Next/TS | P Supabase/cloud | B mandatory cloud/account excluded | P analytics scan | N/A | B experience reference pending license |
-| ProxyFill | Unrelated/Ref | P bundle provenance/license; public matching repo inspected | V public .NET/Blazor manifest; bundle hash match pending | P public HttpClient/Pokémon API evidence; bundle match pending | B hard-coded API credential in corroborating repo; value excluded; bundle presence pending | N/A | N/A | B EXCLUDED runtime |
+| ProxyFill | Unrelated/Ref | B no bundle LICENSE/NOTICE; V exact decisive blob match | V exact Blazor/.NET manifests + relevant deps | V Pokémon API/Drive network behavior; unrelated | B authoritative hard-coded credential proven + unsafe credential-output directive; value never recorded | V bounded scan: no selected ad/analytics/telemetry signatures | N/A | V AUDIT COMPLETE — EXCLUDED runtime |
 
 > Mechanical reconciliation: 30/30 authoritative roots, exactly one row each. The ledger contains exactly one row per authoritative bundle root. SOURCE_MATRIX remains the canonical root-name/count authority.
 
@@ -55,4 +55,4 @@ Phase 1 can close only when every 30-root source has:
 A provider may remain **rejected/quarantined** and still satisfy audit completion if the rejection is evidence-backed. Audit completion never means provider approval.
 
 ## Current decision
-**NOT ACCEPTED.** Classification coverage is 30/30, but the ledger exposes material evidence gaps. Work must remain in Phase 1 and on PR #10 until these gates are resolved or explicitly evidence-backed as rejected.
+**NOT ACCEPTED.** Classification coverage is 30/30, but the ledger still exposes material evidence gaps in the remaining PARTIAL roots. Work remains in Phase 1 and on PR #10 until those gates are resolved or explicitly evidence-backed as rejected.
