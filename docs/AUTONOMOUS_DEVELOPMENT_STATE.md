@@ -106,6 +106,18 @@
 - Updated the ProxyFill evidence card, Acceptance Ledger, SOURCE_MATRIX, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN consistently. ProxyFill is now `DEEP_AUDIT_COMPLETE / EXCLUDED_RUNTIME` and counts as a Phase-1 evidence-backed rejection. This does not mean Phase 1 overall is complete.
 - Resulting branch head before this state update: `4309206f58de80397e852877eb9d9f7637117bf6`.
 
+## CinemaPress authoritative closure
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `bb34e11d8acb836c47b55a384fde6fba17ad3956`, sole open PR, mergeable=true; no Releases. Exact-head Audit hygiene run `35300126245` completed success with one `repository-hygiene` check.
+- Reused the already materialized authoritative Drive ZIP and inspected only the `CinemaPress-master` root. Authoritative Git blob SHA-1 values for `package.json`, `LICENSE.txt`, `README.md` and `app.js` exactly match public `CinemaPress/CinemaPress` master commit `2a9d3fa4bcd9cb92ce031b3e7324f1d7e76050b5`.
+- Verified version `5.0.0`, root MIT license, Node/Express/EJS CMS architecture and the authoritative dependency manifest. No `package-lock.json` and no conventional test/spec files are present; both absences are recorded as evidence.
+- Verified authoritative admin/API/player/embed/iframe/CinemaPlayer routes and configurable external metadata/network surfaces. Default source configuration contains non-empty third-party API credentials/keys; values were deliberately not copied or logged.
+- Verified privacy-incompatible IP/forwarded-IP, MaxMind/WHOIS/geolocation/ASN and cookie behavior plus player paths that can carry IP-derived fields/hashes. These are excluded under Zero-PII.
+- Verified advertising-oriented surfaces including `modules/CP_adv.js` and `prebid-ads.js`; all advertising/prebid/banner behavior is excluded under ZERO_ADS.
+- Native Playback First excludes CinemaPress server/embed/iframe/player runtime and configurable remote CinemaPlayer scripts. No backend/player/provider code is migrated.
+- Updated the CinemaPress source card, Acceptance Ledger, SOURCE_MATRIX, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN consistently. CinemaPress is now `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE_ONLY`.
+- This closes one additional root but does not close Phase 1 overall.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
