@@ -58,7 +58,7 @@ Every source contribution must use exactly one migration mode before implementat
 - cinemalist-official: `EXPERIENCE_REFERENCE`; TMDB/API terms, key handling, license and asset provenance remain gates.
 - cinextma: `EXPERIENCE_REFERENCE`; mandatory Supabase/cloud/account coupling is excluded from Core.
 - Filmex: `EXPERIENCE_REFERENCE`; direct reuse remains blocked pending license/dependency/player evidence.
-- CinemaPress: `CONTRACT_REFERENCE`; CMS/backend runtime is optional-only and cannot replace native Experiences.
+- CinemaPress: `CONTRACT_REFERENCE` only; Phase-1 audit is complete. Root MIT/provenance are verified, but mandatory CMS/backend, server-rendered Experience, ads/prebid, IP/WHOIS profiling, embedded/default credentials and server/embed/iframe/CinemaPlayer runtime are excluded.
 - turkish-series: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; large mutable catalogs stay outside Core/app binaries.
 - xoxixoxi: `CONTRACT_REFERENCE`; unapproved extraction runtime, bypass behavior and media relay are excluded.
 - Ytvplus2: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`.
