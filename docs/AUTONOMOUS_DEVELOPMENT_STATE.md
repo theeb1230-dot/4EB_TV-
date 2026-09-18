@@ -3,9 +3,9 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main`: `b532f8b78e6175c30e30a21f27830e14eeb26449`.
-- PR #13 (`audit/deep-wave4`) was merged by squash only after exact head `990da72e4cde5928f6f4dbba9d706566d5f93353` passed Audit hygiene run `35360049656`; `repository-hygiene` and the Phase-1 evidence-card integrity gate were green.
-- Continuation branch: `audit/deep-wave5`, created exactly from merged main `b532f8b78e6175c30e30a21f27830e14eeb26449`.
+- Exact merged `main`: `54257000e55a454c1287a9e7924592345b2f555e`.
+- PR #14 (`audit/deep-wave5`) was merged by squash only after exact head `ecb4dde12e46ade99ead8194a079b7e8dbc416dd` passed Audit hygiene run `35366224201`; `repository-hygiene` and the Phase-1 evidence-card integrity gate were green.
+- Continuation branch: `audit/deep-wave6`, created exactly from merged main `54257000e55a454c1287a9e7924592345b2f555e`.
 - Phase 1 remains **NOT ACCEPTED**. Do not claim completion until all 30 roots satisfy the Acceptance Ledger.
 
 ## Product invariants
@@ -28,12 +28,12 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 `Cinemax-main` remains `DEEP_AUDIT_PARTIAL / REFERENCE_ELIGIBLE`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling, but dependency/NOTICE/assets/API terms, exact SDK compatibility, telemetry/ads, TV/D-pad and network-contract closure remain outstanding. No player module was identified, so Cinemax is not admitted as a playback-engine source.
 
 ## CI integrity
-- PR #13 exact head `990da72e4cde5928f6f4dbba9d706566d5f93353` passed Audit hygiene run `35360049656`.
+- PR #14 exact head `ecb4dde12e46ade99ead8194a079b7e8dbc416dd` passed Audit hygiene run `35366224201`.
 - `repository-hygiene` passed checkout, third-party archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity.
-- Merge used the exact expected-head SHA guard and produced `main` `b532f8b78e6175c30e30a21f27830e14eeb26449`.
+- Merge used the exact expected-head SHA guard and produced `main` `54257000e55a454c1287a9e7924592345b2f555e`.
 
 ## Highest-value next work
-1. Continue Phase-1 closure on `audit/deep-wave5`; do not create conflicting feature branches while its PR is open.
+1. Continue Phase-1 closure on `audit/deep-wave6`; do not create conflicting feature branches while its PR is open.
 2. Close `Cinemax-main` dependency/NOTICE/assets/API/network/privacy/telemetry/TV evidence from authoritative material when available.
 3. Close `CineSpot-main` and `cinextma-master` with authoritative evidence; fail closed where provenance/license cannot be established.
 4. Continue AIOStreams authoritative blob/privacy/telemetry closure without importing proxy/IP-bypass/torrent/debrid/media-relay behavior.
