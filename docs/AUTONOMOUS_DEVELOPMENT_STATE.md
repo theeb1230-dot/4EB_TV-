@@ -3,9 +3,10 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main`: `bdd505e199f68a43622bb46d31426c9c39201d08`.
+- Exact merged `main`: `1193eae0e74fdcae62a476b3e2933988a28f511a`.
 - PR #17 (`audit/deep-wave8`) merged at `bdd505e199f68a43622bb46d31426c9c39201d08` only after exact head `abacfa4a8264b6260036786df5cb37e6b286a6f1` passed Audit hygiene run `35389607474` with exactly one successful `repository-hygiene` check.
-- Continuation branch: `audit/deep-wave9`, created exactly from merged main `bdd505e199f68a43622bb46d31426c9c39201d08`.
+- PR #18 (`audit/deep-wave9`) merged at `1193eae0e74fdcae62a476b3e2933988a28f511a` after exact head `1cdee7c20b7de3ac327397f4f1c19431adcbff9c` passed Audit hygiene run `35391125834` / check `105749475658`.
+- Continuation branch: `audit/deep-wave10`, created exactly from merged main `1193eae0e74fdcae62a476b3e2933988a28f511a`.
 - Start-of-execution PR #16 head: `c90ec180d86fd908b818209493189bf2b3125360`; exact-head Audit hygiene run `35383807799` completed SUCCESS with exactly one `repository-hygiene` check.
 - Phase 1 remains **NOT ACCEPTED**. Do not claim completion until all 30 roots satisfy the Acceptance Ledger.
 
@@ -22,7 +23,7 @@ These foundations remain authoritative and are not rewritten around source-proje
 ## Phase 1 audit state
 The 30-root Acceptance Ledger remains the completion authority and `SOURCE_MATRIX` remains the canonical exact-root authority. A root closes only with evidence for provenance/version, architecture, license/reuse, dependencies, network/API/cost, secrets/privacy/telemetry/ads, player/provider behavior where applicable, migration destination/exclusion, and risks/clean-room boundary. Evidence-backed rejection/quarantine/exclusion can close an audit but never authorizes runtime admission.
 
-Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, and `cinemalist-official-master`. AIOStreams has materially advanced but remains `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED` because authoritative blob/package/privacy/telemetry closure is still incomplete.
+Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, and `Cinemax-main`. AIOStreams has materially advanced but remains `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED` because authoritative blob/package/privacy/telemetry closure is still incomplete.
 
 `cinextma-master` remains PARTIAL because authoritative selective archive reads previously timed out; public evidence is corroborating only until authoritative blobs match. `CineSpot-main` remains PARTIAL / DIRECT_REUSE_BLOCKED: authoritative inventory establishes Flutter/Firebase/Auth/Firestore/Google Sign-In/Dio/Retrofit/YouTube/url_launcher/WebView surfaces and bundled Google services configuration, but no root license was found and no attributable public provenance match was established. No credentials are recorded or inherited.
 
@@ -30,14 +31,18 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 
 `flixquest-main` advanced to `DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: version-matched public 4.1.1+5 corroboration confirms GPL-3.0, Firebase analytics/auth/crashlytics/messaging/remote-config, Mixpanel, Unity Ads, Better Player, Media3 HLS/DASH, PiP/Cast/Leanback/download surfaces and a scraper/stream/proxy/live/subtitle OpenAPI backend. Ads/analytics/mandatory Firebase, media proxy/scraper behavior, external-browser playback and broad inherited permissions are excluded. Authoritative decisive blob matching remains pending.
 
-`Cinemax-main` remains `DEEP_AUDIT_PARTIAL / REFERENCE_ELIGIBLE`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Direct reuse is still gated by NOTICE/assets/API-term and exact compatibility evidence. No player module was identified, so Cinemax is not admitted as a playback-engine source.
+`Cinemax-main` is now `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / EXPERIENCE_REFERENCE / DIRECT_REUSE_DEFERRED`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Unresolved third-party NOTICE/assets/API-term provenance is resolved fail-closed by deferring direct reuse rather than guessing. No player or TV/D-pad capability is inferred, and this source does not freeze Android API 24.
 
 ## CI integrity
-- `main` is currently `bdd505e199f68a43622bb46d31426c9c39201d08` after PR #17 merged.
+- `main` is currently `1193eae0e74fdcae62a476b3e2933988a28f511a` after PR #18 merged.
 - Audit hygiene remains the mandatory gate for audit PRs: third-party archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity must pass on the exact PR head before merge.
 - No merge is permitted from the current continuation branch until its exact head has a green Audit hygiene run.
 
 ## Work completed in this execution
+- Verified PR #18 exact head passed Audit hygiene run `35391125834`, then merged with expected-head protection to `1193eae0e74fdcae62a476b3e2933988a28f511a`.
+- Re-read main and confirmed zero open PRs before creating `audit/deep-wave10`.
+- Closed `Cinemax-main` Phase-1 audit through an evidence-backed fail-closed decision: architecture/design/performance concepts remain reference-eligible, while direct code/assets reuse is deferred because NOTICE/assets/API-term provenance is unresolved. No player/TV capability or Android baseline is inferred.
+
 - Re-read exact GitHub source truth: main, branches, sole PR #17, Releases, exact-head Actions/checks, Acceptance Ledger and handoff.
 - Verified PR #17 exact head `abacfa4a8264b6260036786df5cb37e6b286a6f1` passed Audit hygiene run `35389607474` and check `105744619525`; merged it with expected-head protection to `bdd505e199f68a43622bb46d31426c9c39201d08`.
 - Re-read main after merge, confirmed zero open PRs, then created `audit/deep-wave9` exactly from merged main.
