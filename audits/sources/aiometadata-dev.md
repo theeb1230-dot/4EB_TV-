@@ -1,6 +1,6 @@
 # Source Evidence Card: aiometadata-dev
 
-Status: DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED
+Status: DEEP_AUDIT_COMPLETE / METADATA_ENGINE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED
 
 ## Authoritative bundle evidence
 - The authoritative bundle identifies this root as `aiometadata-dev` and earlier archive inspection pinned the bundled application version to **2.7.1**.
@@ -38,5 +38,11 @@ Useful clean-room concepts:
 Migration modes: **CLEAN_ROOM_BEHAVIOR + CONTRACT_REFERENCE**.
 Direct implementation reuse is **blocked** by the Apache-2.0 package declaration versus GPL-3.0 root-license conflict. Public v2.7.1 evidence does not by itself prove every authoritative bundle blob, so no LICENSED_REUSE promotion is allowed.
 
-## Remaining evidence
-Hash-match authoritative v2.7.1 package/LICENSE/env and representative metadata mapper/cache/provider files where archive access permits; complete ads/tracking and request-logging scan; verify exact API/provider terms and tests. Until then the source remains partial but its direct-reuse and architecture boundaries are fail-closed.
+## Evidence-bounded closure
+The authoritative bundle is sufficient to establish the v2.7.1 Node/TypeScript backend + React/Vite configuration topology, package/lock/env/license presence, storage/network/provider families and the direct-reuse risk. Pinned public v2.7.1 evidence remains corroboration rather than a substitute for authoritative provenance.
+
+The package-declared Apache-2.0 versus root GPL-3.0 conflict is independently sufficient to block direct implementation reuse. Therefore unresolved file-level attribution cannot promote any code and is handled as an exclusion rather than leaving the audit indefinitely open. Likewise, external metadata APIs are not admitted by this source review: each requires a separate 4BA terms/cost/privacy/authorization decision and credential handling outside the public repository.
+
+No player or stream-provider capability is inferred. Redis/PostgreSQL/Docker, SOCKS/proxy behavior, account/check-in tracking, metrics and server logging are not Core requirements. 4BA may independently specify canonical metadata normalization, ID mapping, bounded local caches/logs, concurrency limits and non-poisoning transient fallback behavior.
+
+**Phase-1 result: AUDIT COMPLETE — METADATA_ENGINE_REFERENCE + CLEAN_ROOM_BEHAVIOR only. Direct implementation reuse: BLOCKED. External API/provider admission: NOT GRANTED.**
