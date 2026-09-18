@@ -44,6 +44,15 @@ The 30-root acceptance ledger remains the authority. A root closes only with evi
 - Updated the source card, Phase-1 Acceptance Ledger, SOURCE_MATRIX, EXPERIENCE_MATRIX, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN consistently on PR #12.
 - Commits produced during closure before this state update: `4ad66d6a2dca929972bdb3948eb69758b208f36e`, `9b232b8be0747629dc5ede96d86e3d932bbee5c6`, `22191a0d2ad3ff0cd9fab24606cea6c5a1249a08`, `6b2e9f355cf46416195e94263a166667345530e4`, `7b419b0552b89d0501b90713b4c9486c54f82267`, `9b783652d128d669e8308c5d0c011e2eee98184e`.
 
+### Cinextma corroboration progress
+- Start exact PR #12 head for this execution: `2b32e4116f015e5d0ed8d68d71e99bfdfa54fb13`; exact-head Audit hygiene run `35350082690` completed successfully with `repository-hygiene` green. Main remained `61d82d47102a790c0b979b38b4667334ed49847b`; PR #12 was sole open PR, mergeable=true; no Releases.
+- Re-fetched the authoritative Drive ZIP (215,407,865 bytes). Direct selective ZIP reads for `cinextma-master` timed out again; this is recorded as infrastructure failure and no archive claim was invented.
+- Identified matching public repository `wisnuwirayuda15/cinextma` and pinned corroborating master commit `0d939f089b5225d49da0edd684346530c5b9431d`.
+- Public evidence narrows the remaining audit: MIT root license, package lock, Next.js/React/TypeScript, Supabase SSR/client, TMDB, PWA, Turnstile, Vercel Analytics and Speed Insights, plus placeholder Google-auth/SMTP environment examples.
+- Product boundaries were strengthened immediately: Supabase/account/cloud is optional-only; Vercel analytics/speed telemetry is excluded under Zero-PII; TMDB remains Metadata and independently terms/key gated; no player/provider or source authorization is inferred.
+- Updated the cinextma source card, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN. Cinextma intentionally remains `DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE` until authoritative blob/security/player/test/asset evidence closes.
+- First resulting evidence commit: `527560ce9619207995f33d198de1f2cba996927f`.
+
 ## Current Phase 1 decision
 **NOT ACCEPTED.** Four roots are evidence-complete. Remaining roots still have unresolved evidence cells. No source/provider/Experience is promoted merely because its audit closed.
 
