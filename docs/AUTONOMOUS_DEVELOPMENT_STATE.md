@@ -165,6 +165,16 @@ Observed signals include:
 - Al-Qahtani: provider/fallback concepts retained, but backend direct-media relay/proxy behavior is explicitly excluded from 4BA architecture.
 - No third-party implementation code or secret values were copied.
 
+## Deep Audit Wave 3: provider/live risk boundaries
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Release or exact-head Actions run exists for this docs-only branch.
+- Added `audits/DEEP_AUDIT_WAVE3.md` covering Turkish-series, xoxixoxi, Ytvplus2 and the live/sports provider family.
+- Expanded `docs/PROVIDER_MATRIX.md` from four provisional rows to explicit admission status for the audited provider/engine candidates.
+- Formalized separate LiveMetadataProvider vs LiveStreamProvider boundaries; EPG/matches/channels do not imply stream authorization.
+- Quarantined `orien.live-main` as reference-only due credential-discovery risk; no credentials or endpoint secrets were copied.
+- Rejected mandatory Puppeteer/ffmpeg scraping backends and any private video relay/proxy as ZERO_COST/scalability violations.
+- Phase 1 remains incomplete: file-level license/dependency/network/authorization evidence is still required before enabling any production provider.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
