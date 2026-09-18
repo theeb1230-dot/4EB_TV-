@@ -299,6 +299,14 @@ Observed signals include:
 - No source was promoted to ENABLED. Remaining gates are manifests/dependencies, root license/provenance, concrete capability surfaces, network behavior, tests, secret/config scans, ads/tracking and authorization/terms.
 - No provider endpoint, credential, token, cookie, playlist or third-party implementation was copied.
 
+## Reference/outlier evidence wave
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Advanced CinemaPress to DEEP_AUDIT_PARTIAL / REFERENCE_ONLY. Node/EJS/Express CMS/catalog concepts may inform clean-room catalog/admin contracts, but CMS/backend is not mandatory, server-rendered UI cannot replace native Experiences, metadata remains separate from streams, and bundled binaries are not executed/migrated.
+- Advanced ProxyFill to DEEP_AUDIT_PARTIAL / EXCLUDED_RUNTIME. Its .NET/Blazor Pokémon proxy-printing domain is unrelated; audit accountability is preserved without inventing a fake 4BA destination. Runtime/assets/data models/printing dependencies are explicitly excluded.
+- Both roots still require safe provenance/license/dependency/security evidence for Phase-1 closure. ProxyFill does not require player/provider work unless contradictory evidence appears.
+- No binaries, third-party assets, credentials or implementation were copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
