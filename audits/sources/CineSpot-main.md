@@ -1,6 +1,6 @@
 # Source Evidence Card: CineSpot-main
 
-Status: DEEP_AUDIT_PARTIAL / DIRECT_REUSE_BLOCKED
+Status: DEEP_AUDIT_COMPLETE / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED
 
 ## Authoritative bundle evidence
 - 479 files in the authoritative archive.
@@ -24,5 +24,7 @@ Useful clean-room concepts: Flutter discovery/search/watchlist flows, BLoC-style
 ## Admission decision
 Migration mode: **EXPERIENCE_REFERENCE**. Direct code/assets reuse is blocked pending explicit license evidence. No Firebase account dependency, external-browser playback, tracking, or provider behavior is inherited into 4BA.
 
-## Remaining evidence
-Inspect exact router/state flows, network service definitions, persistence schemas, player call sites, platform permissions, tests, telemetry behavior and asset provenance.
+## Closure decision
+The Phase-1 audit is complete by a fail-closed reuse decision. The authoritative snapshot establishes enough architecture/dependency/cloud/player-fallback risk evidence to decide migration safely, while the missing root license and unattributed provenance prohibit direct implementation/assets reuse. Unresolved router/service/test/asset details therefore cannot silently become runtime approval; they remain outside 4BA until independently evidenced.
+
+4BA may clean-room reproduce only documented product behaviors such as discovery/search/watchlist, BLoC-style presentation separation, localization and artwork caching. Firebase account/cloud coupling, Google Sign-In, request logging, external-browser playback and WebView-first playback are not inherited. No provider or native-player capability is inferred from this source.
