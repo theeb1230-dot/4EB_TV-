@@ -15,23 +15,23 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 09 | alooytv-addon-main | Provider / Reference | Stremio addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 10 | Filmex-main | Experience / Reference | Flutter UX retained only as clean-room reference; missing license, Firebase/cloud, ads and WebView-first player excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE |
 | 11 | getChanelFraom_dlstreams-main | Provider / Reference | Live channel data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
-| 12 | anthology-main | Provider / Engine / Reference | Turkish addon ecosystem, root license, per-provider authorization | PARTIAL — PROVIDER_PENDING |
+| 12 | anthology-main | Provider / Engine / Reference | Turkish addon ecosystem; collection license/playability does not authorize endpoints/content; runtime remains independently gated | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 13 | Al-Qahtani-main | Provider / Engine / Reference | Arabic/sports contracts; relay/WebView/IP telemetry/ads excluded | PARTIAL — CONTRACT_REFERENCE |
 | 14 | NuvioStreamsAddon-master | Provider / Engine / Reference | Aggregation contracts, authorization/config/network evidence | PARTIAL — PROVIDER_PENDING |
-| 15 | AIOStreams-main | Engine / Provider / Reference | Aggregation/capabilities; license conflict and restricted behavior | PARTIAL — direct reuse BLOCKED |
-| 16 | aniyomi-main | Engine / Experience / Reference | Extensions/player/source architecture, remaining dependency/network/privacy evidence | PARTIAL — reference only |
+| 15 | AIOStreams-main | Engine / Provider / Reference | Aggregation contracts only; license conflict plus proxy/bypass/torrent/debrid/relay runtime rejected | AUDIT COMPLETE — CLEAN_ROOM / CONTRACT_REFERENCE |
+| 16 | aniyomi-main | Engine / Experience / Reference | Android/source/player contracts; provider authorization and native/file obligations gated | AUDIT COMPLETE — CONTRACT/ANDROID_REFERENCE |
 | 17 | YacinTv--main | Provider / Reference | Live TV source; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
 | 18 | xoxixoxi-main | Provider / Engine / Reference | Scraper/process security, authorization/license; bypass/relay excluded | PARTIAL — CONTRACT_REFERENCE |
 | 19 | TRK_S-main | Provider / Reference | Turkish addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 20 | orien.live-main | Security-risk Reference | Credential-discovery risk; never harvest/replay/share credentials | PARTIAL — QUARANTINED |
 | 21 | Ytvplus2-main | Provider / Engine / Reference | Multi-source aggregation/fallback, authorization | PARTIAL — PROVIDER_PENDING |
 | 22 | SportFree-main | Provider / Reference | Sports contracts and stream authorization | PARTIAL — PROVIDER_PENDING |
-| 23 | flixquest-main | Experience / Reference | Flutter adaptive shell; GPL/ad/tracking boundaries | PARTIAL — direct code BLOCKED |
+| 23 | flixquest-main | Experience / Reference | Flutter/player/offline/TV UX clean-room reference; GPL, ads/analytics and proxy/scraper runtime excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
 | 24 | stremio-akwam.X-main | Provider / Engine / Reference | FastAPI/Stremio contracts, authorization/license/network evidence | PARTIAL — PROVIDER_PENDING |
 | 25 | CinemaPress-master | Engine / Reference | Exact snapshot + MIT verified; CMS/catalog contracts retained, ads/privacy/player/backend runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE |
 | 26 | Cannels-arap-streem-main | Provider / Reference | Arabic live data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
 | 27 | CineSpot-main | Experience / Reference | Flutter discovery UX; missing license/provenance fails closed; Firebase/cloud/logger/external-browser/WebView-first behavior excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
-| 28 | aiometadata-dev | Metadata / Engine / Reference | Metadata mapping/cache; license conflict/tracking coupling | PARTIAL — direct reuse BLOCKED |
+| 28 | aiometadata-dev | Metadata / Engine / Reference | Metadata mapping/cache concepts; Apache/GPL conflict blocks direct reuse; external APIs independently gated | AUDIT COMPLETE — METADATA_ENGINE_REFERENCE / CLEAN_ROOM |
 | 29 | turkish-series-main | Provider / Engine / Reference | Dataset provenance/freshness/update architecture and authorization | PARTIAL — PROVIDER_PENDING |
 | 30 | kiro-main | Provider / Reference | Source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 
