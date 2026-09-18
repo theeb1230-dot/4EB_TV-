@@ -5,7 +5,7 @@ Status: Phase 1. The authoritative bundled ZIP is directly readable. Presence of
 | Source | Authoritative bundle license evidence | Security/privacy evidence | 4BA decision |
 |---|---|---|---|
 | Aniyomi 0.18.1.2 | Root LICENSE is Apache-2.0; LICENSE and settings.gradle.kts blob hashes match inspected upstream, while bundled app version is older | Android source includes WebView/player/tracker/config surfaces requiring file-level review; no credential values copied | REFERENCE / conditional direct reuse only after dependency + NOTICE + file audit |
-| AIOStreams 2.32.1 | **Conflict:** package.json says MIT; root LICENSE contains GPL-3.0 | Description explicitly includes proxy/IP-restriction-bypass behavior; analytics/session/config surfaces present | CLEAN-ROOM CONCEPTS ONLY; bypass behavior excluded |
+| AIOStreams 2.32.1 | **Conflict:** package.json says MIT; root LICENSE contains GPL-3.0 | Version-matched public v2.32.1 corroboration confirms required encryption secret/database config, operator auth, optional Redis, proxy/debrid/service settings and a package description explicitly mentioning IP-restriction bypass; authoritative privacy/telemetry package-level closure still pending | CLEAN_ROOM_BEHAVIOR + CONTRACT_REFERENCE only; direct reuse and proxy/IP-bypass/torrent/Usenet/debrid runtime excluded |
 | FlixQuest 4.1.1+5 | Root LICENSE contains GPL-3.0 | pubspec includes Firebase Analytics/Crashlytics/In-App Messaging, Mixpanel and unity_ads_plugin; local BetterPlayer path dependency | EXPERIENCE/REFERENCE concepts only; all ads/tracking integrations excluded; direct reuse blocked pending licensing decision |
 | AIOMetadata 2.7.1 | **Conflict:** package.json says Apache-2.0; root LICENSE contains GPL-3.0 | env/config/cache/database and request-tracking surfaces require deeper review | CLEAN-ROOM METADATA concepts only pending license resolution |
 
@@ -20,12 +20,13 @@ Never reproduce credential/token/cookie/private-key values in commits, issues, P
 
 ## Current blockers
 1. Finish file-level player/network/data-model/dependency review for the remaining PARTIAL roots.
-2. Resolve AIOStreams bundled MIT declaration versus GPL-3.0 root license before any direct reuse.
+2. Resolve AIOStreams bundled MIT declaration versus GPL-3.0 root license before any direct reuse; current 4BA path is clean-room/reference only regardless.
 3. Resolve AIOMetadata bundled Apache-2.0 declaration versus GPL-3.0 root license before any direct reuse.
 4. Treat FlixQuest GPL source as reference/clean-room unless a compatible licensing decision is explicitly made; ZERO_ADS/Zero-PII exclusions apply regardless.
 5. Continue provenance matching by bundle version/blob hashes instead of assuming current upstream equals the archived snapshot.
 
 ## Evidence expansion beyond Wave 1
+- **AIOStreams:** authoritative bundle version is 2.32.1 with an MIT package declaration versus GPL-3.0 root LICENSE conflict. Public `Viren070/AIOStreams` tag `v2.32.1` is version-matched corroboration only, not a substitute for authoritative blob matching. Its package manifest declares Node >=24/pnpm >=11 and workspace architecture; `.env.sample` requires a base URL, encryption secret and database URI while exposing optional Redis plus operator auth/permissions and proxy/debrid/service runtime settings. Versioned Core/Server manifests show SQLite/PostgreSQL/Redis, OpenID, torrent parsing, SOCKS/WebDAV/StremThru, Express/rate limiting and test scripts. The package description explicitly advertises IP-restriction bypass through proxies. 4BA therefore keeps only clean-room aggregation/filtering/config/failure-isolation concepts; proxy bypass, torrent/Usenet/debrid, media relay and server-secret models are excluded. No secret values are copied.
 - **Cinemax:** Apache-2.0 root evidence is verified; direct reuse still waits on NOTICE/assets/API terms and dependency obligations. API keys stay outside source control.
 - **CineSpot:** no root license was found in the authoritative bundle, therefore direct implementation reuse is blocked. Firebase configuration values are never copied; mandatory Firebase/cloud coupling is not a Core dependency.
 - **Anthology:** package-level MIT declaration is insufficient while root-license evidence is pending. Each provider remains independently authorization-gated.
