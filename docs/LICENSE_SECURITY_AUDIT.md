@@ -41,7 +41,7 @@ The acceptance ledger and per-source evidence cards are authoritative for detail
 - **Addon/provider family:** Stremio/addon compatibility, public code and successful discovery do not prove source/content authorization.
 - **orien.live:** quarantined. Credential discovery/harvesting/replay/sharing is not executed or migrated.
 - **CinemaPress:** CMS/catalog concepts are contract-reference only; bundled binaries are not executed or migrated and CMS/backend cannot be mandatory.
-- **ProxyFill:** unrelated .NET/Blazor printing runtime is excluded. Corroborating public code at `hfip/ProxyFill` confirms Blazor WebAssembly/printing/Pokémon scope and exposes a hard-coded API credential in a service file; the credential value is intentionally not recorded. This strengthens the security/exclusion decision, but authoritative bundle blob/license matching is still required before Phase-1 closure.
+- **ProxyFill:** unrelated .NET/Blazor printing runtime is excluded. Corroborating public code is now pinned to commit `1a49d164d10aa24ae5ef57b6a275758500310bae`; exact manifest blobs confirm Blazor WebAssembly/printing/Pokémon scope, a hard-coded API credential in a service file, and `wwwroot/credentials.json` configured for unconditional copy to client output. Secret contents/values were intentionally not inspected or recorded. This materially strengthens the security/exclusion decision, but authoritative bundle blob/license matching is still required before Phase-1 closure.
 
 ### Fail-closed reuse rule
 
