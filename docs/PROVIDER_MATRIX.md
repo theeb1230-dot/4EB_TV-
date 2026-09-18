@@ -20,6 +20,25 @@ Status: Phase 1 evidence matrix. A row is architectural classification, **not au
 | SportFree | Sports provider/backend signal | Sports provider reference | Authorization/license pending |
 | Cannels-arap-streem | Arabic channel data signal | Live metadata/provider reference | Authorization/license pending |
 | orien.live | Credential-discovery risk signal | **Quarantine/reference only** | REJECTED as implementation source |
+| ARB-S33-3 | Node/Stremio provider signal | Provider SDK contract reference | PROVIDER_PENDING; source/content authorization + license pending |
+| alooytv-addon | Node/Stremio provider signal | Provider SDK contract reference | PROVIDER_PENDING; source/content authorization + license pending |
+| NuvioStreamsAddon | Addon aggregation/provider signal | Provider SDK + Resolver contract reference | PROVIDER_PENDING; authorization/config/network evidence pending |
+| TRK_S | Turkish Stremio provider signal | Turkish Provider SDK reference | PROVIDER_PENDING; authorization/license pending |
+| stremio-akwam.X | Python/FastAPI Stremio-style provider signal | Provider SDK/Resolver contract reference | PROVIDER_PENDING; authorization/license/network evidence pending |
+| kiro-drama | Small JS/JSON provider signal | Provider SDK contract reference | PROVIDER_PENDING; authorization/license pending |
+| kiro | Small provider/reference signal | Provider SDK contract reference | PROVIDER_PENDING; authorization/license pending |
+
+## Admission-state semantics
+
+- **REFERENCE_ONLY:** architecture/behavior may inform clean-room contracts; runtime access is not approved.
+- **QUARANTINED:** evidence exposes a security, credential, bypass or provenance concern; no implementation/runtime use.
+- **PENDING_AUTHORIZATION / PROVIDER_PENDING:** technical capability is known but source/content authority is unresolved.
+- **PENDING_LICENSE:** authorization may be possible, but code/data reuse terms remain unresolved.
+- **ELIGIBLE_DISABLED:** evidence gates are closed but provider remains disabled until an explicit product/config decision.
+- **ENABLED:** explicit evidence-backed production admission only.
+- **REVOKED:** previously admitted provider is fail-closed without deleting canonical favorites/history/progress.
+
+Public repositories, reachable URLs, addon compatibility, successful playability and permissive package metadata do not skip these states.
 
 ## Provider admission gate
 A production provider must declare capabilities, remain replaceable, expose no secret to UI, support health/error classification, avoid mandatory paid infrastructure, avoid ads/tracking, and contain no DRM/paywall/access-control bypass. Source access and redistribution must be authorized. Watch and Download capabilities are represented separately.
