@@ -314,6 +314,14 @@ Observed signals include:
 - Phase-1 closure for ProxyFill is intentionally narrowed to provenance/license, .NET/Blazor dependency and safe config/telemetry evidence. It does not require invented player/provider work.
 - Phase 1 remains NOT ACCEPTED; no source was promoted to ENABLED or LICENSED_REUSE.
 
+## Cross-document migration reconciliation
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start was `6ef1c1a9cbf2be548d4ca313237315cec9ebf99e`, sole open PR, mergeable, no Releases and no exact-head Actions runs.
+- Reconciled PHASE1_ACCEPTANCE_LEDGER for the recently deepened addon/provider family so its reuse gates now explicitly block production admission pending authorization instead of leaving generic P states.
+- Repaired stale CinemaPress and ProxyFill ledger rows that had not reflected their latest source-card classifications: CinemaPress is contract-reference-only; ProxyFill runtime is EXCLUDED.
+- Synchronized MIGRATION_PLAN mandatory mappings with Anthology, the three Experience candidates, CinemaPress, turkish-series, xoxixoxi, Ytvplus2, the live/sports family and the addon/provider family.
+- No provider/source was promoted to ENABLED or LICENSED_REUSE. Phase 1 remains NOT ACCEPTED pending file-level evidence closure.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
