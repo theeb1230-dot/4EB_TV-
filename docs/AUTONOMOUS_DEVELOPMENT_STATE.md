@@ -34,6 +34,14 @@
 - The acceptance ledger remains mechanically reconciled at 30 unique authoritative roots after the prior repair; no source was promoted or removed in this run.
 - Phase 1 remains NOT ACCEPTED. File-level evidence closure remains the highest-value work; archive access failures must not be converted into guessed audit facts.
 
+## Repository hygiene remediation
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `e34ba49944f9839e28c790392320da22719e7615`, sole open PR, mergeable=true. No Releases, exact-head workflow runs or check-runs.
+- Repository-root inspection found `CinemaPress-master.zip` committed directly on the audit branch (24,121,537 bytes). This contradicted the clean-room rule that third-party implementation archives are evidence inputs, not 4BA product source artifacts.
+- Added the finding to the CinemaPress evidence card, then removed the raw third-party ZIP from `audit/deep-wave1` in commit `63e342754569cd78f8552846799c3f76a7453cdc`. Evidence notes remain; the archive itself is no longer present at branch root.
+- This removal does not claim license clearance and does not promote CinemaPress. It reduces redistribution/repository-hygiene risk while preserving the fail-closed REFERENCE_ONLY decision.
+- Phase 1 remains NOT ACCEPTED; file-level evidence closure remains outstanding.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
