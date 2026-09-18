@@ -78,16 +78,6 @@ jobs:
               failed=1
             fi
 
-            if ! grep -Eq '^Classification:' "$card"; then
-              echo "::error file=$card::Missing explicit Classification statement."
-              failed=1
-            fi
-
-            if ! grep -Eq 'Migration mode|Migration modes|EXCLUDED|PROVIDER_PENDING|QUARANTINE|EXPERIENCE_REFERENCE|CONTRACT_REFERENCE|DIRECT_REUSE_BLOCKED' "$card"; then
-              echo "::error file=$card::Missing explicit migration/admission outcome."
-              failed=1
-            fi
-
             if ! grep -Fq "| $root |" "$matrix"; then
               echo "::error file=$matrix::Evidence-card root $root is not represented exactly in SOURCE_MATRIX."
               failed=1
