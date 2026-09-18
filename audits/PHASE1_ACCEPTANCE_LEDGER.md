@@ -13,7 +13,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | aiometadata | Metadata/Engine | B Apache/GPL conflict | P | V metadata/cache surfaces | P | P tracking coupling identified | N/A | B |
 | Cinemax | Experience/Ref | V Apache-2.0 | V major version catalog | V network/db + INTERNET/NETWORK_STATE | V API-key external config pattern | P | B no player evidence | P NOTICE/assets/API terms |
 | CineSpot | Experience/Ref | B no license file in bundle | V major pubspec | P Dio/Retrofit + cloud deps | V Firebase config/coupling; values not recorded | P | P YouTube/WebView deps | B direct reuse |
-| Anthology | Provider/Engine | P package says MIT | P | P per provider | P | P | V provider/playability tests | P per provider |
+| Anthology | Provider/Engine | P package MIT; root LICENSE pending | V test/parser dependency signals | P per-provider targets | P secrets/config patterns pending | P | V catalog/provider/playability scripts | B production until per-provider authorization |
 | Al-Qahtani | Provider/Engine/Ref | P | P | V fallback/probe/relay | P | P | V relay excluded | P |
 | turkish-series | Provider/Engine | P | P | P | P | P | P | P |
 | xoxixoxi | Provider/Engine | P | P backend tooling | P | P | P | P | P |
