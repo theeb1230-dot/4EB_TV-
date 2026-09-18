@@ -30,7 +30,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 24 | stremio-akwam.X-main | Provider / Engine / Reference | FastAPI/Stremio contracts, authorization/license/network evidence | PARTIAL — PROVIDER_PENDING |
 | 25 | CinemaPress-master | Engine / Reference | Exact snapshot + MIT verified; CMS/catalog contracts retained, ads/privacy/player/backend runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE |
 | 26 | Cannels-arap-streem-main | Provider / Reference | Arabic live data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
-| 27 | CineSpot-main | Experience / Reference | Flutter discovery UX; no root license, Firebase/cloud coupling | PARTIAL — direct reuse BLOCKED |
+| 27 | CineSpot-main | Experience / Reference | Flutter discovery UX; missing license/provenance fails closed; Firebase/cloud/logger/external-browser/WebView-first behavior excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
 | 28 | aiometadata-dev | Metadata / Engine / Reference | Metadata mapping/cache; license conflict/tracking coupling | PARTIAL — direct reuse BLOCKED |
 | 29 | turkish-series-main | Provider / Engine / Reference | Dataset provenance/freshness/update architecture and authorization | PARTIAL — PROVIDER_PENDING |
 | 30 | kiro-main | Provider / Reference | Source capability, authorization/license | PARTIAL — PROVIDER_PENDING |

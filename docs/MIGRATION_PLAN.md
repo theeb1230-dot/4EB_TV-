@@ -20,7 +20,7 @@ Status: DRAFT / EVIDENCE-DRIVEN. This document does not authorize third-party co
 | FlixQuest | Experience/Flutter/Cast reference | UX/component study; adapt to 4BA Design System |
 | AIOMetadata | Metadata Engine reference | Schema/mapping study; preserve metadata/stream separation |
 | Cinemax | Android Experience/reference | Architecture/UX study |
-| CineSpot | Flutter Experience/reference | Discovery/search/watchlist study |
+| CineSpot | Flutter Experience/reference | CLEAN_ROOM_BEHAVIOR only; direct reuse blocked by missing license/provenance; cloud/browser/WebView-first behavior excluded |
 | Anthology | Provider health/testing reference | Per-addon provenance and contract study |
 | Al-Qahtani | Arabic/sports/provider migration reference | Clean separation of UI/provider/player |
 | Turkish-Series | Turkish data/update reference | Static-data/update strategy study |

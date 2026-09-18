@@ -3,10 +3,9 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main`: `8d146970507ede6cf8133a24d1e024836685af71`.
-- PR #18 (`audit/deep-wave9`) merged at `1193eae0e74fdcae62a476b3e2933988a28f511a` after exact head `1cdee7c20b7de3ac327397f4f1c19431adcbff9c` passed Audit hygiene run `35391125834` / check `105749475658`.
-- PR #19 (`audit/deep-wave10`) merged at `8d146970507ede6cf8133a24d1e024836685af71` only after exact head `7735c76d1d395917317b6b04f07bdf41d6386700` passed Audit hygiene run `35391504287` / `repository-hygiene` job `105750661857`.
-- Continuation branch: `audit/deep-wave11`, created exactly from merged main `8d146970507ede6cf8133a24d1e024836685af71`.
+- Exact merged `main`: `b49e651fc63e8b08050d710b30eea6dee8e49cde`.
+- PR #20 (`audit/deep-wave11`) merged at `b49e651fc63e8b08050d710b30eea6dee8e49cde` only after exact head `8202d893de3903cbfebb3600b25b11a8c5ffcefb` passed Audit hygiene run `35395162508` / `repository-hygiene` job `105762209956`.
+- Continuation branch: `audit/deep-wave12`, created exactly from merged main `b49e651fc63e8b08050d710b30eea6dee8e49cde`.
 - Phase 1 remains **NOT ACCEPTED**. Do not claim completion until all 30 roots satisfy the Acceptance Ledger.
 
 ## Product invariants
@@ -22,30 +21,33 @@ These foundations remain authoritative and are not rewritten around source-proje
 ## Phase 1 audit state
 The 30-root Acceptance Ledger remains the completion authority and `SOURCE_MATRIX` remains the canonical exact-root authority. A root closes only with evidence for provenance/version, architecture, license/reuse, dependencies, network/API/cost, secrets/privacy/telemetry/ads, player/provider behavior where applicable, migration destination/exclusion, and risks/clean-room boundary. Evidence-backed rejection/quarantine/exclusion can close an audit but never authorizes runtime admission.
 
-Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, and `Cinemax-main`. AIOStreams remains `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED` because authoritative blob/package/privacy/telemetry closure is incomplete.
+Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, `Cinemax-main`, and `CineSpot-main`. AIOStreams remains `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED` because authoritative blob/package/privacy/telemetry closure is incomplete.
 
 `Cinemax-main` is `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / EXPERIENCE_REFERENCE / DIRECT_REUSE_DEFERRED`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Unresolved third-party NOTICE/assets/API-term provenance is handled fail-closed by deferring direct reuse. No player or TV/D-pad capability is inferred, and this source does not freeze Android API 24.
 
-`cinextma-master` remains PARTIAL because authoritative selective archive reads previously timed out; public evidence is corroborating only until authoritative blobs match. `CineSpot-main` remains PARTIAL / DIRECT_REUSE_BLOCKED: authoritative inventory establishes Flutter/Firebase/Auth/Firestore/Google Sign-In/Dio/Retrofit/YouTube/url_launcher/WebView surfaces and bundled Google services configuration, but no root license was found and no attributable public provenance match was established. No credentials are recorded or inherited.
+`cinextma-master` remains PARTIAL because authoritative selective archive reads previously timed out; public evidence is corroborating only until authoritative blobs match. `CineSpot-main` is now `DEEP_AUDIT_COMPLETE / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: authoritative inventory establishes Flutter/Firebase/Auth/Firestore/Google Sign-In/Dio/Retrofit/YouTube/url_launcher/WebView surfaces and bundled Google services configuration, while missing root license and unattributed provenance fail closed. No credentials, mandatory cloud/account dependency, request logging, external-browser playback or WebView-first playback are inherited.
 
 `aiometadata-dev` remains `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: pinned public v2.7.1 corroboration confirms Node >=24 <25, an Apache-2.0 package declaration conflicting with a GPL-3.0 root LICENSE, SQLite/PostgreSQL/Redis plus multiple metadata/API credential surfaces. Direct code reuse remains fail-closed; no secrets were copied.
 
 `flixquest-main` remains `DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: version-matched public 4.1.1+5 corroboration confirms GPL-3.0, Firebase analytics/auth/crashlytics/messaging/remote-config, Mixpanel, Unity Ads, Better Player, Media3 HLS/DASH, PiP/Cast/Leanback/download surfaces and a scraper/stream/proxy/live/subtitle OpenAPI backend. Ads/analytics/mandatory Firebase, media proxy/scraper behavior, external-browser playback and broad inherited permissions are excluded.
 
 ## CI integrity
-- `main` is currently `8d146970507ede6cf8133a24d1e024836685af71` after PR #19 merged.
+- `main` is currently `b49e651fc63e8b08050d710b30eea6dee8e49cde` after PR #20 merged.
 - Audit hygiene remains mandatory for audit PRs: third-party archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity must pass on the exact PR head before merge.
-- No merge is permitted from `audit/deep-wave11` until its exact head has a green Audit hygiene run.
+- No merge is permitted from `audit/deep-wave12` until its exact head has a green Audit hygiene run.
 
 ## Work completed in this execution
-- Re-read exact GitHub source truth and found sole open PR #19 on base `1193eae0e74fdcae62a476b3e2933988a28f511a`, exact head `7735c76d1d395917317b6b04f07bdf41d6386700`, mergeable and non-draft.
-- Verified exact-head Audit hygiene run `35391504287` completed SUCCESS; its only `repository-hygiene` job `105750661857` passed archive/build-binary rejection, oversized-file rejection and Phase-1 evidence-card integrity.
-- Merged PR #19 with expected-head protection; exact merged main is `8d146970507ede6cf8133a24d1e024836685af71`.
-- Re-read main after merge and created `audit/deep-wave11` exactly from that SHA.
-- Cinemax closure remains fail-closed: reference concepts only; no direct code/assets admission, no inferred player/TV capability, and no Android-baseline freeze.
+- Re-read GitHub source truth and found sole PR #21 on exact head `c2b216a204dcb3a2bedce9440899c5e1dbdff755`; Audit hygiene run `35400018710` / check `105777536100` is green, so work continued only on that branch.
+- Closed `CineSpot-main` Phase-1 audit through an evidence-backed fail-closed decision: missing root license/provenance blocks direct code/assets, while discovery/search/watchlist/BLoC/localization/cache concepts remain clean-room Experience reference. Firebase/cloud/account, request logging, external-browser and WebView-first playback are excluded.
+
+- Re-read exact GitHub source truth and found sole open PR #20 on base `8d146970507ede6cf8133a24d1e024836685af71`, exact head `8202d893de3903cbfebb3600b25b11a8c5ffcefb`, mergeable and non-draft.
+- Verified exact-head Audit hygiene run `35395162508` completed SUCCESS; its only `repository-hygiene` job `105762209956` passed archive/build-binary rejection, oversized-file rejection and Phase-1 evidence-card integrity.
+- Merged PR #20 with expected-head protection; exact merged main is `b49e651fc63e8b08050d710b30eea6dee8e49cde`.
+- Created `audit/deep-wave12` exactly from the merged main and preserved the single-PR lineage.
+- No source was promoted merely from technical capability; license, provenance, authorization, privacy and constitution gates remain independent.
 
 ## Highest-value next work
-1. Continue Phase-1 closure on `audit/deep-wave11`; keep a single open PR/branch lineage.
+1. Continue Phase-1 closure on `audit/deep-wave12`; keep a single open PR/branch lineage.
 2. Close `CineSpot-main` with authoritative evidence; if license/provenance remains absent, close the audit as clean-room/reference-only rather than leaving an indefinite partial state.
 3. Close `cinextma-master` with authoritative evidence; fail closed where provenance/license/cloud-account boundaries cannot be established.
 4. Continue AIOStreams authoritative blob/privacy/telemetry closure without importing proxy/IP-bypass/torrent/debrid/media-relay behavior.
