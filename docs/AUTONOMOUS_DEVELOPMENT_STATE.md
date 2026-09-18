@@ -154,6 +154,17 @@ Observed signals include:
 - Updated `audits/DEEP_AUDIT_WAVE1.md` and promoted only verified evidence in `docs/CAPABILITY_MATRIX.md`.
 - This docs-only branch has no Actions run; no CI status is claimed.
 
+## Deep Audit Wave 2 started on the same PR
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 is still the sole open PR and mergeable. No Release exists and no Actions run exists for the docs-only head.
+- Read authoritative bundled files for Cinemax (378 files), CineSpot (479), Anthology (2,900) and Al-Qahtani (163).
+- Added `audits/DEEP_AUDIT_WAVE2.md` with technology, architecture, license/config signals, classifications, reusable clean-room concepts, hard exclusions and 4BA destinations.
+- Cinemax: Apache-2.0 modular Android/Compose reference with network/database/features and baseline-profile methodology.
+- CineSpot: Flutter Experience reference with Firebase Auth/Firestore coupling; mandatory account/cloud behavior rejected for 4BA core. Direct reuse remains blocked pending explicit license evidence.
+- Anthology: provider/engine reference with addon/catalog/provider/playability tests; individual provider authorization remains mandatory.
+- Al-Qahtani: provider/fallback concepts retained, but backend direct-media relay/proxy behavior is explicitly excluded from 4BA architecture.
+- No third-party implementation code or secret values were copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
