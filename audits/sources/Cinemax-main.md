@@ -1,6 +1,6 @@
 # Source Evidence Card: Cinemax-main
 
-Status: DEEP_AUDIT_PARTIAL / REFERENCE_ELIGIBLE
+Status: DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / EXPERIENCE_REFERENCE / DIRECT_REUSE_DEFERRED
 
 ## Authoritative bundle evidence
 - 378 files in the authoritative archive.
@@ -24,5 +24,7 @@ Strong reference areas: modular Android feature boundaries, network/domain/datab
 ## Admission decision
 Migration modes: **CONTRACT_REFERENCE + EXPERIENCE_REFERENCE**. Any LICENSED_REUSE promotion requires dependency/NOTICE/assets/API-term closure and tests. No player capability is inferred.
 
-## Remaining evidence
-Close third-party NOTICE/license obligations, exact min/target SDK compatibility, network service/API contracts, API-key handling paths, telemetry/ads scan, TV/D-pad evidence and asset provenance.
+## Closure decision
+The audit is complete by a fail-closed reuse decision. Apache-2.0 at the root establishes source-license evidence, but unresolved third-party NOTICE/assets/API-term provenance means direct implementation/assets are **not admitted**. The inspected tree provides no player module and no evidence sufficient to claim TV/D-pad behavior, so neither capability is inferred. TMDB/network behavior is metadata/catalog reference only and remains independently subject to API terms/key handling. Android API 24 is not frozen from this source because exact dependency/min-SDK compatibility is not established.
+
+This evidence-backed deferral closes the Phase-1 question without pretending missing evidence is approval: Cinemax contributes architecture/design/performance concepts through clean-room/reference boundaries only.
