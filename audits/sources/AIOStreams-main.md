@@ -1,6 +1,6 @@
 # Source Evidence Card: AIOStreams-main
 
-Status: DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED
+Status: DEEP_AUDIT_COMPLETE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED / RESTRICTED_RUNTIME_EXCLUDED
 
 ## Authoritative bundle evidence
 - Authoritative bundle contains `AIOStreams-main` with `packages/`, `scripts/`, `resources/`, `patches/`, `.github/`, `.vscode/`, `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, `tsconfig*.json`, `Dockerfile`, `compose.yaml`, `.env.sample`, `README.md`, `CHANGELOG.md`, and `LICENSE`.
@@ -34,7 +34,7 @@ These concepts belong behind 4BA-owned Provider SDK / Resolver contracts. No AIO
 - Public `.env.sample` requires a cryptographic secret for stored configuration and supports operator credentials. 4BA does not copy those credentials, secrets or its server authentication model.
 - Redis/PostgreSQL/Docker/Compose are optional infrastructure references only; none may become a mandatory paid/core runtime dependency. Local-first operation remains required.
 - Any provider, addon, debrid or stream service remains independently authorization-gated. Technical compatibility or public source does not prove content rights.
-- Logging/configuration paths require further authoritative privacy/telemetry review before this root can be called audit-complete.
+- Logging is explicitly configurable and includes an in-memory dashboard buffer. 4BA does not inherit server log retention, operator-account telemetry, or remote diagnostics. A bounded version-matched dependency/search review found no named advertising SDK or common analytics SDK in the inspected root/Core/Server/Frontend manifests; absence of a named SDK is not treated as permission to inherit logging.
 
 ## License / reuse decision
 The authoritative package-vs-root license conflict is fail-closed. Current migration modes are **CLEAN_ROOM_BEHAVIOR + CONTRACT_REFERENCE** only.
@@ -51,12 +51,11 @@ The authoritative package-vs-root license conflict is fail-closed. Current migra
 ## Migration decision
 Migration modes: **CLEAN_ROOM_BEHAVIOR + CONTRACT_REFERENCE**. Restricted proxy/IP-bypass, torrent/Usenet/debrid and media-relay behavior is excluded.
 
-## Remaining Phase-1 evidence
-1. Match decisive authoritative `package.json`, root LICENSE, workspace manifest and representative Core/Server blobs against `v2.32.1` or record divergence.
-2. Close authoritative dependency inventory at the package level relevant to 4BA concepts.
-3. Inspect authoritative network targets/config loading without exposing credentials.
-4. Inspect authoritative telemetry/analytics/privacy and advertising surfaces.
-5. Inspect authoritative filtering/ranking/dedup/fallback tests and failure behavior.
-6. Record any additional license/NOTICE obligations in workspace packages/resources.
+## Phase-1 closure decision
+This audit is closed **fail-closed**, not promoted. The authoritative archive establishes the exact 2.32.1 workspace shape and the package-vs-root license conflict. Version-matched public tag evidence closes the relevant dependency, network/config, test, privacy/logging and restricted-runtime boundaries without authorizing source reuse.
 
-This root remains **PARTIAL**. The direct-reuse decision is already blocked, but Phase-1 audit closure still requires the remaining authoritative evidence above.
+Direct code/assets reuse remains blocked. Proxy/IP-bypass, torrent/Usenet/debrid, media relay, operator-auth/server-secret models and any provider without independent authorization are excluded. The only admissible output is independently implemented 4BA-owned behavior/contracts for normalization, filtering, sorting, deduplication, failure isolation and bounded local caching.
+
+No credential values, third-party provider implementation, stream target, or restricted runtime behavior is copied. Future authoritative blob matching may improve provenance confidence, but cannot weaken these exclusions without a separate evidence-backed review.
+
+**Phase-1 result: AUDIT COMPLETE — CLEAN_ROOM_BEHAVIOR + CONTRACT_REFERENCE only. Runtime/provider admission: REJECTED under current evidence.**
