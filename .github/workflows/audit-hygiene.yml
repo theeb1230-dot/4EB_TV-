@@ -78,13 +78,13 @@ jobs:
               failed=1
             fi
 
-            if ! grep -Eq '^## 4BA (relevance|classification)' "$card"; then
-              echo "::error file=$card::Missing 4BA relevance/classification section."
+            if ! grep -Eq '^Classification:' "$card"; then
+              echo "::error file=$card::Missing explicit Classification statement."
               failed=1
             fi
 
-            if ! grep -Eq '^## (Admission decision|Migration decision|Admission boundary|4BA decision)' "$card"; then
-              echo "::error file=$card::Missing admission/migration decision or boundary section."
+            if ! grep -Eq 'Migration mode|Migration modes|EXCLUDED|PROVIDER_PENDING|QUARANTINE|EXPERIENCE_REFERENCE|CONTRACT_REFERENCE|DIRECT_REUSE_BLOCKED' "$card"; then
+              echo "::error file=$card::Missing explicit migration/admission outcome."
               failed=1
             fi
 
