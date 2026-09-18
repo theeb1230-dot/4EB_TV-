@@ -124,6 +124,16 @@ Observed signals include:
 - Returned to Phase 1 ordering. Added `audits/DEEP_AUDIT_WAVE1.md` for Aniyomi, AIOStreams, FlixQuest and AIOMetadata.
 - Current repository cards are inventory evidence, not code-level audit evidence. Connected Drive search did not return the authoritative source trees/archive in this run, so no license/code claim was fabricated and no third-party code was copied.
 
+## Deep Audit Wave 1 upstream comparison
+
+- PR #10 remained the only open PR; all work stayed on `audit/deep-wave1`.
+- No workflow run exists for the prior docs-only head, so no CI success was invented.
+- Compared candidate public upstreams for Aniyomi, AIOStreams, FlixQuest and AIOMetadata against bundle inventory signals while keeping provenance-match status explicit.
+- Confirmed candidate-upstream Apache-2.0 for Aniyomi, AGPL-3.0-only for AIOStreams, and a critical AIOMetadata inconsistency: root LICENSE is GPL-3.0 while package.json declares Apache-2.0.
+- AIOStreams direct reuse is restricted to clean-room concepts in this audit; proxy/IP-restriction-bypass behavior is explicitly excluded by the 4BA constitution.
+- FlixQuest upstream tree resembles the bundle inventory, but license/pubspec retrieval failed, so no unsupported claim was promoted.
+- Updated `audits/DEEP_AUDIT_WAVE1.md` and `docs/LICENSE_SECURITY_AUDIT.md`. No third-party implementation code or credentials were copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
