@@ -1,6 +1,6 @@
 # Source Evidence Card: flixquest-main
 
-Status: DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED
+Status: DEEP_AUDIT_COMPLETE / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED
 
 ## Authoritative bundle evidence
 - 742 files in the authoritative archive.
@@ -41,5 +41,16 @@ Clean-room concepts worth retaining:
 Migration modes: **EXPERIENCE_REFERENCE + CLEAN_ROOM_BEHAVIOR**.
 Direct code/assets reuse remains blocked by GPL-3.0. No ad SDK, analytics SDK, mandatory Firebase account/cloud dependency, scraper/proxy runtime, external-browser playback or inherited credentials enter 4BA.
 
-## Remaining evidence
-Hash-match authoritative 4.1.1+5 manifest/pubspec/LICENSE/openapi and representative player/TV/download/test blobs; complete authoritative request logging/secrets/privacy and asset-license evidence. Until then the source remains partial despite strong public corroboration.
+## Evidence-bounded closure
+The authoritative archive establishes the 4.1.1+5 Flutter application, GPL-3.0 root license, Better Player/cache/download/offline families, Firebase/Mixpanel/Unity Ads presence, OpenAPI/provider/server surfaces, Android target and tests. Version-matched public commit `344c8f7a4ee8da73577874f8c79f9556245fb137` is corroborating implementation evidence, not an authorization shortcut.
+
+Additional correlated evidence confirms:
+- offline player and download widget-test surfaces;
+- TV/movie loaders keep download state explicit rather than silently conflating watch and download;
+- Android requests broad storage/install permissions and optional Leanback capability, which 4BA will not inherit wholesale;
+- the scraper client documents proxying streams to hide upstream headers/anti-hotlink details. That behavior directly conflicts with 4BA's no-media-relay/provider-authorization boundary and is rejected;
+- OpenAPI token/proxy secrets and third-party-host download-token behavior are server concerns and are not copied or reproduced.
+
+A full asset-by-asset license grant is not needed to close the audit because **all direct code/assets reuse is already blocked by GPL-3.0 for this migration path**. Unknown asset provenance therefore remains an exclusion, not an open admission question. Likewise, absence of complete authoritative request-log proof cannot authorize telemetry; 4BA rejects inherited analytics/logging/cloud identity by default.
+
+**Phase-1 result: AUDIT COMPLETE — EXPERIENCE_REFERENCE + CLEAN_ROOM_BEHAVIOR only. Direct code/assets reuse: BLOCKED. Runtime provider/proxy admission: REJECTED.**
