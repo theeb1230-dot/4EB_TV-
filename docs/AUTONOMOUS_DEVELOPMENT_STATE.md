@@ -94,6 +94,18 @@
 - Authoritative bundle matching and bundle-local root license/provenance remain open, so ProxyFill is not yet Phase-1 complete despite stronger exclusion evidence.
 - Resulting branch head before this state update: `2f0e3faa1e511a2745f027eb6572e7f91451ecd0`.
 
+## ProxyFill authoritative snapshot closure
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `90a6fa4158ff90fd12a183af7f577ecd1d75337a`, sole open PR, mergeable=true; no Releases. Exact-head Audit hygiene run `35298903032` completed success with a single `repository-hygiene` check.
+- Re-fetched the authoritative Drive archive by exact file ID `1ZRjuUdB3lctpsMfFTgVIiipaXoRtuldl` and materialized the complete 215,407,865-byte ZIP locally.
+- Read only the authoritative `ProxyFill-main` root (90 non-`__MACOSX` entries) and compared decisive files against pinned public commit `1a49d164d10aa24ae5ef57b6a275758500310bae`.
+- Exact Git blob SHA-1 matches were proven for README, `ProxyFill.csproj`, `Program.cs`, `ProxyFill.Shared/ProxyFill.Shared.csproj`, `ProxyFill.Shared/Services/PokemonAPIService.cs`, and `global.json`. This closes snapshot identity for the files material to the exclusion decision.
+- No LICENSE/NOTICE-named file exists in the authoritative ProxyFill root, so direct reuse remains fail-closed. Because ProxyFill is unrelated and no code/assets are migrated, this is an explicit evidence-backed exclusion rather than an unresolved reuse request.
+- The authoritative service blob proves the hard-coded API credential defect exists in the archive itself; no credential value was copied or logged. The authoritative project manifest also proves an unsafe `wwwroot/credentials.json` output-copy directive; that credential file path itself is absent from the archive.
+- A bounded scan of authoritative text/code files found no selected advertising/analytics/telemetry signatures. Network evidence is Pokémon/Drive-oriented and unrelated to 4BA entertainment capabilities.
+- Updated the ProxyFill evidence card, Acceptance Ledger, SOURCE_MATRIX, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN consistently. ProxyFill is now `DEEP_AUDIT_COMPLETE / EXCLUDED_RUNTIME` and counts as a Phase-1 evidence-backed rejection. This does not mean Phase 1 overall is complete.
+- Resulting branch head before this state update: `4309206f58de80397e852877eb9d9f7637117bf6`.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
