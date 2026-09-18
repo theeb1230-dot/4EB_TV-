@@ -28,6 +28,8 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 
 `aiometadata-dev` advanced to `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: pinned public v2.7.1 corroboration confirms the same version, Node >=24 <25, an Apache-2.0 package declaration conflicting with a GPL-3.0 root LICENSE, SQLite/PostgreSQL/Redis plus multiple metadata/API credential surfaces, and bounded/redacted logging + transient-fallback concepts. Direct code reuse remains fail-closed; no secrets were copied. Authoritative decisive blob matching and full logging/telemetry/provider-term closure remain pending.
 
+`flixquest-main` advanced to `DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: public version-matched 4.1.1+5 corroboration confirms GPL-3.0, Firebase analytics/auth/crashlytics/messaging/remote-config, Mixpanel, Unity Ads, Better Player, Media3 HLS/DASH, PiP/Cast/Leanback/download surfaces, and an OpenAPI scraper/stream/proxy/live/subtitle backend. Ads/analytics/mandatory Firebase, media proxy/scraper behavior, external-browser playback and broad inherited permissions are excluded. Authoritative decisive blob matching remains pending.
+
 `Cinemax-main` remains `DEEP_AUDIT_PARTIAL / REFERENCE_ELIGIBLE`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Direct reuse is still gated by NOTICE/assets/API-term and exact compatibility evidence. No player module was identified, so Cinemax is not admitted as a playback-engine source.
 
 ## CI integrity
@@ -39,7 +41,9 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 - Re-read current GitHub source truth before mutation: exact main, all branches, sole open PR #16, exact head, Releases, exact-head Actions/checks, Acceptance Ledger, SOURCE_MATRIX and handoff.
 - Continued only on PR #16; no conflicting branch/PR was created.
 - Deepened `aiometadata-dev` at the exact public v2.7.1 boundary without importing implementation. Recorded the package/LICENSE conflict, dependency/storage/network/credential surfaces, clean-room metadata/cache/fallback concepts, and Zero-PII/ZERO_COST exclusions.
-- Resulting audit evidence commit: `1aed941b6a9f4273d0f54c54e932cf649002c4ee`.
+- Resulting AIOMetadata audit evidence commit: `1aed941b6a9f4273d0f54c54e932cf649002c4ee`.
+- Rechecked the resulting exact head `a6d61b4a514f237e11ed180d94dd0c77d8ccfeec`: Audit hygiene run `35389248066` completed SUCCESS with exactly one `repository-hygiene` check.
+- Deepened FlixQuest player/platform/privacy evidence without importing implementation; evidence commit `fd41f083242e16f53c19cb43589f826db37ecc47`.
 - Phase 1 remains NOT ACCEPTED; this work intentionally does not promote AIOMetadata to licensed reuse or runtime dependency.
 
 ## Highest-value next work
