@@ -50,6 +50,14 @@
 - The gate is intentionally repository hygiene only; it does not treat a passing file-size/archive check as license/security/provider approval.
 - A fresh exact-head Actions run is required before claiming this new gate green. Phase 1 remains NOT ACCEPTED.
 
+## Hygiene CI exact-head verification and correction
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `90831fe1ec01ba2deefb28adea796c8873e1d4d0`, sole open PR, mergeable=true; no Releases.
+- The newly introduced Audit hygiene workflow actually executed on exact head: run `35294971889` completed success and repository-hygiene check passed. A second check-suite instance on the same SHA also passed.
+- Review found a mismatch between the documented blocked-artifact set and the workflow regex: documentation/tree inspection included JAR while CI did not. Corrected the workflow to block `.jar` as well in commit `0f910f806c0e7a0449a9703a8a14c845eb5ed306`.
+- Because that correction changes the exact head, the previous green run is evidence for `90831fe...` only. The corrected head requires its own Actions result before it can be called green.
+- Phase 1 remains NOT ACCEPTED; no source/provider/Experience was promoted.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
