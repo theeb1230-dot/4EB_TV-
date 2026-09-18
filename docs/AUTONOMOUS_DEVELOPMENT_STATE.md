@@ -3,9 +3,9 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main`: `d2dea6a4b9830fbf6bda0604f466d500240286d9`.
-- PR #16 (`audit/deep-wave7`) merged during this execution at `d2dea6a4b9830fbf6bda0604f466d500240286d9` after its exact head passed Audit hygiene.
-- Continuation branch: `audit/deep-wave8`, created exactly from merged main `d2dea6a4b9830fbf6bda0604f466d500240286d9`.
+- Exact merged `main`: `bdd505e199f68a43622bb46d31426c9c39201d08`.
+- PR #17 (`audit/deep-wave8`) merged at `bdd505e199f68a43622bb46d31426c9c39201d08` only after exact head `abacfa4a8264b6260036786df5cb37e6b286a6f1` passed Audit hygiene run `35389607474` with exactly one successful `repository-hygiene` check.
+- Continuation branch: `audit/deep-wave9`, created exactly from merged main `bdd505e199f68a43622bb46d31426c9c39201d08`.
 - Start-of-execution PR #16 head: `c90ec180d86fd908b818209493189bf2b3125360`; exact-head Audit hygiene run `35383807799` completed SUCCESS with exactly one `repository-hygiene` check.
 - Phase 1 remains **NOT ACCEPTED**. Do not claim completion until all 30 roots satisfy the Acceptance Ledger.
 
@@ -33,11 +33,16 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 `Cinemax-main` remains `DEEP_AUDIT_PARTIAL / REFERENCE_ELIGIBLE`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Direct reuse is still gated by NOTICE/assets/API-term and exact compatibility evidence. No player module was identified, so Cinemax is not admitted as a playback-engine source.
 
 ## CI integrity
-- `main` is currently `d2dea6a4b9830fbf6bda0604f466d500240286d9` after PR #16 merged.
+- `main` is currently `bdd505e199f68a43622bb46d31426c9c39201d08` after PR #17 merged.
 - Audit hygiene remains the mandatory gate for audit PRs: third-party archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity must pass on the exact PR head before merge.
-- No new merge is permitted from `audit/deep-wave7` until its exact head has a green run.
+- No merge is permitted from the current continuation branch until its exact head has a green Audit hygiene run.
 
 ## Work completed in this execution
+- Re-read exact GitHub source truth: main, branches, sole PR #17, Releases, exact-head Actions/checks, Acceptance Ledger and handoff.
+- Verified PR #17 exact head `abacfa4a8264b6260036786df5cb37e6b286a6f1` passed Audit hygiene run `35389607474` and check `105744619525`; merged it with expected-head protection to `bdd505e199f68a43622bb46d31426c9c39201d08`.
+- Re-read main after merge, confirmed zero open PRs, then created `audit/deep-wave9` exactly from merged main.
+- Attempted the next authoritative archive pass for Cinemax/CineSpot/cinextma; the local archive read hit a transport timeout before evidence could be safely extracted. No status was promoted and no guess was recorded. This is an execution-environment evidence-access blocker, not a source acceptance decision.
+
 - Re-read GitHub source truth again after PR #16 merged concurrently; did not continue writing onto its diverged historical branch.
 - Created `audit/deep-wave8` exactly from merged main `d2dea6a4b9830fbf6bda0604f466d500240286d9` to preserve the one-PR lineage cleanly.
 - Deepened FlixQuest player/platform/privacy evidence without importing implementation; evidence commit `e956e9f9b15819e439c39bd7e3332cbdb428887b`.
@@ -49,7 +54,7 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 - Phase 1 remains NOT ACCEPTED; this work intentionally does not promote AIOMetadata to licensed reuse or runtime dependency.
 
 ## Highest-value next work
-1. Continue Phase-1 closure on `audit/deep-wave7`; do not create conflicting feature branches while its PR is open.
+1. Continue Phase-1 closure on `audit/deep-wave9`; keep a single open PR/branch lineage.
 2. Close `Cinemax-main` NOTICE/assets/API/network/privacy/telemetry/TV evidence from authoritative material when available; otherwise record an evidence-backed fail-closed reuse decision rather than guessing.
 3. Close `CineSpot-main` and `cinextma-master` with authoritative evidence; fail closed where provenance/license cannot be established.
 4. Continue AIOStreams authoritative blob/privacy/telemetry closure without importing proxy/IP-bypass/torrent/debrid/media-relay behavior.
