@@ -330,6 +330,14 @@ Observed signals include:
 - Reaffirmed ZERO_ADS, Zero-PII, no credential migration, no bypass, no mandatory cloud/backend and no media relay boundaries without copying third-party implementation or sensitive values.
 - Phase 1 remains NOT ACCEPTED pending file-level evidence closure.
 
+## Provider-matrix admission reconciliation
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start was `8f5bf64df423ba7943424ad0be8fe9a76b237f93`. PR #10 remains the sole open PR. Current GitHub metadata reports mergeable=false; no blind merge/update was attempted. There are no Releases and no exact-head Actions runs.
+- Expanded PROVIDER_MATRIX to include the previously omitted addon/provider roots: ARB-S33-3, alooytv-addon, NuvioStreamsAddon, TRK_S, stremio-akwam.X, kiro-drama and kiro.
+- Added explicit admission-state semantics for REFERENCE_ONLY, QUARANTINED, PROVIDER_PENDING/PENDING_AUTHORIZATION, PENDING_LICENSE, ELIGIBLE_DISABLED, ENABLED and REVOKED.
+- Preserved fail-closed authorization: repository presence, reachable URLs, addon compatibility and successful playability cannot promote a provider.
+- No provider is ENABLED. Phase 1 remains NOT ACCEPTED pending file-level evidence closure and the current PR mergeability issue must be diagnosed from GitHub before eventual merge.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
