@@ -282,6 +282,14 @@ Observed signals include:
 - Advanced orien.live to DEEP_AUDIT_PARTIAL / QUARANTINED. Credential harvesting/discovery/replay/sharing and any runtime migration are explicitly excluded; safe audit completion does not require executing credential-oriented paths.
 - No playlist, endpoint, token, cookie, credential, username/password or third-party implementation was copied.
 
+## Acceptance-ledger reconciliation
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Reconciled PHASE1_ACCEPTANCE_LEDGER with the deeper evidence accumulated in recent waves so the ledger no longer understates known exclusions/verified boundaries for Al-Qahtani, turkish-series, xoxixoxi, Ytvplus2, the live/sports family and Experience candidates.
+- Converted ambiguous pending reuse cells into explicit blocked production gates where authorization/license/PII/cloud/runtime evidence already requires blocking: media relay, primary WebView, private playlist/credential migration, mandatory cloud/account coupling, unapproved extraction runtime and provider production admission.
+- Preserved pending markers only where file-level evidence is genuinely still missing; no source was promoted to ENABLED or LICENSED_REUSE.
+- Phase 1 remains NOT ACCEPTED. The remaining work is now more accurately concentrated in root license/provenance, manifests/dependencies, network/authorization, secret/config, ads/tracking, tests/player evidence and asset/data provenance.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
