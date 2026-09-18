@@ -21,11 +21,11 @@ These foundations remain authoritative and are not rewritten around source-proje
 ## Phase 1 audit state
 The 30-root Acceptance Ledger remains the completion authority and `SOURCE_MATRIX` remains the canonical exact-root authority. A root closes only with evidence for provenance/version, architecture, license/reuse, dependencies, network/API/cost, secrets/privacy/telemetry/ads, player/provider behavior where applicable, migration destination/exclusion, and risks/clean-room boundary. Evidence-backed rejection/quarantine/exclusion can close an audit but never authorizes runtime admission.
 
-Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, and `Cinemax-main`. AIOStreams remains `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED` because authoritative blob/package/privacy/telemetry closure is incomplete.
+Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, `Cinemax-main`, and `CineSpot-main`. AIOStreams remains `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED` because authoritative blob/package/privacy/telemetry closure is incomplete.
 
 `Cinemax-main` is `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / EXPERIENCE_REFERENCE / DIRECT_REUSE_DEFERRED`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Unresolved third-party NOTICE/assets/API-term provenance is handled fail-closed by deferring direct reuse. No player or TV/D-pad capability is inferred, and this source does not freeze Android API 24.
 
-`cinextma-master` remains PARTIAL because authoritative selective archive reads previously timed out; public evidence is corroborating only until authoritative blobs match. `CineSpot-main` remains PARTIAL / DIRECT_REUSE_BLOCKED: authoritative inventory establishes Flutter/Firebase/Auth/Firestore/Google Sign-In/Dio/Retrofit/YouTube/url_launcher/WebView surfaces and bundled Google services configuration, but no root license was found and no attributable public provenance match was established. No credentials are recorded or inherited.
+`cinextma-master` remains PARTIAL because authoritative selective archive reads previously timed out; public evidence is corroborating only until authoritative blobs match. `CineSpot-main` is now `DEEP_AUDIT_COMPLETE / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: authoritative inventory establishes Flutter/Firebase/Auth/Firestore/Google Sign-In/Dio/Retrofit/YouTube/url_launcher/WebView surfaces and bundled Google services configuration, while missing root license and unattributed provenance fail closed. No credentials, mandatory cloud/account dependency, request logging, external-browser playback or WebView-first playback are inherited.
 
 `aiometadata-dev` remains `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: pinned public v2.7.1 corroboration confirms Node >=24 <25, an Apache-2.0 package declaration conflicting with a GPL-3.0 root LICENSE, SQLite/PostgreSQL/Redis plus multiple metadata/API credential surfaces. Direct code reuse remains fail-closed; no secrets were copied.
 
@@ -37,6 +37,9 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 - No merge is permitted from `audit/deep-wave12` until its exact head has a green Audit hygiene run.
 
 ## Work completed in this execution
+- Re-read GitHub source truth and found sole PR #21 on exact head `c2b216a204dcb3a2bedce9440899c5e1dbdff755`; Audit hygiene run `35400018710` / check `105777536100` is green, so work continued only on that branch.
+- Closed `CineSpot-main` Phase-1 audit through an evidence-backed fail-closed decision: missing root license/provenance blocks direct code/assets, while discovery/search/watchlist/BLoC/localization/cache concepts remain clean-room Experience reference. Firebase/cloud/account, request logging, external-browser and WebView-first playback are excluded.
+
 - Re-read exact GitHub source truth and found sole open PR #20 on base `8d146970507ede6cf8133a24d1e024836685af71`, exact head `8202d893de3903cbfebb3600b25b11a8c5ffcefb`, mergeable and non-draft.
 - Verified exact-head Audit hygiene run `35395162508` completed SUCCESS; its only `repository-hygiene` job `105762209956` passed archive/build-binary rejection, oversized-file rejection and Phase-1 evidence-card integrity.
 - Merged PR #20 with expected-head protection; exact merged main is `b49e651fc63e8b08050d710b30eea6dee8e49cde`.
