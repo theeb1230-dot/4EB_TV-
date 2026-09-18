@@ -37,3 +37,35 @@ Status: Phase 1 evidence matrix. A signal means audited source evidence exists; 
 
 ## Phase-1 implementation gate
 No capability sourced from a third-party project moves into implementation until its migration mode and acceptance-ledger evidence permit it. 4BA-owned contracts already merged remain the normative boundary and may evolve only through reviewed ADR/contract changes.
+
+
+## Capability ownership and invariants
+
+| Capability | Canonical owner | Provider-facing contract | Experience exposure | Non-negotiable invariant |
+|---|---|---|---|---|
+| Catalog/Search | Core + Search Engine | Catalog/Search capability | Canonical result view models | Provider IDs/endpoints are hidden in normal UX |
+| Metadata | Metadata Engine | Metadata capability | Canonical content/details | Metadata identity is independent from stream availability |
+| Stream | Resolver + Player boundary | Stream capability | Play action + Advanced Sources | Stream never implies Download |
+| Download | Offline Manager | Download capability | Explicit Download action | Separate authorization/capability and user choice |
+| Subtitle | Player/Metadata boundary | Subtitle capability | Track picker + local SRT/VTT | Local file support does not grant remote source authority |
+| Live | Live Engine | Live capability | Channel/now-next UI | EPG metadata is separate from stream authorization |
+| EPG | Live Metadata Engine | EPG capability | Yesterday/today/+3 days | Schedule reachability never authorizes video |
+| Health | Resolver | local observations only | Hidden normally; Developer Mode details | Zero-PII, local/optional anonymous diagnostics |
+| Experience | Experience Engine | none | Preview/Apply | Presentation cannot mutate canonical user state |
+| Sync | Optional Sync adapter | none | Opt-in account/device sync | Local mode remains fully functional |
+
+### Watch / Download separation
+
+A provider declaring `stream` is not eligible for `download` unless the Download capability is separately declared and authorization evidence permits it. Resolver ranking for playback cannot silently produce a download candidate, and Offline Manager cannot reinterpret a playback URL as downloadable media.
+
+### Metadata / Stream separation
+
+Canonical content identity, titles, artwork, seasons, episodes and user state survive provider outages and provider revocation. Stream candidates are ephemeral capability results attached to a canonical content request; they are never the primary identity key for favorites, history, progress or collections.
+
+### Live / EPG separation
+
+Live channel identity and schedule metadata are normalized independently from playable stream candidates. A channel may retain EPG and cached metadata while every stream provider is unavailable or revoked. Provider health affects stream selection, not canonical schedule history.
+
+### Advanced Sources boundary
+
+Normal UX exposes quality/availability rather than provider branding. Developer Mode or Advanced Sources may expose evidence-safe provider labels and health diagnostics, but never credentials, private headers, tokens, raw secret-bearing URLs or captured cookies.
