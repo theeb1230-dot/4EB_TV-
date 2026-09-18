@@ -47,3 +47,5 @@ Never reproduce credential/token/cookie/private-key values in commits, issues, P
 
 ### Fail-closed reuse rule
 Unknown or unresolved license/provenance is never treated as permissive. A source stays reference-only, provider-pending, quarantined or excluded until the evidence required by its migration mode is complete. Successful tests, public availability, repository presence or technical compatibility cannot override this rule.
+
+- **Anthology:** Phase-1 audit complete fail-closed. Package/collection licensing and technical playability do not authorize third-party provider endpoints or media. Captured credentials/cookies/tokens, private playlists, bypass/anti-bot behavior and media relay are excluded; runtime providers remain independently gated.
