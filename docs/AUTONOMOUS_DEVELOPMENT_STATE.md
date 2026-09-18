@@ -83,6 +83,17 @@
 - Updated `audits/sources/ProxyFill-main.md`, the Phase-1 Acceptance Ledger, and `docs/LICENSE_SECURITY_AUDIT.md`. Runtime remains EXCLUDED; the audit is not yet complete because bundle-local blob/provenance/license matching is still pending.
 - No source/provider/Experience was promoted. Phase 1 remains NOT ACCEPTED.
 
+## ProxyFill exclusion evidence strengthened
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start of this run: `ec15aba34edc35b3f5668c157798fa205437a9de`, sole open PR and mergeable=true; no Releases and no exact-head checks at start.
+- Continued Phase-1 evidence closure instead of creating unrelated implementation work.
+- Pinned corroborating `hfip/ProxyFill` evidence to public commit `1a49d164d10aa24ae5ef57b6a275758500310bae` and recorded exact blob hashes for README, root project manifest, Program.cs, shared project manifest and Pokémon API service.
+- Verified the public project manifest declares Blazor WebAssembly plus concrete AutoMapper/MudBlazor/Selenium/Syncfusion dependencies and references a bundled Pokémon SDK DLL. These remain corroborating until authoritative bundle blob matching closes provenance.
+- Verified two concrete secret-handling failures in the corroborating source without copying secret material into 4BA: a hard-coded API credential exists in the service implementation, and `wwwroot/credentials.json` is configured with `CopyToOutputDirectory=Always`, which would ship a credentials file into client output. Secret contents/values were deliberately not reproduced.
+- Updated the ProxyFill source card, Phase-1 Acceptance Ledger and LICENSE_SECURITY_AUDIT consistently. Runtime remains EXCLUDED and no 4BA capability/provider/Experience was promoted.
+- Authoritative bundle matching and bundle-local root license/provenance remain open, so ProxyFill is not yet Phase-1 complete despite stronger exclusion evidence.
+- Resulting branch head before this state update: `2f0e3faa1e511a2745f027eb6572e7f91451ecd0`.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
