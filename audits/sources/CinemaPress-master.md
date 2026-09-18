@@ -24,3 +24,16 @@ Migration mode: **CONTRACT_REFERENCE**. No CMS runtime dependency is admitted.
 
 ## Remaining evidence
 Verify package manifest/lockfile, root license/provenance, Express routes/middleware, persistence/database assumptions, admin/auth surfaces, input validation, tests, secrets/config, ads/tracking and binary provenance.
+
+
+## Repository hygiene finding
+
+A raw third-party archive `CinemaPress-master.zip` (24,121,537 bytes) is currently committed at the root of this audit branch. This violates the established clean-room audit boundary: third-party implementation archives are evidence inputs, not 4BA source artifacts.
+
+Required remediation before PR merge:
+- remove the archive from the 4BA branch/repository history path used for product development;
+- retain only evidence notes/hashes/provenance references needed for audit accountability;
+- do not execute or redistribute the bundled binary/source archive from 4BA;
+- continue file-level inspection from the authoritative external evidence source when tooling permits.
+
+The archive's repository presence is **not** license or reuse approval.
