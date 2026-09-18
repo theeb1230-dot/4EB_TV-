@@ -43,6 +43,7 @@ Every source contribution must use exactly one migration mode before implementat
 | EXCLUDED | Unrelated or constitution-incompatible | Audit record only |
 
 ### Current mandatory mappings
+- Aniyomi: `CONTRACT_REFERENCE + ANDROID_EXPERIENCE_REFERENCE`; Phase-1 audit complete with direct reuse deferred. Provider/source contracts, loader state, modular Android and benchmark concepts may inform independent 4BA implementation. Torrent/TorrServer, unauthorized extensions/providers, external-player/browser playback and primary WebView playback are excluded. Current upstream minSdk 26 does not change the provisional 4BA API 24 baseline.
 - AIOStreams: `CLEAN_ROOM_BEHAVIOR` / `CONTRACT_REFERENCE`; Phase-1 audit complete fail-closed. Direct reuse remains blocked by the authoritative MIT/GPL conflict. Proxy/IP-bypass, torrent/Usenet/debrid, media relay, operator-auth/server-secret models and unauthorized provider runtime are excluded.
 - AIOMetadata: `CLEAN_ROOM_BEHAVIOR` / `CONTRACT_REFERENCE`; direct reuse blocked while authoritative license conflict exists.
 - FlixQuest: `EXPERIENCE_REFERENCE` + clean-room behavior only for current 4BA work; GPL implementation is not copied and ad/analytics integrations are excluded.
