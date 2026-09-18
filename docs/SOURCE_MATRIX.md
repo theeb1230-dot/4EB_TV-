@@ -13,7 +13,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 07 | Match-Archive-main | Provider / Reference | Match archive contracts and authorization | PARTIAL — PROVIDER_PENDING |
 | 08 | kiro-drama-main | Provider / Reference | Drama source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 09 | alooytv-addon-main | Provider / Reference | Stremio addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
-| 10 | Filmex-main | Experience / Reference | Flutter UI, license/dependencies/player/assets | PARTIAL — EXPERIENCE_REFERENCE |
+| 10 | Filmex-main | Experience / Reference | Flutter UX retained only as clean-room reference; missing license, Firebase/cloud, ads and WebView-first player excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE |
 | 11 | getChanelFraom_dlstreams-main | Provider / Reference | Live channel data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
 | 12 | anthology-main | Provider / Engine / Reference | Turkish addon ecosystem, root license, per-provider authorization | PARTIAL — PROVIDER_PENDING |
 | 13 | Al-Qahtani-main | Provider / Engine / Reference | Arabic/sports contracts; relay/WebView/IP telemetry/ads excluded | PARTIAL — CONTRACT_REFERENCE |
@@ -50,4 +50,4 @@ For every source record: provenance/version, language/framework, architecture, U
 
 ## Gate
 
-No source implementation is merged into 4BA Core merely because it works in isolation. It must pass license/security review and be adapted behind 4BA contracts. Providers never bind directly to UI. Credentials are never copied. Advertising/tracking is rejected. DRM/paywall/access-control bypass is rejected. A working URL, public repository, successful playback, addon compatibility, or package-level license declaration cannot by itself promote a source to production admission.
+No source implementation is merged into 4BA Core merely because it works in isolation. It must pass license/security review and be adapted behind 4BA contracts. Providers never bind directly to UI. Credentials are never copied. Advertising SDKs, ad tracking, popups and pre-roll are rejected. Paid dependencies cannot become mandatory. DRM/paywall/access-control bypass is excluded. Source assets require their own licensing evidence where applicable.
