@@ -347,6 +347,16 @@ Observed signals include:
 - Reaffirmed 4BA Cinematic Gold as default official identity and true 10-foot TV layout as an independent presentation surface sharing canonical state.
 - Phase 1 remains NOT ACCEPTED pending file-level evidence closure; no third-party Experience was enabled.
 
+## Capability-boundary reconciliation
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start was `b1e95353b37bb721742667ebee69509ab6eded8a`, sole open PR and mergeable=true. No Releases and no exact-head Actions runs.
+- Expanded CAPABILITY_MATRIX from source mapping into explicit ownership/invariant contracts for Catalog/Search, Metadata, Stream, Download, Subtitle, Live, EPG, Health, Experience and optional Sync.
+- Formalized Watch/Download separation so a Stream capability can never silently authorize or generate Download behavior.
+- Formalized Metadata/Stream separation so canonical identity and user state survive provider outage/revocation and never use ephemeral stream/provider IDs as primary keys.
+- Formalized Live/EPG separation so schedule metadata remains canonical independently of stream availability/authorization.
+- Hardened Advanced Sources/Developer Mode boundary: provider labels and safe health evidence may be exposed, but credentials, tokens, private headers, cookies and secret-bearing URLs may not.
+- Phase 1 remains NOT ACCEPTED; this reconciliation closes a matrix-consistency gap but does not substitute for remaining file-level source evidence.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
