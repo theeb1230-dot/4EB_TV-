@@ -60,6 +60,12 @@ The 30-root acceptance ledger remains the authority. A root closes only with evi
 - This is now a repeated infrastructure limitation, so the audit remains fail-closed and the next useful step is to close other roots with directly retrievable authoritative/public blob evidence rather than repeatedly burning runs on the same archive operation.
 - No Releases exist and no conflicting PR/branch was created.
 
+### Next audit target selected
+- After recording the repeated cinextma archive-read limitation, inspected the existing `CineSpot-main` evidence card as the next high-value small Experience root.
+- Current authoritative evidence already proves 479 files, Flutter 0.1.0 / Dart ^3.9.2, no root license in the bundle, Firebase/Auth/Firestore/Google Sign-In, Dio/Retrofit, YouTube, url_launcher and WebView dependencies, plus bundled Google services configuration whose values are intentionally not recorded.
+- A GitHub repository search did not return a sufficiently attributable public CineSpot source from the available evidence, so no public repository was guessed or used as provenance. Direct reuse remains blocked and the next CineSpot work must come from authoritative file evidence or an exact provenance match.
+- This preserves the fail-closed license/security rule rather than treating a similarly named repository as evidence.
+
 ## Current Phase 1 decision
 **NOT ACCEPTED.** Four roots are evidence-complete. Remaining roots still have unresolved evidence cells. No source/provider/Experience is promoted merely because its audit closed.
 
