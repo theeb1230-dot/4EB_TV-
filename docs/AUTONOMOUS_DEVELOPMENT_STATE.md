@@ -290,6 +290,15 @@ Observed signals include:
 - Preserved pending markers only where file-level evidence is genuinely still missing; no source was promoted to ENABLED or LICENSED_REUSE.
 - Phase 1 remains NOT ACCEPTED. The remaining work is now more accurately concentrated in root license/provenance, manifests/dependencies, network/authorization, secret/config, ads/tracking, tests/player evidence and asset/data provenance.
 
+## Addon/provider evidence wave
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Advanced seven addon/provider sources from inventory-only to DEEP_AUDIT_PARTIAL / PROVIDER_PENDING: ARB-S33-3, alooytv-addon, NuvioStreamsAddon, TRK_S, stremio-akwam.X, kiro-drama and kiro.
+- Applied one consistent admission boundary without falsely treating addon compatibility/public endpoints as authorization. Search, Metadata, Stream, Download, Subtitle, Live and EPG remain independent capabilities; Stream never implies Download and canonical metadata never depends on a provider ID.
+- Explicitly excluded DRM/paywall/auth/anti-bot bypass, harvested credentials/cookies/tokens/private playlists, mandatory backends and media relay/proxy behavior.
+- No source was promoted to ENABLED. Remaining gates are manifests/dependencies, root license/provenance, concrete capability surfaces, network behavior, tests, secret/config scans, ads/tracking and authorization/terms.
+- No provider endpoint, credential, token, cookie, playlist or third-party implementation was copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
