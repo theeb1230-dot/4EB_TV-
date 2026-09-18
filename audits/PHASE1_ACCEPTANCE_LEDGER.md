@@ -8,7 +8,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | Source | Class | License | Dependencies | Network/API | Secrets/privacy | Ads/tracking | Player/provider | Reuse gate |
 |---|---|---|---|---|---|---|---|---|
 | aniyomi | Ref/Experience | V Apache-2.0 snapshot | P | P | P | P | V source->hoster->video | P |
-| AIOStreams | Engine/Provider | B MIT/GPL conflict | P | P | P | P | V generic pipeline; restricted behaviors excluded | B |
+| AIOStreams | Engine/Provider | B MIT/GPL conflict | V workspace/Core/Server/Frontend manifests | V config/network/runtime boundaries bounded | V secret/operator/logging surfaces excluded | V bounded manifest/search review; no named ad/common analytics SDK admitted | V generic pipeline; proxy/bypass/torrent/debrid/relay excluded | V AUDIT COMPLETE — clean-room contract reference; runtime rejected |
 | flixquest | Experience/Ref | V GPL-3.0 | V major pubspec | P | V telemetry deps identified | V ad/analytics deps excluded | V player/offline tests | B direct code |
 | aiometadata | Metadata/Engine | B Apache/GPL conflict | P | V metadata/cache surfaces | P | P tracking coupling identified | N/A | B |
 | Cinemax | Experience/Ref | V Apache-2.0 | V major version catalog | V network/db + INTERNET/NETWORK_STATE | V API-key external config pattern | V no admitted telemetry/ad runtime | B no player/TV evidence inferred | V AUDIT COMPLETE — direct reuse deferred; reference only |
@@ -55,4 +55,4 @@ Phase 1 can close only when every 30-root source has:
 A provider may remain **rejected/quarantined** and still satisfy audit completion if the rejection is evidence-backed. Audit completion never means provider approval.
 
 ## Current decision
-**NOT ACCEPTED.** Classification coverage is 30/30, but the ledger still exposes material evidence gaps in the remaining PARTIAL roots. Work remains in Phase 1 and on the current sole audit PR (#12 while open) until those gates are resolved or explicitly evidence-backed as rejected.
+**NOT ACCEPTED.** Classification coverage is 30/30, but the ledger still exposes material evidence gaps in the remaining PARTIAL roots. Work remains in Phase 1 until every remaining PARTIAL root is resolved or explicitly closed by an evidence-backed rejection/quarantine decision. AIOStreams is now closed fail-closed as clean-room/contract reference only; this does not authorize runtime/provider admission.
