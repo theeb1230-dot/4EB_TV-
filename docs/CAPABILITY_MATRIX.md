@@ -1,20 +1,39 @@
 # 4BA Capability Matrix
 
-Status: Phase 1 evidence matrix. A check here means the source tree shows a capability signal; it does **not** mean production code is approved for reuse.
+Status: Phase 1 evidence matrix. A signal means audited source evidence exists; it never grants reuse or provider authorization.
 
-| Capability | 4BA owner | Aniyomi | AIOStreams | FlixQuest | AIOMetadata | Gate before implementation |
-|---|---|---|---|---|---|---|
-| Domain/data separation | Core | Verified source/domain/data boundaries | Verified staged core pipeline | Provider/service/model separation verified | Backend/configure split verified | Continue dependency audit |
-| Provider/source contracts | Provider SDK | AnimeSource contract verified | Aggregation pipeline only; restricted behaviors excluded | Provider loader/tests signal | Addon API resource boundary | License + contract audit |
-| Metadata normalization | Metadata Engine | core-metadata signal | Stream-side parsing only | Movie/TV metadata models | Network alias/index normalization verified | Schema/mapping audit |
-| Resolver/aggregation | Resolver | Hoster -> video candidate separation verified | Filter/sort/dedup pipeline verified clean-room only | Provider-order/player tests signal | Metadata-only boundary preferred | Behavior/test audit |
-| Native client UX | Experience Engine | Android reference | N/A/backend-oriented | Flutter primary candidate | Configure/web only | UX/code audit |
-| TV/focus | Experience Engine | Pending | N/A | Priority inspection | N/A | D-pad evidence |
-| Cast | Player | Pending | N/A | cast_receiver + player integration evidence | N/A | Protocol/platform audit |
-| Localization | Core | i18n modules confirmed | Pending | Pending | Pending | AR/EN/TR strategy |
-| Performance testing | Quality | macrobenchmark confirmed | Pending | test tree | Pending | Test-content audit |
-| Remote configuration | Config | Pending | env/config signal | API schema signal | configure signal | Signed config design |
-| Offline/local source | Storage | source-local confirmed | N/A | Queue lifecycle/progress provider verified | Cache/database integration signal | Persistence audit |
+| Capability | 4BA owner | Strong source evidence | Required 4BA boundary | Gate |
+|---|---|---|---|---|
+| Canonical domain models | Core | Aniyomi, Cinemax, CineSpot | Provider-free canonical IDs/content/episodes | License/schema audit |
+| Provider contracts | Provider SDK | Aniyomi, Anthology, Al-Qahtani | Capability-declared adapters; fail closed | Authorization + license |
+| Metadata normalization/dedup | Metadata Engine | AIOMetadata, Aniyomi | Metadata independent of streams/providers | License + mapping tests |
+| Search/catalog | Core + Metadata | CineSpot, Cinemax, Aniyomi, addon family | Unified canonical results; source IDs internal | API/auth evidence |
+| Stream aggregation | Resolver | AIOStreams, Al-Qahtani, provider family | normalize -> dedup -> health -> rank -> fallback | Clean-room + authorization |
+| Health/fallback | Resolver | Al-Qahtani, AIOStreams | local anonymous observations; deterministic failure isolation | Privacy + behavior tests |
+| Native playback | Player | Aniyomi/FlixQuest signals | HLS/DASH/MP4 candidates, no provider-specific UI | platform/player audit |
+| Resume/source switch | Player + Resolver | FlixQuest tests + 4BA fallback contracts | checkpoint preserved across candidate retry | integration tests |
+| Subtitle/audio tracks | Player | Aniyomi Video model, FlixQuest tests | explicit normalized track descriptors | platform tests |
+| Trusted intro/outro | Player | FlixQuest policy tests, Aniyomi chapter model | trusted timing distinguished from heuristic | provenance/timing tests |
+| Download | Offline | FlixQuest offline lifecycle | capability separate from Stream; explicit user action | authorization/storage audit |
+| Cast | Player | FlixQuest cast receiver signal | optional platform capability, phone remote where supported | protocol/platform audit |
+| Live channels | Live Engine | live-source family | LiveMetadataProvider separate from LiveStreamProvider | authorization/license |
+| EPG/match schedule | Live Metadata | sports/live family | metadata capability, never proof of stream rights | data-rights/freshness |
+| Experience switching | Experience Engine | Cinemax/CineSpot/FlixQuest/cinemalist/cinextma references | presentation only; canonical user state persists | Design/accessibility audit |
+| Android TV focus | Experience Engine | FlixQuest/Android candidates require deeper evidence | true 10-foot D-pad focus contracts | focus tests |
+| Localization | Core | Aniyomi i18n + CineSpot localization signal | Arabic RTL default + English + Turkish | locale/RTL tests |
+| Offline library/cache | Storage | Aniyomi local source, FlixQuest offline, Cinemax Room | local-first metadata/art/poster/progress cache | storage/privacy audit |
+| Remote configuration | Config | third-party config signals only | optional signed fail-closed config; no home-grown crypto | crypto/key lifecycle audit |
+| Diagnostics | Core/Quality | test/logging signals across sources | local/anonymous/opt-in only, no PII | privacy audit |
+| Performance | Quality | Cinemax baseline profiles, Aniyomi macrobenchmark | platform benchmarks + Web load gates | benchmark implementation |
 
-## Rules
-4BA owns every production contract. Third-party projects provide evidence and ideas, not runtime coupling. UI never binds directly to a provider. Metadata and streams remain separate. ZERO_COST, ZERO_ADS, Privacy/Zero-PII and Native Playback First override inherited implementation choices.
+## Capability invariants
+1. **Stream != Download.** A stream-capable provider has no download capability unless separately authorized and declared.
+2. **Metadata != Stream.** Metadata identity, EPG and schedules cannot carry playback authority.
+3. **Experience != Provider.** Switching UI cannot alter provider authorization or canonical user state.
+4. **Health != Telemetry service.** Health scoring works locally; remote diagnostics are optional and anonymous only.
+5. **Backend != Video path.** Optional gateways may assist metadata/config when necessary but never relay/proxy 4BA video.
+6. **WebView != primary player.** Internal WebView is final fallback only; external browser playback is prohibited.
+7. **Repository evidence != authorization.** Public code/URLs/addons do not automatically become executable providers.
+
+## Phase-1 implementation gate
+No capability sourced from a third-party project moves into implementation until its migration mode and acceptance-ledger evidence permit it. 4BA-owned contracts already merged remain the normative boundary and may evolve only through reviewed ADR/contract changes.
