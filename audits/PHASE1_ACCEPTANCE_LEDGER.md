@@ -22,6 +22,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | Match-Archive | Provider/Ref | P | P | P archive targets | P | P | V live metadata/stream split | B production pending auth |
 | kiro-drama | Provider/Ref | P | P JS/JSON | P per-source | P config pending | P | P capability surface | B production pending auth |
 | alooytv-addon | Provider/Ref | P | P Node/Stremio | P per-source | P config pending | P | P capability surface | B production pending auth |
+| ARB-S33-3 | Provider/Ref | P | P Node/Stremio | P ArabSeed-oriented per-source behavior | P config pending | P | P capability surface | B production pending auth |
 | Filmex | Experience/Ref | P | P | P | P | P | B no player evidence yet | B direct reuse pending license |
 | getChanelFraom_dlstreams | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
 | NuvioStreamsAddon | Provider/Engine | P | P Node/addon | P per-source | P config pending | P | P aggregation/capabilities | B production pending auth |
@@ -37,7 +38,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | cinextma | Experience/Ref | P | P Next/TS | P Supabase/cloud | B mandatory cloud/account excluded | P analytics scan | N/A | B experience reference pending license |
 | ProxyFill | Unrelated/Ref | P root/provenance | P .NET/Blazor deps | N/A unless contradictory evidence | P config/telemetry scan | N/A | N/A | B EXCLUDED runtime |
 
-> The ledger contains exactly one row per authoritative bundle root. SOURCE_MATRIX remains the canonical root-name/count authority.
+> Mechanical reconciliation: 30/30 authoritative roots, exactly one row each. The ledger contains exactly one row per authoritative bundle root. SOURCE_MATRIX remains the canonical root-name/count authority.
 
 ## Phase 1 acceptance criteria
 Phase 1 can close only when every 30-root source has:
