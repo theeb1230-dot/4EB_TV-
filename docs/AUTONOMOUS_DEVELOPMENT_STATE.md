@@ -322,6 +322,14 @@ Observed signals include:
 - Synchronized MIGRATION_PLAN mandatory mappings with Anthology, the three Experience candidates, CinemaPress, turkish-series, xoxixoxi, Ytvplus2, the live/sports family and the addon/provider family.
 - No provider/source was promoted to ENABLED or LICENSED_REUSE. Phase 1 remains NOT ACCEPTED pending file-level evidence closure.
 
+## Corpus-wide license/security reconciliation
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start was `d608ff57ee08fdf36ac21d9da127f344cf66afa5`. A transient listing reported mergeable=false, then an authoritative PR metadata refresh resolved it to mergeable=true; no branch mutation was needed. PR #10 remains the sole open PR, with no Releases and no exact-head Actions runs.
+- Expanded LICENSE_SECURITY_AUDIT beyond its stale Wave-1-only scope so the central security/license document now records current evidence-backed decisions for Cinemax, CineSpot, Anthology, Al-Qahtani, Experience candidates, turkish-series, xoxixoxi, live/sports, addon/provider family, orien.live, CinemaPress and ProxyFill.
+- Added a fail-closed reuse invariant: unknown/unresolved license or provenance is never interpreted as permissive; public availability, successful tests or technical compatibility cannot promote reuse/provider admission.
+- Reaffirmed ZERO_ADS, Zero-PII, no credential migration, no bypass, no mandatory cloud/backend and no media relay boundaries without copying third-party implementation or sensitive values.
+- Phase 1 remains NOT ACCEPTED pending file-level evidence closure.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
