@@ -307,6 +307,13 @@ Observed signals include:
 - Both roots still require safe provenance/license/dependency/security evidence for Phase-1 closure. ProxyFill does not require player/provider work unless contradictory evidence appears.
 - No binaries, third-party assets, credentials or implementation were copied.
 
+## Outlier acceptance reconciliation
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`. Source-truth PR #10 head at start of this run was `e8c8f8147771b3e369e307eb1ef909646f7f0b79`; it remained the sole open PR and mergeable, with no Releases and no exact-head Actions runs.
+- Reconciled PHASE1_ACCEPTANCE_LEDGER with the new CinemaPress and ProxyFill source-card evidence. CinemaPress is Engine/Reference with mandatory-CMS/player runtime blocked; ProxyFill is unrelated/reference with runtime explicitly EXCLUDED.
+- Phase-1 closure for ProxyFill is intentionally narrowed to provenance/license, .NET/Blazor dependency and safe config/telemetry evidence. It does not require invented player/provider work.
+- Phase 1 remains NOT ACCEPTED; no source was promoted to ENABLED or LICENSED_REUSE.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
