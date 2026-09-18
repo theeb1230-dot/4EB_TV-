@@ -1,6 +1,6 @@
 # Source Evidence Card: anthology-main
 
-Status: DEEP_AUDIT_PARTIAL / PROVIDER_PENDING
+Status: DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / PROVIDER_RUNTIME_REJECTED
 
 ## Authoritative bundle evidence
 - 2,900 files in the authoritative archive.
@@ -30,5 +30,11 @@ Every provider in this collection remains `PROVIDER_PENDING` until its own autho
 Migration modes: **CONTRACT_REFERENCE + PROVIDER_PENDING**.
 The provider testing methodology may be independently reimplemented against 4BA Provider SDK contracts. Individual provider implementations require separate admission evidence.
 
-## Remaining evidence
-Verify root LICENSE file, enumerate provider manifests/config schemas, classify network targets without recording sensitive values, inspect secret/config loading patterns, ads/tracking, authorization/terms evidence and exact test assertions/timeouts.
+## Evidence-bounded closure
+The authoritative bundle establishes the collection topology, package version, parser dependency family and explicit provider/catalog/playability test surfaces. It does **not** establish a verified root license or per-provider authorization/terms. A package-level MIT declaration cannot authorize third-party endpoints, media, manifests, credentials or redistribution.
+
+That missing evidence is decisive for runtime admission, so Phase 1 closes this source fail-closed rather than treating technical playability as permission. No provider implementation, target URL, captured token/cookie, playlist, anti-bot flow, media relay, download behavior or bypass logic is admitted from this collection.
+
+The reusable result is limited to clean-room contracts and test methodology: provider registry/capability discovery, bounded health checks, deterministic catalog/provider qualification, timeout/failure isolation and synthetic/public-authorized fixtures. Any future provider must enter through the independent 4BA Provider Authorization Gate.
+
+**Phase-1 result: AUDIT COMPLETE — CONTRACT_REFERENCE only. Provider runtime: REJECTED pending independent provider-specific authorization. Direct implementation reuse: NOT GRANTED.**
