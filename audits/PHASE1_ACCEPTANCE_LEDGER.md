@@ -32,14 +32,12 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | stremio-akwam.X | Provider/Engine | P | P | P | P | P | P | P |
 | CinemaPress | Engine/Ref | P | P | P | P | P | N/A | P |
 | Cannels-arap-streem | Provider/Ref | P | P | P | P | P | P | P |
-| CineSpot | Experience/Ref | P | V major pubspec | P | V Firebase coupling | P | P | B until license |
-| turkish-series | Provider/Engine | P | P | P | P | P | P | P |
 | kiro | Provider/Ref | P | P | P | P | P | P | P |
 | cinemalist | Experience/Ref | P | P | P | P | P | P | P |
 | cinextma | Experience/Ref | P | P | P | P cloud coupling signal | P | N/A | P |
 | ProxyFill | Unrelated/Ref | P | P | N/A | P | P | N/A | B runtime |
 
-> Duplicate source labels in the historical bundle naming are normalized by the source matrix. This ledger is an acceptance-control view, not a count authority; SOURCE_MATRIX remains the 30-root count authority.
+> The ledger contains exactly one row per authoritative bundle root. SOURCE_MATRIX remains the canonical root-name/count authority.
 
 ## Phase 1 acceptance criteria
 Phase 1 can close only when every 30-root source has:
