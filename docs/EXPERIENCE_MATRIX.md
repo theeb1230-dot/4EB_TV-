@@ -8,11 +8,11 @@ Status: Phase 1 evidence matrix. Experience candidacy is not direct-code reuse a
 | FlixQuest | High | Flutter UI/player/offline/Cast evidence | Clean-room Experience reference; GPL + ads/tracking exclusions |
 | Cinemax | High for Android/TV patterns | Modular Compose + dark design system + baseline profiles | Experience/Reference; deeper dependency audit pending |
 | CineSpot | High for Flutter discovery | Flutter/BLoC/localization + Firebase account coupling | Experience reference; local-first 4BA rules override cloud coupling |
-| cinemalist | Medium/High | Flutter/TMDB/BLoC inventory | Candidate pending file-level license/network audit |
-| cinextma | Medium/High for Web | Next.js responsive web + Supabase signal | Web Experience reference; no mandatory cloud backend |
-| Filmex | Medium | Compact Flutter UI inventory | Candidate pending deep audit |
+| cinemalist | Medium/High | Flutter/TMDB/BLoC deep-audit evidence | EXPERIENCE_REFERENCE; license/assets/API terms/key handling/player evidence pending |
+| cinextma | Medium/High for Web | Next.js/TypeScript responsive web + Supabase deep-audit evidence | EXPERIENCE_REFERENCE; no mandatory Supabase/cloud/account dependency |
+| Filmex | Medium | Compact Flutter UI/navigation deep-audit evidence | EXPERIENCE_REFERENCE; license/dependencies/player/assets pending |
 | Aniyomi | Medium/reference-heavy | Android presentation/source/player architecture | Architecture/reference; not automatically a selectable Experience |
-| Al-Qahtani | Medium | Flutter/web clean-room migration surfaces | Reference/Experience concepts; legacy bridges/proxy excluded |
+| Al-Qahtani | Medium | Flutter/web clean-room migration surfaces + fallback/bridge audit | CONTRACT_REFERENCE + EXPERIENCE_REFERENCE; legacy WebView bridge, relay/proxy, IP telemetry and inherited ads/tracking excluded |
 | AIOStreams | Low as UI | TypeScript aggregation workspace | Engine/Resolver reference, not Experience |
 | AIOMetadata | Low as UI | Metadata/configure frontend/backend | Metadata Engine reference, not Experience |
 | CinemaPress | Low | Node/EJS CMS | Reference/Engine, not client Experience |
@@ -22,3 +22,22 @@ Status: Phase 1 evidence matrix. Experience candidacy is not direct-code reuse a
 A selectable Experience must provide a distinctive maintainable UX while preserving the same 4BA Core state: favorites, history, progress, downloads and settings. It must support Arabic RTL, English and Turkish, accessibility, TV focus where applicable, ZERO_ADS and Zero-PII. Experiences may override approved accent/layout tokens but cannot bypass player safety, provider boundaries or accessibility contracts.
 
 Projects that are primarily providers, scrapers, metadata engines, CMSs or unrelated tools are deliberately **not** forced into the Experience selector.
+
+
+## Experience isolation contract
+
+1. An Experience receives canonical 4BA view models and capability availability only; it never imports provider-specific response models, credentials or endpoint logic.
+2. Preview is side-effect free. Apply changes presentation state only and cannot mutate favorites, history, progress, downloads, provider authorization or account/local-mode state.
+3. 4BA Cinematic Gold remains the default and owns the official champagne-gold identity. Alternate Experiences may vary approved accent/layout tokens but cannot impersonate the official identity.
+4. Every selectable Experience must pass Arabic RTL, English, Turkish, text scaling, screen-reader semantics, reduced motion and applicable TV D-pad/focus gates before admission.
+5. Phone, tablet/foldable, TV and Web layouts may differ substantially while sharing canonical state. Android TV is a 10-foot Experience, not an enlarged phone tree.
+6. Experience code cannot open an external browser for playback. Native playback remains primary and internal WebView remains final fallback only.
+7. ZERO_ADS and Zero-PII are non-overridable. An inherited ad, analytics, crash-reporting or cloud-account dependency is removed or replaced before an Experience can become selectable.
+
+## Admission states
+
+- **EXPERIENCE_REFERENCE:** evidence may inform clean-room UX/contracts; not selectable.
+- **CANDIDATE_DISABLED:** implementation exists behind Core contracts but acceptance gates are incomplete.
+- **ELIGIBLE_DISABLED:** all required gates pass; explicit product decision still required.
+- **ENABLED:** selectable Experience with migration/rollback coverage.
+- **REVOKED:** disabled fail-closed without deleting canonical user state.
