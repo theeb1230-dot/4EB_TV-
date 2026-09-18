@@ -236,6 +236,15 @@ Observed signals include:
 - Updated both source cards and the Phase-1 acceptance ledger. CineSpot remains EXPERIENCE_REFERENCE only; Cinemax remains CONTRACT_REFERENCE/EXPERIENCE_REFERENCE pending NOTICE/assets/API-term closure.
 - No credential values, google-services values, API keys, third-party implementation code or restricted endpoints were copied.
 
+## File-level evidence closure: Anthology
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Advanced Anthology from inventory-only to DEEP_AUDIT_PARTIAL / PROVIDER_PENDING using authoritative archive evidence: 2,900 files, package version 1.7.28, package-level MIT declaration, provider/addon corpus, cheerio parser dependency and explicit catalog/provider/playability test scripts.
+- Separated technical playability from authorization: successful addon/provider tests do not establish content redistribution, download or access-control rights. Every bundled provider remains pending individual authorization/network/license/provenance review.
+- Formalized safe test migration: 4BA may clean-room the provider qualification methodology, but fixtures must use synthetic/public-authorized data and never captured cookies/tokens/credentials/private playlists.
+- Updated Anthology source card and Phase-1 acceptance ledger. Root LICENSE, provider manifests/config schemas, network-target classification and secret/config patterns remain open evidence gates.
+- No provider endpoint, credential, token, cookie, private playlist or third-party implementation was copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
