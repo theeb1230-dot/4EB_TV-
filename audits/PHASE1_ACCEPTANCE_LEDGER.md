@@ -7,7 +7,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 
 | Source | Class | License | Dependencies | Network/API | Secrets/privacy | Ads/tracking | Player/provider | Reuse gate |
 |---|---|---|---|---|---|---|---|---|
-| aniyomi | Ref/Experience | V Apache-2.0 snapshot | P | P | P | P | V source->hoster->video | P |
+| aniyomi | Engine/Experience/Ref | V Apache-2.0 root; file/native obligations gated | V Gradle catalogs + source/app dependency families | V HTTP/source boundaries + manifest network permissions bounded | V no secrets copied; commented crash-credential pattern excluded | V bounded search found no named ad/common analytics SDK admitted | V source->hoster->video + native player/download; torrent/external player/WebView-primary excluded | V AUDIT COMPLETE — contract/Android reference; direct reuse deferred |
 | AIOStreams | Engine/Provider | B MIT/GPL conflict | V workspace/Core/Server/Frontend manifests | V config/network/runtime boundaries bounded | V secret/operator/logging surfaces excluded | V bounded manifest/search review; no named ad/common analytics SDK admitted | V generic pipeline; proxy/bypass/torrent/debrid/relay excluded | V AUDIT COMPLETE — clean-room contract reference; runtime rejected |
 | flixquest | Experience/Ref | V GPL-3.0 | V major pubspec | P | V telemetry deps identified | V ad/analytics deps excluded | V player/offline tests | B direct code |
 | aiometadata | Metadata/Engine | B Apache/GPL conflict | P | V metadata/cache surfaces | P | P tracking coupling identified | N/A | B |
