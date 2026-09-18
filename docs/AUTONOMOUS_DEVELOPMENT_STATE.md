@@ -134,6 +134,15 @@ Observed signals include:
 - FlixQuest upstream tree resembles the bundle inventory, but license/pubspec retrieval failed, so no unsupported claim was promoted.
 - Updated `audits/DEEP_AUDIT_WAVE1.md` and `docs/LICENSE_SECURITY_AUDIT.md`. No third-party implementation code or credentials were copied.
 
+## Authoritative archive unlocked
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remained the sole open PR and all changes stayed on `audit/deep-wave1`.
+- Fetched the connected Drive source archive by its authoritative file ID: 215,407,865 bytes, 70,644 ZIP entries, expected 30 project roots.
+- Selectively inspected bundled source files for Aniyomi, AIOStreams, FlixQuest and AIOMetadata without importing third-party implementation code.
+- Corrected prior upstream-only assumptions with bundle facts: Aniyomi 0.18.1.2 Apache-2.0; AIOStreams 2.32.1 has MIT-vs-GPL-3.0 conflict; FlixQuest 4.1.1+5 is GPL-3.0 and carries ad/analytics dependencies excluded by constitution; AIOMetadata 2.7.1 has Apache-2.0-vs-GPL-3.0 conflict.
+- Updated Deep Audit and License/Security audit with authoritative evidence and explicit clean-room/direct-reuse gates.
+- No Actions run exists for this documentation-only PR head; no CI success is claimed.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
