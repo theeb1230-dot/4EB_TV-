@@ -31,7 +31,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | orien.live | Quarantine | B | B | B | B credential-discovery risk | P | B | B |
 | SportFree | Provider/Ref | P | P | P sports targets | P | P | V live metadata/stream split | B production pending auth |
 | stremio-akwam.X | Provider/Engine | P | P Python/FastAPI | P per-source | P config pending | P | P Stremio capability surface | B production pending auth |
-| CinemaPress | Engine/Ref | P root/provenance | P Node deps | P Express/CMS routes | P admin/config scan | P ads/tracking scan | B CMS/player not runtime requirement | B contract reference only |
+| CinemaPress | Engine/Ref | V MIT + exact public snapshot match | V package manifest; no lockfile | V Express/CMS/API/network surfaces | B embedded default API credentials + IP/WHOIS/geolocation/cookies excluded | B ad/prebid/advertising surfaces excluded | B server/embed/iframe/CinemaPlayer runtime excluded | V AUDIT COMPLETE — CONTRACT_REFERENCE only |
 | Cannels-arap-streem | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
 | kiro | Provider/Ref | P | P small source | P per-source | P config pending | P | P capability surface | B production pending auth |
 | cinemalist | Experience/Ref | P | P Flutter/BLoC | P TMDB terms/key path | P key/config pending | P | B no player evidence | B experience reference pending license |
