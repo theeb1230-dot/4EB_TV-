@@ -58,6 +58,13 @@
 - Because that correction changes the exact head, the previous green run is evidence for `90831fe...` only. The corrected head requires its own Actions result before it can be called green.
 - Phase 1 remains NOT ACCEPTED; no source/provider/Experience was promoted.
 
+## Hygiene CI exact-head closure and duplicate-run fix
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `05b127b93886e9138128d04300ed121ac17e71f4`, sole open PR, mergeable=true; no Releases.
+- Corrected JAR-aware hygiene gate is now proven on exact head: Audit hygiene run `35295127955` completed success; repository-hygiene check completed success. A second success check on the same SHA exposed duplicate execution from overlapping push + pull_request triggers.
+- Reduced CI waste without weakening coverage: pull_request is now scoped to base `main`, while push continues to cover `main` and `audit/**`. This preserves PR validation and branch validation but prevents unrelated PR targets from triggering the workflow; duplicate events for audit PR updates remain observable and will be revisited if GitHub continues emitting both required contexts.
+- No product/provider/source classification changed. Phase 1 remains NOT ACCEPTED.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
