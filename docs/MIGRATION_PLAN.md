@@ -28,3 +28,32 @@ Status: DRAFT / EVIDENCE-DRIVEN. This document does not authorize third-party co
 
 ## Non-negotiable target boundaries
 Core owns domain/storage/config/security/localization/accessibility. Experience Engine owns presentation only. Provider SDK owns source capabilities. Metadata Engine owns identity/mapping/deduplication. Resolver owns ranking/fallback. Player owns playback state and native platform integration. Optional gateway may assist only when necessary and may never be a mandatory paid/video-proxy dependency.
+
+
+## Evidence-gated migration modes
+
+Every source contribution must use exactly one migration mode before implementation begins:
+
+| Mode | Meaning | Allowed output |
+|---|---|---|
+| LICENSED_REUSE | Proven compatible license + provenance + dependency obligations | Reviewed code/assets with notices and tests |
+| CLEAN_ROOM_BEHAVIOR | Behavior is useful but code reuse is blocked/unclear | 4BA-owned specification, tests and independent implementation |
+| CONTRACT_REFERENCE | Architecture/API shape informs 4BA boundaries | ADR/contracts only; no implementation copy |
+| EXPERIENCE_REFERENCE | UX interaction/layout concept is useful | Recreated 4BA Design-System behavior, not copied branding/assets |
+| PROVIDER_PENDING | Provider concept understood but authorization incomplete | Disabled adapter specification/test fixtures only |
+| QUARANTINE | Credential/access-control/security risk | No executable integration |
+| EXCLUDED | Unrelated or constitution-incompatible | Audit record only |
+
+### Current mandatory mappings
+- AIOStreams: `CLEAN_ROOM_BEHAVIOR` / `CONTRACT_REFERENCE`; direct reuse blocked while authoritative license conflict exists. Torrent/Usenet/debrid/proxy/bypass behavior excluded.
+- AIOMetadata: `CLEAN_ROOM_BEHAVIOR` / `CONTRACT_REFERENCE`; direct reuse blocked while authoritative license conflict exists.
+- FlixQuest: `EXPERIENCE_REFERENCE` + clean-room behavior only for current 4BA work; GPL implementation is not copied and ad/analytics integrations are excluded.
+- orien.live: `QUARANTINE`.
+- ProxyFill: `EXCLUDED` from runtime.
+- All provider-oriented bundle sources without explicit authorization evidence: `PROVIDER_PENDING`.
+- Cinemax: `CONTRACT_REFERENCE` / `EXPERIENCE_REFERENCE` until dependency/API-key/telemetry obligations are fully closed.
+- CineSpot: `EXPERIENCE_REFERENCE`; direct reuse blocked until license evidence is verified.
+- Al-Qahtani: `CONTRACT_REFERENCE` for health/fallback concepts; direct-media relay/proxy behavior is `EXCLUDED`.
+
+## Migration invariant
+A source changing classification or migration mode requires an evidence update in the source card, acceptance ledger and relevant matrix in the same PR. No implementation PR may silently promote `PROVIDER_PENDING`, `QUARANTINE`, or `EXCLUDED` material.
