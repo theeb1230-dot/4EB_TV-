@@ -1,19 +1,26 @@
 # 4BA License & Security Audit
 
-Status: Phase 1. Presence of a LICENSE file is **not** equivalent to reuse approval. Public-upstream findings below are comparison evidence until the authoritative bundled revision is provenance-matched.
+Status: Phase 1. The authoritative bundled ZIP is now directly readable. Presence of a LICENSE file is **not** equivalent to reuse approval.
 
-| Source | License evidence | Secret/config signal | Constitution/security signal | Reuse status |
-|---|---|---|---|---|
-| Aniyomi | Candidate upstream root LICENSE: Apache-2.0 | Current app build contains commented ACRA URI/login/password configuration hooks | No credential values copied; telemetry/crash endpoints cannot be inherited by default | BLOCKED for direct reuse until bundled revision + dependency/notices audit |
-| AIOStreams | Candidate upstream: AGPL-3.0-only | Environment/configuration and SECRET_KEY model | Current manifest describes proxy/IP-restriction-bypass behavior, excluded from 4BA | CLEAN-ROOM CONCEPTS ONLY |
-| FlixQuest | Bundle proves LICENSE exists; upstream LICENSE unread in this run | API schema/config artifacts observed | Player/network/ads/tracking still pending | BLOCKED |
-| AIOMetadata | Candidate upstream root LICENSE text: GPL-3.0; package.json declares Apache-2.0 | .env/config and multiple external metadata/cache dependencies | License metadata conflict is a release/reuse blocker | CLEAN-ROOM CONCEPTS ONLY pending resolution |
+| Source | Authoritative bundle license evidence | Security/privacy evidence | 4BA decision |
+|---|---|---|---|
+| Aniyomi 0.18.1.2 | Root LICENSE is Apache-2.0; LICENSE and settings.gradle.kts blob hashes match inspected upstream, while bundled app version is older | Android source includes WebView/player/tracker/config surfaces requiring file-level review; no credential values copied | REFERENCE / conditional direct reuse only after dependency + NOTICE + file audit |
+| AIOStreams 2.32.1 | **Conflict:** package.json says MIT; root LICENSE contains GPL-3.0 | Description explicitly includes proxy/IP-restriction-bypass behavior; analytics/session/config surfaces present | CLEAN-ROOM CONCEPTS ONLY; bypass behavior excluded |
+| FlixQuest 4.1.1+5 | Root LICENSE contains GPL-3.0 | pubspec includes Firebase Analytics/Crashlytics/In-App Messaging, Mixpanel and unity_ads_plugin; local BetterPlayer path dependency | EXPERIENCE/REFERENCE concepts only; all ads/tracking integrations excluded; direct reuse blocked pending licensing decision |
+| AIOMetadata 2.7.1 | **Conflict:** package.json says Apache-2.0; root LICENSE contains GPL-3.0 | env/config/cache/database and request-tracking surfaces require deeper review | CLEAN-ROOM METADATA concepts only pending license resolution |
 
 ## Mandatory handling
-Never reproduce credential/token/cookie/private-key values in commits, issues, PRs or audit reports. Unknown/no-license code is not copied. Advertising SDKs, ad tracking, popups and pre-roll are rejected. Paid dependencies cannot become mandatory. DRM/paywall/access-control bypass is excluded. Source assets require their own licensing evidence where applicable.
+Never reproduce credential/token/cookie/private-key values in commits, issues, PRs or audit reports. Unknown or conflicting-license code is not copied. Advertising SDKs, ad tracking, popups and pre-roll are rejected. Paid dependencies cannot become mandatory. DRM/paywall/access-control bypass is excluded. Source assets require their own licensing evidence where applicable.
+
+## Verified hard exclusions from Wave 1
+- FlixQuest advertising dependency: `unity_ads_plugin`.
+- FlixQuest analytics/telemetry integrations: Firebase Analytics/Crashlytics and Mixpanel are not carried into 4BA.
+- AIOStreams proxy/IP-restriction-bypass behavior is not a 4BA capability.
+- No secret values from any `.env`, Google services file, workflow or source file may be copied.
 
 ## Current blockers
-1. Match each bundled snapshot to an upstream commit/tag before relying on upstream license/version details.
-2. Resolve AIOMetadata's upstream GPL-3.0 LICENSE versus Apache-2.0 package declaration before any direct reuse.
-3. Treat AIOStreams as clean-room/reference-only unless a future legal/license decision explicitly approves AGPL obligations.
-4. Read FlixQuest license/pubspec/player/network files from the authoritative snapshot before reuse.
+1. Finish file-level player/network/data-model/dependency review for the four Wave 1 projects.
+2. Resolve AIOStreams bundled MIT declaration versus GPL-3.0 root license before any direct reuse.
+3. Resolve AIOMetadata bundled Apache-2.0 declaration versus GPL-3.0 root license before any direct reuse.
+4. Treat FlixQuest GPL source as reference/clean-room unless a compatible licensing decision is explicitly made; ZERO_ADS/Zero-PII exclusions apply regardless.
+5. Continue provenance matching by bundle version/blob hashes instead of assuming current upstream equals the archived snapshot.
