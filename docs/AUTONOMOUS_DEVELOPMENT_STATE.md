@@ -254,6 +254,16 @@ Observed signals include:
 - Updated Al-Qahtani source card and Phase-1 acceptance ledger. Root license/provenance, exact dependency manifests, secrets/config scan, workers/API schemas and provider authorization remain open.
 - No IP values, credentials, endpoints, third-party implementation or legacy ad/tracking code was copied.
 
+## Experience-candidate evidence wave
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only head.
+- Advanced cinemalist-official-master, cinextma-master and Filmex-main from inventory-only to DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE using authoritative archive evidence already established for their source trees.
+- cinemalist: Flutter/TMDB/BLoC discovery reference; API terms/key storage/license/assets/player/telemetry remain gated and UI cannot bind to provider/TMDB response models.
+- cinextma: Next.js/TypeScript + Supabase/cloud signals; cloud/auth cannot become mandatory, Web remains local-first/static-hostable where possible, and no backend video relay is permitted.
+- Filmex: compact ~61-file Flutter reference; no player or full-Experience capability is inferred without implementation evidence.
+- All three are explicitly Experience references only. Useful UX must be independently expressed through 4BA Design System and canonical contracts; no branding/assets/provider implementation is admitted.
+- No credentials, third-party implementation or provider endpoints were copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
