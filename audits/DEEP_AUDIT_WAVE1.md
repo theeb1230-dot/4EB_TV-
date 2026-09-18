@@ -102,3 +102,72 @@ The connected Drive archive was successfully fetched as the authoritative 215,40
 
 ## Security triage note
 Keyword scanning was used only to locate files for deeper review. Matches for words such as `token`, `secret`, `tracking`, `player` or `webview` are not themselves proof of a vulnerability, credential leak or advertising behavior. No secret values are recorded in this repository.
+
+
+## File-level architecture findings — Wave 1 continuation
+
+### Aniyomi: source and playback contracts
+Authoritative bundled files reviewed:
+- `source-api/.../animesource/AnimeSource.kt`
+- `source-api/.../animesource/model/Video.kt`
+
+Verified behavior:
+- The source contract separates catalog/search/detail/episode discovery from hoster discovery and final video discovery.
+- Source capabilities are explicit: latest support, filters, related-anime support, hoster list and video list.
+- The video model carries URL, title, numeric resolution/bitrate, request headers, preferred flag, subtitle tracks, audio tracks and timestamp chapters (Opening/Ending/Recap/etc.).
+- Legacy Rx APIs coexist with newer suspend APIs, showing a migration boundary rather than a single monolithic source API.
+
+4BA decision:
+- Adopt the **conceptual separation** of catalog -> episode -> source candidate -> playback candidate, but implement it in 4BA's own Provider SDK/Core contracts.
+- Useful clean-room additions for future 4BA contracts: explicit audio/subtitle track descriptors, trusted chapter/timestamp descriptors and provider capability flags.
+- Do not inherit provider-specific headers or player arguments into UI models; keep them inside resolver/playback boundaries.
+
+### AIOStreams: stream pipeline
+Authoritative bundled files reviewed include `packages/core/src/streams/sorter.ts` and `deduplicator.ts`.
+
+Verified behavior:
+- Stream processing is staged rather than UI-bound: filtering, sorting, deduplication and other transformations are separate modules.
+- Deduplication supports multiple keys and deterministic tie-breaking; the implementation also contains torrent/Usenet/debrid/proxy-specific behavior.
+- User-configurable ordering/tag preferences can reject or rank candidates.
+
+4BA decision:
+- Preserve only the generic clean-room idea: deterministic candidate normalization -> dedup -> health/policy filtering -> ranking -> fallback.
+- Do NOT copy torrent/Usenet/debrid/proxy/bypass implementation or identifiers into 4BA.
+- 4BA's existing resolver health/ranking and metadata dedup packages remain provider-independent and are the correct destination.
+
+### FlixQuest: player/offline state
+Authoritative bundled files reviewed:
+- `lib/models/movie_stream_metadata.dart`
+- `lib/provider/offline_download_provider.dart`
+- `test/player_next_episode_policy_test.dart`
+
+Verified behavior:
+- Player metadata tracks content identity, artwork, elapsed position and recommendations.
+- Offline state exposes queue operations (enqueue/pause/resume/retry/remove), event subscription, progress/error state and smoothed download-rate presentation.
+- Next-episode tests prefer trusted outro timing when available and otherwise use a late-progress fallback after timing lookup settles.
+
+4BA decision:
+- Reimplement clean-room state-machine concepts, not GPL code.
+- Keep playback checkpoint/content metadata separate from provider stream objects.
+- Offline manager should expose explicit queue lifecycle and observable progress.
+- Skip-intro/outro and next-episode behavior must use trusted timing when available; heuristic fallback must never masquerade as verified chapter timing.
+
+### AIOMetadata: metadata/network/cache boundaries
+Authoritative bundled files reviewed:
+- `docs/api.md`
+- `addon/lib/tmdb-network-index.ts`
+- `addon/lib/subtitleHandler.ts`
+
+Verified behavior:
+- API surface separates manifest/catalog/meta/stream-style resources.
+- TMDB network indexing uses normalized aliases, bounded network timeouts, a multi-day export fallback and optional Redis cache.
+- The subtitle handler also performs optional external watch check-ins/tracking, demonstrating an important privacy coupling to avoid.
+
+4BA decision:
+- Metadata normalization/cache concepts are reusable clean-room ideas.
+- Core metadata must work without Redis or any mandatory server.
+- External account/watch tracking must be a separate explicit opt-in sync capability, never hidden inside subtitle or metadata resolution.
+- Provider API keys remain optional integrations and must never be embedded as public client secrets.
+
+## Wave 1 architecture extraction status
+The four projects now have authoritative file-level evidence for at least one high-value architectural surface. This is meaningful Deep Audit progress, but it is **not** acceptance of Wave 1 as complete: dependency trees, player/network security surfaces, secrets/config scans and provenance/license resolution still require further evidence.
