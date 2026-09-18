@@ -11,7 +11,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | AIOStreams | Engine/Provider | B MIT/GPL conflict | P | P | P | P | V generic pipeline; restricted behaviors excluded | B |
 | flixquest | Experience/Ref | V GPL-3.0 | V major pubspec | P | V telemetry deps identified | V ad/analytics deps excluded | V player/offline tests | B direct code |
 | aiometadata | Metadata/Engine | B Apache/GPL conflict | P | V metadata/cache surfaces | P | P tracking coupling identified | N/A | B |
-| Cinemax | Experience/Ref | V Apache-2.0 | V major version catalog | V network/db + INTERNET/NETWORK_STATE | V API-key external config pattern | P | B no player evidence | P NOTICE/assets/API terms |
+| Cinemax | Experience/Ref | V Apache-2.0 | V major version catalog | V network/db + INTERNET/NETWORK_STATE | V API-key external config pattern | V no admitted telemetry/ad runtime | B no player/TV evidence inferred | V AUDIT COMPLETE — direct reuse deferred; reference only |
 | CineSpot | Experience/Ref | B no license file in bundle | V major pubspec | P Dio/Retrofit + cloud deps | V Firebase config/coupling; values not recorded | P | P YouTube/WebView deps | B direct reuse |
 | Anthology | Provider/Engine | P package MIT; root LICENSE pending | V test/parser dependency signals | P per-provider targets | P secrets/config patterns pending | P | V catalog/provider/playability scripts | B production until per-provider authorization |
 | Al-Qahtani | Provider/Engine/Ref | P root/provenance | V Flutter/Node signals | V fallback/hardening runtime | B IP/address telemetry excluded; config scan pending | B inherited ads/tracking excluded | V legacy bridge; relay/primary WebView excluded | B relay; reference only |
