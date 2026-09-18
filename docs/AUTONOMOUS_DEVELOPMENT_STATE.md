@@ -3,11 +3,11 @@
 GitHub is the source of truth. This compact handoff never overrides newer repository state.
 
 ## Current source truth
-- PR #11 was verified mergeable on exact head `8570fe63ce9127082933d93f830d630de712cca8`; Audit hygiene run `35343125353` completed `success` with repository-hygiene steps green.
-- PR #11 was squash-merged into `main` using that exact-head guard. Resulting exact main SHA: `61d82d47102a790c0b979b38b4667334ed49847b`.
-- No Releases existed at this run's baseline.
-- With no open PR remaining after #11, `audit/deep-wave3` was created directly from exact main to continue Phase 1 rather than starting conflicting implementation work.
-- First Wave-3 evidence commit: `fbe77a88e5b038f89f551a149c56bb0c66a08ea3`, strengthening `cinemalist-official-master` with public corroborating license/dependency/tree evidence while deliberately keeping it PARTIAL until authoritative-bundle blob matching is complete.
+- PR #10 and PR #11 are merged. Exact merged `main` at the start of the current Wave-3 work is `61d82d47102a790c0b979b38b4667334ed49847b`.
+- Sole open PR at this run's source-truth check: **#12 `Audit: Phase 1 source closure wave 3`**, branch `audit/deep-wave3`, base `main`, base SHA `61d82d47102a790c0b979b38b4667334ed49847b`, exact head at start `568c46af96c49c057d2026aa771869f64324ec59`, mergeable=true.
+- Exact-head Audit hygiene run `35348196599` on start head `568c46a...` completed `success`.
+- No Releases were present at the checked baseline.
+- This run continued on PR #12 only and did not create parallel audit/implementation work.
 
 ## Product constitution invariants
 ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Native Playback First, internal WebView only as final fallback, no external-browser playback, no DRM/paywall/access-control bypass, no secrets, no mandatory paid backend, no 4BA/GitHub media proxy, Metadata != Streams, Watch != Download, provider/UI separation, Arabic RTL default plus English and Turkish, real TV focus behavior, rollback-capable changes, evidence-backed completion claims.
@@ -26,28 +26,38 @@ The 30-root acceptance ledger remains the authority. A root closes only with evi
 - `ProxyFill-main`: `DEEP_AUDIT_COMPLETE / EXCLUDED_RUNTIME`.
 - `CinemaPress-master`: `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE_ONLY`.
 - `Filmex-main`: `DEEP_AUDIT_COMPLETE / EXPERIENCE_REFERENCE_ONLY`.
+- `cinemalist-official-master`: `DEEP_AUDIT_COMPLETE / EXPERIENCE_REFERENCE_ONLY / CLEAN_ROOM`.
 
-### Cinemalist progress
-`cinemalist-official-master` remains `DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE`.
-- Matching public repository discovered: `bisunajaime/cinemalist-official`, branch `master`; it is corroborating only until authoritative snapshot blobs match.
-- Public `pubspec.yaml` blob `8e23c0a98937e1d57dfa05243fe70f50f44a423f` identifies Flutter package `cinemalist` version `2.0.0+200`, Dart `>=3.2.0 <4.0.0`, with BLoC/http/cache/connectivity/YouTube-player/url-launcher dependencies.
-- Public root `LICENSE.txt` blob `f288702d2fa16d3cdf0035b15a9fcbc552cd88e7` contains GPLv3 text. This does not yet establish the authoritative archive license.
-- No code/assets/provider/player capability was promoted. Direct reuse stays blocked pending authoritative provenance/license matching; clean-room Experience concepts remain the default.
+### Cinemalist authoritative closure
+- Authoritative ZIP root was directly inspected and decisive Git blob SHA-1 values matched the public `bisunajaime/cinemalist-official` master snapshot at commit `bc46abf74c09e35de475f356824c0b1756a9da88`:
+  - `pubspec.yaml` `8e23c0a98937e1d57dfa05243fe70f50f44a423f`
+  - `LICENSE.txt` `f288702d2fa16d3cdf0035b15a9fcbc552cd88e7`
+  - `lib/main.dart` `227d57b8e1bce39694cb1ecade7233aa7b8cabd9`
+  - TMDB API client `6041c60e1a46fe3253aad524ca18ee7e3b27a834`
+- Authoritative package is `cinemalist` version `2.0.0+200`; GPLv3 root license is now proven for the archived snapshot. Current 4BA migration decision is clean-room behavior/Experience reference only, not direct implementation reuse.
+- TMDB client directly targets API v3 metadata endpoints. Metadata behavior stays separate from Streams/Providers and production TMDB use remains independently terms/authorization/attribution/key-management gated.
+- Authoritative `main.dart` contains a non-empty hard-coded default TMDB API key in addition to compile-time environment loading. The value was deliberately not reproduced; embedded/default credentials are excluded from 4BA.
+- Bounded authoritative code scan found no selected ad/analytics SDK signatures. The bundled privacy policy describes third-party Log Data that may include IP/device/OS/config/time information; that policy is not inherited under Zero-PII and is not treated as proof that every described telemetry path exists in the inspected Dart code.
+- `youtube_player_flutter` is used for trailer-oriented playback and `url_launcher` can launch external URIs. Neither is promoted to the 4BA movie/episode Player; external-browser playback remains forbidden.
+- File-backed local JSON storage via `path_provider` is retained only as a clean-room local-first concept; canonical storage remains Core-owned.
+- No authoritative Flutter test files were found in the expected test structure, and no TV focus/RTL/Turkish/offline/player-fallback/accessibility acceptance evidence is inherited.
+- Updated the source card, Phase-1 Acceptance Ledger, SOURCE_MATRIX, EXPERIENCE_MATRIX, LICENSE_SECURITY_AUDIT and MIGRATION_PLAN consistently on PR #12.
+- Commits produced during closure before this state update: `4ad66d6a2dca929972bdb3948eb69758b208f36e`, `9b232b8be0747629dc5ede96d86e3d932bbee5c6`, `22191a0d2ad3ff0cd9fab24606cea6c5a1249a08`, `6b2e9f355cf46416195e94263a166667345530e4`, `7b419b0552b89d0501b90713b4c9486c54f82267`, `9b783652d128d669e8308c5d0c011e2eee98184e`.
 
 ## Current Phase 1 decision
-**NOT ACCEPTED.** Three roots are evidence-complete. Remaining roots still have unresolved evidence cells.
+**NOT ACCEPTED.** Four roots are evidence-complete. Remaining roots still have unresolved evidence cells. No source/provider/Experience is promoted merely because its audit closed.
 
 ## Highest-value next work
-1. Continue on the sole Wave-3 PR once opened; do not create parallel conflicting audit PRs.
-2. Match decisive authoritative Cinemalist blobs (pubspec/license/entry/network) to the public corroborating repository and close remaining network/privacy/player/config cells.
-3. Continue small Experience roots: `cinextma-master`, `CineSpot-main`, `Cinemax-main`.
-4. Close Wave-1 dependency/network/privacy evidence for Aniyomi, AIOStreams, FlixQuest and AIOMetadata without copying incompatible code.
-5. Close Anthology and Al-Qahtani provenance/config/network/security boundaries.
-6. Keep authorization separate from technical playability for provider/live/addon roots.
-7. Reconcile any root promoted to complete into Acceptance Ledger and all affected matrices/audits in the same PR.
+1. Continue on sole open PR #12 while it remains open; do not create conflicting audit or implementation PRs.
+2. Close the next small Experience roots with authoritative file evidence, prioritizing `cinextma-master`, `CineSpot-main`, then remaining `Cinemax-main` cells.
+3. Close Wave-1 dependency/network/privacy evidence for Aniyomi, AIOStreams, FlixQuest and AIOMetadata without copying incompatible code.
+4. Close Anthology and Al-Qahtani provenance/config/network/security boundaries.
+5. Keep authorization separate from technical playability for provider/live/addon roots.
+6. Reconcile any root promoted to complete into Acceptance Ledger and all affected matrices/audits in the same PR.
+7. Do not begin Phase-2/Player/UI implementation merely because individual roots close; Phase 1 requires all 30 roots to satisfy the acceptance criteria or evidence-backed rejection/exclusion.
 
 ## Repository hygiene / CI
-`.github/workflows/audit-hygiene.yml` blocks committed third-party archives/build binaries and oversized tracked files. Exact-head CI must be rechecked after each write; an older green run never proves a newer SHA green.
+`.github/workflows/audit-hygiene.yml` blocks committed third-party archives/build binaries and oversized tracked files. Start-head run `35348196599` was green. The resulting exact PR head after this state update requires its own CI result before it may be called green.
 
 ## Platform baselines
 Android API 24 and iOS 15 remain provisional until selected player/platform dependency compatibility evidence is complete.
