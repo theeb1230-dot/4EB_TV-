@@ -54,6 +54,16 @@ Every source contribution must use exactly one migration mode before implementat
 - Cinemax: `CONTRACT_REFERENCE` / `EXPERIENCE_REFERENCE` until dependency/API-key/telemetry obligations are fully closed.
 - CineSpot: `EXPERIENCE_REFERENCE`; direct reuse blocked until license evidence is verified.
 - Al-Qahtani: `CONTRACT_REFERENCE` for health/fallback concepts; direct-media relay/proxy behavior is `EXCLUDED`.
+- Anthology: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; per-provider authorization and root-license evidence remain mandatory.
+- cinemalist-official: `EXPERIENCE_REFERENCE`; TMDB/API terms, key handling, license and asset provenance remain gates.
+- cinextma: `EXPERIENCE_REFERENCE`; mandatory Supabase/cloud/account coupling is excluded from Core.
+- Filmex: `EXPERIENCE_REFERENCE`; direct reuse remains blocked pending license/dependency/player evidence.
+- CinemaPress: `CONTRACT_REFERENCE`; CMS/backend runtime is optional-only and cannot replace native Experiences.
+- turkish-series: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; large mutable catalogs stay outside Core/app binaries.
+- xoxixoxi: `CONTRACT_REFERENCE`; unapproved extraction runtime, bypass behavior and media relay are excluded.
+- Ytvplus2: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`.
+- Live/sports family (Mstch_Server2, Match-Archive, getChanelFraom_dlstreams, YacinTv, SportFree, Cannels-arap-streem): `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; EPG/public playlist reachability never proves stream authorization.
+- Addon/provider family (ARB-S33-3, alooytv-addon, NuvioStreamsAddon, TRK_S, stremio-akwam.X, kiro-drama, kiro): `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; addon compatibility or successful discovery is not authorization.
 
 ## Migration invariant
 A source changing classification or migration mode requires an evidence update in the source card, acceptance ledger and relevant matrix in the same PR. No implementation PR may silently promote `PROVIDER_PENDING`, `QUARANTINE`, or `EXCLUDED` material.
