@@ -26,6 +26,14 @@
 - Authoritative Drive archive was also re-fetched by exact file ID in this run (215,407,865 bytes) for continued file-level work; local central-directory inspection hit an execution-environment timeout, so no unsupported file-content claim was added.
 - Phase 1 remains NOT ACCEPTED. The next evidence work remains file-level license/provenance/dependency/network/secrets/ads/player/test closure, not additional generic governance prose.
 
+## Exact-head source-truth and archive-read failure classification
+
+- Start main SHA: `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 exact head at start: `378afcf63e88eef01e431e8dfe77bf7e994a5ed4`, sole open PR, mergeable=true. Branch inventory was re-read; no Releases, exact-head workflow runs or check-runs exist.
+- Re-attempted direct file-level inspection of CinemaPress from the authoritative 215,407,865-byte Drive ZIP using a bounded project-root query. The execution environment again timed out while opening/reading the ZIP central directory, so the failure is classified as tooling/archive-read infrastructure rather than source evidence.
+- No CinemaPress license, dependency, route, auth, test, secret, ad/tracking or persistence claim was promoted from the failed read. Its existing DEEP_AUDIT_PARTIAL / REFERENCE_ONLY state remains fail-closed.
+- The acceptance ledger remains mechanically reconciled at 30 unique authoritative roots after the prior repair; no source was promoted or removed in this run.
+- Phase 1 remains NOT ACCEPTED. File-level evidence closure remains the highest-value work; archive access failures must not be converted into guessed audit facts.
+
 ## Risks / blockers
 
 - Multiple roots still have unresolved root-license/provenance, dependency, network/API authorization, secret/config, ads/tracking, player/provider or asset/data-provenance evidence as recorded in `audits/PHASE1_ACCEPTANCE_LEDGER.md`.
