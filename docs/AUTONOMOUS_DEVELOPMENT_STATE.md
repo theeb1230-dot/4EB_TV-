@@ -3,9 +3,9 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main`: `4986837fee065206607d0c6a57a703c340b8cd68`.
-- PR #15 (`audit/deep-wave6`) is merged; the former audit branch remains only as historical evidence.
-- Continuation branch: `audit/deep-wave7`, created exactly from merged main `4986837fee065206607d0c6a57a703c340b8cd68`.
+- Exact merged `main`: `d2dea6a4b9830fbf6bda0604f466d500240286d9`.
+- PR #16 (`audit/deep-wave7`) merged during this execution at `d2dea6a4b9830fbf6bda0604f466d500240286d9` after its exact head passed Audit hygiene.
+- Continuation branch: `audit/deep-wave8`, created exactly from merged main `d2dea6a4b9830fbf6bda0604f466d500240286d9`.
 - Start-of-execution PR #16 head: `c90ec180d86fd908b818209493189bf2b3125360`; exact-head Audit hygiene run `35383807799` completed SUCCESS with exactly one `repository-hygiene` check.
 - Phase 1 remains **NOT ACCEPTED**. Do not claim completion until all 30 roots satisfy the Acceptance Ledger.
 
@@ -28,14 +28,20 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 
 `aiometadata-dev` advanced to `DEEP_AUDIT_PARTIAL / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: pinned public v2.7.1 corroboration confirms the same version, Node >=24 <25, an Apache-2.0 package declaration conflicting with a GPL-3.0 root LICENSE, SQLite/PostgreSQL/Redis plus multiple metadata/API credential surfaces, and bounded/redacted logging + transient-fallback concepts. Direct code reuse remains fail-closed; no secrets were copied. Authoritative decisive blob matching and full logging/telemetry/provider-term closure remain pending.
 
+`flixquest-main` advanced to `DEEP_AUDIT_PARTIAL / EXPERIENCE_REFERENCE / CLEAN_ROOM_ONLY / DIRECT_REUSE_BLOCKED`: version-matched public 4.1.1+5 corroboration confirms GPL-3.0, Firebase analytics/auth/crashlytics/messaging/remote-config, Mixpanel, Unity Ads, Better Player, Media3 HLS/DASH, PiP/Cast/Leanback/download surfaces and a scraper/stream/proxy/live/subtitle OpenAPI backend. Ads/analytics/mandatory Firebase, media proxy/scraper behavior, external-browser playback and broad inherited permissions are excluded. Authoritative decisive blob matching remains pending.
+
 `Cinemax-main` remains `DEEP_AUDIT_PARTIAL / REFERENCE_ELIGIBLE`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Direct reuse is still gated by NOTICE/assets/API-term and exact compatibility evidence. No player module was identified, so Cinemax is not admitted as a playback-engine source.
 
 ## CI integrity
-- `main` is currently `4986837fee065206607d0c6a57a703c340b8cd68` after PR #15 merged.
+- `main` is currently `d2dea6a4b9830fbf6bda0604f466d500240286d9` after PR #16 merged.
 - Audit hygiene remains the mandatory gate for audit PRs: third-party archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity must pass on the exact PR head before merge.
 - No new merge is permitted from `audit/deep-wave7` until its exact head has a green run.
 
 ## Work completed in this execution
+- Re-read GitHub source truth again after PR #16 merged concurrently; did not continue writing onto its diverged historical branch.
+- Created `audit/deep-wave8` exactly from merged main `d2dea6a4b9830fbf6bda0604f466d500240286d9` to preserve the one-PR lineage cleanly.
+- Deepened FlixQuest player/platform/privacy evidence without importing implementation; evidence commit `e956e9f9b15819e439c39bd7e3332cbdb428887b`.
+
 - Re-read current GitHub source truth before mutation: exact main, all branches, sole open PR #16, exact head, Releases, exact-head Actions/checks, Acceptance Ledger, SOURCE_MATRIX and handoff.
 - Continued only on PR #16; no conflicting branch/PR was created.
 - Deepened `aiometadata-dev` at the exact public v2.7.1 boundary without importing implementation. Recorded the package/LICENSE conflict, dependency/storage/network/credential surfaces, clean-room metadata/cache/fallback concepts, and Zero-PII/ZERO_COST exclusions.
