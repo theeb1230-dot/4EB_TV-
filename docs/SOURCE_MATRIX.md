@@ -28,7 +28,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 22 | SportFree-main | Provider / Reference | Sports contracts and stream authorization | PARTIAL — PROVIDER_PENDING |
 | 23 | flixquest-main | Experience / Reference | Flutter adaptive shell; GPL/ad/tracking boundaries | PARTIAL — direct code BLOCKED |
 | 24 | stremio-akwam.X-main | Provider / Engine / Reference | FastAPI/Stremio contracts, authorization/license/network evidence | PARTIAL — PROVIDER_PENDING |
-| 25 | CinemaPress-master | Engine / Reference | CMS/catalog contracts, license/config/ads scan | PARTIAL — CONTRACT_REFERENCE |
+| 25 | CinemaPress-master | Engine / Reference | Exact snapshot + MIT verified; CMS/catalog contracts retained, ads/privacy/player/backend runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE |
 | 26 | Cannels-arap-streem-main | Provider / Reference | Arabic live data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
 | 27 | CineSpot-main | Experience / Reference | Flutter discovery UX; no root license, Firebase/cloud coupling | PARTIAL — direct reuse BLOCKED |
 | 28 | aiometadata-dev | Metadata / Engine / Reference | Metadata mapping/cache; license conflict/tracking coupling | PARTIAL — direct reuse BLOCKED |
