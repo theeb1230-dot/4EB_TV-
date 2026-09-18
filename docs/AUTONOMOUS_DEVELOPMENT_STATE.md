@@ -201,6 +201,16 @@ Observed signals include:
 - This is a governance correctness fix: Phase 1 remains NOT ACCEPTED and no completion percentage is inferred from duplicated table rows.
 - No third-party code or sensitive source values were introduced.
 
+## Provider authorization acceptance gate
+
+- Start main SHA remains `74c6df21e4dea35e38304bfc99f4edcf1a8c6002`; PR #10 remains the sole open PR and mergeable. No Releases or exact-head Actions runs exist for this docs-only branch.
+- Added `docs/PROVIDER_AUTHORIZATION_GATE.md` to turn the constitution's authorized-source requirement into an enforceable fail-closed admission model.
+- Defined evidence requirements for source/content authority, access controls, credentials, transport, separate capabilities, privacy, ZERO_COST, failure isolation and provenance/license.
+- Defined explicit states: REFERENCE_ONLY, QUARANTINED, PENDING_AUTHORIZATION, PENDING_LICENSE, ELIGIBLE_DISABLED, ENABLED and REVOKED.
+- Formalized that repository presence, public URLs, scraper code, Stremio compatibility or permissive package licensing do not prove authorization.
+- Kill-switch semantics preserve canonical user state and fail closed; signed config remains deliberately unimplemented pending vetted crypto/key-lifecycle audit.
+- No bundled provider is promoted to production by this change and no sensitive endpoint/credential was copied.
+
 ## Risks / blockers
 
 - License text and implementation code are still unread; no production code reuse is approved.
