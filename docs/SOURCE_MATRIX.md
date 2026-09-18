@@ -8,7 +8,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 02 | cinextma-master | Experience / Reference | Next.js UX, Supabase/cloud/account boundaries | PARTIAL — EXPERIENCE_REFERENCE |
 | 03 | ARB-S33-3-main | Provider / Reference | ArabSeed/Stremio contracts, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 04 | Cinemax-main | Experience / Reference | Android/Kotlin architecture, NOTICE/assets/API/player evidence | PARTIAL — reuse gated |
-| 05 | ProxyFill-main | Unrelated / Reference | Provenance/license/dependency/security evidence sufficient for exclusion | PARTIAL — EXCLUDED_RUNTIME |
+| 05 | ProxyFill-main | Unrelated / Reference | Evidence-backed exclusion complete: exact snapshot blobs, no bundle license, secret-handling defects, unrelated domain | AUDIT COMPLETE — EXCLUDED_RUNTIME |
 | 06 | Mstch_Server2-main | Provider / Reference | Sports contracts and stream authorization | PARTIAL — PROVIDER_PENDING |
 | 07 | Match-Archive-main | Provider / Reference | Match archive contracts and authorization | PARTIAL — PROVIDER_PENDING |
 | 08 | kiro-drama-main | Provider / Reference | Drama source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
