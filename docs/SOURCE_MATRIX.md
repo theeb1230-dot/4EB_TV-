@@ -12,7 +12,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 06 | Mstch_Server2-main | Provider / Data / Reference | Canonical match/schedule/channel contracts only; unresolved playback rights/license fail closed; backend/streams excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 07 | Match-Archive-main | Provider / Data / Reference | Canonical historical-match/archive contracts only; unresolved replay/stream rights and root reuse fail closed | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 08 | kiro-drama-main | Provider / Reference | Drama source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
-| 09 | alooytv-addon-main | Provider / Reference | Stremio addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
+| 09 | alooytv-addon-main | Provider / Reference | Clean-room capability/catalog/metadata/stream boundaries only; unresolved root/per-target rights and runtime targets fail closed | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 10 | Filmex-main | Experience / Reference | Flutter UX retained only as clean-room reference; missing license, Firebase/cloud, ads and WebView-first player excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE |
 | 11 | getChanelFraom_dlstreams-main | Provider / Data / Reference | Canonical channel normalization and bounded health only; unresolved stream rights/license fail closed; private credentials/playlists excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 12 | anthology-main | Provider / Engine / Reference | Turkish addon ecosystem; collection license/playability does not authorize endpoints/content; runtime remains independently gated | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
