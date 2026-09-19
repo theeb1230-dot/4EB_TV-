@@ -6,7 +6,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 |---:|---|---|---|---|
 | 01 | cinemalist-official-master | Experience / Reference | Exact GPLv3 snapshot matched; Flutter/TMDB/BLoC/local-state behavior retained only as clean-room reference; embedded default key/privacy-policy telemetry/external launcher excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
 | 02 | cinextma-master | Experience / Reference | Next.js/PWA UX; authoritative blob reads unavailable, so public MIT cannot authorize archive reuse; cloud/account/telemetry/provider behavior excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
-| 03 | ARB-S33-3-main | Provider / Reference | ArabSeed/Stremio contracts, authorization/license | PARTIAL — PROVIDER_PENDING |
+| 03 | ARB-S33-3-main | Provider / Reference | Clean-room capability/catalog/metadata/stream boundaries only; unresolved root/per-target rights and runtime targets fail closed | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 04 | Cinemax-main | Experience / Reference | Android/Kotlin modular/design/performance concepts; unresolved NOTICE/assets/API-term reuse fails closed; no player/TV capability inferred | AUDIT COMPLETE — CONTRACT/EXPERIENCE_REFERENCE |
 | 05 | ProxyFill-main | Unrelated / Reference | Evidence-backed exclusion complete: exact snapshot blobs, no bundle license, secret-handling defects, unrelated domain | AUDIT COMPLETE — EXCLUDED_RUNTIME |
 | 06 | Mstch_Server2-main | Provider / Data / Reference | Canonical match/schedule/channel contracts only; unresolved playback rights/license fail closed; backend/streams excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
