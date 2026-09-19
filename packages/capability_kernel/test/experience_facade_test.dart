@@ -3,7 +3,8 @@ import 'package:core_domain/core_domain.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('experience sees capability availability without implementation ids', () {
+  test('experience sees capability availability without implementation ids',
+      () {
     final kernel = CapabilityKernel()
       ..register(const CapabilityEndpoint(
         implementationId: 'authorized-provider-hidden-from-ui',
