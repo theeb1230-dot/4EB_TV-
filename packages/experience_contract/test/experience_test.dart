@@ -11,7 +11,7 @@ void main() {
         capabilities: {Capability.search, Capability.metadata},
       ));
     final context = ExperienceContext(
-      capabilities: ExperienceCapabilityFacade(kernel),
+      capabilities: KernelExperienceCapabilityFacade(kernel),
     );
     const experience = ExperienceDescriptor(
       id: '4ba-cinematic-gold',
