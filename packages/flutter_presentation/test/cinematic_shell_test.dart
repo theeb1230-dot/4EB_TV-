@@ -4,7 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 
 void main() {
-  testWidgets('Arabic shell renders RTL with mobile navigation', (tester) async {
+  testWidgets('Arabic shell renders RTL with mobile navigation',
+      (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: FourBaCinematicShell(
@@ -16,11 +17,13 @@ void main() {
         ),
       ),
     );
-    expect(Directionality.of(tester.element(find.text('المحتوى'))), TextDirection.rtl);
+    expect(Directionality.of(tester.element(find.text('المحتوى'))),
+        TextDirection.rtl);
     expect(find.byType(NavigationBar), findsOneWidget);
   });
 
-  testWidgets('TV shell uses sidebar and exposes focus highlight', (tester) async {
+  testWidgets('TV shell uses sidebar and exposes focus highlight',
+      (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: FourBaCinematicShell(
@@ -59,6 +62,7 @@ void main() {
     expect(data.disableAnimations, isTrue);
     expect(data.highContrast, isTrue);
     expect(data.textScaler.scale(10), 14);
-    expect(Directionality.of(tester.element(find.text('Content'))), TextDirection.ltr);
+    expect(Directionality.of(tester.element(find.text('Content'))),
+        TextDirection.ltr);
   });
 }
