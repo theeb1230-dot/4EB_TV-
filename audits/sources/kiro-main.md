@@ -1,6 +1,6 @@
 # Source Evidence Card: kiro-main
 
-Status: DEEP_AUDIT_PARTIAL / PROVIDER_PENDING
+Status: DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED
 
 ## Authoritative bundle evidence
 - small provider/source project in the authoritative 30-project corpus.
@@ -26,5 +26,12 @@ Stremio/addon compatibility, public source code, a working endpoint or successfu
 ## Migration decision
 Migration modes: **CONTRACT_REFERENCE + PROVIDER_PENDING**. No production provider is enabled by this audit state.
 
-## Remaining evidence
-Verify manifests/dependencies, root license/provenance, concrete capability surfaces, network targets without recording sensitive values, tests/error handling, secrets/config, ads/tracking and authorization/terms.
+## Evidence-bounded closure
+The authoritative bundle establishes a small provider/source family and enough structure to bound its role behind Provider SDK contracts, but it does not establish compatible root reuse rights, per-target content authorization, or production-safe network/config provenance. Phase 1 therefore closes fail-closed rather than treating technical reachability as authorization.
+
+- Direct code/runtime reuse is blocked under current evidence.
+- No endpoint, stream target, credential, token, cookie, private configuration, scraper/extractor behavior, relay/proxy behavior, bypass behavior, or ad/tracking behavior is admitted.
+- Only clean-room capability declaration, catalog/metadata/stream separation, deterministic normalized failures and provider isolation may inform 4BA contracts.
+- Any future runtime provider requires independent license/provenance, content authorization, safe network/config review, bounded cost and constitutional playback compliance.
+
+Final decision: **AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED**. Audit completion does not authorize a provider.
