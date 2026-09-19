@@ -1,6 +1,6 @@
 # Source Evidence Card: turkish-series-main
 
-Status: DEEP_AUDIT_PARTIAL / DATA_REFERENCE
+Status: DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / DATA_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED
 
 ## Authoritative bundle evidence
 - Very large corpus: roughly 18,082 files.
@@ -22,5 +22,11 @@ Useful concepts: static zero-cost metadata publication, freshness/version marker
 ## Migration decision
 Migration modes: **CONTRACT_REFERENCE + PROVIDER_PENDING**. Data/update concepts may be clean-room implemented after provenance/schema/freshness evidence.
 
-## Remaining evidence
-Verify root license/data provenance, representative JSON schemas, update scripts/workflows, freshness/rollback behavior, Android client boundaries, network/provider code, tests, secret/config handling and dataset size strategy.
+## Evidence-bounded closure
+The authoritative corpus proves the architectural shape and, equally importantly, proves that 4BA must not treat this mutable dataset as trusted application source. Root/data redistribution provenance and provider/content authorization are not established by the bundle. Those missing rights are decisive: direct dataset/code migration and runtime provider admission fail closed.
+
+The large JSON/data footprint is not copied into Core or app binaries. No endpoint, credential, provider target, stream reference or mutable catalog payload is admitted. Scheduled/static publication is retained only as a clean-room pattern for authorized metadata/config snapshots with explicit schema/version/freshness markers, bounded client caches, atomic replacement and last-known-good rollback.
+
+The Android/Python/data mix is therefore sufficient for a Phase-1 architectural decision without pretending unresolved data rights are a future production entitlement. Any future Turkish metadata source must pass the normal provider/metadata authorization gate independently.
+
+**Phase-1 result: AUDIT COMPLETE — CONTRACT_REFERENCE + DATA_REFERENCE. Direct reuse: BLOCKED. Runtime provider: PROVIDER_PENDING and disabled.**
