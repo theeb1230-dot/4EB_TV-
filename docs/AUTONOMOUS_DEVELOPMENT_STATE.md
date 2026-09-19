@@ -3,9 +3,9 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main` at this execution start: `5b1e705f1b240c681db31097d16a4d76504b85f9`.
-- PR #35 (`audit/deep-wave26`) merged at `5b1e705f1b240c681db31097d16a4d76504b85f9` after exact head `66c0de128fac3a1a07b6ffc5727b94a2fd3bfdad` passed Audit hygiene run `35417572677` / repository-hygiene job `105829050719`.
-- Continuation branch: `audit/deep-wave27`, created from exact merged main `5b1e705f1b240c681db31097d16a4d76504b85f9`.
+- Exact merged `main` at this execution start: `8c2a073791f6d4460bbd7733b267c210f583a8f1`.
+- PR #36 (`audit/deep-wave27`) merged at `8c2a073791f6d4460bbd7733b267c210f583a8f1` after exact head `50f971f89d17c9558c3da50c5d791ea2b074f88a` passed Audit hygiene run `35420312288` / repository-hygiene job `105836619705`.
+- Continuation branch: `audit/deep-wave28`, created from exact merged main `8c2a073791f6d4460bbd7733b267c210f583a8f1`.
 - Phase 1 remains **NOT ACCEPTED**. Do not claim completion until all 30 roots satisfy the Acceptance Ledger.
 
 ## Product invariants
@@ -21,28 +21,29 @@ These foundations remain authoritative and are not rewritten around source-proje
 ## Phase 1 audit state
 The 30-root Acceptance Ledger remains the completion authority and `SOURCE_MATRIX` remains the canonical exact-root authority. A root closes only with evidence for provenance/version, architecture, license/reuse, dependencies, network/API/cost, secrets/privacy/telemetry/ads, player/provider behavior where applicable, migration destination/exclusion, and risks/clean-room boundary. Evidence-backed rejection/quarantine/exclusion can close an audit but never authorizes runtime admission.
 
-Evidence-complete roots now include the previously closed Experience/Engine/reference roots plus `YacinTv--main`, `orien.live-main`, `xoxixoxi-main`, `Mstch_Server2-main`, `SportFree-main`, `Match-Archive-main`, and `getChanelFraom_dlstreams-main`. `getChanelFraom_dlstreams-main` is closed fail-closed as `CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED`: only canonical channel normalization, provider-independent identity and bounded local health concepts remain clean-room reference; no unresolved playlist/stream target, credential, private configuration, relay, bypass behavior or provider runtime is admitted.
+Evidence-complete roots now include the previously closed Experience/Engine/reference roots plus `YacinTv--main`, `orien.live-main`, `xoxixoxi-main`, `Mstch_Server2-main`, `SportFree-main`, `Match-Archive-main`, `getChanelFraom_dlstreams-main`, and `Cannels-arap-streem-main`. `Cannels-arap-streem-main` is closed fail-closed as `CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED`: only provider-independent Arabic channel taxonomy and EPG mapping concepts remain clean-room reference; no unresolved playlist/stream target, credential, private configuration, relay, bypass behavior or provider runtime is admitted.
 
 ## CI integrity
 - Audit hygiene remains mandatory for audit PRs: third-party archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity must pass on the exact PR head before merge.
-- No merge is permitted from `audit/deep-wave27` until its exact head has a green Audit hygiene run.
+- No merge is permitted from `audit/deep-wave28` until its exact head has a green Audit hygiene run.
 
 ## Work completed in this execution
-- Re-read GitHub source truth and found sole open PR #35 on exact head `66c0de128fac3a1a07b6ffc5727b94a2fd3bfdad`.
-- Verified Audit hygiene run `35417572677` / repository-hygiene job `105829050719` succeeded on that exact head, including archive/build-binary rejection, oversized-file rejection and Phase-1 evidence-card integrity.
-- Merged PR #35 with expected-head protection to exact main `5b1e705f1b240c681db31097d16a4d76504b85f9`.
-- Created `audit/deep-wave27` from exact merged main.
-- Closed `getChanelFraom_dlstreams-main` fail-closed as a clean-room channel normalization/health contract reference. Unresolved playlist/stream/network targets, credentials/tokens/cookies/private config, media relay and bypass behavior remain excluded. Runtime provider admission still requires independent rights/license/ZERO_COST/privacy/native-playback evidence.
+- Re-read GitHub source truth and found sole open PR #36 on exact head `50f971f89d17c9558c3da50c5d791ea2b074f88a`.
+- Verified Audit hygiene run `35420312288` / repository-hygiene job `105836619705` succeeded on that exact head, including archive/build-binary rejection, oversized-file rejection and Phase-1 evidence-card integrity.
+- Merged PR #36 with expected-head protection to exact main `8c2a073791f6d4460bbd7733b267c210f583a8f1`.
+- Confirmed there are still no Releases; shipping artifacts before the audit/product gates would be a false completion signal.
+- Created `audit/deep-wave28` from exact merged main.
+- Closed `Cannels-arap-streem-main` fail-closed as a clean-room Arabic channel taxonomy/EPG contract reference. Unresolved playlist/stream/network targets, credentials/tokens/cookies/private config, media relay and bypass behavior remain excluded. Runtime provider admission still requires independent rights/license/ZERO_COST/privacy/native-playback evidence.
 - Reconciled the source evidence card, Phase-1 Acceptance Ledger and SOURCE_MATRIX.
 
 ## Risks / blockers
-- Phase 1 is still NOT ACCEPTED because several roots remain PARTIAL/PROVIDER_PENDING in the Acceptance Ledger.
+- Phase 1 is still NOT ACCEPTED because eight roots remain PARTIAL/PROVIDER_PENDING in the Acceptance Ledger: `Ytvplus2`, `NuvioStreamsAddon`, `TRK_S`, `stremio-akwam.X`, `ARB-S33-3`, `alooytv-addon`, `kiro-drama`, `kiro`.
 - Provider technical reachability or public playlist availability is never treated as content/redistribution authorization.
 - No Release exists yet; producing APK/TV APK/unsigned IPA/Web artifacts before Phase-1 and later product gates would be a false completion signal.
 
 ## Highest-value next work
-1. Keep work on `audit/deep-wave27` until its exact head CI is green and mergeable; do not create a competing PR.
-2. Continue the remaining high-risk live root `Cannels-arap-streem-main` using an evidence-backed fail-closed admission decision.
-3. Continue remaining addon/provider roots (`Ytvplus2`, `NuvioStreamsAddon`, `TRK_S`, `stremio-akwam.X`, `ARB-S33-3`, `alooytv-addon`, `kiro-drama`, `kiro`) without admitting endpoints or credentials absent authorization evidence.
+1. Keep work on `audit/deep-wave28` until its exact head CI is green and mergeable; do not create a competing PR.
+2. Continue remaining addon/provider roots (`Ytvplus2`, `NuvioStreamsAddon`, `TRK_S`, `stremio-akwam.X`, `ARB-S33-3`, `alooytv-addon`, `kiro-drama`, `kiro`) using evidence-backed fail-closed decisions without admitting endpoints or credentials absent authorization evidence.
+3. Prioritize `Ytvplus2` next because its multi-source aggregation/fallback architecture can inform provider-isolation contracts while its runtime authorization remains independently gated.
 4. Phase 1 closes only when every one of the 30 ledger rows satisfies acceptance criteria. Provider rejection/quarantine can close an audit but never authorizes runtime admission.
 5. After Phase 1 acceptance, resume implementation phases in constitutional order rather than prematurely shipping a shell.
