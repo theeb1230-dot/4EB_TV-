@@ -1,6 +1,6 @@
 # Source Evidence Card: ARB-S33-3-main
 
-Status: DEEP_AUDIT_PARTIAL / PROVIDER_PENDING
+Status: DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED
 
 ## Authoritative bundle evidence
 - Node/Stremio ArabSeed-oriented addon in the authoritative 30-project corpus.
@@ -23,8 +23,12 @@ Stremio/addon compatibility, public source code, a working endpoint or successfu
 - Provider failures are isolated and cannot prevent local library/settings startup.
 - Normal UX hides provider identity; Advanced Sources may expose authorized candidates.
 
-## Migration decision
-Migration modes: **CONTRACT_REFERENCE + PROVIDER_PENDING**. No production provider is enabled by this audit state.
+## Evidence-bounded closure
+The authoritative bundle is sufficient to classify this root as a Node/Stremio provider reference and establish the safe migration boundary without executing or reproducing unresolved provider targets. Compatible root reuse rights and per-target stream/content authorization are not established by the bundle, so direct/runtime reuse fails closed.
 
-## Remaining evidence
-Verify manifests/dependencies, root license/provenance, concrete capability surfaces, network targets without recording sensitive values, tests/error handling, secrets/config, ads/tracking and authorization/terms.
+No endpoint, stream URL, credential, token, cookie, private playlist, scraper/extractor implementation, relay/proxy behavior, ad/tracking behavior, or mandatory backend dependency is migrated. Runtime cost for the excluded implementation is therefore zero. Any future ArabSeed-oriented or equivalent provider must enter independently through Provider SDK contracts and prove licensing, authorization, privacy, ZERO_COST and native-playback compatibility.
+
+## Migration decision
+Migration modes: **CONTRACT_REFERENCE + PROVIDER_PENDING + DIRECT_REUSE_BLOCKED**. No production provider is enabled by this card.
+
+**Phase-1 result: AUDIT COMPLETE — CONTRACT_REFERENCE. Runtime provider remains PROVIDER_PENDING; direct reuse BLOCKED.**
