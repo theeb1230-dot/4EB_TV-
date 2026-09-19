@@ -32,6 +32,7 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. Pro
 - PR #53 exact head `fce46e316f96b395f8e890218df5f86194b55dda` passed Audit hygiene `35466685154` and Core contracts `35466685193`, including the architecture graph and all seven package jobs, then merged with expected-head protection. Fresh exact-head CI is required for this design branch.
 
 ## Work completed in this execution
+- Rechecked PR #54 exact-head CI. Run `35467906915` exposed one remaining formatter-only defect: Dart required a blank line between `FourBaCardKind` and `FourBaButtonKind`. Applied the exact formatter diff on the same branch; new head `c48c1133e0d6b7aba1644845e567d1bfaf14dbc3`. Fresh exact-head CI is queued, so merge remains correctly blocked.
 - Re-read exact main `e85bee8b79662b15a2fec2759e28d3973852831f`, branches, sole PR #54, exact head, Actions/checks, Releases, constitution, architecture and actual changed code before mutation.
 - Found a real exact-head CI defect: Core contracts run `35466775816` failed only because `dart format` changed `packages/design_tokens/lib/src/tokens.dart` and `test/typography_components_test.dart`; sibling matrix jobs were cancelled by fail-fast rather than code failures.
 - Applied the formatter output on the same PR branch. New exact head is `e5de1d416297e5b3eaaa1e2a37a5e6a38fc91f6f`. Audit hygiene run `35467869899` is green; Core contracts run `35467870012` is still queued at this handoff and must not be called green yet.
@@ -55,7 +56,7 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. Pro
 - Previous conversational estimate of 32% is superseded by this repository-derived weighted calculation. The increase reflects Phase-1 acceptance, architecture graph enforcement and tested executable Design System/kernel/metadata/resolver foundations, not a claim that the app UI/player is usable.
 
 ## Blockers by product impact
-- **P0:** PR #54 exact-head Core contracts must turn green after formatter repair before merge.
+- **P0:** PR #54 exact-head Core contracts must turn green after formatter repair before merge. Latest exact head is `c48c1133e0d6b7aba1644845e567d1bfaf14dbc3`; Audit hygiene `35468015848` and Core contracts `35468015847` are queued and are not yet evidence of success.
 - **P0:** Phase 3 lacks real presentation adapters and rendered RTL/contrast/TV-focus evidence.
 - **P0:** No end-to-end Home/Search → Details → Episodes → Resolve → Native Play path exists yet.
 - **P0:** Local-first storage/config/security implementations and platform compatibility evidence are missing.
