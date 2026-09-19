@@ -9,14 +9,16 @@ final class FourBaBrandMark extends StatelessWidget {
   final double size;
 
   @override
-  Widget build(BuildContext context) => Semantics(
-        label: '4BA',
-        image: true,
-        child: SizedBox.square(
-          dimension: size,
-          child: CustomPaint(painter: const _FourBaBrandPainter()),
-        ),
-      );
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: '4BA',
+      image: true,
+      child: SizedBox.square(
+        dimension: size,
+        child: CustomPaint(painter: const _FourBaBrandPainter()),
+      ),
+    );
+  }
 }
 
 final class _FourBaBrandPainter extends CustomPainter {
