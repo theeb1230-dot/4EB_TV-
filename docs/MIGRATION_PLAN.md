@@ -49,7 +49,7 @@ Every source contribution must use exactly one migration mode before implementat
 - AIOStreams: `CLEAN_ROOM_BEHAVIOR` / `CONTRACT_REFERENCE`; Phase-1 audit complete fail-closed. Direct reuse remains blocked by the authoritative MIT/GPL conflict. Proxy/IP-bypass, torrent/Usenet/debrid, media relay, operator-auth/server-secret models and unauthorized provider runtime are excluded.
 - AIOMetadata: `CLEAN_ROOM_BEHAVIOR` / `CONTRACT_REFERENCE`; direct reuse blocked while authoritative license conflict exists.
 - FlixQuest: `EXPERIENCE_REFERENCE` + clean-room behavior only for current 4BA work; GPL implementation is not copied and ad/analytics integrations are excluded.
-- orien.live: `QUARANTINE`.
+- orien.live: `QUARANTINE + EXCLUDED`; Phase-1 audit complete. No runtime/code/data/network/account material migrates. Retain only a 4BA-owned negative admission rule rejecting harvested/shared/private credentials and access-control bypass.
 - ProxyFill: `EXCLUDED` from runtime; Phase-1 evidence closure is complete as an evidence-backed exclusion after exact authoritative snapshot matching, no bundle-local LICENSE/NOTICE, and confirmed secret-handling defects.
 - All provider-oriented bundle sources without explicit authorization evidence: `PROVIDER_PENDING`.
 - Cinemax: `CONTRACT_REFERENCE` / `EXPERIENCE_REFERENCE` until dependency/API-key/telemetry obligations are fully closed.
