@@ -3,17 +3,18 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact start main for this execution: `a9ce214d95090945a0257a81a7e3ebb3004a38dd`.
-- PR #56 exact head `b770da89e3b3001a52218eed33effc076220a76c` passed Core contracts run `35473092742` and Audit hygiene run `35473092740`, was mergeable, and merged with expected-head protection.
-- Exact end main after that merge: `ec0aa6de017efa9f29aeb4f335fa532c7110b3d2`.
-- Continuation branch: `design/phase3-flutter-surface`, created from exact merged main. Its current head is the commit produced by this handoff update; exact-head CI is mandatory before merge.
+- Exact start main for this execution: `ec0aa6de017efa9f29aeb4f335fa532c7110b3d2`.
+- Exact end main remains `ec0aa6de017efa9f29aeb4f335fa532c7110b3d2`; PR #57 is intentionally not merged until its repaired exact head is green.
+- Sole open PR #57 branch: `design/phase3-flutter-surface`.
+- Previous PR #57 exact head `39858997e8c3e078566ff66666e725d86980d597`: Audit hygiene run `35474064777` passed. Core contracts run `35474064791` passed architecture and every Dart package job, but Flutter presentation failed at `flutter analyze` because `LogicalKeyboardKey` was referenced by the widget test without importing `package:flutter/services.dart`.
+- The analyzer defect was repaired on the same PR branch. Fresh exact-head CI is mandatory before merge.
 - Releases remain empty; release gates are intentionally not bypassed.
 
 ## Product invariants
 ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Local-first, Native Playback First, internal WebView only as final fallback, no external-browser playback, no DRM/paywall/access-control bypass, no secrets, no mandatory paid backend, no 4BA/GitHub media proxy, Metadata != Streams, Watch != Download, provider/UI separation, Arabic RTL default plus English and Turkish, real TV focus behavior, rollback-capable changes, evidence-backed completion claims.
 
 ## Decision / blockers
-- **P0 selected:** Phase 3 lacked a real Flutter-rendered surface. Acceptance for this slice: a Flutter edge package consumes `presentation_contract` + `design_tokens`; Arabic renders RTL; compact layout renders mobile navigation; TV renders a distinct sidebar with focusable 56px targets and ring/scale focus feedback; Reduce Motion, high contrast and text scaling reach Flutter MediaQuery; package is provider-blind; Flutter format/analyze/widget tests and architecture CI pass on exact head.
+- **P0 selected:** finish the sole open Flutter presentation PR. Acceptance: architecture + hygiene + Flutter format/analyze/widget tests green on the exact repaired head, then merge with expected-head protection.
 - **P0 open:** logo/icon/splash runtime and rendered contrast/device D-pad evidence remain missing.
 - **P0 open:** no Home/Search → Details → Episodes → Resolve → Native Play runtime path.
 - **P0 open:** local-first storage/config/security implementation and platform compatibility evidence are missing.
@@ -21,27 +22,20 @@ ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Local-first, Native Playback
 - **P2:** Update channels, developer diagnostics, load/device hardening and Golden evidence remain future work.
 
 ## Work completed in this execution
-- Re-read the sole open PR #56, exact head/base/mergeability, exact-head Actions, constitution, architecture and handoff before mutation.
-- Verified repaired PR #56 exact-head CI fully green and merged it with expected-head protection.
-- Added `packages/flutter_presentation`, the first real Flutter rendering edge for Cinematic Gold.
-- Added a dark Cinematic Gold shell that consumes semantic tokens instead of redefining identity constants.
-- Added Arabic-default RTL and English/Turkish-compatible LTR through the presentation context.
-- Added compact Flutter NavigationBar and a distinct TV sidebar rather than scaling phone navigation.
-- Added focusable TV tiles with 56px minimum target, gold focus ring and scale feedback.
-- Propagated Reduce Motion, high contrast and text scaling into Flutter MediaQuery.
-- Added widget tests for RTL/mobile navigation, TV sidebar/focus traversal and accessibility preferences.
-- Extended architecture policy and CI so `flutter_presentation` may depend only on `design_tokens` + `presentation_contract`, is mechanically provider-blind, and receives Flutter format/analyze/test gates.
+- Re-read exact main, the sole open PR #57, exact head/base/mergeability, exact-head Actions/jobs/logs and current handoff before mutation.
+- Diagnosed the only Core-contract failure from the actual Flutter job log: formatting passed; `flutter analyze` failed solely because the TV focus widget test lacked the Flutter services import for `LogicalKeyboardKey`; `flutter test` was consequently skipped.
+- Added `package:flutter/services.dart` on the same PR branch. No behavior, provider boundary or product invariant was weakened.
+- All non-Flutter package jobs and the architecture boundary job were already green on the failed head.
 - No provider endpoint, credential, stream target, ad/tracking SDK, paid backend, media relay/proxy or DRM/access-control bypass was introduced.
 
 ## Progress scorecard (evidence-weighted, recomputed)
-- Overall Product Completion: **35.8%**. Governance/audit 100%; Architecture 90%; Design System 57%; Core 35%; Provider SDK/config 45%; Metadata 50%; Search/Resolver 50%; Native Player 10%; Experience/content UI 20%; Live/Sports 5%; Offline 5%; Profile/local 5%; Android 0%; Android TV 0%; iOS 0%; Web/PWA 0%; Accessibility/updates 15%; Security/performance/tests 20%; CI/CD/releases 10%; Beta/Golden hardening 0%. Only the merged, exact-head-verified presentation contract is credited; the new Flutter surface is not credited beyond the current branch until its exact-head CI passes.
-- Current Phase Completion (Phase 3 Design System): **57%**. Semantic presentation adapter is verified; real Flutter rendering code now exists but remains pending exact-head CI and device/rendered evidence.
-- Verified Functional Completion: **20%**. Provider-blind presentation behavior is unit-verified; no end-to-end content/playback runtime path or distributable platform artifact exists yet.
+- Overall Product Completion: **35.8%**. Governance/audit 100%; Architecture 90%; Design System 57%; Core 35%; Provider SDK/config 45%; Metadata 50%; Search/Resolver 50%; Native Player 10%; Experience/content UI 20%; Live/Sports 5%; Offline 5%; Profile/local 5%; Android 0%; Android TV 0%; iOS 0%; Web/PWA 0%; Accessibility/updates 15%; Security/performance/tests 20%; CI/CD/releases 10%; Beta/Golden hardening 0%. The repair itself earns no completion credit until exact-head CI verifies Flutter analyze/tests.
+- Current Phase Completion (Phase 3 Design System): **57%** pending repaired exact-head CI and device/rendered evidence.
+- Verified Functional Completion: **20%**. No end-to-end content/playback runtime path or distributable platform artifact exists yet.
 
 ## Tests / CI / artifacts
-- PR #56 exact head passed Core contracts and Audit hygiene before merge.
-- New Flutter widget tests cover Arabic RTL/mobile navigation, TV-specific navigation/focus and accessibility preference propagation; exact-head CI is pending for this continuation branch.
-- Architecture checker now includes `flutter_presentation`; workflow has a dedicated stable-Flutter format/analyze/test job.
+- PR #57 previous head: Audit hygiene passed; architecture and all Dart package format/analyze/tests passed; Flutter formatting passed; Flutter analyze failed on one missing test import; Flutter tests did not run.
+- Repaired exact head requires fresh Audit hygiene + Core contracts. No blind rerun was used.
 - No distributable APK/TV APK/IPA/Web artifact exists yet.
 
 ## Risks / open acceptance
@@ -51,7 +45,7 @@ ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Local-first, Native Playback
 - Phase 3 cannot be accepted until logo/splash and stronger rendered/device evidence exist.
 
 ## Highest-value next work
-1. Require exact-head Audit hygiene + Core contracts for the Flutter surface; fix failures from logs on this branch only and merge with expected-head protection when green/mergeable.
+1. Require exact-head Audit hygiene + Core contracts for repaired PR #57; fix any new defect from logs on this branch only and merge with expected-head protection when green/mergeable.
 2. Add logo geometry/splash and rendered contrast/RTL/focus evidence to close remaining Phase 3 acceptance.
-3. Implement local-first Core storage/config/security contracts and tested in-memory/local adapters without mandatory backend.
+3. Implement local-first Core storage/config/security contracts and tested local adapters without mandatory backend.
 4. Build the first end-to-end product vertical slice: Home/Search → Details → Episodes → Resolve → Native Play.
