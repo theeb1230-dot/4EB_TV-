@@ -3,10 +3,10 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main` at this execution is `c09f0401a4be2774bdb11b5f029d4cb5d51bba11`.
+- Exact merged `main` at this execution is `e85bee8b79662b15a2fec2759e28d3973852831f`.
 - PR #52 exact head `34bd937011815ad3ee4d87aa85982febf7feab37` passed Audit hygiene run `35466276728`, was mergeable, and merged with expected-head protection. Core contracts did not trigger because #52 changed documentation only.
 - Phase 1 remains ACCEPTED; Phase 2 is active and not yet accepted.
-- Continuation branch is `architecture/phase2-dependency-graph`, created from exact merged main.
+- Continuation branch is `design/phase3-typography-components`, created from exact merged main.
 - Releases remain empty; release gates are intentionally not bypassed.
 
 ## Product invariants
@@ -29,9 +29,13 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. Pro
 - Core contracts CI covers all seven executable packages.
 - Experience remains independently provider-blind.
 - This branch adds `tools/check_architecture.py`, a mechanical package graph/import boundary gate, and broadens workflow path coverage to every package so a newly added package cannot silently evade architecture CI.
-- Fresh exact-head CI is required before this branch can merge.
+- PR #53 exact head `fce46e316f96b395f8e890218df5f86194b55dda` passed Audit hygiene `35466685154` and Core contracts `35466685193`, including the architecture graph and all seven package jobs, then merged with expected-head protection. Fresh exact-head CI is required for this design branch.
 
 ## Work completed in this execution
+- Re-read main, branches, the sole open PR #53, exact head/base, Releases, exact-head workflows and jobs before mutation.
+- Verified PR #53 exact head was clean and fully green after the self-import checker repair; merged it with expected-head protection.
+- Advanced Phase 3 executable Design System: added platform-neutral typography roles/metrics and component semantics for buttons, cards, responsive gaps and ten-foot minimum targets.
+- Kept the token package Flutter-independent so Android/iOS/Web/TV presentation adapters consume one semantic source rather than redefining identity constants.
 - Re-read default branch/main exact SHA, sole open PR #52, mergeability, exact-head Actions and Releases before mutation.
 - Verified PR #52 Audit hygiene success and merged it with expected-head protection.
 - Added a mechanical architecture dependency graph checker covering all current foundational packages and their permitted direct edges.
@@ -47,7 +51,7 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. Pro
 - Android API 24 and iOS 15 remain provisional until player/persistence/network compatibility evidence is recorded.
 
 ## Highest-value next work
-1. Require exact-head Core contracts + Audit hygiene on the dependency-graph branch; fix any defect on the same branch.
-2. Reconcile the mechanical graph output with MASTER_ARCHITECTURE and add any missing architecture edge tests exposed by CI.
-3. Continue executable Design System integration, including typography/component semantics before Flutter presentation shells.
+1. Require exact-head Core contracts + Audit hygiene on the typography/components branch and fix any defect on the same branch.
+2. Add tests for typography completeness, responsive component metrics and ten-foot accessibility targets.
+3. Reconcile executable Design System semantics with DESIGN_SYSTEM and begin the Flutter presentation adapter only after the semantic contract is green.
 4. Begin Core local-first storage/config/security contracts without choosing platform plugins prematurely.
