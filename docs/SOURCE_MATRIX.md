@@ -14,7 +14,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 08 | kiro-drama-main | Provider / Reference | Drama source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 09 | alooytv-addon-main | Provider / Reference | Stremio addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 10 | Filmex-main | Experience / Reference | Flutter UX retained only as clean-room reference; missing license, Firebase/cloud, ads and WebView-first player excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE |
-| 11 | getChanelFraom_dlstreams-main | Provider / Reference | Live channel data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
+| 11 | getChanelFraom_dlstreams-main | Provider / Data / Reference | Canonical channel normalization and bounded health only; unresolved stream rights/license fail closed; private credentials/playlists excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 12 | anthology-main | Provider / Engine / Reference | Turkish addon ecosystem; collection license/playability does not authorize endpoints/content; runtime remains independently gated | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 13 | Al-Qahtani-main | Provider / Engine / Reference | Arabic/provider migration and fallback/validation contracts; media relay, IP telemetry, ads, external-browser and WebView-primary runtime excluded | AUDIT COMPLETE — CONTRACT/EXPERIENCE_REFERENCE / RUNTIME_REJECTED |
 | 14 | NuvioStreamsAddon-master | Provider / Engine / Reference | Aggregation contracts, authorization/config/network evidence | PARTIAL — PROVIDER_PENDING |
