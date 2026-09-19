@@ -32,7 +32,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 26 | Cannels-arap-streem-main | Provider / Reference | Arabic live data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
 | 27 | CineSpot-main | Experience / Reference | Flutter discovery UX; missing license/provenance fails closed; Firebase/cloud/logger/external-browser/WebView-first behavior excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
 | 28 | aiometadata-dev | Metadata / Engine / Reference | Metadata mapping/cache concepts; Apache/GPL conflict blocks direct reuse; external APIs independently gated | AUDIT COMPLETE — METADATA_ENGINE_REFERENCE / CLEAN_ROOM |
-| 29 | turkish-series-main | Provider / Engine / Reference | Dataset provenance/freshness/update architecture and authorization | PARTIAL — PROVIDER_PENDING |
+| 29 | turkish-series-main | Provider / Engine / Reference | Large mutable Turkish corpus informs authorized snapshot/freshness/rollback contracts only; dataset/code reuse rights unresolved and runtime provider remains disabled | AUDIT COMPLETE — CONTRACT/DATA_REFERENCE / PROVIDER_PENDING |
 | 30 | kiro-main | Provider / Reference | Source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 
 ## Status semantics
