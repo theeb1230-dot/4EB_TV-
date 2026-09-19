@@ -14,8 +14,8 @@ final class FourBaPresentationContext {
     this.reduceMotion = false,
     this.highContrast = false,
     this.textScale = 1.0,
-  }) : assert(logicalWidth >= 0),
-       assert(textScale > 0);
+  })  : assert(logicalWidth >= 0),
+        assert(textScale > 0);
 
   final double logicalWidth;
   final bool isTenFoot;
@@ -25,12 +25,13 @@ final class FourBaPresentationContext {
   final double textScale;
 
   FourBaLayoutClass get layout => FourBaBreakpoints.classify(
-    logicalWidth: logicalWidth,
-    isTenFoot: isTenFoot,
-  );
+        logicalWidth: logicalWidth,
+        isTenFoot: isTenFoot,
+      );
 
-  FourBaTextDirection get direction =>
-      locale == FourBaLocale.ar ? FourBaTextDirection.rtl : FourBaTextDirection.ltr;
+  FourBaTextDirection get direction => locale == FourBaLocale.ar
+      ? FourBaTextDirection.rtl
+      : FourBaTextDirection.ltr;
 }
 
 final class FourBaPresentationAdapter {
@@ -38,12 +39,11 @@ final class FourBaPresentationAdapter {
 
   final FourBaPresentationContext context;
 
-  FourBaNavigationKind get navigation => FourBaNavigation.kindFor(context.layout);
+  FourBaNavigationKind get navigation =>
+      FourBaComponents.navigation(context.layout);
 
-  FourBaComponentMetrics button(FourBaButtonKind kind) => FourBaComponents.button(
-    kind: kind,
-    isTenFoot: context.isTenFoot,
-  );
+  FourBaComponentMetrics button(FourBaButtonKind kind) =>
+      FourBaComponents.button(kind: kind, isTenFoot: context.isTenFoot);
 
   FourBaTextToken text(FourBaTextRole role) {
     final token = FourBaTypography.roles[role]!;
@@ -54,10 +54,11 @@ final class FourBaPresentationAdapter {
     );
   }
 
-  int motionDuration([int normalMs = FourBaMotion.standardMs]) => FourBaMotion.durationMs(
-    reduceMotion: context.reduceMotion,
-    normalMs: normalMs,
-  );
+  int motionDuration([int normalMs = FourBaMotion.standardMs]) =>
+      FourBaMotion.durationMs(
+        reduceMotion: context.reduceMotion,
+        normalMs: normalMs,
+      );
 
   List<FourBaFocusCue> get focusCues => context.isTenFoot
       ? const [FourBaFocusCue.ring, FourBaFocusCue.scale]
@@ -65,5 +66,17 @@ final class FourBaPresentationAdapter {
 
   double get cardGap => FourBaComponents.cardGap(context.layout);
 
-  List<FourBaPlayerControl> get playerControls => FourBaPlayerControls.primary;
+  double get playerControlTarget =>
+      FourBaComponents.playerControlTarget(isTenFoot: context.isTenFoot);
+
+  List<FourBaPlayerControl> get playerControls => const [
+        FourBaPlayerControl.playPause,
+        FourBaPlayerControl.timeline,
+        FourBaPlayerControl.audio,
+        FourBaPlayerControl.subtitles,
+        FourBaPlayerControl.quality,
+        FourBaPlayerControl.previous,
+        FourBaPlayerControl.next,
+        FourBaPlayerControl.sourceRecovery,
+      ];
 }
