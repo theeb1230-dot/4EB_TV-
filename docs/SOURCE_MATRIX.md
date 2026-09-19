@@ -24,7 +24,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 18 | xoxixoxi-main | Provider / Engine / Reference | Bounded worker/timeout/isolation contracts only; unresolved license/authorization/process/network safety fail closed; scraper/bypass/relay runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / RUNTIME_REJECTED |
 | 19 | TRK_S-main | Provider / Reference | Turkish addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 20 | orien.live-main | Security-risk Reference | Credential-discovery behavior is constitution-incompatible; no execution/network contact/secrets required for safe closure | AUDIT COMPLETE — QUARANTINED / RUNTIME_EXCLUDED |
-| 21 | Ytvplus2-main | Provider / Engine / Reference | Multi-source aggregation/fallback, authorization | PARTIAL — PROVIDER_PENDING |
+| 21 | Ytvplus2-main | Provider / Engine / Reference | Clean-room aggregation/fallback/failure isolation only; unresolved root/per-source rights and runtime targets fail closed | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 22 | SportFree-main | Provider / Data / Reference | Sports metadata/fallback/health contracts only; unresolved playback rights/license fail closed; streams/runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 23 | flixquest-main | Experience / Reference | Flutter/player/offline/TV UX clean-room reference; GPL, ads/analytics and proxy/scraper runtime excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
 | 24 | stremio-akwam.X-main | Provider / Engine / Reference | FastAPI/Stremio contracts, authorization/license/network evidence | PARTIAL — PROVIDER_PENDING |
