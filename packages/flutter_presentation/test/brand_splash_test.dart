@@ -19,7 +19,8 @@ void main() {
       ),
     );
 
-    final opacity = tester.widget<AnimatedOpacity>(find.byType(AnimatedOpacity));
+    final opacity =
+        tester.widget<AnimatedOpacity>(find.byType(AnimatedOpacity));
     expect(opacity.duration, Duration.zero);
     expect(find.text('4BA'), findsOneWidget);
     expect(find.byType(FourBaBrandMark), findsOneWidget);
@@ -30,7 +31,8 @@ void main() {
       const MaterialApp(home: FourBaCinematicSplash(progress: 2)),
     );
 
-    final opacity = tester.widget<AnimatedOpacity>(find.byType(AnimatedOpacity));
+    final opacity =
+        tester.widget<AnimatedOpacity>(find.byType(AnimatedOpacity));
     expect(opacity.opacity, 1);
   });
 }
