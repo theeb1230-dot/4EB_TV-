@@ -1,6 +1,6 @@
 # 4BA Master Architecture
 
-Status: PROVISIONAL CONTRACT FREEZE. Runtime dependencies remain subject to Phase 1 deep-audit evidence.
+Status: PHASE 2 ARCHITECTURE BASELINE. Phase 1 deep audit is accepted; runtime provider admission remains independently fail-closed.
 
 ## Architectural invariant
 4BA is a local-first adaptive client. The core product must remain usable without a paid or permanently available 4BA backend. Video traffic is never proxied through GitHub or a 4BA-owned general backend.
@@ -32,8 +32,18 @@ Static assets/configuration may use zero-cost static hosting. Catalog/metadata w
 ## Security/privacy
 No credentials in public source or signed config. Remote config must be signed, versioned, rollback-capable and support provider kill switches. Telemetry is local/anonymous/optional and Zero-PII. Ads and ad tracking are prohibited.
 
-## Architecture acceptance still pending
-- Source-level license/dependency/player evidence for architecture-critical references.
-- Flutter/player compatibility evidence for Android API 24 and iOS 15.
-- Concrete persistence/network/player package selection.
-- Web playback/CORS feasibility per authorized integration.
+## Workspace boundaries
+- `core_domain` owns provider-independent identities, capability/playback/failure contracts and may not import UI or concrete providers.
+- `provider_sdk` depends only on Core contracts and owns provider lifecycle/admission interfaces.
+- `metadata_engine` depends on Core identities and owns canonicalization/deduplication, never playback resolution.
+- `resolver_engine` consumes Core + Provider SDK and owns health/ranking/fallback, never presentation.
+- `design_tokens` is platform-neutral and owns executable semantic visual/layout/focus/motion tokens. It must not import provider or network code.
+- Future Experience/UI packages may depend on Core + design tokens and capability facades, never concrete providers.
+- Future platform shells compose packages at the edge; platform plugins do not leak into Core contracts.
+
+## Phase 2 acceptance gates
+- Package dependency graph follows the boundaries above and CI tests every executable package.
+- Architecture documents and ADRs agree with actual imports and package manifests.
+- No paid/mandatory backend, provider-specific UI dependency, ad/telemetry SDK, or credential enters foundational packages.
+- Platform-specific player/persistence/network selections remain deferred until compatibility evidence is recorded for provisional Android API 24 / iOS 15 baselines.
+- Web playback/CORS feasibility remains an integration admission concern, not a reason to proxy video through 4BA infrastructure.
