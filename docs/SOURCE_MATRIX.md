@@ -16,7 +16,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 10 | Filmex-main | Experience / Reference | Flutter UX retained only as clean-room reference; missing license, Firebase/cloud, ads and WebView-first player excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE |
 | 11 | getChanelFraom_dlstreams-main | Provider / Reference | Live channel data; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
 | 12 | anthology-main | Provider / Engine / Reference | Turkish addon ecosystem; collection license/playability does not authorize endpoints/content; runtime remains independently gated | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
-| 13 | Al-Qahtani-main | Provider / Engine / Reference | Arabic/sports contracts; relay/WebView/IP telemetry/ads excluded | PARTIAL — CONTRACT_REFERENCE |
+| 13 | Al-Qahtani-main | Provider / Engine / Reference | Arabic/provider migration and fallback/validation contracts; media relay, IP telemetry, ads, external-browser and WebView-primary runtime excluded | AUDIT COMPLETE — CONTRACT/EXPERIENCE_REFERENCE / RUNTIME_REJECTED |
 | 14 | NuvioStreamsAddon-master | Provider / Engine / Reference | Aggregation contracts, authorization/config/network evidence | PARTIAL — PROVIDER_PENDING |
 | 15 | AIOStreams-main | Engine / Provider / Reference | Aggregation contracts only; license conflict plus proxy/bypass/torrent/debrid/relay runtime rejected | AUDIT COMPLETE — CLEAN_ROOM / CONTRACT_REFERENCE |
 | 16 | aniyomi-main | Engine / Experience / Reference | Android/source/player contracts; provider authorization and native/file obligations gated | AUDIT COMPLETE — CONTRACT/ANDROID_REFERENCE |

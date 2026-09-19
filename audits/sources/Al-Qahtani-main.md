@@ -1,6 +1,6 @@
 # Source Evidence Card: Al-Qahtani-main
 
-Status: DEEP_AUDIT_PARTIAL / REFERENCE_ONLY
+Status: DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / EXPERIENCE_REFERENCE / RUNTIME_REJECTED
 
 ## Authoritative bundle evidence
 - 163 files in the authoritative archive.
@@ -29,5 +29,11 @@ Useful server hardening ideas such as bounded TTL, timeouts, rate limits and str
 ## Migration decision
 Migration modes: **CONTRACT_REFERENCE + EXPERIENCE_REFERENCE**. Health/fallback and validation concepts may inform 4BA-owned contracts. Media relay/proxy, PII-address handling and legacy primary WebView bridges are EXCLUDED.
 
-## Remaining evidence
-Verify root/license provenance, exact Node/Flutter dependency manifests, secrets/config loading, ads/tracking scans, workers/API schemas, provider authorization, test assertions and which legacy bridge paths are still reachable.
+## Evidence-bounded closure
+The authoritative archive is sufficient to bound the useful architecture and the constitution-incompatible runtime. It does not establish reusable root-license/provenance or provider/content authorization. That absence is decisive for implementation/runtime admission and therefore fails closed rather than leaving an ambiguous production path.
+
+No source code, provider endpoint, credential/config value, media relay/proxy path, IP/address collection, ad/tracking behavior, legacy external-browser bridge or WebView-primary playback is admitted into 4BA. The verified Flutter/Node dependency signals and fallback/hardening behavior are used only to define clean-room contracts and tests.
+
+Reusable output is limited to 4BA-owned specifications for provider isolation, bounded health probing, TTL/timeouts, strict media/content validation, deterministic fallback, rate-limit concepts for an optional legitimate metadata/config gateway, and Arabic migration/UX lessons. Any future provider requires independent authorization and any optional gateway must remain Zero-Cost-compatible and outside the media data path.
+
+**Phase-1 result: AUDIT COMPLETE — CONTRACT_REFERENCE + EXPERIENCE_REFERENCE only. Runtime/provider admission: REJECTED under current evidence. Direct implementation reuse: NOT GRANTED.**
