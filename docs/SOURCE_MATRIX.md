@@ -21,7 +21,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 15 | AIOStreams-main | Engine / Provider / Reference | Aggregation contracts only; license conflict plus proxy/bypass/torrent/debrid/relay runtime rejected | AUDIT COMPLETE — CLEAN_ROOM / CONTRACT_REFERENCE |
 | 16 | aniyomi-main | Engine / Experience / Reference | Android/source/player contracts; provider authorization and native/file obligations gated | AUDIT COMPLETE — CONTRACT/ANDROID_REFERENCE |
 | 17 | YacinTv--main | Provider / Reference | Live TV source; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
-| 18 | xoxixoxi-main | Provider / Engine / Reference | Scraper/process security, authorization/license; bypass/relay excluded | PARTIAL — CONTRACT_REFERENCE |
+| 18 | xoxixoxi-main | Provider / Engine / Reference | Bounded worker/timeout/isolation contracts only; unresolved license/authorization/process/network safety fail closed; scraper/bypass/relay runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / RUNTIME_REJECTED |
 | 19 | TRK_S-main | Provider / Reference | Turkish addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 20 | orien.live-main | Security-risk Reference | Credential-discovery risk; never harvest/replay/share credentials | PARTIAL — QUARANTINED |
 | 21 | Ytvplus2-main | Provider / Engine / Reference | Multi-source aggregation/fallback, authorization | PARTIAL — PROVIDER_PENDING |
