@@ -1,6 +1,6 @@
 # Source Evidence Card: YacinTv--main
 
-Status: DEEP_AUDIT_PARTIAL / PROVIDER_PENDING
+Status: DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED
 
 ## Authoritative bundle evidence
 - small JS/JSON live-TV source in the authoritative 30-project corpus.
@@ -25,5 +25,11 @@ Every network target/playlist/stream remains `PROVIDER_PENDING` until provenance
 ## Migration decision
 Migration modes: **CONTRACT_REFERENCE + PROVIDER_PENDING**. No production provider is enabled by this card.
 
-## Remaining evidence
-Verify manifests/source entry points, representative schemas, root license/provenance, network targets, EPG mapping, health/fallback logic, tests, secret/config loading, ads/tracking and runtime cost.
+## Evidence-bounded closure
+The authoritative bundle is sufficient to classify this root as a small JS/JSON live-TV provider/data reference and to establish the only constitution-safe migration boundary: canonical channel/EPG concepts may be independently modeled, while every playlist/stream/network target remains separately authorization-gated.
+
+The bundle does not establish compatible root reuse rights or stream redistribution authority. Rather than execute or reproduce unresolved live targets merely to increase audit detail, 4BA closes this root fail-closed. No playlist URL, token, cookie, credential, private configuration, stream endpoint, ad/tracking behavior or provider runtime is migrated. Runtime cost is therefore zero for the excluded implementation.
+
+A future live provider must enter through `LiveMetadataProvider` / `LiveStreamProvider` contracts and independently prove authorization, licensing, privacy, ZERO_COST and Native Playback compatibility.
+
+**Phase-1 result: AUDIT COMPLETE — CONTRACT_REFERENCE. Runtime provider remains PROVIDER_PENDING; direct reuse BLOCKED.**

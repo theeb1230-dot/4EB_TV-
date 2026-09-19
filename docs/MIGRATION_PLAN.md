@@ -63,7 +63,7 @@ Every source contribution must use exactly one migration mode before implementat
 - turkish-series: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; large mutable catalogs stay outside Core/app binaries.
 - xoxixoxi: `CONTRACT_REFERENCE`; Phase-1 audit complete fail-closed. Independently implement only bounded worker lifecycle, timeout/cancellation, resource ceilings and staged failure isolation. Direct code/runtime reuse, scraper/extractor/browser automation, ffmpeg execution, endpoints/cookies/credentials, bypass behavior and media relay are excluded.
 - Ytvplus2: `CONTRACT_REFERENCE` + `PROVIDER_PENDING`.
-- Live/sports family (Mstch_Server2, Match-Archive, getChanelFraom_dlstreams, YacinTv, SportFree, Cannels-arap-streem): `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; EPG/public playlist reachability never proves stream authorization.
+- Live/sports family (Mstch_Server2, Match-Archive, getChanelFraom_dlstreams, YacinTv, SportFree, Cannels-arap-streem): `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; EPG/public playlist reachability never proves stream authorization. YacinTv Phase-1 audit is complete fail-closed: only canonical channel/EPG contract concepts remain reusable via clean-room implementation; direct/runtime reuse is blocked.
 - Addon/provider family (ARB-S33-3, alooytv-addon, NuvioStreamsAddon, TRK_S, stremio-akwam.X, kiro-drama, kiro): `CONTRACT_REFERENCE` + `PROVIDER_PENDING`; addon compatibility or successful discovery is not authorization.
 
 ## Migration invariant
