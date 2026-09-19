@@ -3,10 +3,10 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main` at this execution start after validating the sole open PR is `0858b3fbb771338afda338b7bf7b499f28718e61`.
-- PR #44 exact head `d4b6f5ae5670ce627f8ced73264c47f7ba3ec524` passed Audit hygiene run `35443807009` and all five Core-contract package jobs in run `35443807026`, then merged with expected-head protection.
-- Phase 1 remains ACCEPTED on main; Phase 2 workspace/design-token baseline is now merged.
-- Continuation branch is `architecture/phase2-capability-kernel`, created from exact merged main `0858b3fbb771338afda338b7bf7b499f28718e61`.
+- Exact merged `main` at this execution is `a7cd41151f29cf977157ee7e694701bab0b7db44`.
+- PR #45 exact head `a48b084a2383b3a05816356227f11afdb8bd1ea3` passed Audit hygiene run `35444172968` and all six Core-contract jobs in run `35444172950`, then merged with expected-head protection.
+- Phase 1 remains ACCEPTED; Phase 2 is active and not yet accepted.
+- Continuation branch is `architecture/phase2-admission`, created from exact merged main.
 - Releases remain empty; release gates are intentionally not bypassed.
 
 ## Product invariants
@@ -28,11 +28,11 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. `ki
 - The new architecture branch requires fresh exact-head CI before merge.
 
 ## Work completed in this execution
-- Re-read main, branches, sole open PR, recent commits, Actions/jobs, Releases and relevant code/documents.
-- Verified PR #44 was clean/mergeable and that Audit hygiene plus core_domain/provider_sdk/resolver_engine/metadata_engine/design_tokens format/analyze/tests all succeeded on its exact head; merged it with expected-head protection.
-- Added `packages/capability_kernel`: a provider-agnostic local microkernel that registers already-admitted implementations by capability, deterministically orders them, rejects duplicate/empty registrations and supports immediate unregister as a local kill-switch boundary.
-- Added kernel tests for capability routing, duplicate rejection and kill-switch removal.
-- Extended Core contracts CI to format/analyze/test `capability_kernel`.
+- Re-read main, branches, the sole open PR, exact-head Actions/jobs, Releases and relevant architecture/code.
+- Verified the formatter repair on PR #45: Audit hygiene and every Core contracts matrix job passed format, analyze --fatal-infos and tests; merged exact head with protection.
+- Added a fail-closed `CapabilityAdmissionController` on the new continuation branch. It removes previous registration first and registers only explicit `admitted` decisions; `disabled` and `unauthorized` decisions remain absent from the kernel.
+- Added tests proving admitted -> disabled revocation and unauthorized fail-closed behavior.
+- Kept admission data provider-neutral: no endpoint, credential, URL, stream target, network implementation or remote-config trust assumption is introduced.
 
 ## Risks / blockers
 - Phase 2 is not yet accepted: actual dependency/import graph still needs continued reconciliation as Experience/platform packages are introduced.
@@ -41,7 +41,7 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. `ki
 - Provider-pending/direct-reuse-blocked sources remain disabled; Phase-1 acceptance is not provider authorization.
 
 ## Highest-value next work
-1. Open one PR only for `architecture/phase2-capability-kernel`; require exact-head Core contracts + Audit hygiene and fix any defect on the same branch.
-2. Add a composition/admission layer that feeds the kernel only authorized/enabled implementations while keeping signed remote config and rollback separate from provider code.
-3. Continue Experience Engine boundary work so UI consumes capability facades rather than concrete providers.
-4. Continue executable Design System integration only after architecture dependencies remain green; preserve provisional Android API 24/iOS 15 until compatibility evidence exists.
+1. Require exact-head Core contracts + Audit hygiene on the admission branch and fix any defect on the same branch.
+2. Add signed/versioned configuration envelope contracts with monotonic version/rollback semantics; signature verification implementation must remain platform/composition-owned and fail closed.
+3. Add Experience-facing capability facade contracts so presentation never imports Provider SDK.
+4. Continue dependency/import graph evidence and executable Design System integration; keep Android API 24/iOS 15 provisional pending compatibility evidence.
