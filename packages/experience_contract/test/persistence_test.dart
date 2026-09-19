@@ -40,8 +40,10 @@ void main() {
     );
   }
 
-  test('persisted apply changes memory only after durable write succeeds', () async {
-    final engine = ExperienceEngine(defaultExperience: gold)..register(alternate);
+  test('persisted apply changes memory only after durable write succeeds',
+      () async {
+    final engine = ExperienceEngine(defaultExperience: gold)
+      ..register(alternate);
     final store = MemoryStore()..failWrites = true;
     expect(engine.preview(alternate.id, context()), isTrue);
 
