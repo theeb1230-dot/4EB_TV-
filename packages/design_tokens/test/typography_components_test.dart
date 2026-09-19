@@ -27,9 +27,12 @@ void main() {
   });
 
   test('responsive card gaps increase without scaling phone canvas', () {
-    expect(FourBaComponents.cardGap(FourBaLayoutClass.compact), FourBaSpacing.x3);
-    expect(FourBaComponents.cardGap(FourBaLayoutClass.medium), FourBaSpacing.x4);
-    expect(FourBaComponents.cardGap(FourBaLayoutClass.expanded), FourBaSpacing.x6);
+    expect(
+        FourBaComponents.cardGap(FourBaLayoutClass.compact), FourBaSpacing.x3);
+    expect(
+        FourBaComponents.cardGap(FourBaLayoutClass.medium), FourBaSpacing.x4);
+    expect(
+        FourBaComponents.cardGap(FourBaLayoutClass.expanded), FourBaSpacing.x6);
     expect(FourBaComponents.cardGap(FourBaLayoutClass.tv), FourBaSpacing.x8);
   });
 }
