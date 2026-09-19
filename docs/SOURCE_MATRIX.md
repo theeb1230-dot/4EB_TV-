@@ -25,7 +25,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 19 | TRK_S-main | Provider / Reference | Turkish addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 20 | orien.live-main | Security-risk Reference | Credential-discovery behavior is constitution-incompatible; no execution/network contact/secrets required for safe closure | AUDIT COMPLETE — QUARANTINED / RUNTIME_EXCLUDED |
 | 21 | Ytvplus2-main | Provider / Engine / Reference | Multi-source aggregation/fallback, authorization | PARTIAL — PROVIDER_PENDING |
-| 22 | SportFree-main | Provider / Reference | Sports contracts and stream authorization | PARTIAL — PROVIDER_PENDING |
+| 22 | SportFree-main | Provider / Data / Reference | Sports metadata/fallback/health contracts only; unresolved playback rights/license fail closed; streams/runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 23 | flixquest-main | Experience / Reference | Flutter/player/offline/TV UX clean-room reference; GPL, ads/analytics and proxy/scraper runtime excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
 | 24 | stremio-akwam.X-main | Provider / Engine / Reference | FastAPI/Stremio contracts, authorization/license/network evidence | PARTIAL — PROVIDER_PENDING |
 | 25 | CinemaPress-master | Engine / Reference | Exact snapshot + MIT verified; CMS/catalog contracts retained, ads/privacy/player/backend runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE |
