@@ -121,6 +121,7 @@ enum FourBaCardKind {
   collection,
   download
 }
+
 enum FourBaButtonKind { primary, secondary, danger, advancedSources }
 
 final class FourBaComponentMetrics {
