@@ -3,81 +3,47 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main` at this execution is `e85bee8b79662b15a2fec2759e28d3973852831f`.
-- PR #52 exact head `34bd937011815ad3ee4d87aa85982febf7feab37` passed Audit hygiene run `35466276728`, was mergeable, and merged with expected-head protection. Core contracts did not trigger because #52 changed documentation only.
-- Phase 1 remains ACCEPTED; Phase 2 is active and not yet accepted.
-- Continuation branch is `design/phase3-typography-components`, created from exact merged main.
+- Exact start main for this execution: `eeccceb7052589f5ab9eef00f678a71d81c3e3f7`.
+- Exact end main remains `eeccceb7052589f5ab9eef00f678a71d81c3e3f7`; PR #55 is intentionally not merged until its repaired exact head is green.
+- Open PR #55 branch: `design/phase3-presentation-contracts`.
+- Previous PR #55 exact head `145402a0fe8cedc3778cf6fa1af3813df54a96f3`: Audit hygiene run `35469275465` passed; Core contracts run `35469275458` failed only at design_tokens canonical formatting. Architecture passed; other package jobs were cancelled by fail-fast after the formatter defect.
+- Formatter defect was repaired on the same PR branch from the job log diff. Current branch head after code/test formatting repair and this handoff update is the commit produced by this update; fresh exact-head CI is mandatory before merge.
 - Releases remain empty; release gates are intentionally not bypassed.
 
 ## Product invariants
-ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Native Playback First, internal WebView only as final fallback, no external-browser playback, no DRM/paywall/access-control bypass, no secrets, no mandatory paid backend, no 4BA/GitHub media proxy, Metadata != Streams, Watch != Download, provider/UI separation, Arabic RTL default plus English and Turkish, real TV focus behavior, rollback-capable changes, evidence-backed completion claims.
+ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Local-first, Native Playback First, internal WebView only as final fallback, no external-browser playback, no DRM/paywall/access-control bypass, no secrets, no mandatory paid backend, no 4BA/GitHub media proxy, Metadata != Streams, Watch != Download, provider/UI separation, Arabic RTL default plus English and Turkish, real TV focus behavior, rollback-capable changes, evidence-backed completion claims.
 
-## Architecture already merged
-- `packages/core_domain`: canonical content/capability/playback/failure contracts.
-- `packages/provider_sdk`: registry and fail-closed capability boundaries.
-- `packages/capability_kernel`: deterministic provider-neutral routing, fail-closed admission/revocation, signed/versioned configuration contracts, rollback history and Experience capability facade.
-- `packages/experience_contract`: provider-blind Experience descriptors/context plus registry/preview/apply/persistence contracts.
-- `packages/resolver_engine`: provider-independent health/ranking/fallback foundation.
-- `packages/metadata_engine`: canonicalization/deduplication.
-- `packages/design_tokens`: executable design semantics baseline.
-- Signed-configuration/key-rotation ADR: public verification material only, fail-closed rotation/replay rules, no client private keys.
-
-## Phase 1 audit state
-The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. Provider-pending/direct-reuse-blocked sources remain disabled. Audit acceptance does not authorize any provider.
-
-## CI integrity
-- Core contracts CI covers all seven executable packages.
-- Experience remains independently provider-blind.
-- This branch adds `tools/check_architecture.py`, a mechanical package graph/import boundary gate, and broadens workflow path coverage to every package so a newly added package cannot silently evade architecture CI.
-- PR #53 exact head `fce46e316f96b395f8e890218df5f86194b55dda` passed Audit hygiene `35466685154` and Core contracts `35466685193`, including the architecture graph and all seven package jobs, then merged with expected-head protection. Fresh exact-head CI is required for this design branch.
+## Decision / acceptance criteria for this slice
+Highest solvable P0 remains Phase 3 executable presentation semantics on the sole open PR. Acceptance criteria: responsive navigation contracts including dedicated TV semantics; provider-neutral player control roles; larger ten-foot targets; tests; canonical formatting/analyze/tests and architecture CI green on the exact head; no provider/ad/tracking/secret/paid-backend/proxy/bypass introduction.
 
 ## Work completed in this execution
-- Rechecked PR #54 exact-head CI. Run `35467906915` exposed one remaining formatter-only defect: Dart required a blank line between `FourBaCardKind` and `FourBaButtonKind`. Applied the exact formatter diff on the same branch; new head `c48c1133e0d6b7aba1644845e567d1bfaf14dbc3`. Fresh exact-head CI is queued, so merge remains correctly blocked.
-- Re-read exact main `e85bee8b79662b15a2fec2759e28d3973852831f`, branches, sole PR #54, exact head, Actions/checks, Releases, constitution, architecture and actual changed code before mutation.
-- Found a real exact-head CI defect: Core contracts run `35466775816` failed only because `dart format` changed `packages/design_tokens/lib/src/tokens.dart` and `test/typography_components_test.dart`; sibling matrix jobs were cancelled by fail-fast rather than code failures.
-- Applied the formatter output on the same PR branch. New exact head is `e5de1d416297e5b3eaaa1e2a37a5e6a38fc91f6f`. Audit hygiene run `35467869899` is green; Core contracts run `35467870012` is still queued at this handoff and must not be called green yet.
-- Added the fixed evidence-weighted product scorecard and P0/P1/P2 blockers so future work cannot raise completion from documents/shells alone.
+- Re-read the sole open PR #55, exact head/base/mergeability, exact-head Actions/jobs and failing job log before mutation.
+- Diagnosed the Core contracts failure as a deterministic `dart format` defect in `packages/design_tokens/lib/src/tokens.dart` and `test/typography_components_test.dart`, not an architecture or behavior failure.
+- Applied the formatter's exact canonical changes to both files on the same PR branch; did not rerun blindly and did not open competing work.
+- Preserved navigation/player semantics, TV targets and tests unchanged in behavior.
+- No provider endpoint, credential, stream target, ad/tracking SDK, paid backend, media relay/proxy or DRM/access-control bypass was introduced.
 
-- Re-read main, branches, the sole open PR #53, exact head/base, Releases, exact-head workflows and jobs before mutation.
-- Verified PR #53 exact head was clean and fully green after the self-import checker repair; merged it with expected-head protection.
-- Advanced Phase 3 executable Design System: added platform-neutral typography roles/metrics and component semantics for buttons, cards, responsive gaps and ten-foot minimum targets.
-- Kept the token package Flutter-independent so Android/iOS/Web/TV presentation adapters consume one semantic source rather than redefining identity constants.
-- Re-read default branch/main exact SHA, sole open PR #52, mergeability, exact-head Actions and Releases before mutation.
-- Verified PR #52 Audit hygiene success and merged it with expected-head protection.
-- Added a mechanical architecture dependency graph checker covering all current foundational packages and their permitted direct edges.
-- The checker rejects packages missing policy, policy entries missing packages, forbidden foundational dependencies, and Dart imports of undeclared foundational packages.
-- Updated Core contracts workflow to run the graph checker and trigger for any `packages/**` change plus checker changes, closing the previous per-package trigger maintenance gap.
-- No provider endpoint, credential, stream target, ad/tracking SDK, paid backend, proxy or DRM/access-control bypass was introduced.
-
-## Progress scorecard (evidence-weighted)
-- Overall Product Completion: **35.1%**. Weighted from the fixed product model: Governance/audit 100%; Architecture 90%; Design System 45%; Core 35%; Provider SDK/config 45%; Metadata 50%; Search/Resolver 50%; Native Player 10%; Experience/content UI 20%; Live/Sports 5%; Offline 5%; Profile/local 5%; Android 0%; Android TV 0%; iOS 0%; Web/PWA 0%; Accessibility/updates 15%; Security/performance/tests 20%; CI/CD/releases 10%; Beta/Golden hardening 0%.
-- Current Phase Completion (Phase 3 Design System): **45%**. Executable semantic tokens, typography, responsive spacing, motion and TV target metrics exist with tests; Flutter/Web/TV adapters, rendered contrast evidence, logo/icon/splash implementation and full player/navigation component semantics are still open.
-- Verified Functional Completion: **18%**. This deliberately counts only behavior backed by executable package tests/CI or equivalent evidence. There is still no end-to-end runtime product flow or platform artifact, so contracts and documentation do not inflate this number.
-- Previous conversational estimate of 32% is superseded by this repository-derived weighted calculation. The increase reflects Phase-1 acceptance, architecture graph enforcement and tested executable Design System/kernel/metadata/resolver foundations, not a claim that the app UI/player is usable.
+## Progress scorecard (evidence-weighted, recomputed)
+- Overall Product Completion: **35.5%**. Governance/audit 100%; Architecture 90%; Design System 52%; Core 35%; Provider SDK/config 45%; Metadata 50%; Search/Resolver 50%; Native Player 10%; Experience/content UI 20%; Live/Sports 5%; Offline 5%; Profile/local 5%; Android 0%; Android TV 0%; iOS 0%; Web/PWA 0%; Accessibility/updates 15%; Security/performance/tests 20%; CI/CD/releases 10%; Beta/Golden hardening 0%. No completion credit was added for a formatting repair.
+- Current Phase Completion (Phase 3 Design System): **52%**. Semantic contracts exist, but exact-head CI is pending and real platform adapters/rendered evidence remain open.
+- Verified Functional Completion: **19%**. No end-to-end runtime product path or distributable platform artifact exists yet.
 
 ## Blockers by product impact
-- **P0:** PR #54 exact-head Core contracts must turn green after formatter repair before merge. Latest exact head is `c48c1133e0d6b7aba1644845e567d1bfaf14dbc3`; Audit hygiene `35468015848` and Core contracts `35468015847` are queued and are not yet evidence of success.
-- **P0:** Phase 3 lacks real presentation adapters and rendered RTL/contrast/TV-focus evidence.
-- **P0:** No end-to-end Home/Search → Details → Episodes → Resolve → Native Play path exists yet.
-- **P0:** Local-first storage/config/security implementations and platform compatibility evidence are missing.
-- **P1:** Downloads/offline, Live/Sports/EPG, platform shells and Web/PWA remain unimplemented as product surfaces.
-- **P2:** update channels, developer diagnostics, load/device hardening and Golden release evidence remain future work.
+- **P0:** Fresh exact-head Core contracts + Audit hygiene must pass for repaired PR #55 before merge.
+- **P0:** Phase 3 lacks real Flutter/Web presentation adapters, rendered RTL/contrast/TV-focus evidence, logo/icon/splash implementation.
+- **P0:** No Home/Search → Details → Episodes → Resolve → Native Play runtime path.
+- **P0:** Local-first storage/config/security implementation and platform compatibility evidence are missing.
+- **P1:** Downloads/offline, Live/Sports/EPG, platform shells and Web/PWA product surfaces remain unimplemented.
+- **P2:** Update channels, developer diagnostics, load/device hardening and Golden evidence remain future work.
 
-## Risks / blockers
-- Phase 2 is not yet accepted: platform shells and real presentation packages do not exist yet, so graph evidence covers foundational packages only.
-- Concrete local storage implementations and crash-consistency evidence remain future platform work.
-- Production signature algorithm/key-storage selection remains deferred until Android API 24 / iOS 15 / Web compatibility evidence.
-- Exact production color contrast remains to be measured on rendered Flutter/Web/TV surfaces.
+## Risks / open acceptance
 - Android API 24 and iOS 15 remain provisional until player/persistence/network compatibility evidence is recorded.
+- Production signature algorithm/key-storage selection remains deferred until compatibility/security evidence exists.
+- Token tests cannot prove rendered contrast, RTL or D-pad traversal.
+- Phase 3 cannot be accepted from semantic contracts alone.
 
 ## Highest-value next work
-1. Re-fetch Core contracts run `35467870012` for exact head `e5de1d416297e5b3eaaa1e2a37a5e6a38fc91f6f`; fix any real failure on PR #54, merge only when fully green and mergeable.
-2. Finish Phase 3 with presentation adapters plus rendered RTL/contrast/TV-focus evidence; do not mark Phase 3 complete from tokens alone.
-3. Start the highest P0 runtime blocker: local-first Core storage/config/security contracts and implementation path, then wire toward the first end-to-end Home/Search → Details → Episodes → Resolve → Native Play vertical slice.
-4. Recalculate all three percentages from evidence after every merged slice; decrease them when newly discovered gaps invalidate prior acceptance.
-
-## Previous next-work notes
-1. Require exact-head Core contracts + Audit hygiene on the typography/components branch and fix any defect on the same branch.
-2. Add tests for typography completeness, responsive component metrics and ten-foot accessibility targets.
-3. Reconcile executable Design System semantics with DESIGN_SYSTEM and begin the Flutter presentation adapter only after the semantic contract is green.
-4. Begin Core local-first storage/config/security contracts without choosing platform plugins prematurely.
+1. Inspect fresh exact-head CI for PR #55; fix any real failure from logs on this branch only, then merge with expected-head protection when green and mergeable.
+2. After merge/re-read main, build the first real presentation adapter/component layer consuming design_tokens with RTL and TV focus tests.
+3. Implement logo geometry/splash and rendered contrast/RTL/focus evidence.
+4. Then implement local-first Core storage/config/security and the first end-to-end product vertical slice.

@@ -36,10 +36,8 @@ abstract final class FourBaRadius {
 enum FourBaLayoutClass { compact, medium, expanded, tv }
 
 abstract final class FourBaBreakpoints {
-  static FourBaLayoutClass classify({
-    required double logicalWidth,
-    required bool isTenFoot,
-  }) {
+  static FourBaLayoutClass classify(
+      {required double logicalWidth, required bool isTenFoot}) {
     if (isTenFoot) return FourBaLayoutClass.tv;
     if (logicalWidth < 600) return FourBaLayoutClass.compact;
     if (logicalWidth < 1024) return FourBaLayoutClass.medium;
@@ -50,11 +48,8 @@ abstract final class FourBaBreakpoints {
 abstract final class FourBaMotion {
   static const shortMs = 140;
   static const standardMs = 220;
-
-  static int durationMs({
-    required bool reduceMotion,
-    int normalMs = standardMs,
-  }) =>
+  static int durationMs(
+          {required bool reduceMotion, int normalMs = standardMs}) =>
       reduceMotion ? 0 : normalMs;
 }
 
@@ -74,16 +69,12 @@ enum FourBaTextRole {
   bodyCompact,
   label,
   caption,
-  playerTime,
+  playerTime
 }
 
 final class FourBaTextToken {
-  const FourBaTextToken({
-    required this.size,
-    required this.lineHeight,
-    required this.weight,
-  });
-
+  const FourBaTextToken(
+      {required this.size, required this.lineHeight, required this.weight});
   final double size;
   final double lineHeight;
   final int weight;
@@ -124,34 +115,48 @@ enum FourBaCardKind {
 
 enum FourBaButtonKind { primary, secondary, danger, advancedSources }
 
-final class FourBaComponentMetrics {
-  const FourBaComponentMetrics({
-    required this.radius,
-    required this.minimumTarget,
-    required this.contentPadding,
-  });
+enum FourBaNavigationKind { bottomBar, rail, sidebar, tvSidebar }
 
+enum FourBaPlayerControl {
+  playPause,
+  timeline,
+  audio,
+  subtitles,
+  quality,
+  previous,
+  next,
+  sourceRecovery
+}
+
+final class FourBaComponentMetrics {
+  const FourBaComponentMetrics(
+      {required this.radius,
+      required this.minimumTarget,
+      required this.contentPadding});
   final double radius;
   final double minimumTarget;
   final double contentPadding;
 }
 
 abstract final class FourBaComponents {
-  static FourBaComponentMetrics button({
-    required FourBaButtonKind kind,
-    required bool isTenFoot,
-  }) {
+  static FourBaComponentMetrics button(
+      {required FourBaButtonKind kind, required bool isTenFoot}) {
     final target =
         isTenFoot ? FourBaFocus.tvMinimumTarget : FourBaFocus.minimumTarget;
-    final radius = kind == FourBaButtonKind.advancedSources
-        ? FourBaRadius.control
-        : FourBaRadius.control;
     return FourBaComponentMetrics(
-      radius: radius,
+      radius: FourBaRadius.control,
       minimumTarget: target,
       contentPadding: isTenFoot ? FourBaSpacing.x6 : FourBaSpacing.x4,
     );
   }
+
+  static FourBaNavigationKind navigation(FourBaLayoutClass layout) =>
+      switch (layout) {
+        FourBaLayoutClass.compact => FourBaNavigationKind.bottomBar,
+        FourBaLayoutClass.medium => FourBaNavigationKind.rail,
+        FourBaLayoutClass.expanded => FourBaNavigationKind.sidebar,
+        FourBaLayoutClass.tv => FourBaNavigationKind.tvSidebar,
+      };
 
   static double cardGap(FourBaLayoutClass layout) => switch (layout) {
         FourBaLayoutClass.compact => FourBaSpacing.x3,
@@ -159,4 +164,7 @@ abstract final class FourBaComponents {
         FourBaLayoutClass.expanded => FourBaSpacing.x6,
         FourBaLayoutClass.tv => FourBaSpacing.x8,
       };
+
+  static double playerControlTarget({required bool isTenFoot}) =>
+      isTenFoot ? FourBaFocus.tvMinimumTarget : FourBaFocus.minimumTarget;
 }
