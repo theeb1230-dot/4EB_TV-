@@ -109,7 +109,8 @@ final class _FourBaFocusTileState extends State<FourBaFocusTile> {
           scale: focused ? FourBaFocus.scale : 1,
           duration: Duration(milliseconds: FourBaMotion.shortMs),
           child: Container(
-            constraints: const BoxConstraints(minHeight: FourBaFocus.tvMinimumTarget),
+            constraints:
+                const BoxConstraints(minHeight: FourBaFocus.tvMinimumTarget),
             padding: const EdgeInsets.symmetric(horizontal: FourBaSpacing.x4),
             decoration: BoxDecoration(
               color: _color(FourBaColorTokens.raised),
