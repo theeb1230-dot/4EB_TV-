@@ -8,6 +8,8 @@ on:
       - 'packages/resolver_engine/**'
       - 'packages/metadata_engine/**'
       - 'packages/design_tokens/**'
+      - 'packages/capability_kernel/**'
+      - 'packages/capability_kernel/**'
       - '.github/workflows/core-contracts.yml'
   push:
     branches: [main]
@@ -27,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: [core_domain, provider_sdk, resolver_engine, metadata_engine, design_tokens]
+        package: [core_domain, provider_sdk, resolver_engine, metadata_engine, design_tokens, capability_kernel]
     defaults:
       run:
         working-directory: packages/${{ matrix.package }}
