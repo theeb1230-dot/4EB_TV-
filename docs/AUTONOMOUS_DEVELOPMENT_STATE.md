@@ -3,10 +3,10 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact start/end main for this execution remains `e25774822acfaff77ac6bf7941a706ff13b624f0`; PR #58 remains the sole open PR and is not mergeable by policy until repaired exact-head CI is green.
+- Exact start/end main for this execution remains `e25774822acfaff77ac6bf7941a706ff13b624f0`; PR #58 remains the sole open PR until its repaired exact head is green.
 - Sole open PR #58 branch: `design/phase3-brand-splash`, base exact main `e25774822acfaff77ac6bf7941a706ff13b624f0`.
-- PR #58 head `3329f57e669a15efc347c29de3e37eab5648c55f`: Audit hygiene run `35476048154` passed. Core contracts run `35476048249` passed architecture and every Dart package job; `flutter-presentation` failed only at `Check Flutter formatting`, so analyze/tests were skipped by fail-fast.
-- The formatter-sensitive expression-bodied brand widget was replaced on the same branch with a block-bodied build method to remove continuation-indentation ambiguity without changing behavior. Commit `6b058402cfe1be08360e6d518e82b2e335569c28`; this handoff update advances the branch again, so fresh exact-head CI is mandatory.
+- PR #58 head `3697224fe0e8fd366fcaf069634c4e3d40901a2e`: Audit hygiene run `35476374428` passed. Core contracts run `35476374429` passed architecture and all Dart package jobs; `flutter-presentation` failed only at `Check Flutter formatting`, so analyze/tests were skipped by fail-fast.
+- Inspection of the actual changed test found two over-width `tester.widget<AnimatedOpacity>` assignments still not in canonical Dart layout. They were reformatted on the same branch in commit `7236d6f3bf81a0d1414ee619440973859a302e62`; this handoff update advances the branch again, so fresh exact-head CI is mandatory.
 - Releases remain empty; release gates are intentionally not bypassed.
 
 ## Product invariants
@@ -22,19 +22,19 @@ ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Local-first, Native Playback
 
 ## Work completed in this execution
 - Re-read sole PR #58, exact head/base/mergeability, exact-head workflow runs/jobs, handoff and changed Flutter code before mutation.
-- Verified head `3329f57...`: Audit hygiene passed; architecture and all Dart package jobs passed; only Flutter formatting failed. This is stronger evidence than the prior assumed formatter diagnosis and prevents blind reruns.
-- Replaced the formatter-sensitive expression-bodied `FourBaBrandMark.build` with a behavior-equivalent block body on the same PR branch. No gate, provider boundary or invariant was weakened.
+- Verified exact head `3697224f...`: Audit hygiene passed; architecture and all Dart package jobs passed; only Flutter formatting failed. Flutter analyze/test were skipped by fail-fast.
+- Inspected the changed Flutter files and corrected the remaining canonical line wrapping in `brand_splash_test.dart` on the same PR branch. No gate, provider boundary or invariant was weakened.
 - Existing PR #58 implementation remains deterministic vector-only `FourBaBrandMark`, offline-safe `FourBaCinematicSplash`, Reduce Motion support, progress clamping and widget tests.
 - No provider endpoint, credential, stream target, ad/tracking SDK, paid backend, media relay/proxy or DRM/access-control bypass was introduced.
 
 ## Progress scorecard (evidence-weighted, recomputed)
-- Overall Product Completion: **36.0%**. Governance/audit 100%; Architecture 90%; Design System 60%; Core 35%; Provider SDK/config 45%; Metadata 50%; Search/Resolver 50%; Native Player 10%; Experience/content UI 20%; Live/Sports 5%; Offline 5%; Profile/local 5%; Android 0%; Android TV 0%; iOS 0%; Web/PWA 0%; Accessibility/updates 15%; Security/performance/tests 20%; CI/CD/releases 10%; Beta/Golden hardening 0%. Formatter-only repair earns no product credit before exact-head verification.
+- Overall Product Completion: **36.0%**. Governance/audit 100%; Architecture 90%; Design System 60%; Core 35%; Provider SDK/config 45%; Metadata 50%; Search/Resolver 50%; Native Player 10%; Experience/content UI 20%; Live/Sports 5%; Offline 5%; Profile/local 5%; Android 0%; Android TV 0%; iOS 0%; Web/PWA 0%; Accessibility/updates 15%; Security/performance/tests 20%; CI/CD/releases 10%; Beta/Golden hardening 0%. Formatting repair earns no product credit before exact-head verification.
 - Current Phase Completion (Phase 3 Design System): **60%**. Merged Flutter presentation is verified; PR #58 identity/splash remains pending exact-head CI plus rendered/device evidence.
 - Verified Functional Completion: **21%**. No end-to-end content/playback runtime path or distributable platform artifact exists.
 
 ## Tests / CI / artifacts
-- PR #58 head `3329f57...`: Audit hygiene success; architecture + all Dart package jobs success; Flutter formatting failure; Flutter analyze/test skipped.
-- Fresh exact-head Audit hygiene + Core contracts required after the block-body repair and this handoff update. No blind rerun used.
+- PR #58 head `3697224f...`: Audit hygiene success; architecture + all Dart package jobs success; Flutter formatting failure; Flutter analyze/test skipped.
+- Fresh exact-head Audit hygiene + Core contracts required after the test-format repair and this handoff update. No blind rerun used.
 - No distributable APK/TV APK/IPA/Web artifact exists yet.
 
 ## Risks / open acceptance
