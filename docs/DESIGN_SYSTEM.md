@@ -22,7 +22,7 @@ Semantic tokens, not hard-coded widget colors:
 - state.live/state.error: red family
 - state.success/state.healthy: green family
 - focus.ring: gold with guaranteed contrast
-Exact production values require contrast validation on real displays before pixel freeze.
+Executable baseline values now live in `packages/design_tokens`; widgets must consume semantic roles rather than duplicate literals. Contrast validation on real displays remains required before pixel freeze.
 
 ## Typography
 Arabic is the default locale and RTL is first-class. English and Turkish use the same semantic scale.
@@ -73,3 +73,7 @@ Arabic RTL is the default test path. Directional icons mirror only when semantic
 
 ## Acceptance gates
 Before pixel freeze: contrast measurements, Arabic/English/Turkish samples, phone/tablet/foldable/TV screenshots, D-pad traversal map, Reduce Motion capture, player overlay capture and accessibility labels review.
+
+
+## Executable token contract
+`packages/design_tokens` is the single platform-neutral source for V1 color, spacing, radius, focus, motion and responsive classification primitives. It intentionally contains no Flutter dependency, allowing Core/CI validation before platform shells exist. Flutter theme/components will adapt these semantics rather than redefining them. Ten-foot mode is an explicit capability input and never inferred by blindly scaling phone width.
