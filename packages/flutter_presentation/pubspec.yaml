@@ -1,0 +1,22 @@
+name: flutter_presentation
+description: Flutter rendering adapter for 4BA Cinematic Gold presentation contracts.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+dependencies:
+  flutter:
+    sdk: flutter
+  design_tokens:
+    path: ../design_tokens
+  presentation_contract:
+    path: ../presentation_contract
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
