@@ -25,7 +25,7 @@ jobs:
         run: python3 tools/check_architecture.py
       - name: Presentation and Experiences must not depend on Provider SDK
         run: |
-          if grep -R -n -E "provider_sdk|package:provider_sdk" packages/experience_contract packages/presentation_contract; then
+          if grep -R -n -E "provider_sdk|package:provider_sdk" packages/experience_contract packages/presentation_contract packages/flutter_presentation; then
             echo "Presentation and Experience boundaries must remain provider-blind."
             exit 1
           fi
@@ -53,3 +53,25 @@ jobs:
         run: git diff -- .
       - run: dart analyze --fatal-infos
       - run: dart test
+
+  flutter-presentation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/flutter_presentation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Check Flutter formatting
+        run: |
+          dart format .
+          git diff --exit-code -- .
+      - name: Show formatter diff on failure
+        if: failure()
+        run: git diff -- .
+      - run: flutter analyze
+      - run: flutter test
