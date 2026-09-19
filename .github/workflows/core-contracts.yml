@@ -3,24 +3,14 @@ name: Core contracts
 on:
   pull_request:
     paths:
-      - 'packages/core_domain/**'
-      - 'packages/provider_sdk/**'
-      - 'packages/resolver_engine/**'
-      - 'packages/metadata_engine/**'
-      - 'packages/design_tokens/**'
-      - 'packages/capability_kernel/**'
-      - 'packages/experience_contract/**'
+      - 'packages/**'
+      - 'tools/check_architecture.py'
       - '.github/workflows/core-contracts.yml'
   push:
     branches: [main]
     paths:
-      - 'packages/core_domain/**'
-      - 'packages/provider_sdk/**'
-      - 'packages/resolver_engine/**'
-      - 'packages/metadata_engine/**'
-      - 'packages/design_tokens/**'
-      - 'packages/capability_kernel/**'
-      - 'packages/experience_contract/**'
+      - 'packages/**'
+      - 'tools/check_architecture.py'
       - '.github/workflows/core-contracts.yml'
 
 permissions:
@@ -31,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Verify package dependency graph
+        run: python3 tools/check_architecture.py
       - name: Experiences must not depend on Provider SDK
         run: |
           if grep -R -n -E "provider_sdk|package:provider_sdk" packages/experience_contract; then
