@@ -3,7 +3,7 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main` at this execution start: `796e624afd4e5a5ebb9f47bf73218b367d342c3c`.
+- Exact merged `main` at this execution start: `f9e4a57a9a4428ced7fe96b2061e4062395dfeb3`.
 - PR #20 (`audit/deep-wave11`) merged at `b49e651fc63e8b08050d710b30eea6dee8e49cde` only after exact head `8202d893de3903cbfebb3600b25b11a8c5ffcefb` passed Audit hygiene run `35395162508` / `repository-hygiene` job `105762209956`.
 - PR #21 (`audit/deep-wave12`) merged at `eb7d9654582cc50e3d22af4969e6edc5fc35f44d` after exact head `9a9db1af6b57abaa779aac80f94969ea19ba300b` passed Audit hygiene run `35401863568` / check `105783299796`.
 - PR #22 (`audit/deep-wave13`) merged at `5ee91ab842c8aa6eb9ab636adddbc532850aeaa4`; main Audit hygiene push run `35402633060` passed on that exact SHA.
@@ -15,7 +15,8 @@ GitHub is the source of truth. This handoff never overrides newer repository sta
 - PR #28 (`audit/deep-wave19`) merged at `44964669dafa58e685afc7329ecac71da869e2cf` after exact head `0a6eb32f224fcb65dc0d88e29f4ecadd2745972d` passed Audit hygiene run `35406810071` / check `105798143532`.
 - PR #29 (`audit/deep-wave20`) merged at `85aa3e835edf6573121b67f7c3de9a9e31eaa853` after exact head `a4049025ed2581899f35336b76740bf21c5bb5e3` passed Audit hygiene run `35408350607`.
 - PR #30 (`audit/deep-wave21`) merged at `796e624afd4e5a5ebb9f47bf73218b367d342c3c` after exact head `e622bcb34efc88a36c6eca1fc31bb953b01fe195` passed Audit hygiene run `35409072154` / job `105804821316`.
-- Continuation branch: `audit/deep-wave22`, created from exact merged main `796e624afd4e5a5ebb9f47bf73218b367d342c3c`.
+- PR #31 (`audit/deep-wave22`) merged at `f9e4a57a9a4428ced7fe96b2061e4062395dfeb3` after exact head `b200e4e5cf3631d39f0c386ce9a63ee8dffbcb20` passed Audit hygiene run `35409176104` / job `105805130944`.
+- Continuation branch: `audit/deep-wave23`, created from exact merged main `f9e4a57a9a4428ced7fe96b2061e4062395dfeb3`.
 - Phase 1 remains **NOT ACCEPTED**. Do not claim completion until all 30 roots satisfy the Acceptance Ledger.
 
 ## Product invariants
@@ -31,7 +32,7 @@ These foundations remain authoritative and are not rewritten around source-proje
 ## Phase 1 audit state
 The 30-root Acceptance Ledger remains the completion authority and `SOURCE_MATRIX` remains the canonical exact-root authority. A root closes only with evidence for provenance/version, architecture, license/reuse, dependencies, network/API/cost, secrets/privacy/telemetry/ads, player/provider behavior where applicable, migration destination/exclusion, and risks/clean-room boundary. Evidence-backed rejection/quarantine/exclusion can close an audit but never authorizes runtime admission.
 
-Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, `Cinemax-main`, `CineSpot-main`, `cinextma-master`, `AIOStreams-main`, `aniyomi-main`, `flixquest-main`, `aiometadata-dev`, `anthology-main`, `Al-Qahtani-main`, `turkish-series-main`, `xoxixoxi-main`, and `orien.live-main`. AIOStreams is closed fail-closed as `CLEAN_ROOM_ONLY / CONTRACT_REFERENCE / DIRECT_REUSE_BLOCKED`; restricted runtime remains rejected.
+Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`, `Filmex-main`, `cinemalist-official-master`, `Cinemax-main`, `CineSpot-main`, `cinextma-master`, `AIOStreams-main`, `aniyomi-main`, `flixquest-main`, `aiometadata-dev`, `anthology-main`, `Al-Qahtani-main`, `turkish-series-main`, `xoxixoxi-main`, `orien.live-main`, and `YacinTv--main`. AIOStreams is closed fail-closed as `CLEAN_ROOM_ONLY / CONTRACT_REFERENCE / DIRECT_REUSE_BLOCKED`; restricted runtime remains rejected.
 
 `Cinemax-main` is `DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / EXPERIENCE_REFERENCE / DIRECT_REUSE_DEFERRED`: authoritative evidence establishes Android/Kotlin/Compose modular architecture, Apache-2.0 root license, Room/DataStore/Hilt/network/design-system modules and baseline-profile tooling. Unresolved third-party NOTICE/assets/API-term provenance is handled fail-closed by deferring direct reuse. No player or TV/D-pad capability is inferred, and this source does not freeze Android API 24.
 
@@ -44,9 +45,11 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 ## CI integrity
 - `main` at execution start is `d4da2a9251fd95343114d1a3ebd9e7553e96ad69` after PR #23 merged. PR #23 exact head passed Audit hygiene run `35402792633` / job `105786110136` before merge.
 - Audit hygiene remains mandatory for audit PRs: third-party archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity must pass on the exact PR head before merge.
-- No merge is permitted from `audit/deep-wave22` until its exact head has a green Audit hygiene run.
+- No merge is permitted from `audit/deep-wave23` until its exact head has a green Audit hygiene run.
 
 ## Work completed in this execution
+- Verified PR #31 exact head `b200e4e5cf3631d39f0c386ce9a63ee8dffbcb20` passed Audit hygiene run `35409176104` / repository-hygiene job `105805130944`; merged with expected-head protection to exact main `f9e4a57a9a4428ced7fe96b2061e4062395dfeb3`.
+- Created `audit/deep-wave23` from exact merged main and closed `YacinTv--main` fail-closed as a clean-room live metadata/channel contract reference. No playlist/stream target, credential, token, cookie, provider runtime or ad/tracking behavior is admitted; runtime remains independently authorization-gated.
 - Verified PR #30 exact head `e622bcb34efc88a36c6eca1fc31bb953b01fe195` passed Audit hygiene run `35409072154` / repository-hygiene job `105804821316`; merged with expected-head protection to exact main `796e624afd4e5a5ebb9f47bf73218b367d342c3c`.
 - Re-read main, confirmed no competing open PR, and created `audit/deep-wave22` exactly from merged main.
 - Closed `orien.live-main` safely by quarantine without executing credential-discovery behavior or contacting targets. Runtime/code/data/network/account migration is excluded; only a negative provider-admission rule is retained.
@@ -95,7 +98,7 @@ Evidence-complete roots currently include `ProxyFill-main`, `CinemaPress-master`
 - No source was promoted merely from technical capability; license, provenance, authorization, privacy and constitution gates remain independent.
 
 ## Highest-value next work
-1. Keep work on `audit/deep-wave22` until its exact head CI is green and mergeable; do not create a competing PR.
+1. Keep work on `audit/deep-wave23` until its exact head CI is green and mergeable; do not create a competing PR.
 2. Continue the highest-risk remaining provider/live/sports roots with evidence-backed authorization/provenance decisions.
 4. Continue remaining provider/live/sports roots with authorization/provenance evidence; rejection can satisfy audit closure but never runtime admission.
 5. Reconcile every closed root into the Acceptance Ledger and affected matrices in the same PR.
