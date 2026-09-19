@@ -1,0 +1,15 @@
+name: experience_contract
+description: Provider-blind Experience boundary for 4BA.
+version: 0.0.1
+publish_to: none
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+dependencies:
+  capability_kernel:
+    path: ../capability_kernel
+  core_domain:
+    path: ../core_domain
+  design_tokens:
+    path: ../design_tokens
+dev_dependencies:
+  test: ^1.25.0
