@@ -64,3 +64,99 @@ abstract final class FourBaFocus {
   static const minimumTarget = 48.0;
   static const tvMinimumTarget = 56.0;
 }
+
+enum FourBaTextRole {
+  display,
+  heroTitle,
+  titleLarge,
+  title,
+  body,
+  bodyCompact,
+  label,
+  caption,
+  playerTime,
+}
+
+final class FourBaTextToken {
+  const FourBaTextToken({
+    required this.size,
+    required this.lineHeight,
+    required this.weight,
+  });
+
+  final double size;
+  final double lineHeight;
+  final int weight;
+}
+
+abstract final class FourBaTypography {
+  static const roles = <FourBaTextRole, FourBaTextToken>{
+    FourBaTextRole.display:
+        FourBaTextToken(size: 48, lineHeight: 1.12, weight: 700),
+    FourBaTextRole.heroTitle:
+        FourBaTextToken(size: 36, lineHeight: 1.18, weight: 700),
+    FourBaTextRole.titleLarge:
+        FourBaTextToken(size: 28, lineHeight: 1.22, weight: 700),
+    FourBaTextRole.title:
+        FourBaTextToken(size: 22, lineHeight: 1.28, weight: 600),
+    FourBaTextRole.body:
+        FourBaTextToken(size: 16, lineHeight: 1.5, weight: 400),
+    FourBaTextRole.bodyCompact:
+        FourBaTextToken(size: 14, lineHeight: 1.45, weight: 400),
+    FourBaTextRole.label:
+        FourBaTextToken(size: 14, lineHeight: 1.3, weight: 600),
+    FourBaTextRole.caption:
+        FourBaTextToken(size: 12, lineHeight: 1.35, weight: 400),
+    FourBaTextRole.playerTime:
+        FourBaTextToken(size: 13, lineHeight: 1.2, weight: 500),
+  };
+}
+
+enum FourBaCardKind {
+  poster,
+  hero,
+  episode,
+  channel,
+  match,
+  collection,
+  download
+}
+
+enum FourBaButtonKind { primary, secondary, danger, advancedSources }
+
+final class FourBaComponentMetrics {
+  const FourBaComponentMetrics({
+    required this.radius,
+    required this.minimumTarget,
+    required this.contentPadding,
+  });
+
+  final double radius;
+  final double minimumTarget;
+  final double contentPadding;
+}
+
+abstract final class FourBaComponents {
+  static FourBaComponentMetrics button({
+    required FourBaButtonKind kind,
+    required bool isTenFoot,
+  }) {
+    final target =
+        isTenFoot ? FourBaFocus.tvMinimumTarget : FourBaFocus.minimumTarget;
+    final radius = kind == FourBaButtonKind.advancedSources
+        ? FourBaRadius.control
+        : FourBaRadius.control;
+    return FourBaComponentMetrics(
+      radius: radius,
+      minimumTarget: target,
+      contentPadding: isTenFoot ? FourBaSpacing.x6 : FourBaSpacing.x4,
+    );
+  }
+
+  static double cardGap(FourBaLayoutClass layout) => switch (layout) {
+        FourBaLayoutClass.compact => FourBaSpacing.x3,
+        FourBaLayoutClass.medium => FourBaSpacing.x4,
+        FourBaLayoutClass.expanded => FourBaSpacing.x6,
+        FourBaLayoutClass.tv => FourBaSpacing.x8,
+      };
+}
