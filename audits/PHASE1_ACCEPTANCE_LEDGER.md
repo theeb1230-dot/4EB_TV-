@@ -28,7 +28,7 @@ Legend: **V** verified evidence, **P** partial/pending deeper evidence, **B** bl
 | NuvioStreamsAddon | Provider/Engine | P | P Node/addon | P per-source | P config pending | P | P aggregation/capabilities | B production pending auth |
 | YacinTv | Provider/Ref | P | P | P playlist targets | B private credentials/playlists excluded | P | V live metadata/stream split | B production pending auth |
 | TRK_S | Provider/Ref | P | P Stremio | P per-source | P config pending | P | P capability surface | B production pending auth |
-| orien.live | Quarantine | B | B | B | B credential-discovery risk | P | B | B |
+| orien.live | Quarantine/Ref | B runtime reuse prohibited; license uncertainty cannot override exclusion | B dependency execution not required for quarantine closure | B no network target/contact admitted | B credential-discovery/harvest/replay/share risk; no values executed or recorded | V no ad/tracking behavior admitted from quarantined source | B credential/access-control runtime prohibited | V AUDIT COMPLETE — QUARANTINED / RUNTIME_EXCLUDED |
 | SportFree | Provider/Ref | P | P | P sports targets | P | P | V live metadata/stream split | B production pending auth |
 | stremio-akwam.X | Provider/Engine | P | P Python/FastAPI | P per-source | P config pending | P | P Stremio capability surface | B production pending auth |
 | CinemaPress | Engine/Ref | V MIT + exact public snapshot match | V package manifest; no lockfile | V Express/CMS/API/network surfaces | B embedded default API credentials + IP/WHOIS/geolocation/cookies excluded | B ad/prebid/advertising surfaces excluded | B server/embed/iframe/CinemaPlayer runtime excluded | V AUDIT COMPLETE — CONTRACT_REFERENCE only |

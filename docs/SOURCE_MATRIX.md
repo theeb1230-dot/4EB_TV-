@@ -23,7 +23,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 17 | YacinTv--main | Provider / Reference | Live TV source; private credentials/playlists excluded | PARTIAL — PROVIDER_PENDING |
 | 18 | xoxixoxi-main | Provider / Engine / Reference | Bounded worker/timeout/isolation contracts only; unresolved license/authorization/process/network safety fail closed; scraper/bypass/relay runtime excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / RUNTIME_REJECTED |
 | 19 | TRK_S-main | Provider / Reference | Turkish addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
-| 20 | orien.live-main | Security-risk Reference | Credential-discovery risk; never harvest/replay/share credentials | PARTIAL — QUARANTINED |
+| 20 | orien.live-main | Security-risk Reference | Credential-discovery behavior is constitution-incompatible; no execution/network contact/secrets required for safe closure | AUDIT COMPLETE — QUARANTINED / RUNTIME_EXCLUDED |
 | 21 | Ytvplus2-main | Provider / Engine / Reference | Multi-source aggregation/fallback, authorization | PARTIAL — PROVIDER_PENDING |
 | 22 | SportFree-main | Provider / Reference | Sports contracts and stream authorization | PARTIAL — PROVIDER_PENDING |
 | 23 | flixquest-main | Experience / Reference | Flutter/player/offline/TV UX clean-room reference; GPL, ads/analytics and proxy/scraper runtime excluded | AUDIT COMPLETE — EXPERIENCE_REFERENCE / CLEAN_ROOM |
