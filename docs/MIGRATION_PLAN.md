@@ -70,3 +70,5 @@ Every source contribution must use exactly one migration mode before implementat
 A source changing classification or migration mode requires an evidence update in the source card, acceptance ledger and relevant matrix in the same PR. No implementation PR may silently promote `PROVIDER_PENDING`, `QUARANTINE`, or `EXCLUDED` material.
 
 - Al-Qahtani Phase-1: `CONTRACT_REFERENCE + EXPERIENCE_REFERENCE` only. Independently implement provider isolation, bounded health/fallback and strict validation behind canonical 4BA contracts. Do not migrate relay/proxy, IP telemetry, ads/tracking, external-browser or WebView-primary paths. Runtime providers require separate authorization.
+
+- turkish-series Phase-1: `CONTRACT_REFERENCE + DATA_REFERENCE + PROVIDER_PENDING`. Independently implement authorized metadata snapshot/version/freshness/cache/rollback contracts. Do not compile or copy the unresolved mutable corpus into Core/app binaries; no provider runtime is enabled without separate rights evidence.
