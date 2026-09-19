@@ -1,6 +1,6 @@
 # Source Evidence Card: xoxixoxi-main
 
-Status: DEEP_AUDIT_PARTIAL / REFERENCE_ONLY
+Status: DEEP_AUDIT_COMPLETE / CONTRACT_REFERENCE / DIRECT_REUSE_BLOCKED / RUNTIME_REJECTED
 
 ## Authoritative bundle evidence
 - Large Node-oriented corpus: roughly 6,711 files.
@@ -21,5 +21,11 @@ Only generic clean-room concepts are candidates: bounded worker/process lifecycl
 ## Migration decision
 Migration mode: **CONTRACT_REFERENCE** only. Runtime/provider implementation remains blocked pending license, authorization, network and process-security evidence.
 
-## Remaining evidence
-Verify package manifests/lockfile, root license, process spawning/ffmpeg invocation, Puppeteer lifecycle, network targets, resource limits, tests, secrets/config, ads/tracking and whether any extraction path depends on bypass behavior.
+## Evidence-bounded closure
+The authoritative bundle inventory proves a backend/extraction shape with Puppeteer/headless-browser and ffmpeg/process execution surfaces, but does not establish a compatible root reuse license, source/content authorization, safe network-target provenance, or a process-security model suitable for production admission. Those are decisive runtime gates rather than optional cleanup.
+
+4BA therefore closes this audit fail-closed. No scraper, extractor, browser automation, ffmpeg invocation, endpoint, cookie, credential, anti-bot/access-control behavior, or media relay is migrated. The only retained value is an independently implemented contract model for bounded worker lifecycle, timeout/cancellation, staged resolver failures, resource ceilings and isolation of expensive optional work. Such work may never become a mandatory ZERO_COST Core dependency.
+
+A future provider may be reviewed independently only with explicit authorization, compatible licensing, bounded resource/process execution, safe network policy and constitution-compliant playback. This closure does not grant that admission.
+
+**Phase-1 result: AUDIT COMPLETE — CONTRACT_REFERENCE. Direct reuse: BLOCKED. Extraction/runtime provider: REJECTED under current evidence.**
