@@ -32,6 +32,11 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. Pro
 - PR #53 exact head `fce46e316f96b395f8e890218df5f86194b55dda` passed Audit hygiene `35466685154` and Core contracts `35466685193`, including the architecture graph and all seven package jobs, then merged with expected-head protection. Fresh exact-head CI is required for this design branch.
 
 ## Work completed in this execution
+- Re-read exact main `e85bee8b79662b15a2fec2759e28d3973852831f`, branches, sole PR #54, exact head, Actions/checks, Releases, constitution, architecture and actual changed code before mutation.
+- Found a real exact-head CI defect: Core contracts run `35466775816` failed only because `dart format` changed `packages/design_tokens/lib/src/tokens.dart` and `test/typography_components_test.dart`; sibling matrix jobs were cancelled by fail-fast rather than code failures.
+- Applied the formatter output on the same PR branch. New exact head is `e5de1d416297e5b3eaaa1e2a37a5e6a38fc91f6f`. Audit hygiene run `35467869899` is green; Core contracts run `35467870012` is still queued at this handoff and must not be called green yet.
+- Added the fixed evidence-weighted product scorecard and P0/P1/P2 blockers so future work cannot raise completion from documents/shells alone.
+
 - Re-read main, branches, the sole open PR #53, exact head/base, Releases, exact-head workflows and jobs before mutation.
 - Verified PR #53 exact head was clean and fully green after the self-import checker repair; merged it with expected-head protection.
 - Advanced Phase 3 executable Design System: added platform-neutral typography roles/metrics and component semantics for buttons, cards, responsive gaps and ten-foot minimum targets.
@@ -43,6 +48,20 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. Pro
 - Updated Core contracts workflow to run the graph checker and trigger for any `packages/**` change plus checker changes, closing the previous per-package trigger maintenance gap.
 - No provider endpoint, credential, stream target, ad/tracking SDK, paid backend, proxy or DRM/access-control bypass was introduced.
 
+## Progress scorecard (evidence-weighted)
+- Overall Product Completion: **35.1%**. Weighted from the fixed product model: Governance/audit 100%; Architecture 90%; Design System 45%; Core 35%; Provider SDK/config 45%; Metadata 50%; Search/Resolver 50%; Native Player 10%; Experience/content UI 20%; Live/Sports 5%; Offline 5%; Profile/local 5%; Android 0%; Android TV 0%; iOS 0%; Web/PWA 0%; Accessibility/updates 15%; Security/performance/tests 20%; CI/CD/releases 10%; Beta/Golden hardening 0%.
+- Current Phase Completion (Phase 3 Design System): **45%**. Executable semantic tokens, typography, responsive spacing, motion and TV target metrics exist with tests; Flutter/Web/TV adapters, rendered contrast evidence, logo/icon/splash implementation and full player/navigation component semantics are still open.
+- Verified Functional Completion: **18%**. This deliberately counts only behavior backed by executable package tests/CI or equivalent evidence. There is still no end-to-end runtime product flow or platform artifact, so contracts and documentation do not inflate this number.
+- Previous conversational estimate of 32% is superseded by this repository-derived weighted calculation. The increase reflects Phase-1 acceptance, architecture graph enforcement and tested executable Design System/kernel/metadata/resolver foundations, not a claim that the app UI/player is usable.
+
+## Blockers by product impact
+- **P0:** PR #54 exact-head Core contracts must turn green after formatter repair before merge.
+- **P0:** Phase 3 lacks real presentation adapters and rendered RTL/contrast/TV-focus evidence.
+- **P0:** No end-to-end Home/Search → Details → Episodes → Resolve → Native Play path exists yet.
+- **P0:** Local-first storage/config/security implementations and platform compatibility evidence are missing.
+- **P1:** Downloads/offline, Live/Sports/EPG, platform shells and Web/PWA remain unimplemented as product surfaces.
+- **P2:** update channels, developer diagnostics, load/device hardening and Golden release evidence remain future work.
+
 ## Risks / blockers
 - Phase 2 is not yet accepted: platform shells and real presentation packages do not exist yet, so graph evidence covers foundational packages only.
 - Concrete local storage implementations and crash-consistency evidence remain future platform work.
@@ -51,6 +70,12 @@ The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. Pro
 - Android API 24 and iOS 15 remain provisional until player/persistence/network compatibility evidence is recorded.
 
 ## Highest-value next work
+1. Re-fetch Core contracts run `35467870012` for exact head `e5de1d416297e5b3eaaa1e2a37a5e6a38fc91f6f`; fix any real failure on PR #54, merge only when fully green and mergeable.
+2. Finish Phase 3 with presentation adapters plus rendered RTL/contrast/TV-focus evidence; do not mark Phase 3 complete from tokens alone.
+3. Start the highest P0 runtime blocker: local-first Core storage/config/security contracts and implementation path, then wire toward the first end-to-end Home/Search → Details → Episodes → Resolve → Native Play vertical slice.
+4. Recalculate all three percentages from evidence after every merged slice; decrease them when newly discovered gaps invalidate prior acceptance.
+
+## Previous next-work notes
 1. Require exact-head Core contracts + Audit hygiene on the typography/components branch and fix any defect on the same branch.
 2. Add tests for typography completeness, responsive component metrics and ten-foot accessibility targets.
 3. Reconcile executable Design System semantics with DESIGN_SYSTEM and begin the Flutter presentation adapter only after the semantic contract is green.
