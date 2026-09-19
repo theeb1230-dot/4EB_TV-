@@ -57,7 +57,8 @@ void main() {
     const adapter = FourBaPresentationAdapter(
       FourBaPresentationContext(logicalWidth: 390, isTenFoot: false),
     );
-    expect(adapter.playerControls, contains(FourBaPlayerControl.sourceRecovery));
+    expect(
+        adapter.playerControls, contains(FourBaPlayerControl.sourceRecovery));
     expect(adapter.playerControls, contains(FourBaPlayerControl.subtitles));
     expect(adapter.playerControls, contains(FourBaPlayerControl.quality));
   });
