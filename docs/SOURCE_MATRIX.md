@@ -9,7 +9,7 @@ This is the canonical 30-root audit queue. Classification is evidence-backed whe
 | 03 | ARB-S33-3-main | Provider / Reference | ArabSeed/Stremio contracts, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 04 | Cinemax-main | Experience / Reference | Android/Kotlin modular/design/performance concepts; unresolved NOTICE/assets/API-term reuse fails closed; no player/TV capability inferred | AUDIT COMPLETE — CONTRACT/EXPERIENCE_REFERENCE |
 | 05 | ProxyFill-main | Unrelated / Reference | Evidence-backed exclusion complete: exact snapshot blobs, no bundle license, secret-handling defects, unrelated domain | AUDIT COMPLETE — EXCLUDED_RUNTIME |
-| 06 | Mstch_Server2-main | Provider / Reference | Sports contracts and stream authorization | PARTIAL — PROVIDER_PENDING |
+| 06 | Mstch_Server2-main | Provider / Data / Reference | Canonical match/schedule/channel contracts only; unresolved playback rights/license fail closed; backend/streams excluded | AUDIT COMPLETE — CONTRACT_REFERENCE / PROVIDER_PENDING |
 | 07 | Match-Archive-main | Provider / Reference | Match archive contracts and authorization | PARTIAL — PROVIDER_PENDING |
 | 08 | kiro-drama-main | Provider / Reference | Drama source capability, authorization/license | PARTIAL — PROVIDER_PENDING |
 | 09 | alooytv-addon-main | Provider / Reference | Stremio addon capability, authorization/license | PARTIAL — PROVIDER_PENDING |
