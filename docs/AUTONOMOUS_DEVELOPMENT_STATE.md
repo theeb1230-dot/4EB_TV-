@@ -5,8 +5,8 @@ GitHub is the source of truth. This handoff never overrides newer repository sta
 ## Current source truth
 - Exact start/end main for this execution remains `e25774822acfaff77ac6bf7941a706ff13b624f0`; PR #58 remains the sole open PR until its repaired exact head is green.
 - Sole open PR #58 branch: `design/phase3-brand-splash`, base exact main `e25774822acfaff77ac6bf7941a706ff13b624f0`.
-- PR #58 head `3697224fe0e8fd366fcaf069634c4e3d40901a2e`: Audit hygiene run `35476374428` passed. Core contracts run `35476374429` passed architecture and all Dart package jobs; `flutter-presentation` failed only at `Check Flutter formatting`, so analyze/tests were skipped by fail-fast.
-- Inspection of the actual changed test found two over-width `tester.widget<AnimatedOpacity>` assignments still not in canonical Dart layout. They were reformatted on the same branch in commit `7236d6f3bf81a0d1414ee619440973859a302e62`; this handoff update advances the branch again, so fresh exact-head CI is mandatory.
+- Previous exact head `19757a5c1152cbe79f81f1eafce26f3d4d435dcc`: Audit hygiene run `35477255830` passed. Core contracts run `35477255835` passed architecture and all Dart package jobs; `flutter-presentation` failed only at `Check Flutter formatting`, so analyze/tests were skipped by fail-fast.
+- The changed widget test was corrected to canonical multiline invocation layout on the same PR in commit `1cb7254de452981d4a84a67c67d4e5fcbeb96176`. This handoff update advances the branch again, so fresh exact-head CI remains mandatory.
 - Releases remain empty; release gates are intentionally not bypassed.
 
 ## Product invariants
@@ -21,9 +21,9 @@ ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Local-first, Native Playback
 - **P2:** Update channels, developer diagnostics, load/device hardening and Golden evidence remain future work.
 
 ## Work completed in this execution
-- Re-read sole PR #58, exact head/base/mergeability, exact-head workflow runs/jobs, handoff and changed Flutter code before mutation.
-- Verified exact head `3697224f...`: Audit hygiene passed; architecture and all Dart package jobs passed; only Flutter formatting failed. Flutter analyze/test were skipped by fail-fast.
-- Inspected the changed Flutter files and corrected the remaining canonical line wrapping in `brand_splash_test.dart` on the same PR branch. No gate, provider boundary or invariant was weakened.
+- Re-read exact main, sole PR #58, exact head/base, exact-head workflows/jobs, handoff and changed Flutter files before mutation.
+- Verified head `19757a5c...`: Audit hygiene passed; architecture and all Dart package jobs passed; only Flutter formatting failed; analyze/tests were skipped.
+- Corrected `brand_splash_test.dart` to canonical multiline `tester.widget<AnimatedOpacity>(...)` layout on the same PR. No gate, provider boundary or product invariant was weakened.
 - Existing PR #58 implementation remains deterministic vector-only `FourBaBrandMark`, offline-safe `FourBaCinematicSplash`, Reduce Motion support, progress clamping and widget tests.
 - No provider endpoint, credential, stream target, ad/tracking SDK, paid backend, media relay/proxy or DRM/access-control bypass was introduced.
 
@@ -33,8 +33,8 @@ ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Local-first, Native Playback
 - Verified Functional Completion: **21%**. No end-to-end content/playback runtime path or distributable platform artifact exists.
 
 ## Tests / CI / artifacts
-- PR #58 head `3697224f...`: Audit hygiene success; architecture + all Dart package jobs success; Flutter formatting failure; Flutter analyze/test skipped.
-- Fresh exact-head Audit hygiene + Core contracts required after the test-format repair and this handoff update. No blind rerun used.
+- Previous PR #58 head `19757a5c...`: Audit hygiene success; architecture + all Dart package jobs success; Flutter formatting failure; Flutter analyze/test skipped.
+- Fresh exact-head Audit hygiene + Core contracts required after canonical test-format repair and this handoff update. No blind rerun used.
 - No distributable APK/TV APK/IPA/Web artifact exists yet.
 
 ## Risks / open acceptance
