@@ -1,4 +1,5 @@
 import 'experience.dart';
+import 'persistence.dart';
 
 final class ExperienceEngine {
   ExperienceEngine({required ExperienceDescriptor defaultExperience})
@@ -45,6 +46,36 @@ final class ExperienceEngine {
       _previewId = null;
       return false;
     }
+    _activeId = id;
+    _previewId = null;
+    return true;
+  }
+
+  Future<bool> applyPreviewPersisted(
+    ExperienceContext context,
+    ExperienceSelectionStore store,
+  ) async {
+    final id = _previewId;
+    if (id == null) return false;
+    final descriptor = _registry[id];
+    if (descriptor == null || !context.canActivate(descriptor)) {
+      _previewId = null;
+      return false;
+    }
+    await store.writeActiveId(id);
+    _activeId = id;
+    _previewId = null;
+    return true;
+  }
+
+  Future<bool> restore(
+    ExperienceContext context,
+    ExperienceSelectionStore store,
+  ) async {
+    final id = await store.readActiveId();
+    if (id == null) return false;
+    final descriptor = _registry[id];
+    if (descriptor == null || !context.canActivate(descriptor)) return false;
     _activeId = id;
     _previewId = null;
     return true;
