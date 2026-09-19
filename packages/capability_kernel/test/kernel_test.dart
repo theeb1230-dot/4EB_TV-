@@ -15,7 +15,10 @@ void main() {
         capabilities: {Capability.search},
         priority: 20,
       ));
-    expect(kernel.implementationsFor(Capability.search).map((e) => e.implementationId),
+    expect(
+        kernel
+            .implementationsFor(Capability.search)
+            .map((e) => e.implementationId),
         ['authorized-b', 'authorized-a']);
     expect(kernel.implementationsFor(Capability.stream), isEmpty);
   });
