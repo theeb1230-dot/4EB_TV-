@@ -1,0 +1,14 @@
+name: presentation_contract
+description: Platform-neutral 4BA presentation adapter contracts consuming Cinematic Gold design semantics.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  design_tokens:
+    path: ../design_tokens
+
+dev_dependencies:
+  test: ^1.25.0

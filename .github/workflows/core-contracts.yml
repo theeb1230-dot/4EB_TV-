@@ -23,10 +23,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify package dependency graph
         run: python3 tools/check_architecture.py
-      - name: Experiences must not depend on Provider SDK
+      - name: Presentation and Experiences must not depend on Provider SDK
         run: |
-          if grep -R -n -E "provider_sdk|package:provider_sdk" packages/experience_contract; then
-            echo "Experience boundary must remain provider-blind."
+          if grep -R -n -E "provider_sdk|package:provider_sdk" packages/experience_contract packages/presentation_contract; then
+            echo "Presentation and Experience boundaries must remain provider-blind."
             exit 1
           fi
 
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: [core_domain, provider_sdk, resolver_engine, metadata_engine, design_tokens, capability_kernel, experience_contract]
+        package: [core_domain, provider_sdk, resolver_engine, metadata_engine, design_tokens, capability_kernel, experience_contract, presentation_contract]
     defaults:
       run:
         working-directory: packages/${{ matrix.package }}
