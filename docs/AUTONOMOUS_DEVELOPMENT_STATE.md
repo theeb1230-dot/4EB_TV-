@@ -3,10 +3,11 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact merged `main` at this execution start after validating and merging the prior sole PR: `bde098ef5bf106e34bded91986a838414bc4cb1d`.
-- PR #42 exact head `e96ba422f533d676d526f88852d8345420c381a4` passed Audit hygiene run `35442069675` / repository-hygiene job `105894488314` and was merged with expected-head protection to exact main `bde098ef5bf106e34bded91986a838414bc4cb1d`.
-- Continuation branch is `audit/deep-wave34`, created from exact merged main `bde098ef5bf106e34bded91986a838414bc4cb1d`.
-- Phase 1 is now **ACCEPTED on this branch pending exact-head CI and merge**: all 30 authoritative roots have evidence-bounded decisions. Runtime provider admission remains independently gated.
+- Exact merged `main` at this execution start is `02263a9a30a0da9a956dd5d87e1e5fcbc72791b6`.
+- PR #43 exact head `b296cd301bf32c045d232f4545eac7b7c445f1ba` passed Audit hygiene run `35443646107` / repository-hygiene job `105898747508` and was merged with expected-head protection.
+- Phase 1 is **ACCEPTED on main** with 30/30 evidence-bounded root decisions; this never authorizes a runtime provider.
+- Continuation branch is `architecture/phase2-workspace`, created from exact merged main `02263a9a30a0da9a956dd5d87e1e5fcbc72791b6`.
+- Releases remain empty; product release gates are not yet satisfied.
 
 ## Product invariants
 ZERO_COST core, ZERO_ADS, Privacy First / Zero-PII, Native Playback First, internal WebView only as final fallback, no external-browser playback, no DRM/paywall/access-control bypass, no secrets, no mandatory paid backend, no 4BA/GitHub media proxy, Metadata != Streams, Watch != Download, provider/UI separation, Arabic RTL default plus English and Turkish, real TV focus behavior, rollback-capable changes, evidence-backed completion claims.
@@ -22,25 +23,26 @@ These foundations remain authoritative and are not rewritten around source-proje
 The 30-root Acceptance Ledger and SOURCE_MATRIX are mechanically reconciled. `kiro-main`, the final PARTIAL root, is closed fail-closed as `CONTRACT_REFERENCE / PROVIDER_PENDING / DIRECT_REUSE_BLOCKED`. No unresolved endpoint, stream target, credential/token/cookie/private configuration, scraper/extractor, relay/proxy, bypass, ad/tracking behavior or mandatory backend runtime is admitted. Audit acceptance does not authorize any provider.
 
 ## CI integrity
-- Audit hygiene remains mandatory: archive/build-binary rejection, oversized-file rejection, and Phase-1 evidence-card integrity must pass on the exact PR head before merge.
-- The new `audit/deep-wave34` commits require a fresh green run before merge.
-- Phase 1 acceptance becomes merged source truth only after exact-head CI is green and the PR is merged with expected-head protection.
+- Audit hygiene succeeded on the exact Phase-1 acceptance head before merge.
+- Core contracts CI now includes `design_tokens` alongside core_domain/provider_sdk/resolver_engine/metadata_engine.
+- The new architecture branch requires fresh exact-head CI before merge.
 
 ## Work completed in this execution
-- Re-read repository source truth, branches, sole open PR, recent commits, Actions and Releases; Releases remain empty.
-- Verified PR #42 exact head `e96ba422f533d676d526f88852d8345420c381a4` passed Audit hygiene run `35442069675` and merged it with expected-head protection.
-- Created `audit/deep-wave34` from exact merged main `bde098ef5bf106e34bded91986a838414bc4cb1d`.
-- Closed final root `kiro-main` fail-closed and reconciled its evidence card, Acceptance Ledger and SOURCE_MATRIX.
-- Phase-1 ledger now records 30/30 evidence-bounded decisions and ACCEPTED status on this branch.
+- Re-read GitHub source truth: main/branches/open PR/commits/Actions/Releases and actual package/document tree.
+- Verified and merged sole PR #43 only after exact-head Audit hygiene success, making Phase 1 acceptance merged source truth.
+- Created `architecture/phase2-workspace` from exact main.
+- Promoted MASTER_ARCHITECTURE to a Phase-2 baseline and made package dependency boundaries explicit.
+- Added executable, platform-neutral `packages/design_tokens` with Cinematic Gold color/spacing/radius/focus/motion/responsive primitives and tests.
+- Bound DESIGN_SYSTEM semantics to the executable token package and extended Core contracts CI to analyze/test it.
 
 ## Risks / blockers
-- Phase 1 acceptance is not yet merged source truth until fresh Audit hygiene passes on the exact `audit/deep-wave34` head and the PR merges.
-- Provider technical reachability or public endpoint availability is never content/redistribution authorization.
-- Provider-pending and direct-reuse-blocked decisions remain disabled until independently admitted.
-- No Release should be produced merely because Phase 1 closed; product implementation and later quality/release gates remain incomplete.
+- Phase 2 is not yet accepted: actual dependency/import graph still needs continued reconciliation as Experience/platform packages are introduced.
+- Exact production color contrast remains to be measured on rendered Flutter/Web/TV surfaces.
+- Android API 24 and iOS 15 remain provisional until player/persistence/network compatibility evidence is recorded.
+- Provider-pending/direct-reuse-blocked sources remain disabled; Phase-1 acceptance is not provider authorization.
 
 ## Highest-value next work
-1. Open one PR only for `audit/deep-wave34`; require fresh exact-head Audit hygiene and merge only with expected-head protection.
-2. After Phase 1 acceptance is merged, move to Phase 2/3 implementation: reconcile MASTER_ARCHITECTURE/ADRs and turn DESIGN_SYSTEM into executable tokens/components without weakening existing Core/Provider/Resolver/Metadata contracts.
-3. Continue constitutional order through Core, Provider SDK, Metadata, Resolver, Native Player, Experience Engine and platform apps; do not produce a shell release.
-4. Keep all runtime providers fail-closed until independent authorization/license/network/cost/security admission evidence exists.
+1. Open one PR only for `architecture/phase2-workspace`; require exact-head Core contracts + Audit hygiene as applicable and fix failures on the same branch.
+2. Continue Phase 2 by adding explicit Experience/capability composition boundaries without concrete providers and verify the dependency graph in CI.
+3. Continue Phase 3 by adapting executable tokens into Flutter theme/components, then validate Arabic RTL, English/Turkish, responsive classes and TV focus behavior.
+4. Preserve provisional platform baselines until compatibility evidence exists; do not select a player merely to make a demo compile.
