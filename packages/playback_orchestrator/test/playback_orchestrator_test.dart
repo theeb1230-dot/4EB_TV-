@@ -1,7 +1,6 @@
 import 'package:core_domain/core_domain.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
 import 'package:provider_sdk/provider_sdk.dart';
-import 'package:resolver_engine/resolver_engine.dart';
 import 'package:test/test.dart';
 
 final class FakeProvider implements Provider {
