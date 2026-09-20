@@ -28,4 +28,31 @@ void main() {
     expect(checkpoint.canonicalContentId, 'content:1');
     expect(checkpoint.position, const Duration(seconds: 42));
   });
+
+  test('local cache expiry is deterministic and backend independent', () {
+    final storedAt = DateTime.utc(2026, 9, 20, 1);
+    final value = CachedValue(
+      value: 'cached-metadata',
+      storedAt: storedAt,
+      expiresAt: storedAt.add(const Duration(hours: 1)),
+    );
+
+    expect(value.isExpiredAt(storedAt), isFalse);
+    expect(
+      value.isExpiredAt(storedAt.add(const Duration(minutes: 59))),
+      isFalse,
+    );
+    expect(value.isExpiredAt(storedAt.add(const Duration(hours: 1))), isTrue);
+  });
+
+  test('local diagnostics carry no mandatory identity field', () {
+    final event = LocalDiagnosticEvent(
+      code: 'cache.expired',
+      occurredAt: DateTime.utc(2026, 9, 20),
+      attributes: const {'scope': 'metadata'},
+    );
+
+    expect(event.code, 'cache.expired');
+    expect(event.attributes, const {'scope': 'metadata'});
+  });
 }
