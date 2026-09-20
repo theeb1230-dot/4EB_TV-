@@ -1,16 +1,30 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_data_flutter/local_data_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+final class FakePreferencesClient implements SharedPreferencesAsyncClient {
+  final Map<String, String> values = <String, String>{};
+
+  @override
+  Future<String?> getString(String key) async => values[key];
+
+  @override
+  Future<void> setString(String key, String value) async {
+    values[key] = value;
+  }
+
+  @override
+  Future<void> remove(String key) async {
+    values.remove(key);
+  }
+
+  @override
+  Future<Set<String>> getKeys() async => values.keys.toSet();
+}
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
-  setUp(() {
-    SharedPreferences.setMockInitialValues(<String, Object>{});
-  });
-
   test('persists strings and enumerates keys', () async {
-    final backend = SharedPreferencesStringBackend();
+    final client = FakePreferencesClient();
+    final backend = SharedPreferencesStringBackend(preferences: client);
 
     await backend.write('kv/settings/language', 'ar');
 
@@ -19,7 +33,8 @@ void main() {
   });
 
   test('delete removes durable value', () async {
-    final backend = SharedPreferencesStringBackend();
+    final client = FakePreferencesClient();
+    final backend = SharedPreferencesStringBackend(preferences: client);
     await backend.write('cache/item', 'payload');
 
     await backend.delete('cache/item');
