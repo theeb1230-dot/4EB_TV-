@@ -15,6 +15,7 @@ ALLOWED: dict[str, set[str]] = {
     "experience_contract": {"core_domain", "capability_kernel", "design_tokens"},
     "presentation_contract": {"design_tokens"},
     "flutter_presentation": {"design_tokens", "presentation_contract"},
+    "local_data_memory": {"core_domain"},
 }
 PACKAGE_IMPORT = re.compile(r"package:([a-zA-Z0-9_]+?)/")
 PATH_DEP = re.compile(r"^\s{2}([a-zA-Z0-9_]+):\s*$")
