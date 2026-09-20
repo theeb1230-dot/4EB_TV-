@@ -35,7 +35,8 @@ final class PersistentLocalKeyValueStore implements LocalKeyValueStore {
 }
 
 final class PersistentLocalCacheStore implements LocalCacheStore {
-  PersistentLocalCacheStore(this.backend, {this.codec = const LocalDataCodec()});
+  PersistentLocalCacheStore(this.backend,
+      {this.codec = const LocalDataCodec()});
 
   final PersistentStringBackend backend;
   final LocalDataCodec codec;
