@@ -47,7 +47,7 @@ void main() {
       const Duration(seconds: 37),
     );
 
-    expect(result.completed, isTrue);
+    expect(result.disposition, AttemptDisposition.success);
     expect(session.initialized, isTrue);
     expect(session.seekPosition, const Duration(seconds: 37));
     expect(session.played, isTrue);
@@ -63,7 +63,7 @@ void main() {
       Duration.zero,
     );
 
-    expect(result.completed, isFalse);
+    expect(result.disposition, AttemptDisposition.retryNext);
     expect(session.disposed, isTrue);
     expect(adapter.activeSession, isNull);
   });
@@ -80,7 +80,7 @@ void main() {
       Duration.zero,
     );
 
-    expect(result.completed, isFalse);
+    expect(result.disposition, AttemptDisposition.retryNext);
     expect(created, isFalse);
   });
 
