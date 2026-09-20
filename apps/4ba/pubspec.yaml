@@ -5,6 +5,14 @@ version: 0.1.0+1
 environment:
   sdk: ">=3.4.0 <4.0.0"
 dependencies:
+  app_flow:
+    path: ../../packages/app_flow
+  core_domain:
+    path: ../../packages/core_domain
+  playback_orchestrator:
+    path: ../../packages/playback_orchestrator
+  provider_sdk:
+    path: ../../packages/provider_sdk
   flutter:
     sdk: flutter
   flutter_presentation:
