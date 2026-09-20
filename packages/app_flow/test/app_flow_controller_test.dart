@@ -20,6 +20,9 @@ final class DemoProvider implements Provider {
       );
 
   @override
+  Future<Uri?> resolveDownload(ResolveRequest request) async => null;
+
+  @override
   Future<ResolveResult> resolve(ResolveRequest request) async => ResolveResult(
         candidates: [
           PlaybackCandidate(
