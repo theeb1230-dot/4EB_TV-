@@ -44,10 +44,7 @@ final class MetadataSearchAggregator {
     return List.unmodifiable(canonical);
   }
 
-  CanonicalContent _merge(
-    CanonicalContent current,
-    CanonicalContent incoming,
-  ) {
+  CanonicalContent _merge(CanonicalContent current, CanonicalContent incoming) {
     final titles = <LocalizedTitle>[...current.titles];
     final titleKeys = titles
         .map((item) => '${item.languageTag}:${item.value}')
