@@ -75,9 +75,11 @@ final class _FlowScreen extends StatelessWidget {
         AppFlowStage.search => _Search(flow: flow, refresh: refresh),
         AppFlowStage.details => _Details(flow: flow, refresh: refresh),
         AppFlowStage.episodes => _Episodes(flow: flow, refresh: refresh),
-        AppFlowStage.resolving => const Center(child: CircularProgressIndicator()),
+        AppFlowStage.resolving =>
+          const Center(child: CircularProgressIndicator()),
         AppFlowStage.playing => const Center(child: Text('جاري التشغيل')),
-        AppFlowStage.error => const Center(child: Text('لا يتوفر مصدر تشغيل حاليًا')),
+        AppFlowStage.error =>
+          const Center(child: Text('لا يتوفر مصدر تشغيل حاليًا')),
       },
     );
   }
