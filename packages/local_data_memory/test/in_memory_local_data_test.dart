@@ -28,7 +28,12 @@ void main() {
     );
 
     expect(
-      (await cache.read('home', now: expiresAt.subtract(const Duration(seconds: 1))))?.value,
+      (
+        await cache.read(
+          'home',
+          now: expiresAt.subtract(const Duration(seconds: 1)),
+        ),
+      )?.value,
       'payload',
     );
     expect(await cache.read('home', now: expiresAt), isNull);
