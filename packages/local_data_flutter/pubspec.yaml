@@ -1,0 +1,21 @@
+name: local_data_flutter
+description: Flutter platform persistence edge for 4BA local-first storage.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.0.0
+
+flutter:
+  uses-material-design: false
+
+dependencies:
+  flutter:
+    sdk: flutter
+  local_data_persistent:
+    path: ../local_data_persistent
+  shared_preferences: ^2.5.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
