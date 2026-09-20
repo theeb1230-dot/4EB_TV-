@@ -1,6 +1,7 @@
 import 'package:core_domain/core_domain.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:native_player_flutter/native_player_flutter.dart';
+import 'package:playback_orchestrator/playback_orchestrator.dart' show AttemptDisposition;
 
 final class FakeSession implements NativeVideoSession {
   FakeSession({this.failInitialize = false});
