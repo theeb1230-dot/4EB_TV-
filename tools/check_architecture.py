@@ -20,7 +20,7 @@ ALLOWED: dict[str, set[str]] = {
     "local_data_persistent": {"core_domain", "local_data_codec"},
     "local_data_flutter": {"local_data_persistent"},
     "playback_orchestrator": {"core_domain", "provider_sdk", "resolver_engine"},
-    "native_player_flutter": {"core_domain", "playback_orchestrator"},
+    "native_player_flutter": {"core_domain", "playback_orchestrator", "resolver_engine"},
 }
 PACKAGE_IMPORT = re.compile(r"package:([a-zA-Z0-9_]+?)/")
 PATH_DEP = re.compile(r"^\s{2}([a-zA-Z0-9_]+):\s*$")
