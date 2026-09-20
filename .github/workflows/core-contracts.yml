@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: [core_domain, provider_sdk, resolver_engine, metadata_engine, design_tokens, capability_kernel, experience_contract, presentation_contract, local_data_memory, local_data_codec, local_data_persistent, playback_orchestrator]
+        package: [core_domain, provider_sdk, resolver_engine, metadata_engine, design_tokens, capability_kernel, experience_contract, presentation_contract, local_data_memory, local_data_codec, local_data_persistent, playback_orchestrator, app_flow]
     defaults:
       run:
         working-directory: packages/${{ matrix.package }}
