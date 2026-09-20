@@ -1,6 +1,5 @@
 import 'package:core_domain/core_domain.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
-import 'package:resolver_engine/resolver_engine.dart' show AttemptResult;
 import 'package:video_player/video_player.dart';
 
 abstract interface class NativeVideoSession {
