@@ -17,6 +17,7 @@ ALLOWED: dict[str, set[str]] = {
     "flutter_presentation": {"design_tokens", "presentation_contract"},
     "local_data_memory": {"core_domain"},
     "local_data_codec": {"core_domain"},
+    "local_data_persistent": {"core_domain", "local_data_codec"},
 }
 PACKAGE_IMPORT = re.compile(r"package:([a-zA-Z0-9_]+?)/")
 PATH_DEP = re.compile(r"^\s{2}([a-zA-Z0-9_]+):\s*$")
