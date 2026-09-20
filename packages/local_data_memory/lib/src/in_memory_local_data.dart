@@ -58,7 +58,8 @@ final class InMemoryLocalCacheStore implements LocalCacheStore {
 final class InMemoryLocalDiagnosticsSink implements LocalDiagnosticsSink {
   final List<LocalDiagnosticEvent> _events = [];
 
-  List<LocalDiagnosticEvent> get events => List.unmodifiable(_events);
+  List<LocalDiagnosticEvent> get events =>
+      List<LocalDiagnosticEvent>.unmodifiable(_events);
 
   @override
   void record(LocalDiagnosticEvent event) {
