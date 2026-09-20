@@ -11,6 +11,8 @@ dependencies:
     path: ../core_domain
   playback_orchestrator:
     path: ../playback_orchestrator
+  resolver_engine:
+    path: ../resolver_engine
   video_player: ^2.9.2
 dev_dependencies:
   flutter_test:
