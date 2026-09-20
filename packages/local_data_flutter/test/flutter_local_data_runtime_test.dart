@@ -36,7 +36,11 @@ void main() {
     );
     await runtime.cacheStore.write(
       'home',
-      CachedValue(value: 'payload', expiresAt: expiresAt),
+      CachedValue(
+        value: 'payload',
+        storedAt: DateTime.utc(2028),
+        expiresAt: expiresAt,
+      ),
     );
 
     expect(
