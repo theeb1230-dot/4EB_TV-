@@ -31,7 +31,8 @@ void main() {
     ],
   );
 
-  test('resolves providers and falls back to next playable candidate', () async {
+  test('resolves providers and falls back to next playable candidate',
+      () async {
     final registry = ProviderRegistry()
       ..register(FakeProvider(
         'a',
