@@ -45,16 +45,28 @@ final class MetadataSearchAggregator {
   }
 
   CanonicalContent _merge(CanonicalContent current, CanonicalContent incoming) {
-    final titles = <LocalizedText>[...current.titles];
-    final titleKeys = titles.map((item) => '${item.locale}:${item.value}').toSet();
+    final titles = <LocalizedTitle>[...current.titles];
+    final titleKeys = titles
+        .map((item) => '${item.languageTag}:${item.value}')
+        .toSet();
     for (final title in incoming.titles) {
-      if (titleKeys.add('${title.locale}:${title.value}')) titles.add(title);
+      if (titleKeys.add('${title.languageTag}:${title.value}')) {
+        titles.add(title);
+      }
     }
 
     final externalIds = <ExternalId>[...current.externalIds];
-    final idKeys = externalIds.map((item) => '${item.namespace}:${item.value}').toSet();
+    final idKeys = externalIds
+        .map((item) => '${item.namespace}:${item.value}')
+        .toSet();
     for (final id in incoming.externalIds) {
       if (idKeys.add('${id.namespace}:${id.value}')) externalIds.add(id);
+    }
+
+    final genres = <String>[...current.genres];
+    final genreKeys = genres.toSet();
+    for (final genre in incoming.genres) {
+      if (genreKeys.add(genre)) genres.add(genre);
     }
 
     return CanonicalContent(
@@ -63,6 +75,7 @@ final class MetadataSearchAggregator {
       titles: titles,
       year: current.year ?? incoming.year,
       externalIds: externalIds,
+      genres: genres,
     );
   }
 }
