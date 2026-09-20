@@ -20,6 +20,7 @@ ALLOWED: dict[str, set[str]] = {
     "local_data_persistent": {"core_domain", "local_data_codec"},
     "local_data_flutter": {"local_data_persistent"},
     "playback_orchestrator": {"core_domain", "provider_sdk", "resolver_engine"},
+    "app_flow": {"core_domain", "playback_orchestrator"},
     "native_player_flutter": {"core_domain", "playback_orchestrator"},
 }
 PACKAGE_IMPORT = re.compile(r"package:([a-zA-Z0-9_]+?)/")
