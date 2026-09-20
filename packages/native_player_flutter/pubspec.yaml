@@ -1,0 +1,17 @@
+name: native_player_flutter
+description: Native video_player playback edge for 4BA Android, Android TV, iOS and Web.
+version: 0.1.0
+publish_to: none
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  core_domain:
+    path: ../core_domain
+  playback_orchestrator:
+    path: ../playback_orchestrator
+  video_player: ^2.9.2
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
