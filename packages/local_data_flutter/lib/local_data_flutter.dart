@@ -50,3 +50,23 @@ final class SharedPreferencesStringBackend implements PersistentStringBackend {
   @override
   Future<Set<String>> keys() => _preferences.getKeys();
 }
+
+/// Runtime composition root for local-first state used by Flutter shells.
+///
+/// Both stores intentionally share one backend. Their namespaced keys keep
+/// user state and cache entries isolated while allowing a platform shell to
+/// construct the complete local-data boundary in one place.
+final class FlutterLocalDataRuntime {
+  FlutterLocalDataRuntime._(this.keyValueStore, this.cacheStore);
+
+  factory FlutterLocalDataRuntime({PersistentStringBackend? backend}) {
+    final durableBackend = backend ?? SharedPreferencesStringBackend();
+    return FlutterLocalDataRuntime._(
+      PersistentLocalKeyValueStore(durableBackend),
+      PersistentLocalCacheStore(durableBackend),
+    );
+  }
+
+  final PersistentLocalKeyValueStore keyValueStore;
+  final PersistentLocalCacheStore cacheStore;
+}
