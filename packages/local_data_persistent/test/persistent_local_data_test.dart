@@ -3,7 +3,8 @@ import 'package:local_data_persistent/local_data_persistent.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('key value data survives adapter recreation and keeps scopes isolated', () async {
+  test('key value data survives adapter recreation and keeps scopes isolated',
+      () async {
     final backend = MemoryPersistentStringBackend();
     await PersistentLocalKeyValueStore(backend)
         .write(LocalDataScope.favorites, 'same/key', 'movie-1');
@@ -11,12 +12,15 @@ void main() {
         .write(LocalDataScope.history, 'same/key', 'episode-9');
 
     final recreated = PersistentLocalKeyValueStore(backend);
-    expect(await recreated.read(LocalDataScope.favorites, 'same/key'), 'movie-1');
-    expect(await recreated.read(LocalDataScope.history, 'same/key'), 'episode-9');
+    expect(
+        await recreated.read(LocalDataScope.favorites, 'same/key'), 'movie-1');
+    expect(
+        await recreated.read(LocalDataScope.history, 'same/key'), 'episode-9');
 
     await recreated.clear(LocalDataScope.favorites);
     expect(await recreated.read(LocalDataScope.favorites, 'same/key'), isNull);
-    expect(await recreated.read(LocalDataScope.history, 'same/key'), 'episode-9');
+    expect(
+        await recreated.read(LocalDataScope.history, 'same/key'), 'episode-9');
   });
 
   test('cache survives adapter recreation and evicts expired values', () async {
