@@ -94,10 +94,10 @@ final class _FlowScreen extends StatelessWidget {
         AppFlowStage.search => _Search(flow: flow, refresh: refresh),
         AppFlowStage.details => _Details(flow: flow, refresh: refresh),
         AppFlowStage.episodes => _Episodes(
-          flow: flow,
-          nativePlayback: nativePlayback,
-          refresh: refresh,
-        ),
+            flow: flow,
+            nativePlayback: nativePlayback,
+            refresh: refresh,
+          ),
         AppFlowStage.resolving =>
           const Center(child: CircularProgressIndicator()),
         AppFlowStage.playing => const Center(child: Text('جاري التشغيل')),
