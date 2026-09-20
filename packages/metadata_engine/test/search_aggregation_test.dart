@@ -9,43 +9,49 @@ CanonicalContent item(
   List<ExternalId> ids = const [],
   List<String> genres = const [],
   String language = 'ar',
-}) =>
-    CanonicalContent(
-      canonicalId: id,
-      type: ContentType.movie,
-      titles: [LocalizedTitle(languageTag: language, value: title)],
-      year: year,
-      externalIds: ids,
-      genres: genres,
-    );
+}) => CanonicalContent(
+  canonicalId: id,
+  type: ContentType.movie,
+  titles: [LocalizedTitle(languageTag: language, value: title)],
+  year: year,
+  externalIds: ids,
+  genres: genres,
+);
 
 void main() {
   const aggregator = MetadataSearchAggregator();
 
   test('deduplicates cross-provider results by authoritative external id', () {
     final results = aggregator.aggregate([
-      MetadataSearchBatch(items: [
-        item(
-          'first',
-          'ذيب',
-          ids: const [ExternalId(namespace: 'tmdb', value: '42')],
-          genres: const ['action'],
-        ),
-      ]),
-      MetadataSearchBatch(items: [
-        item(
-          'second',
-          'Theeb',
-          ids: const [ExternalId(namespace: 'tmdb', value: '42')],
-          genres: const ['drama'],
-          language: 'en',
-        ),
-      ]),
+      MetadataSearchBatch(
+        items: [
+          item(
+            'first',
+            'ذيب',
+            ids: const [ExternalId(namespace: 'tmdb', value: '42')],
+            genres: const ['action'],
+          ),
+        ],
+      ),
+      MetadataSearchBatch(
+        items: [
+          item(
+            'second',
+            'Theeb',
+            ids: const [ExternalId(namespace: 'tmdb', value: '42')],
+            genres: const ['drama'],
+            language: 'en',
+          ),
+        ],
+      ),
     ]);
 
     expect(results, hasLength(1));
     expect(results.single.canonicalId, 'first');
-    expect(results.single.titles.map((title) => title.value), containsAll(['ذيب', 'Theeb']));
+    expect(
+      results.single.titles.map((title) => title.value),
+      containsAll(['ذيب', 'Theeb']),
+    );
     expect(results.single.genres, containsAll(['action', 'drama']));
   });
 
