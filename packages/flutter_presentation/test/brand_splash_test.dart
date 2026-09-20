@@ -3,14 +3,17 @@ import 'package:flutter_presentation/flutter_presentation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('brand mark exposes a single accessible identity', (tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(home: Scaffold(body: FourBaBrandMark())),
-    );
+  testWidgets(
+    'brand mark exposes a single accessible identity',
+    (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: FourBaBrandMark())),
+      );
 
-    expect(find.bySemanticsLabel('4BA'), findsOneWidget);
-    expect(find.byType(CustomPaint), findsWidgets);
-  });
+      expect(find.bySemanticsLabel('4BA'), findsOneWidget);
+      expect(find.byType(CustomPaint), findsWidgets);
+    },
+  );
 
   testWidgets('splash is local and honors reduced motion', (tester) async {
     await tester.pumpWidget(
