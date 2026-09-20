@@ -2,6 +2,7 @@ import 'package:app_flow/app_flow.dart';
 import 'package:core_domain/core_domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_presentation/flutter_presentation.dart';
+import 'package:native_player_flutter/native_player_flutter.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 import 'package:provider_sdk/provider_sdk.dart';
@@ -28,9 +29,16 @@ final class FourBaAppShell extends StatefulWidget {
 }
 
 final class _FourBaAppShellState extends State<FourBaAppShell> {
+  final NativePlaybackAdapter nativePlayback = NativePlaybackAdapter();
   late final AppFlowController flow = AppFlowController(
     playback: PlaybackOrchestrator(ProviderRegistry()),
   );
+
+  @override
+  void dispose() {
+    nativePlayback.stop();
+    super.dispose();
+  }
 
   static const demo = CanonicalContent(
     canonicalId: 'local-demo',
@@ -53,16 +61,27 @@ final class _FourBaAppShellState extends State<FourBaAppShell> {
               highContrast: media.highContrast,
               textScale: media.textScaler.scale(1),
             ),
-            child: SafeArea(child: _FlowScreen(flow: flow, refresh: refresh)),
+            child: SafeArea(
+              child: _FlowScreen(
+                flow: flow,
+                nativePlayback: nativePlayback,
+                refresh: refresh,
+              ),
+            ),
           );
         },
       );
 }
 
 final class _FlowScreen extends StatelessWidget {
-  const _FlowScreen({required this.flow, required this.refresh});
+  const _FlowScreen({
+    required this.flow,
+    required this.nativePlayback,
+    required this.refresh,
+  });
 
   final AppFlowController flow;
+  final NativePlaybackAdapter nativePlayback;
   final VoidCallback refresh;
 
   @override
@@ -74,7 +93,11 @@ final class _FlowScreen extends StatelessWidget {
         AppFlowStage.home => _Home(flow: flow, refresh: refresh),
         AppFlowStage.search => _Search(flow: flow, refresh: refresh),
         AppFlowStage.details => _Details(flow: flow, refresh: refresh),
-        AppFlowStage.episodes => _Episodes(flow: flow, refresh: refresh),
+        AppFlowStage.episodes => _Episodes(
+            flow: flow,
+            nativePlayback: nativePlayback,
+            refresh: refresh,
+          ),
         AppFlowStage.resolving =>
           const Center(child: CircularProgressIndicator()),
         AppFlowStage.playing => const Center(child: Text('جاري التشغيل')),
@@ -176,21 +199,33 @@ final class _Details extends StatelessWidget {
 }
 
 final class _Episodes extends StatelessWidget {
-  const _Episodes({required this.flow, required this.refresh});
+  const _Episodes({
+    required this.flow,
+    required this.nativePlayback,
+    required this.refresh,
+  });
   final AppFlowController flow;
+  final NativePlaybackAdapter nativePlayback;
   final VoidCallback refresh;
 
   @override
   Widget build(BuildContext context) => ListTile(
         title: const Text('الحلقة 1'),
-        onTap: () {
+        onTap: () async {
+          final episode = EpisodeRef(
+            canonicalContentId: flow.state.content!.canonicalId,
+            season: 1,
+            episode: 1,
+          );
           flow.selectEpisode(
             flow.state.content!,
-            EpisodeRef(
-              canonicalContentId: flow.state.content!.canonicalId,
-              season: 1,
-              episode: 1,
-            ),
+            episode,
+          );
+          refresh();
+          await flow.play(
+            content: flow.state.content!,
+            episode: episode,
+            attempt: nativePlayback.attempt,
           );
           refresh();
         },

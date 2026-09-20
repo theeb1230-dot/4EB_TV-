@@ -9,6 +9,8 @@ dependencies:
     path: ../../packages/app_flow
   core_domain:
     path: ../../packages/core_domain
+  native_player_flutter:
+    path: ../../packages/native_player_flutter
   playback_orchestrator:
     path: ../../packages/playback_orchestrator
   provider_sdk:
