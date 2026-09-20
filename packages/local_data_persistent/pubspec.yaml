@@ -1,0 +1,13 @@
+name: local_data_persistent
+description: Backend-neutral durable local data adapters for 4BA.
+version: 0.0.1
+publish_to: none
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+dependencies:
+  core_domain:
+    path: ../core_domain
+  local_data_codec:
+    path: ../local_data_codec
+dev_dependencies:
+  test: ^1.25.0
