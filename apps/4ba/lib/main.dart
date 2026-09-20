@@ -1,10 +1,12 @@
+import 'package:app_flow/app_flow.dart';
+import 'package:core_domain/core_domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_presentation/flutter_presentation.dart';
+import 'package:playback_orchestrator/playback_orchestrator.dart';
 import 'package:presentation_contract/presentation_contract.dart';
+import 'package:provider_sdk/provider_sdk.dart';
 
 void main() => runApp(const FourBaApp());
-
-enum FourBaSection { home, movies, series, search, settings }
 
 final class FourBaApp extends StatelessWidget {
   const FourBaApp({super.key});
@@ -26,85 +28,169 @@ final class FourBaAppShell extends StatefulWidget {
 }
 
 final class _FourBaAppShellState extends State<FourBaAppShell> {
-  FourBaSection section = FourBaSection.home;
+  late final AppFlowController flow = AppFlowController(
+    playback: PlaybackOrchestrator(ProviderRegistry()),
+  );
 
-  static const labels = <FourBaSection, String>{
-    FourBaSection.home: 'الرئيسية',
-    FourBaSection.movies: 'الأفلام',
-    FourBaSection.series: 'المسلسلات',
-    FourBaSection.search: 'البحث',
-    FourBaSection.settings: 'الإعدادات',
-  };
+  static const demo = CanonicalContent(
+    canonicalId: 'local-demo',
+    type: ContentType.series,
+    titles: [LocalizedTitle(languageTag: 'ar', value: 'محتوى تجريبي محلي')],
+  );
+
+  void refresh() => setState(() {});
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (context, constraints) {
           final media = MediaQuery.of(context);
-          final tenFoot = constraints.maxWidth >= 1200;
-          final presentation = FourBaPresentationContext(
-            logicalWidth: constraints.maxWidth,
-            isTenFoot: tenFoot,
-            locale: FourBaLocale.ar,
-            reduceMotion: media.disableAnimations,
-            highContrast: media.highContrast,
-            textScale: media.textScaler.scale(1),
-          );
           return FourBaCinematicShell(
-            contextModel: presentation,
-            destinations: labels.values.toList(growable: false),
-            child: SafeArea(
-              child: _SectionBody(
-                section: section,
-                onSelect: (value) => setState(() => section = value),
-              ),
+            contextModel: FourBaPresentationContext(
+              logicalWidth: constraints.maxWidth,
+              isTenFoot: constraints.maxWidth >= 1200,
+              locale: FourBaLocale.ar,
+              reduceMotion: media.disableAnimations,
+              highContrast: media.highContrast,
+              textScale: media.textScaler.scale(1),
             ),
+            child: SafeArea(child: _FlowScreen(flow: flow, refresh: refresh)),
           );
         },
       );
 }
 
-final class _SectionBody extends StatelessWidget {
-  const _SectionBody({required this.section, required this.onSelect});
+final class _FlowScreen extends StatelessWidget {
+  const _FlowScreen({required this.flow, required this.refresh});
 
-  final FourBaSection section;
-  final ValueChanged<FourBaSection> onSelect;
+  final AppFlowController flow;
+  final VoidCallback refresh;
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              '4BA',
-              textDirection: TextDirection.ltr,
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+  Widget build(BuildContext context) {
+    final state = flow.state;
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: switch (state.stage) {
+        AppFlowStage.home => _Home(flow: flow, refresh: refresh),
+        AppFlowStage.search => _Search(flow: flow, refresh: refresh),
+        AppFlowStage.details => _Details(flow: flow, refresh: refresh),
+        AppFlowStage.episodes => _Episodes(flow: flow, refresh: refresh),
+        AppFlowStage.resolving => const Center(child: CircularProgressIndicator()),
+        AppFlowStage.playing => const Center(child: Text('جاري التشغيل')),
+        AppFlowStage.error => const Center(child: Text('لا يتوفر مصدر تشغيل حاليًا')),
+      },
+    );
+  }
+}
+
+final class _Home extends StatelessWidget {
+  const _Home({required this.flow, required this.refresh});
+  final AppFlowController flow;
+  final VoidCallback refresh;
+
+  @override
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('4BA', style: Theme.of(context).textTheme.headlineMedium),
+          const SizedBox(height: 24),
+          FilledButton(
+            onPressed: () {
+              flow.openSearch();
+              refresh();
+            },
+            child: const Text('البحث'),
+          ),
+          const SizedBox(height: 16),
+          ListTile(
+            title: const Text('محتوى تجريبي محلي'),
+            subtitle: const Text('مسلسل'),
+            onTap: () {
+              flow.openDetails(_FourBaAppShellState.demo);
+              refresh();
+            },
+          ),
+        ],
+      );
+}
+
+final class _Search extends StatelessWidget {
+  const _Search({required this.flow, required this.refresh});
+  final AppFlowController flow;
+  final VoidCallback refresh;
+
+  @override
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('البحث', style: Theme.of(context).textTheme.headlineMedium),
+          const SizedBox(height: 16),
+          TextField(
+            autofocus: true,
+            decoration: const InputDecoration(
+              hintText: 'ابحث عن فيلم أو مسلسل',
+              border: OutlineInputBorder(),
             ),
-            const SizedBox(height: 24),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                for (final item in FourBaSection.values)
-                  FilledButton.tonal(
-                    onPressed: () => onSelect(item),
-                    child: Text(_FourBaAppShellState.labels[item]!),
-                  ),
-              ],
+            onSubmitted: (query) {
+              flow.openSearch(query);
+              refresh();
+            },
+          ),
+          if (flow.state.query.isNotEmpty)
+            ListTile(
+              title: const Text('محتوى تجريبي محلي'),
+              onTap: () {
+                flow.openDetails(_FourBaAppShellState.demo);
+                refresh();
+              },
             ),
-            const SizedBox(height: 32),
-            Expanded(
-              child: Center(
-                child: Semantics(
-                  header: true,
-                  child: Text(
-                    _FourBaAppShellState.labels[section]!,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-              ),
+        ],
+      );
+}
+
+final class _Details extends StatelessWidget {
+  const _Details({required this.flow, required this.refresh});
+  final AppFlowController flow;
+  final VoidCallback refresh;
+
+  @override
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            flow.state.content!.titles.first.value,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const SizedBox(height: 16),
+          FilledButton(
+            onPressed: () {
+              flow.openEpisodes(flow.state.content!);
+              refresh();
+            },
+            child: const Text('الحلقات'),
+          ),
+        ],
+      );
+}
+
+final class _Episodes extends StatelessWidget {
+  const _Episodes({required this.flow, required this.refresh});
+  final AppFlowController flow;
+  final VoidCallback refresh;
+
+  @override
+  Widget build(BuildContext context) => ListTile(
+        title: const Text('الحلقة 1'),
+        onTap: () {
+          flow.selectEpisode(
+            flow.state.content!,
+            EpisodeRef(
+              canonicalContentId: flow.state.content!.canonicalId,
+              season: 1,
+              episode: 1,
             ),
-          ],
-        ),
+          );
+          refresh();
+        },
       );
 }
