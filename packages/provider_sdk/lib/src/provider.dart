@@ -1,5 +1,15 @@
 import 'package:core_domain/core_domain.dart';
 
+abstract interface class ContentDiscoveryProvider {
+  ProviderDescriptor get descriptor;
+
+  Future<List<CanonicalContent>> search(String query);
+
+  Future<CanonicalContent?> details(String canonicalId);
+
+  Future<List<EpisodeRef>> episodes(CanonicalContent content);
+}
+
 abstract interface class Provider {
   ProviderDescriptor get descriptor;
 
@@ -28,4 +38,8 @@ final class ProviderRegistry {
       );
 
   Provider? byId(String providerId) => _providers[providerId];
+
+  List<ContentDiscoveryProvider> discoveryProviders() => List.unmodifiable(
+        _providers.values.whereType<ContentDiscoveryProvider>(),
+      );
 }
