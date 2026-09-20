@@ -75,3 +75,25 @@ jobs:
         run: git diff -- .
       - run: flutter analyze
       - run: flutter test
+
+  flutter-local-data:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/local_data_flutter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Check Flutter formatting
+        run: |
+          dart format .
+          git diff --exit-code -- .
+      - name: Show formatter diff on failure
+        if: failure()
+        run: git diff -- .
+      - run: flutter analyze
+      - run: flutter test
