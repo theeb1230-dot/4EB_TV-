@@ -20,6 +20,9 @@ final class FakeProvider implements Provider {
 
   @override
   Future<ResolveResult> resolve(ResolveRequest request) async => result;
+
+  @override
+  Future<Uri?> resolveDownload(ResolveRequest request) async => null;
 }
 
 void main() {
