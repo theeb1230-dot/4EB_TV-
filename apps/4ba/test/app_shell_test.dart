@@ -1,26 +1,60 @@
+import 'package:core_domain/core_domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:four_ba_app/main.dart';
+import 'package:provider_sdk/provider_sdk.dart';
+
+final class _DiscoveryProvider implements Provider, ContentDiscoveryProvider {
+  @override
+  ProviderDescriptor get descriptor => const ProviderDescriptor(
+        providerId: 'test',
+        version: '1',
+        capabilities: {Capability.search, Capability.metadata},
+        configurationSchemaVersion: 1,
+      );
+
+  @override
+  Future<List<CanonicalContent>> search(String query) async => const [
+        CanonicalContent(
+          canonicalId: 'test-result',
+          type: ContentType.series,
+          titles: [LocalizedTitle(languageTag: 'ar', value: 'نتيجة حقيقية')],
+        ),
+      ];
+
+  @override
+  Future<CanonicalContent?> details(String canonicalId) async => null;
+
+  @override
+  Future<List<EpisodeRef>> episodes(CanonicalContent content) async => const [];
+
+  @override
+  Future<ResolveResult> resolve(ResolveRequest request) async =>
+      const ResolveResult(candidates: []);
+
+  @override
+  Future<Uri?> resolveDownload(ResolveRequest request) async => null;
+}
 
 void main() {
-  testWidgets('navigates home to search, details and episodes', (tester) async {
-    await tester.pumpWidget(const FourBaApp());
+  testWidgets('search renders provider discovery result and opens details',
+      (tester) async {
+    final registry = ProviderRegistry()..register(_DiscoveryProvider());
+    await tester.pumpWidget(
+      MaterialApp(home: FourBaAppShell(registry: registry)),
+    );
 
-    expect(find.text('البحث'), findsOneWidget);
     await tester.tap(find.text('البحث'));
     await tester.pump();
-    expect(find.text('ابحث عن فيلم أو مسلسل'), findsOneWidget);
-
-    await tester.enterText(find.byType(EditableText), 'تجريبي');
+    await tester.enterText(find.byType(EditableText), 'اختبار');
     await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pump();
+    await tester.pumpAndSettle();
 
-    await tester.tap(find.text('محتوى تجريبي محلي'));
+    expect(find.text('نتيجة حقيقية'), findsOneWidget);
+    expect(find.text('محتوى تجريبي محلي'), findsNothing);
+
+    await tester.tap(find.text('نتيجة حقيقية'));
     await tester.pump();
     expect(find.text('الحلقات'), findsOneWidget);
-
-    await tester.tap(find.text('الحلقات'));
-    await tester.pump();
-    expect(find.text('الحلقة 1'), findsOneWidget);
   });
 }
