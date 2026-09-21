@@ -364,7 +364,44 @@ final class _PlayerSurface extends StatefulWidget {
   State<_PlayerSurface> createState() => _PlayerSurfaceState();
 }
 
-final class _PlayerSurfaceState extends State<_PlayerSurface> {
+final class _PlayerSurfaceState extends State<_PlayerSurface>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    widget.nativePlayback.activeController?.addListener(_refreshPlayer);
+  }
+
+  void _refreshPlayer() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused ||
+        state == AppLifecycleState.detached) {
+      widget.nativePlayback.pause();
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.nativePlayback.activeController?.removeListener(_refreshPlayer);
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  Future<void> seekBy(Duration delta) async {
+    final controller = widget.nativePlayback.activeController;
+    if (controller == null) return;
+    final duration = controller.value.duration;
+    var target = controller.value.position + delta;
+    if (target < Duration.zero) target = Duration.zero;
+    if (duration > Duration.zero && target > duration) target = duration;
+    await widget.nativePlayback.seekTo(target);
+  }
   @override
   Widget build(BuildContext context) {
     final controller = widget.nativePlayback.activeController;
@@ -372,6 +409,11 @@ final class _PlayerSurfaceState extends State<_PlayerSurface> {
       return const Center(child: Text('تعذر فتح جلسة التشغيل'));
     }
     final value = controller.value;
+    if (value.hasError) {
+      return Center(
+        child: Text('خطأ في التشغيل: ${value.errorDescription ?? 'غير معروف'}'),
+      );
+    }
     return Column(
       children: [
         Expanded(
@@ -382,9 +424,19 @@ final class _PlayerSurfaceState extends State<_PlayerSurface> {
             ),
           ),
         ),
+        if (value.isBuffering) const LinearProgressIndicator(),
         VideoProgressIndicator(controller, allowScrubbing: true),
         const SizedBox(height: 8),
-        FilledButton.icon(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              tooltip: 'رجوع 10 ثوانٍ',
+              onPressed: () => seekBy(const Duration(seconds: -10)),
+              icon: const Icon(Icons.replay_10),
+            ),
+            const SizedBox(width: 12),
+            FilledButton.icon(
           autofocus: true,
           onPressed: () async {
             if (controller.value.isPlaying) {
@@ -398,6 +450,14 @@ final class _PlayerSurfaceState extends State<_PlayerSurface> {
             controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
           ),
           label: Text(controller.value.isPlaying ? 'إيقاف مؤقت' : 'تشغيل'),
+            ),
+            const SizedBox(width: 12),
+            IconButton(
+              tooltip: 'تقديم 10 ثوانٍ',
+              onPressed: () => seekBy(const Duration(seconds: 10)),
+              icon: const Icon(Icons.forward_10),
+            ),
+          ],
         ),
       ],
     );
