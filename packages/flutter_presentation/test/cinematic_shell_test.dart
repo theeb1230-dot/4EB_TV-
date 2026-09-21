@@ -66,6 +66,7 @@ void main() {
     expect(Directionality.of(tester.element(find.text('Content'))),
         TextDirection.ltr);
   });
+
   testWidgets('cinematic button honors TV target and keyboard focus',
       (tester) async {
     await tester.pumpWidget(
@@ -89,5 +90,27 @@ void main() {
     final size = tester.getSize(find.byType(FourBaCinematicButton));
     expect(size.height, greaterThanOrEqualTo(56));
     expect(FocusManager.instance.primaryFocus, isNotNull);
+  });
+
+  testWidgets(
+      'runtime theme consumes Cinematic Gold typography and focus tokens',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: FourBaCinematicShell(
+          contextModel: FourBaPresentationContext(
+            logicalWidth: 390,
+            isTenFoot: false,
+          ),
+          child: Text('عنوان', style: TextStyle()),
+        ),
+      ),
+    );
+    final context = tester.element(find.text('عنوان'));
+    final theme = Theme.of(context);
+    expect(theme.brightness, Brightness.dark);
+    expect(theme.textTheme.headlineMedium?.fontSize, 28);
+    expect(theme.textTheme.bodyLarge?.fontSize, 16);
+    expect(theme.inputDecorationTheme.filled, isTrue);
   });
 }
