@@ -102,6 +102,7 @@ final class _FlowScreen extends StatelessWidget {
         AppFlowStage.episodes => _Episodes(
             flow: flow,
             nativePlayback: nativePlayback,
+            discovery: discovery,
             refresh: refresh,
           ),
         AppFlowStage.resolving =>
@@ -231,36 +232,77 @@ final class _Details extends StatelessWidget {
       );
 }
 
-final class _Episodes extends StatelessWidget {
+final class _Episodes extends StatefulWidget {
   const _Episodes({
     required this.flow,
     required this.nativePlayback,
+    required this.discovery,
     required this.refresh,
   });
+
   final AppFlowController flow;
   final NativePlaybackAdapter nativePlayback;
+  final DiscoveryCoordinator discovery;
   final VoidCallback refresh;
 
   @override
-  Widget build(BuildContext context) => ListTile(
-        title: const Text('الحلقة 1'),
-        onTap: () async {
-          final episode = EpisodeRef(
-            canonicalContentId: flow.state.content!.canonicalId,
-            season: 1,
-            episode: 1,
-          );
-          flow.selectEpisode(
-            flow.state.content!,
-            episode,
-          );
-          refresh();
-          await flow.play(
-            content: flow.state.content!,
-            episode: episode,
-            attempt: nativePlayback.attempt,
-          );
-          refresh();
-        },
-      );
+  State<_Episodes> createState() => _EpisodesState();
+}
+
+final class _EpisodesState extends State<_Episodes> {
+  List<EpisodeRef> episodes = const [];
+  bool loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    load();
+  }
+
+  Future<void> load() async {
+    final content = widget.flow.state.content;
+    if (content == null) {
+      if (mounted) setState(() => loading = false);
+      return;
+    }
+    final items = await widget.discovery.episodes(content);
+    if (!mounted) return;
+    setState(() {
+      episodes = items;
+      loading = false;
+    });
+  }
+
+  Future<void> play(EpisodeRef episode) async {
+    final content = widget.flow.state.content;
+    if (content == null) return;
+    widget.flow.selectEpisode(content, episode);
+    widget.refresh();
+    await widget.flow.play(
+      content: content,
+      episode: episode,
+      attempt: widget.nativePlayback.attempt,
+    );
+    widget.refresh();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (loading) return const Center(child: CircularProgressIndicator());
+    if (episodes.isEmpty) {
+      return const Center(child: Text('لا توجد حلقات متاحة'));
+    }
+    return ListView.builder(
+      itemCount: episodes.length,
+      itemBuilder: (context, index) {
+        final episode = episodes[index];
+        final title = episode.title ?? 'الحلقة ${episode.episode}';
+        return ListTile(
+          title: Text(title),
+          subtitle: Text('الموسم ${episode.season}'),
+          onTap: () => play(episode),
+        );
+      },
+    );
+  }
 }
