@@ -70,6 +70,8 @@ void main() {
 
     await adapter.pause();
     expect(session.paused, isTrue);
+    await adapter.seekTo(const Duration(seconds: 15));
+    expect(session.seekPosition, const Duration(seconds: 15));
     session.played = false;
     await adapter.resume();
     expect(session.played, isTrue);
