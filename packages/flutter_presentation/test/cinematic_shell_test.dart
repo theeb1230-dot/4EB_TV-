@@ -66,4 +66,28 @@ void main() {
     expect(Directionality.of(tester.element(find.text('Content'))),
         TextDirection.ltr);
   });
+  testWidgets('cinematic button honors TV target and keyboard focus',
+      (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FourBaCinematicShell(
+          contextModel: const FourBaPresentationContext(
+            logicalWidth: 1920,
+            isTenFoot: true,
+            reduceMotion: true,
+          ),
+          child: FourBaCinematicButton(
+            label: 'تشغيل',
+            isTenFoot: true,
+            autofocus: true,
+            onPressed: () {},
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    final size = tester.getSize(find.byType(FourBaCinematicButton));
+    expect(size.height, greaterThanOrEqualTo(56));
+    expect(FocusManager.instance.primaryFocus, isNotNull);
+  });
 }
