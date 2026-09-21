@@ -56,7 +56,13 @@ void main() {
   testWidgets('search fails closed when no discovery provider is configured',
       (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(home: FourBaAppShell()),
+      MaterialApp(
+        home: FourBaAppShell(
+          localData: FlutterLocalDataRuntime(
+            backend: MemoryPersistentStringBackend(),
+          ),
+        ),
+      ),
     );
 
     await tester.tap(find.text('البحث'));
