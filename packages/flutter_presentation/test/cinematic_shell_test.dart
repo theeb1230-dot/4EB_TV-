@@ -112,5 +112,24 @@ void main() {
     expect(theme.textTheme.headlineMedium?.fontSize, 28);
     expect(theme.textTheme.bodyLarge?.fontSize, 16);
     expect(theme.inputDecorationTheme.filled, isTrue);
+    expect(theme.primaryTextTheme.headlineMedium?.fontSize, 28);
+    expect(theme.splashFactory, isA<InkSparkleFactory>());
   });
+  testWidgets('reduced motion disables splash feedback', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: FourBaCinematicShell(
+          contextModel: FourBaPresentationContext(
+            logicalWidth: 390,
+            isTenFoot: false,
+            reduceMotion: true,
+          ),
+          child: Text('هادئ'),
+        ),
+      ),
+    );
+    final theme = Theme.of(tester.element(find.text('هادئ')));
+    expect(theme.splashFactory, isA<NoSplashFactory>());
+  });
+
 }
