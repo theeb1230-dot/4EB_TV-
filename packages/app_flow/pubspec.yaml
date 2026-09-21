@@ -7,7 +7,11 @@ environment:
 dependencies:
   core_domain:
     path: ../core_domain
+  metadata_engine:
+    path: ../metadata_engine
   playback_orchestrator:
     path: ../playback_orchestrator
+  provider_sdk:
+    path: ../provider_sdk
 dev_dependencies:
   test: ^1.25.0
