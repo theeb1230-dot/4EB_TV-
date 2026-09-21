@@ -1,5 +1,6 @@
 import 'package:core_domain/core_domain.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
+import 'package:provider_sdk/provider_sdk.dart';
 
 enum AppFlowStage { home, search, details, episodes, resolving, playing, error }
 
