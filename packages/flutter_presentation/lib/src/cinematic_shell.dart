@@ -4,6 +4,34 @@ import 'package:presentation_contract/presentation_contract.dart';
 
 Color _color(int value) => Color(value);
 
+FontWeight _weight(int value) => switch (value) {
+      >= 700 => FontWeight.w700,
+      >= 600 => FontWeight.w600,
+      >= 500 => FontWeight.w500,
+      _ => FontWeight.w400,
+    };
+
+TextStyle _textStyle(FourBaTextRole role) {
+  final token = FourBaTypography.roles[role]!;
+  return TextStyle(
+    fontSize: token.size,
+    height: token.lineHeight,
+    fontWeight: _weight(token.weight),
+    color: _color(FourBaColorTokens.textPrimary),
+  );
+}
+
+TextTheme _textTheme() => TextTheme(
+      displayLarge: _textStyle(FourBaTextRole.display),
+      headlineLarge: _textStyle(FourBaTextRole.heroTitle),
+      headlineMedium: _textStyle(FourBaTextRole.titleLarge),
+      titleLarge: _textStyle(FourBaTextRole.title),
+      bodyLarge: _textStyle(FourBaTextRole.body),
+      bodyMedium: _textStyle(FourBaTextRole.bodyCompact),
+      labelLarge: _textStyle(FourBaTextRole.label),
+      bodySmall: _textStyle(FourBaTextRole.caption),
+    );
+
 final class FourBaCinematicShell extends StatelessWidget {
   const FourBaCinematicShell({
     super.key,
@@ -29,6 +57,34 @@ final class FourBaCinematicShell extends StatelessWidget {
         error: _color(FourBaColorTokens.error),
       ),
       focusColor: _color(FourBaColorTokens.focusRing),
+      textTheme: _textTheme(),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: _color(FourBaColorTokens.base),
+        indicatorColor: _color(FourBaColorTokens.raised),
+        labelTextStyle: WidgetStatePropertyAll(
+          _textStyle(FourBaTextRole.label),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: _color(FourBaColorTokens.base),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(FourBaRadius.control),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(FourBaRadius.control),
+          borderSide: BorderSide(
+            color: _color(FourBaColorTokens.focusRing),
+            width: FourBaFocus.ringWidth,
+          ),
+        ),
+      ),
+      cardTheme: CardThemeData(
+        color: _color(FourBaColorTokens.raised),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(FourBaRadius.card),
+        ),
+      ),
     );
 
     return Directionality(
@@ -211,9 +267,11 @@ final class _FourBaFocusTileState extends State<FourBaFocusTile> {
                 : FourBaMotion.shortMs,
           ),
           child: Container(
-            constraints:
-                const BoxConstraints(minHeight: FourBaFocus.tvMinimumTarget),
-            padding: const EdgeInsets.symmetric(horizontal: FourBaSpacing.x4),
+            constraints: const BoxConstraints(
+              minHeight: FourBaFocus.tvMinimumTarget,
+            ),
+            padding:
+                const EdgeInsets.symmetric(horizontal: FourBaSpacing.x4),
             decoration: BoxDecoration(
               color: _color(FourBaColorTokens.raised),
               borderRadius: BorderRadius.circular(FourBaRadius.control),
