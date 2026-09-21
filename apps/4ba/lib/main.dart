@@ -159,6 +159,7 @@ final class _Search extends StatefulWidget {
 
 final class _SearchState extends State<_Search> {
   List<CanonicalContent> results = const [];
+  Map<String, List<ProviderContentLocator>> locators = const {};
   bool loading = false;
 
   Future<void> search(String query) async {
@@ -168,6 +169,7 @@ final class _SearchState extends State<_Search> {
     if (!mounted) return;
     setState(() {
       results = result.items;
+      locators = result.locators;
       loading = false;
     });
     widget.refresh();
@@ -201,7 +203,10 @@ final class _SearchState extends State<_Search> {
                 return ListTile(
                   title: Text(content.titles.first.value),
                   onTap: () {
-                    widget.flow.openDetails(content);
+                    widget.flow.openDetails(
+                      content,
+                      locators: locators[content.canonicalId] ?? const [],
+                    );
                     widget.refresh();
                   },
                 );
@@ -243,7 +248,10 @@ final class _DetailsState extends State<_Details> {
       if (mounted) setState(() => loading = false);
       return;
     }
-    final detailed = await widget.discovery.details(selected.canonicalId);
+    final detailed = await widget.discovery.details(
+      selected.canonicalId,
+      locators: widget.flow.state.contentLocators,
+    );
     if (!mounted) return;
     setState(() {
       content = detailed ?? selected;
@@ -313,7 +321,10 @@ final class _EpisodesState extends State<_Episodes> {
       if (mounted) setState(() => loading = false);
       return;
     }
-    final items = await widget.discovery.episodes(content);
+    final items = await widget.discovery.episodes(
+      content,
+      locators: widget.flow.state.contentLocators,
+    );
     if (!mounted) return;
     setState(() {
       episodes = items;
