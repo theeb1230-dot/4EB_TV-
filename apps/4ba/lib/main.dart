@@ -111,7 +111,7 @@ final class _FlowScreen extends StatelessWidget {
           ),
         AppFlowStage.resolving =>
           const Center(child: CircularProgressIndicator()),
-        AppFlowStage.playing => const Center(child: Text('جاري التشغيل')),
+        AppFlowStage.playing => _PlayerSurface(nativePlayback: nativePlayback),
         AppFlowStage.error =>
           const Center(child: Text('لا يتوفر مصدر تشغيل حاليًا')),
       },
@@ -350,6 +350,55 @@ final class _EpisodesState extends State<_Episodes> {
           onTap: () => play(episode),
         );
       },
+    );
+  }
+}
+
+final class _PlayerSurface extends StatefulWidget {
+  const _PlayerSurface({required this.nativePlayback});
+
+  final NativePlaybackAdapter nativePlayback;
+
+  @override
+  State<_PlayerSurface> createState() => _PlayerSurfaceState();
+}
+
+final class _PlayerSurfaceState extends State<_PlayerSurface> {
+  @override
+  Widget build(BuildContext context) {
+    final controller = widget.nativePlayback.activeController;
+    if (controller == null || !controller.value.isInitialized) {
+      return const Center(child: Text('تعذر فتح جلسة التشغيل'));
+    }
+    final value = controller.value;
+    return Column(
+      children: [
+        Expanded(
+          child: Center(
+            child: AspectRatio(
+              aspectRatio: value.aspectRatio == 0 ? 16 / 9 : value.aspectRatio,
+              child: VideoPlayer(controller),
+            ),
+          ),
+        ),
+        VideoProgressIndicator(controller, allowScrubbing: true),
+        const SizedBox(height: 8),
+        FilledButton.icon(
+          autofocus: true,
+          onPressed: () async {
+            if (controller.value.isPlaying) {
+              await widget.nativePlayback.pause();
+            } else {
+              await widget.nativePlayback.resume();
+            }
+            if (mounted) setState(() {});
+          },
+          icon: Icon(
+            controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          ),
+          label: Text(controller.value.isPlaying ? 'إيقاف مؤقت' : 'تشغيل'),
+        ),
+      ],
     );
   }
 }
