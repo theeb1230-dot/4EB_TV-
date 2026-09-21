@@ -10,6 +10,7 @@ final class FakeSession implements NativeVideoSession {
   final bool failInitialize;
   bool initialized = false;
   bool played = false;
+  bool paused = false;
   bool disposed = false;
   Duration? seekPosition;
 
@@ -26,6 +27,9 @@ final class FakeSession implements NativeVideoSession {
 
   @override
   Future<void> play() async => played = true;
+
+  @override
+  Future<void> pause() async => paused = true;
 
   @override
   Future<void> dispose() async => disposed = true;
@@ -54,6 +58,21 @@ void main() {
     expect(session.seekPosition, const Duration(seconds: 37));
     expect(session.played, isTrue);
     expect(adapter.activeSession, same(session));
+  });
+
+  test('pause and resume delegate to active native session', () async {
+    final session = FakeSession();
+    final adapter = NativePlaybackAdapter(sessionFactory: (_) => session);
+    await adapter.playCandidate(
+      candidate('https://media.example/stream.m3u8'),
+      Duration.zero,
+    );
+
+    await adapter.pause();
+    expect(session.paused, isTrue);
+    session.played = false;
+    await adapter.resume();
+    expect(session.played, isTrue);
   });
 
   test('disposes failed session and returns retryable failure', () async {
