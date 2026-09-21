@@ -37,6 +37,8 @@ final class DiscoveryCoordinator {
   final ProviderRegistry _registry;
   final MetadataSearchAggregator _aggregator;
 
+  bool get hasDiscoveryProviders => _registry.discoveryProviders().isNotEmpty;
+
   Future<DiscoverySearchResult> search(String query) async {
     final normalized = query.trim();
     if (normalized.isEmpty) {
