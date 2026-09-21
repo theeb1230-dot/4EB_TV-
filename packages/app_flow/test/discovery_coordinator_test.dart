@@ -58,6 +58,39 @@ void main() {
     expect(result.failedProviders, ['bad']);
   });
 
+  test('preserves provider-local ids across canonical aggregation', () async {
+    const a = CanonicalContent(
+      canonicalId: 'a-123',
+      type: ContentType.series,
+      titles: [LocalizedTitle(languageTag: 'ar', value: 'المسلسل')],
+      externalIds: [ExternalId(namespace: 'tmdb', value: '42')],
+    );
+    const b = CanonicalContent(
+      canonicalId: 'b-789',
+      type: ContentType.series,
+      titles: [LocalizedTitle(languageTag: 'en', value: 'The Series')],
+      externalIds: [ExternalId(namespace: 'tmdb', value: '42')],
+    );
+    final registry = ProviderRegistry()
+      ..register(DiscoveryProvider('a', const [a]))
+      ..register(DiscoveryProvider('b', const [b]));
+    final coordinator = DiscoveryCoordinator(registry: registry);
+
+    final result = await coordinator.search('series');
+
+    expect(result.items, hasLength(1));
+    final locators = result.locatorsFor(result.items.single.canonicalId);
+    expect(
+      locators.map((locator) => locator.providerContentId),
+      containsAll(['a-123', 'b-789']),
+    );
+    final details = await coordinator.details(
+      result.items.single.canonicalId,
+      locators: locators,
+    );
+    expect(details?.canonicalId, 'a-123');
+  });
+
   test('empty query fails closed without calling providers', () async {
     final registry = ProviderRegistry()
       ..register(DiscoveryProvider('bad', const [], fail: true));
