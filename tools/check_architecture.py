@@ -22,6 +22,7 @@ ALLOWED: dict[str, set[str]] = {
     "playback_orchestrator": {"core_domain", "provider_sdk", "resolver_engine"},
     "app_flow": {"core_domain", "metadata_engine", "playback_orchestrator", "provider_sdk"},
     "native_player_flutter": {"core_domain", "playback_orchestrator"},
+    "tvmaze_provider": {"core_domain", "provider_sdk"},
 }
 PACKAGE_IMPORT = re.compile(r"package:([a-zA-Z0-9_]+?)/")
 PATH_DEP = re.compile(r"^\s{2}([a-zA-Z0-9_]+):\s*$")
