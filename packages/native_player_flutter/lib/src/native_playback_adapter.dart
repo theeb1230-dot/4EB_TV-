@@ -6,6 +6,7 @@ abstract interface class NativeVideoSession {
   Future<void> initialize();
   Future<void> seekTo(Duration position);
   Future<void> play();
+  Future<void> pause();
   Future<void> dispose();
 }
 
@@ -29,6 +30,9 @@ final class VideoPlayerNativeSession implements NativeVideoSession {
   Future<void> play() => _controller.play();
 
   @override
+  Future<void> pause() => _controller.pause();
+
+  @override
   Future<void> dispose() => _controller.dispose();
 }
 
@@ -41,6 +45,15 @@ final class NativePlaybackAdapter {
   NativeVideoSession? _activeSession;
 
   NativeVideoSession? get activeSession => _activeSession;
+
+  VideoPlayerController? get activeController {
+    final session = _activeSession;
+    return session is VideoPlayerNativeSession ? session.controller : null;
+  }
+
+  Future<void> pause() async => _activeSession?.pause();
+
+  Future<void> resume() async => _activeSession?.play();
 
   PlaybackAttempt get attempt => playCandidate;
 
