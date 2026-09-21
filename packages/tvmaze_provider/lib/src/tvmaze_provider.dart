@@ -11,11 +11,15 @@ final class TvMazeProvider implements Provider, ContentDiscoveryProvider {
 
   @override
   ProviderDescriptor get descriptor => const ProviderDescriptor(
-    providerId: 'tvmaze',
-    version: '1',
-    capabilities: {Capability.catalog, Capability.metadata, Capability.search},
-    configurationSchemaVersion: 1,
-  );
+        providerId: 'tvmaze',
+        version: '1',
+        capabilities: {
+          Capability.catalog,
+          Capability.metadata,
+          Capability.search
+        },
+        configurationSchemaVersion: 1,
+      );
 
   @override
   Future<List<CanonicalContent>> search(String query) async {
@@ -102,8 +106,7 @@ final class TvMazeProvider implements Provider, ContentDiscoveryProvider {
     final year = premiered is String && premiered.length >= 4
         ? int.tryParse(premiered.substring(0, 4))
         : null;
-    final genres =
-        (show['genres'] as List?)
+    final genres = (show['genres'] as List?)
             ?.whereType<String>()
             .where((value) => value.trim().isNotEmpty)
             .toList(growable: false) ??
@@ -133,9 +136,9 @@ final class TvMazeProvider implements Provider, ContentDiscoveryProvider {
   }
 
   Future<Object?> _getJson(Uri uri) async {
-    final response = await _client
-        .get(uri, headers: const {'User-Agent': '4BA/0.1 metadata-client'})
-        .timeout(const Duration(seconds: 8));
+    final response = await _client.get(uri, headers: const {
+      'User-Agent': '4BA/0.1 metadata-client'
+    }).timeout(const Duration(seconds: 8));
     if (response.statusCode == 429) {
       throw StateError('TVmaze rate limit reached');
     }
