@@ -1,6 +1,6 @@
+import 'package:app_flow/src/discovery_coordinator.dart';
 import 'package:core_domain/core_domain.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
-import 'package:provider_sdk/provider_sdk.dart';
 
 enum AppFlowStage { home, search, details, episodes, resolving, playing, error }
 
@@ -13,7 +13,6 @@ final class AppFlowState {
     this.failureClass,
     this.contentLocators = const <ProviderContentLocator>[],
   });
-
   final AppFlowStage stage;
   final String query;
   final CanonicalContent? content;
@@ -23,40 +22,21 @@ final class AppFlowState {
 }
 
 final class AppFlowController {
-  AppFlowController({required PlaybackOrchestrator playback})
-      : _playback = playback;
-
+  AppFlowController({required PlaybackOrchestrator playback}) : _playback = playback;
   final PlaybackOrchestrator _playback;
   AppFlowState _state = const AppFlowState();
-
   AppFlowState get state => _state;
 
-  void openSearch([String query = '']) =>
-      _state = AppFlowState(stage: AppFlowStage.search, query: query);
+  void openSearch([String query = '']) => _state = AppFlowState(stage: AppFlowStage.search, query: query);
 
-  void openDetails(
-    CanonicalContent content, {
-    List<ProviderContentLocator> locators = const <ProviderContentLocator>[],
-  }) =>
-      _state = AppFlowState(
-        stage: AppFlowStage.details,
-        content: content,
-        contentLocators: List.unmodifiable(locators),
-      );
+  void openDetails(CanonicalContent content, {List<ProviderContentLocator> locators = const <ProviderContentLocator>[]}) =>
+      _state = AppFlowState(stage: AppFlowStage.details, content: content, contentLocators: List.unmodifiable(locators));
 
-  void openEpisodes(CanonicalContent content) => _state = AppFlowState(
-        stage: AppFlowStage.episodes,
-        content: content,
-        contentLocators: _state.contentLocators,
-      );
+  void openEpisodes(CanonicalContent content) => _state =
+      AppFlowState(stage: AppFlowStage.episodes, content: content, contentLocators: _state.contentLocators);
 
-  void selectEpisode(CanonicalContent content, EpisodeRef episode) =>
-      _state = AppFlowState(
-        stage: AppFlowStage.episodes,
-        content: content,
-        episode: episode,
-        contentLocators: _state.contentLocators,
-      );
+  void selectEpisode(CanonicalContent content, EpisodeRef episode) => _state =
+      AppFlowState(stage: AppFlowStage.episodes, content: content, episode: episode, contentLocators: _state.contentLocators);
 
   Future<PlaybackOrchestrationResult> play({
     required CanonicalContent content,
@@ -72,11 +52,7 @@ final class AppFlowController {
       contentLocators: _state.contentLocators,
     );
     final result = await _playback.resolveAndPlay(
-      request: ResolveRequest(
-        content: content,
-        episode: episode,
-        dataSaver: dataSaver,
-      ),
+      request: ResolveRequest(content: content, episode: episode, dataSaver: dataSaver),
       capability: Capability.stream,
       attempt: attempt,
       resumePosition: resumePosition,
