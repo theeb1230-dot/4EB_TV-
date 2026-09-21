@@ -22,7 +22,9 @@ final class FourBaApp extends StatelessWidget {
 }
 
 final class FourBaAppShell extends StatefulWidget {
-  const FourBaAppShell({super.key});
+  const FourBaAppShell({super.key, this.registry});
+
+  final ProviderRegistry? registry;
 
   @override
   State<FourBaAppShell> createState() => _FourBaAppShellState();
@@ -30,8 +32,10 @@ final class FourBaAppShell extends StatefulWidget {
 
 final class _FourBaAppShellState extends State<FourBaAppShell> {
   final NativePlaybackAdapter nativePlayback = NativePlaybackAdapter();
+  late final ProviderRegistry registry = widget.registry ?? ProviderRegistry();
+  late final DiscoveryCoordinator discovery = DiscoveryCoordinator(registry: registry);
   late final AppFlowController flow = AppFlowController(
-    playback: PlaybackOrchestrator(ProviderRegistry()),
+    playback: PlaybackOrchestrator(registry),
   );
 
   @override
@@ -40,11 +44,6 @@ final class _FourBaAppShellState extends State<FourBaAppShell> {
     super.dispose();
   }
 
-  static const demo = CanonicalContent(
-    canonicalId: 'local-demo',
-    type: ContentType.series,
-    titles: [LocalizedTitle(languageTag: 'ar', value: 'محتوى تجريبي محلي')],
-  );
 
   void refresh() => setState(() {});
 
@@ -65,6 +64,7 @@ final class _FourBaAppShellState extends State<FourBaAppShell> {
               child: _FlowScreen(
                 flow: flow,
                 nativePlayback: nativePlayback,
+                discovery: discovery,
                 refresh: refresh,
               ),
             ),
@@ -77,11 +77,13 @@ final class _FlowScreen extends StatelessWidget {
   const _FlowScreen({
     required this.flow,
     required this.nativePlayback,
+    required this.discovery,
     required this.refresh,
   });
 
   final AppFlowController flow;
   final NativePlaybackAdapter nativePlayback;
+  final DiscoveryCoordinator discovery;
   final VoidCallback refresh;
 
   @override
@@ -91,7 +93,11 @@ final class _FlowScreen extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: switch (state.stage) {
         AppFlowStage.home => _Home(flow: flow, refresh: refresh),
-        AppFlowStage.search => _Search(flow: flow, refresh: refresh),
+        AppFlowStage.search => _Search(
+          flow: flow,
+          discovery: discovery,
+          refresh: refresh,
+        ),
         AppFlowStage.details => _Details(flow: flow, refresh: refresh),
         AppFlowStage.episodes => _Episodes(
             flow: flow,
@@ -126,23 +132,41 @@ final class _Home extends StatelessWidget {
             },
             child: const Text('البحث'),
           ),
-          const SizedBox(height: 16),
-          ListTile(
-            title: const Text('محتوى تجريبي محلي'),
-            subtitle: const Text('مسلسل'),
-            onTap: () {
-              flow.openDetails(_FourBaAppShellState.demo);
-              refresh();
-            },
-          ),
+
         ],
       );
 }
 
-final class _Search extends StatelessWidget {
-  const _Search({required this.flow, required this.refresh});
+final class _Search extends StatefulWidget {
+  const _Search({
+    required this.flow,
+    required this.discovery,
+    required this.refresh,
+  });
+
   final AppFlowController flow;
+  final DiscoveryCoordinator discovery;
   final VoidCallback refresh;
+
+  @override
+  State<_Search> createState() => _SearchState();
+}
+
+final class _SearchState extends State<_Search> {
+  List<CanonicalContent> results = const [];
+  bool loading = false;
+
+  Future<void> search(String query) async {
+    widget.flow.openSearch(query);
+    setState(() => loading = true);
+    final result = await widget.discovery.search(query);
+    if (!mounted) return;
+    setState(() {
+      results = result.items;
+      loading = false;
+    });
+    widget.refresh();
+  }
 
   @override
   Widget build(BuildContext context) => Column(
@@ -156,19 +180,29 @@ final class _Search extends StatelessWidget {
               hintText: 'ابحث عن فيلم أو مسلسل',
               border: OutlineInputBorder(),
             ),
-            onSubmitted: (query) {
-              flow.openSearch(query);
-              refresh();
-            },
+            onSubmitted: search,
           ),
-          if (flow.state.query.isNotEmpty)
-            ListTile(
-              title: const Text('محتوى تجريبي محلي'),
-              onTap: () {
-                flow.openDetails(_FourBaAppShellState.demo);
-                refresh();
+          if (loading) const LinearProgressIndicator(),
+          if (!loading && widget.flow.state.query.isNotEmpty && results.isEmpty)
+            const Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: Text('لا توجد نتائج'),
+            ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: results.length,
+              itemBuilder: (context, index) {
+                final content = results[index];
+                return ListTile(
+                  title: Text(content.titles.first.value),
+                  onTap: () {
+                    widget.flow.openDetails(content);
+                    widget.refresh();
+                  },
+                );
               },
             ),
+          ),
         ],
       );
 }
