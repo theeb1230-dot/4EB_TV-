@@ -53,6 +53,20 @@ final class _DiscoveryProvider implements Provider, ContentDiscoveryProvider {
 }
 
 void main() {
+  testWidgets('search fails closed when no discovery provider is configured',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: FourBaAppShell()),
+    );
+
+    await tester.tap(find.text('البحث'));
+    await tester.pump();
+
+    expect(find.textContaining('لا يوجد مزود محتوى مفعّل'), findsOneWidget);
+    final field = tester.widget<TextField>(find.byType(TextField));
+    expect(field.enabled, isFalse);
+  });
+
   testWidgets('search renders provider discovery result and opens details',
       (tester) async {
     final registry = ProviderRegistry()..register(_DiscoveryProvider());
