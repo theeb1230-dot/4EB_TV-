@@ -33,6 +33,33 @@ final class DemoProvider implements Provider {
           ),
         ],
       );
+
+  test('retry re-resolves failed playback and preserves resume position', () async {
+    final registry = ProviderRegistry()..register(DemoProvider());
+    final flow = AppFlowController(playback: PlaybackOrchestrator(registry));
+    var attempts = 0;
+    Duration? retriedResume;
+
+    await flow.play(
+      content: content,
+      resumePosition: const Duration(seconds: 12),
+      attempt: (_, resume) async {
+        attempts++;
+        retriedResume = resume;
+        return attempts == 1
+            ? const AttemptResult.retry(ResolveFailureClass.network)
+            : const AttemptResult.success();
+      },
+    );
+    expect(flow.state.stage, AppFlowStage.error);
+
+    final result = await flow.retry(
+      resumePosition: const Duration(seconds: 27),
+    );
+    expect(result?.completed, isTrue);
+    expect(flow.state.stage, AppFlowStage.playing);
+    expect(retriedResume, const Duration(seconds: 27));
+  });
 }
 
 void main() {
