@@ -78,3 +78,4 @@ void main() {
     expect(find.text('الحلقة 1'), findsNothing);
   });
 }
+
