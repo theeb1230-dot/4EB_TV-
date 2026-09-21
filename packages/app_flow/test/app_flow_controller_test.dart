@@ -33,7 +33,6 @@ final class DemoProvider implements Provider {
           ),
         ],
       );
-
 }
 
 void main() {
@@ -92,7 +91,8 @@ void main() {
     expect(flow.state.stage, AppFlowStage.playing);
     expect(flow.state.contentLocators, const [locator]);
   });
-  test('retry re-resolves failed playback and preserves resume position', () async {
+  test('retry re-resolves failed playback and preserves resume position',
+      () async {
     final registry = ProviderRegistry()..register(DemoProvider());
     final flow = AppFlowController(playback: PlaybackOrchestrator(registry));
     var attempts = 0;
