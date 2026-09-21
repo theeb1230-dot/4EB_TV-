@@ -10,10 +10,10 @@ final class LegalAboutSurface extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('حول وحقوق البيانات')),
-        body: const SafeArea(
+        body: SafeArea(
           child: ListView(
-            padding: EdgeInsets.all(24),
-            children: [
+            padding: const EdgeInsets.all(24),
+            children: const [
               Text('4BA'),
               SizedBox(height: 16),
               Text(
