@@ -13,6 +13,8 @@ dependencies:
     path: ../../packages/native_player_flutter
   local_data_flutter:
     path: ../../packages/local_data_flutter
+  local_data_persistent:
+    path: ../../packages/local_data_persistent
   playback_orchestrator:
     path: ../../packages/playback_orchestrator
   provider_sdk:
