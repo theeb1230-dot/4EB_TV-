@@ -55,17 +55,21 @@ final class TvMazeProvider implements Provider, ContentDiscoveryProvider {
       _base.replace(path: '/shows/${id.toString()}/episodes'),
     );
     if (data is! List) return const [];
-    return data.whereType<Map<String, dynamic>>().map((item) {
-      final season = item['season'];
-      final number = item['number'];
-      if (season is! num || number is! num) return null;
-      return EpisodeRef(
-        canonicalContentId: content.canonicalId,
-        season: season.toInt(),
-        episode: number.toInt(),
-        title: item['name'] is String ? item['name'] as String : null,
-      );
-    }).whereType<EpisodeRef>().toList(growable: false);
+    return data
+        .whereType<Map<String, dynamic>>()
+        .map((item) {
+          final season = item['season'];
+          final number = item['number'];
+          if (season is! num || number is! num) return null;
+          return EpisodeRef(
+            canonicalContentId: content.canonicalId,
+            season: season.toInt(),
+            episode: number.toInt(),
+            title: item['name'] is String ? item['name'] as String : null,
+          );
+        })
+        .whereType<EpisodeRef>()
+        .toList(growable: false);
   }
 
   @override
