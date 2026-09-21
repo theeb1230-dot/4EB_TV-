@@ -60,7 +60,10 @@ void main() {
     );
     await tester.pumpWidget(
       MaterialApp(
-        home: FourBaAppShell(localData: localData),
+        home: FourBaAppShell(
+          registry: ProviderRegistry(),
+          localData: localData,
+        ),
       ),
     );
 
