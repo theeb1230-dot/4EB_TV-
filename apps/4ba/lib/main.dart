@@ -322,7 +322,9 @@ final class _EpisodesState extends State<_Episodes> {
   Widget build(BuildContext context) {
     if (loading) return const Center(child: CircularProgressIndicator());
     if (episodes.isEmpty) {
-      return const Center(child: Text('لا توجد حلقات متاحة'));
+      return const Center(
+        child: Text('لا توجد حلقات متاحة'),
+      );
     }
     return ListView.builder(
       itemCount: episodes.length,
