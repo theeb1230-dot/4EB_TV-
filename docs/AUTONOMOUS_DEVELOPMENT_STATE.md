@@ -3,51 +3,52 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact start/end main for this execution: `9eecd03497606fb8b983a80bef6d86e33fdcb25e`.
-- Open PR #70: `app/wire-flow-ui` -> `main`; exact code head before this handoff commit: `1ac79201cbd6d6120c68a3afa1567ef68d8500bf`.
-- Exact-head CI for `1ac79201cbd6d6120c68a3afa1567ef68d8500bf`: Audit hygiene SUCCESS; Core contracts SUCCESS; PR is mergeable and not draft.
-- Merge was attempted with expected-head protection and was blocked by the execution safety layer, not by GitHub mergeability or CI. Do not claim #70 is merged until main proves it.
+- Exact start/end `main`: `c2d29a12df93897a822d82c74b40256b515a6b34` (PR #72 merged).
+- Open PR #73: `metadata/universal-search` -> `main`; exact code head after the evidence-based formatter fix: `8dc1526f17060c41d767ba088f310a0613286329`.
+- No competing PR is open.
+- PR #73 reports mergeable=true and draft=false, but merge is blocked until CI is green on the post-handoff exact head.
 - Releases remain non-Golden; no Golden gate is bypassed.
 
 ## Product invariants
 ZERO_COST core, ZERO_ADS/zero ad tracking, Privacy First/Zero-PII, Local-first, Native Playback First, internal WebView last fallback only, no external-browser playback, no DRM/paywall/access-control bypass, no secrets, no mandatory paid backend, no GitHub/4BA media proxy, Metadata != Streams, Watch != Download, provider/UI separation, Arabic RTL default plus English/Turkish, evidence-backed completion only.
 
 ## Decision / blockers
-- **P0 selected:** merge the CI-green real application-flow UI slice, then replace its intentionally local fixture catalog with authorized provider/metadata/search integration and wire episode selection through Resolve -> Native Play.
-- Acceptance for #70 is proven at exact head: typed AppFlowState renders Home/Search/Details/Episodes; Arabic-first UI; controller-owned transitions; query preservation; CanonicalContent/EpisodeRef selection; widget test for Home -> Search -> Details -> Episodes; exact-head Audit + Core contracts green.
-- **P0 open:** real authorized catalog/provider search integration, playback screen/controller integration, native playback runtime/device evidence, quality/audio/subtitles/source-switch continuity.
+- **P0 selected:** finish #73 provider-neutral Metadata/Universal Search aggregation with exact-head green CI and merge it.
+- Acceptance: independent discovery batches aggregate without provider identity in presentation; canonical rules deduplicate external IDs first and title/year second; merged records preserve localized titles/external IDs/genres; Metadata never resolves streams; tests cover cross-source dedup, distinct years and immutable output; exact-head CI green.
+- **P0 next:** application discovery coordinator over authorized `ContentDiscoveryProvider` instances with failure isolation/ranking, then replace the app fixture.
+- **P0 next:** Episode -> Resolve -> Native Play end-to-end with source-failure fallback, same-position switching, quality/audio/subtitles and runtime/device evidence.
 - **P0 open:** remaining Core config/security/network/localization/accessibility runtime gaps and Design System device/runtime evidence.
 - **P1:** Offline/downloads, Live/Sports/EPG, Experience switching, complete Android/TV/iOS/Web surfaces and local profile features.
 - **P2:** update channels, developer diagnostics UI, performance/accessibility hardening and Golden evidence.
 
 ## Work completed in this execution
-- Re-read GitHub source truth and confirmed #70 is the only open PR.
-- Confirmed main is `9eecd03497606fb8b983a80bef6d86e33fdcb25e` (#69 merged).
-- Re-read #70 actual diff: executable Flutter shell now renders Home/Search/Details/Episodes from AppFlowController/AppFlowState and uses CanonicalContent/EpisodeRef rather than a separate navigation state.
-- Confirmed the catalog row remains an explicit local fixture and does not claim provider/network integration.
-- Verified exact-head `1ac79201cbd6d6120c68a3afa1567ef68d8500bf`: Audit hygiene SUCCESS and Core contracts SUCCESS; PR reports mergeable=true, draft=false.
-- Attempted expected-head-protected squash merge. The execution safety layer blocked the write; GitHub did not report a CI or mergeability failure.
-- No Provider endpoint, ad/tracking SDK, PII, media proxy, secret, DRM/access-control bypass or mandatory backend was introduced in this execution.
+- Re-read GitHub source truth and confirmed #73 is the only open PR; `main` remains `c2d29a12df93897a822d82c74b40256b515a6b34`.
+- Re-read #73 state/diff and exact-head Actions rather than inheriting the prior report.
+- Exact head `21fd49e97a3ab7fbd526e91d904901a433d812fa`: Audit hygiene SUCCESS; Core contracts FAILURE.
+- Inspected Core contracts jobs: `test (metadata_engine)` failed specifically at `Check Dart formatting`; analyze/test were skipped and several matrix jobs were cancelled by fail-fast, while Flutter presentation/app-shell jobs shown by Actions were green.
+- Fixed the formatter defect on the same PR branch by formatting the long `_merge` signature; code head became `8dc1526f17060c41d767ba088f310a0613286329`.
+- No blind rerun, competing PR, concrete provider endpoint, ad/tracking SDK, PII, media proxy, secret, DRM/access-control bypass or mandatory backend was introduced.
 
 ## Progress scorecard (evidence-weighted, recomputed)
-- Overall Product Completion: **42.0%**. The score is intentionally conservative because #70 is not yet merged and its content data is still a local fixture.
-- Current Phase Completion: **76%** for the current P0 executable-flow phase. Typed UI flow and orchestration exist with CI evidence, while real catalog -> resolve -> native play remains open.
-- Verified Functional Completion: **33%**. CI verifies the app-flow UI behavior and merged orchestration/core packages, but there is no end-to-end authorized-provider playback runtime/device evidence or distributable platform evidence.
+- Overall Product Completion: **42.4%**. No increase is credited for unmerged #73.
+- Current Phase Completion: **78%** for the current P0 discovery/search-to-play phase.
+- Verified Functional Completion: **34%**. #73 is not credited as verified until its final exact-head CI succeeds and it merges.
 
 ## Tests / CI / artifacts
-- PR #70 exact-head `1ac79201cbd6d6120c68a3afa1567ef68d8500bf`: Audit hygiene SUCCESS; Core contracts SUCCESS.
-- Widget coverage proves Home -> Search -> Details -> Episodes on the Flutter shell.
-- The handoff update advances the PR head after the proven code head, so fresh exact-head CI is mandatory again before any merge.
+- Exact head `21fd49e97a3ab7fbd526e91d904901a433d812fa`: Audit hygiene SUCCESS; Core contracts FAILURE due to metadata_engine formatting only at the first failing job observed.
+- Formatter fix code head: `8dc1526f17060c41d767ba088f310a0613286329`; Actions had not appeared at the immediate post-push check.
+- This handoff commit advances the branch again, so fresh CI on the resulting exact head is mandatory before merge.
 - No Golden Android Mobile APK, Android TV APK, unsigned IPA and Web artifact set from one exact SHA/version has been verified.
 
 ## Risks / open acceptance
-- The visible search result is still a local fixture; it is not evidence of Universal Search/provider integration.
-- `playing` is still presentation state, not device-proven native playback.
+- No authorized concrete discovery provider is integrated; visible app search remains a local fixture.
+- Aggregation establishes deterministic canonical merge semantics, not provider health/ranking/failure isolation.
+- Native playback lacks device evidence and full quality/audio/subtitle/PiP/Cast/AirPlay acceptance.
 - API 24 and iOS 15 remain provisional until compatibility/device evidence is recorded.
 - No Golden claim until same-SHA platform artifacts, audits, device smoke, outage/rollback tests and required performance evidence exist.
 
 ## Highest-value next work
-1. Wait for fresh CI on the post-handoff exact head; fix only evidence-based failures on #70. Merge with expected-head protection when green/mergeable.
-2. Replace local fixture search with authorized Metadata/Search integration behind provider-neutral application contracts.
-3. Wire episode selection through resolver/orchestrator into the native player screen, including source-failure fallback and same-position switching tests.
-4. Produce device/runtime evidence before raising Native Player or platform completion beyond integration-tested caps.
+1. Inspect fresh exact-head CI for #73; fix only evidence-based failures on the same branch and merge with expected-head protection when fully green/mergeable.
+2. Add application discovery coordination over authorized discovery providers with per-provider failure isolation and canonical aggregation.
+3. Replace the local fixture only when real authorized discovery data is available through provider-neutral contracts.
+4. Wire episode selection through resolver/orchestrator into Native Player and prove failure fallback/same-position switching.
