@@ -124,8 +124,31 @@ final class _FlowScreen extends StatelessWidget {
             localData: localData,
             progressKey: _progressKey(state),
           ),
-        AppFlowStage.error =>
-          const Center(child: Text('لا يتوفر مصدر تشغيل حاليًا')),
+        AppFlowStage.error => Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('لا يتوفر مصدر تشغيل حاليًا'),
+                const SizedBox(height: 12),
+                FilledButton.icon(
+                  autofocus: true,
+                  onPressed: () async {
+                    final raw = await localData.keyValueStore.read(
+                      LocalDataScope.playbackProgress,
+                      _progressKey(state),
+                    );
+                    final milliseconds = int.tryParse(raw ?? '') ?? 0;
+                    await flow.retry(
+                      resumePosition: Duration(milliseconds: milliseconds),
+                    );
+                    refresh();
+                  },
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('إعادة المحاولة'),
+                ),
+              ],
+            ),
+          ),
       },
     );
   }
