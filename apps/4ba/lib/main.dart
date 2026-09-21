@@ -104,7 +104,7 @@ final class _FlowScreen extends StatelessWidget {
         AppFlowStage.search => _Search(
             flow: flow,
             discovery: discovery,
-            hasDiscoveryProviders: registry.discoveryProviders().isNotEmpty,
+            hasDiscoveryProviders: discovery.hasDiscoveryProviders,
             refresh: refresh,
           ),
         AppFlowStage.details => _Details(
