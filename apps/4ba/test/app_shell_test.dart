@@ -23,7 +23,14 @@ final class _DiscoveryProvider implements Provider, ContentDiscoveryProvider {
       ];
 
   @override
-  Future<CanonicalContent?> details(String canonicalId) async => null;
+  Future<CanonicalContent?> details(String canonicalId) async =>
+      const CanonicalContent(
+        canonicalId: 'test-result',
+        type: ContentType.series,
+        titles: [LocalizedTitle(languageTag: 'ar', value: 'نتيجة حقيقية')],
+        year: 2026,
+        genres: ['دراما'],
+      );
 
   @override
   Future<List<EpisodeRef>> episodes(CanonicalContent content) async => const [
@@ -61,7 +68,9 @@ void main() {
     expect(find.text('محتوى تجريبي محلي'), findsNothing);
 
     await tester.tap(find.text('نتيجة حقيقية'));
-    await tester.pump();
+    await tester.pumpAndSettle();
+    expect(find.text('2026'), findsOneWidget);
+    expect(find.text('دراما'), findsOneWidget);
     expect(find.text('الحلقات'), findsOneWidget);
 
     await tester.tap(find.text('الحلقات'));
