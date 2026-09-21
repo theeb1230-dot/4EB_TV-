@@ -55,13 +55,12 @@ final class _DiscoveryProvider implements Provider, ContentDiscoveryProvider {
 void main() {
   testWidgets('search fails closed when no discovery provider is configured',
       (tester) async {
+    final localData = FlutterLocalDataRuntime(
+      backend: MemoryPersistentStringBackend(),
+    );
     await tester.pumpWidget(
       MaterialApp(
-        home: FourBaAppShell(
-          localData: FlutterLocalDataRuntime(
-            backend: MemoryPersistentStringBackend(),
-          ),
-        ),
+        home: FourBaAppShell(localData: localData),
       ),
     );
 
