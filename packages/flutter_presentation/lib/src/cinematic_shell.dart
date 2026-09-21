@@ -275,8 +275,7 @@ final class _FourBaFocusTileState extends State<FourBaFocusTile> {
             constraints: const BoxConstraints(
               minHeight: FourBaFocus.tvMinimumTarget,
             ),
-            padding:
-                const EdgeInsets.symmetric(horizontal: FourBaSpacing.x4),
+            padding: const EdgeInsets.symmetric(horizontal: FourBaSpacing.x4),
             decoration: BoxDecoration(
               color: _color(FourBaColorTokens.raised),
               borderRadius: BorderRadius.circular(FourBaRadius.control),
