@@ -1,6 +1,7 @@
 import 'package:app_flow/app_flow.dart';
 import 'package:core_domain/core_domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_presentation/flutter_presentation.dart';
 import 'package:native_player_flutter/native_player_flutter.dart';
 import 'package:local_data_flutter/local_data_flutter.dart';
@@ -256,6 +257,8 @@ final class _SearchState extends State<_Search> {
               itemBuilder: (context, index) {
                 final content = results[index];
                 return ListTile(
+                  autofocus: index == 0,
+                  focusColor: Theme.of(context).colorScheme.primaryContainer,
                   title: Text(content.titles.first.value),
                   onTap: () {
                     widget.flow.openDetails(
@@ -339,8 +342,16 @@ final class _DetailsState extends State<_Details> {
           child: const Text('الحلقات'),
         ),
       ],
+          ),
+        ),
+      ),
     );
   }
+}
+
+final class _SeekIntent extends Intent {
+  const _SeekIntent(this.delta);
+  final Duration delta;
 }
 
 final class _Episodes extends StatefulWidget {
@@ -412,6 +423,8 @@ final class _EpisodesState extends State<_Episodes> {
         final episode = episodes[index];
         final title = episode.title ?? 'الحلقة ${episode.episode}';
         return ListTile(
+          autofocus: index == 0,
+          focusColor: Theme.of(context).colorScheme.primaryContainer,
           title: Text(title),
           subtitle: Text('الموسم ${episode.season}'),
           onTap: () => play(episode),
@@ -513,7 +526,27 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
         child: Text('خطأ في التشغيل: ${value.errorDescription ?? 'غير معروف'}'),
       );
     }
-    return Column(
+    return Shortcuts(
+      shortcuts: const <ShortcutActivator, Intent>{
+        SingleActivator(LogicalKeyboardKey.arrowLeft):
+            _SeekIntent(Duration(seconds: -10)),
+        SingleActivator(LogicalKeyboardKey.arrowRight):
+            _SeekIntent(Duration(seconds: 10)),
+        SingleActivator(LogicalKeyboardKey.mediaPlayPause):
+            ActivateIntent(),
+      },
+      child: Actions(
+        actions: <Type, Action<Intent>>{
+          _SeekIntent: CallbackAction<_SeekIntent>(
+            onInvoke: (intent) {
+              seekBy(intent.delta);
+              return null;
+            },
+          ),
+        },
+        child: FocusTraversalGroup(
+          policy: ReadingOrderTraversalPolicy(),
+          child: Column(
       children: [
         Expanded(
           child: Center(
