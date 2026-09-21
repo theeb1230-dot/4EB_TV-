@@ -46,9 +46,8 @@ final class MetadataSearchAggregator {
 
   CanonicalContent _merge(CanonicalContent current, CanonicalContent incoming) {
     final titles = <LocalizedTitle>[...current.titles];
-    final titleKeys = titles
-        .map((item) => '${item.languageTag}:${item.value}')
-        .toSet();
+    final titleKeys =
+        titles.map((item) => '${item.languageTag}:${item.value}').toSet();
     for (final title in incoming.titles) {
       if (titleKeys.add('${title.languageTag}:${title.value}')) {
         titles.add(title);
@@ -56,9 +55,8 @@ final class MetadataSearchAggregator {
     }
 
     final externalIds = <ExternalId>[...current.externalIds];
-    final idKeys = externalIds
-        .map((item) => '${item.namespace}:${item.value}')
-        .toSet();
+    final idKeys =
+        externalIds.map((item) => '${item.namespace}:${item.value}').toSet();
     for (final id in incoming.externalIds) {
       if (idKeys.add('${id.namespace}:${id.value}')) externalIds.add(id);
     }
