@@ -21,6 +21,7 @@ dependencies:
     path: ../../packages/flutter_presentation
   presentation_contract:
     path: ../../packages/presentation_contract
+  video_player: ^2.10.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
