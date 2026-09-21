@@ -11,6 +11,8 @@ dependencies:
     path: ../../packages/core_domain
   native_player_flutter:
     path: ../../packages/native_player_flutter
+  local_data_flutter:
+    path: ../../packages/local_data_flutter
   playback_orchestrator:
     path: ../../packages/playback_orchestrator
   provider_sdk:
