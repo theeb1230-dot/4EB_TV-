@@ -2,8 +2,8 @@ import 'package:app_flow/app_flow.dart';
 import 'package:core_domain/core_domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_presentation/flutter_presentation.dart';
-import 'package:native_player_flutter/native_player_flutter.dart';
 import 'package:local_data_flutter/local_data_flutter.dart';
+import 'package:native_player_flutter/native_player_flutter.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 import 'package:provider_sdk/provider_sdk.dart';
@@ -38,8 +38,8 @@ final class _FourBaAppShellState extends State<FourBaAppShell> {
   final NativePlaybackAdapter nativePlayback = NativePlaybackAdapter();
   late final FlutterLocalDataRuntime localData =
       widget.localData ?? FlutterLocalDataRuntime();
-  late final ProviderRegistry registry = widget.registry ??
-      (ProviderRegistry()..register(TvMazeProvider()));
+  late final ProviderRegistry registry =
+      widget.registry ?? (ProviderRegistry()..register(TvMazeProvider()));
   late final DiscoveryCoordinator discovery =
       DiscoveryCoordinator(registry: registry);
   late final AppFlowController flow = AppFlowController(
@@ -527,7 +527,6 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
         ),
         if (value.isBuffering) const LinearProgressIndicator(),
         VideoProgressIndicator(controller, allowScrubbing: true),
-        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -536,23 +535,18 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
               onPressed: () => seekBy(const Duration(seconds: -10)),
               icon: const Icon(Icons.replay_10),
             ),
-            const SizedBox(width: 12),
-            FilledButton.icon(
+            IconButton(
+              tooltip: value.isPlaying ? 'إيقاف مؤقت' : 'تشغيل',
               autofocus: true,
               onPressed: () async {
-                if (controller.value.isPlaying) {
+                if (value.isPlaying) {
                   await widget.nativePlayback.pause();
                 } else {
                   await widget.nativePlayback.resume();
                 }
-                if (mounted) setState(() {});
               },
-              icon: Icon(
-                controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-              ),
-              label: Text(controller.value.isPlaying ? 'إيقاف مؤقت' : 'تشغيل'),
+              icon: Icon(value.isPlaying ? Icons.pause : Icons.play_arrow),
             ),
-            const SizedBox(width: 12),
             IconButton(
               tooltip: 'تقديم 10 ثوانٍ',
               onPressed: () => seekBy(const Duration(seconds: 10)),
