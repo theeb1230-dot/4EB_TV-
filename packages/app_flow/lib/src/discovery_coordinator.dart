@@ -62,7 +62,9 @@ final class DiscoveryCoordinator {
     final locators = <String, List<ProviderContentLocator>>{};
     for (final item in items) {
       locators[item.canonicalId] = List.unmodifiable(
-        sources.where((source) => matchCanonical(item, source.item)).map(
+        sources
+            .where((source) => matchCanonical(source.item, [item]) != null)
+            .map(
               (source) => ProviderContentLocator(
                 providerId: source.providerId,
                 providerContentId: source.item.canonicalId,
@@ -83,8 +85,9 @@ final class DiscoveryCoordinator {
     List<ProviderContentLocator> locators = const <ProviderContentLocator>[],
   }) async {
     for (final locator in locators) {
-      final provider = _registry.byId(locator.providerId);
-      if (provider is! ContentDiscoveryProvider) continue;
+      final registered = _registry.byId(locator.providerId);
+      if (registered is! ContentDiscoveryProvider) continue;
+      final provider = registered as ContentDiscoveryProvider;
       try {
         final result = await provider.details(locator.providerContentId);
         if (result != null) return result;
@@ -108,8 +111,9 @@ final class DiscoveryCoordinator {
     List<ProviderContentLocator> locators = const <ProviderContentLocator>[],
   }) async {
     for (final locator in locators) {
-      final provider = _registry.byId(locator.providerId);
-      if (provider is! ContentDiscoveryProvider) continue;
+      final registered = _registry.byId(locator.providerId);
+      if (registered is! ContentDiscoveryProvider) continue;
+      final provider = registered as ContentDiscoveryProvider;
       try {
         final providerContent =
             await provider.details(locator.providerContentId);
