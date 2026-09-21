@@ -10,6 +10,8 @@ import 'package:provider_sdk/provider_sdk.dart';
 import 'package:tvmaze_provider/tvmaze_provider.dart';
 import 'package:video_player/video_player.dart';
 
+import 'legal_about.dart';
+
 void main() => runApp(const FourBaApp());
 
 final class FourBaApp extends StatelessWidget {
@@ -182,6 +184,16 @@ final class _Home extends StatelessWidget {
             },
             child: const Text('البحث'),
           ),
+          const SizedBox(height: 12),
+          TextButton.icon(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const LegalAboutSurface(),
+              ),
+            ),
+            icon: const Icon(Icons.info_outline),
+            label: const Text('حول وحقوق البيانات'),
+          ),
         ],
       );
 }
@@ -228,43 +240,36 @@ final class _SearchState extends State<_Search> {
           Text('البحث', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 16),
           if (!widget.hasDiscoveryProviders)
-            const Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Text(
-                'لا يوجد مزود محتوى مفعّل حاليًا. البحث متوقف حتى يتم تفعيل مصدر مصرح به.',
-              ),
-            ),
+            const Text('لا توجد مصادر اكتشاف متاحة حاليًا.'),
           TextField(
-            enabled: widget.hasDiscoveryProviders,
-            autofocus: widget.hasDiscoveryProviders,
-            decoration: const InputDecoration(
-              hintText: 'ابحث عن فيلم أو مسلسل',
-              border: OutlineInputBorder(),
-            ),
+            textInputAction: TextInputAction.search,
             onSubmitted: search,
+            decoration: const InputDecoration(
+              labelText: 'ابحث عن فيلم أو مسلسل',
+              prefixIcon: Icon(Icons.search),
+            ),
           ),
           if (loading) const LinearProgressIndicator(),
-          if (widget.hasDiscoveryProviders &&
-              !loading &&
-              widget.flow.state.query.isNotEmpty &&
-              results.isEmpty)
-            const Padding(
-              padding: EdgeInsets.only(top: 16),
-              child: Text('لا توجد نتائج'),
-            ),
+          const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
               itemCount: results.length,
               itemBuilder: (context, index) {
-                final content = results[index];
+                final item = results[index];
                 return ListTile(
-                  title: Text(content.titles.first.value),
-                  onTap: () {
-                    widget.flow.openDetails(
-                      content,
-                      locators: locators[content.canonicalId] ?? const [],
+                  title: Text(item.titles.first.value),
+                  subtitle: item.year == null ? null : Text('${item.year}'),
+                  onTap: () async {
+                    final itemLocators = locators[item.canonicalId] ?? const [];
+                    final detailed = await discovery.details(
+                      item,
+                      locators: itemLocators,
                     );
-                    widget.refresh();
+                    flow.openDetails(
+                      detailed.content,
+                      providerLocators: detailed.locators,
+                    );
+                    refresh();
                   },
                 );
               },
@@ -274,7 +279,7 @@ final class _SearchState extends State<_Search> {
       );
 }
 
-final class _Details extends StatefulWidget {
+final class _Details extends StatelessWidget {
   const _Details({
     required this.flow,
     required this.discovery,
@@ -286,57 +291,29 @@ final class _Details extends StatefulWidget {
   final VoidCallback refresh;
 
   @override
-  State<_Details> createState() => _DetailsState();
-}
-
-final class _DetailsState extends State<_Details> {
-  CanonicalContent? content;
-  bool loading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    load();
-  }
-
-  Future<void> load() async {
-    final selected = widget.flow.state.content;
-    if (selected == null) {
-      if (mounted) setState(() => loading = false);
-      return;
-    }
-    final detailed = await widget.discovery.details(
-      selected.canonicalId,
-      locators: widget.flow.state.contentLocators,
-    );
-    if (!mounted) return;
-    setState(() {
-      content = detailed ?? selected;
-      loading = false;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (loading) return const Center(child: CircularProgressIndicator());
-    final selected = content;
-    if (selected == null) {
-      return const Center(child: Text('تعذر تحميل التفاصيل'));
-    }
+    final content = flow.state.content;
+    if (content == null) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          selected.titles.first.value,
+          content.titles.first.value,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        if (selected.year != null) Text('${selected.year}'),
-        if (selected.genres.isNotEmpty) Text(selected.genres.join(' • ')),
-        const SizedBox(height: 16),
+        if (content.year != null) Text('${content.year}'),
+        const SizedBox(height: 24),
         FilledButton(
-          onPressed: () {
-            widget.flow.openEpisodes(selected);
-            widget.refresh();
+          onPressed: () async {
+            final result = await discovery.episodes(
+              content,
+              locators: flow.state.providerLocators,
+            );
+            flow.openEpisodes(
+              result.episodes,
+              providerLocators: result.locators,
+            );
+            refresh();
           },
           child: const Text('الحلقات'),
         ),
@@ -345,7 +322,7 @@ final class _DetailsState extends State<_Details> {
   }
 }
 
-final class _Episodes extends StatefulWidget {
+final class _Episodes extends StatelessWidget {
   const _Episodes({
     required this.flow,
     required this.nativePlayback,
@@ -359,68 +336,28 @@ final class _Episodes extends StatefulWidget {
   final VoidCallback refresh;
 
   @override
-  State<_Episodes> createState() => _EpisodesState();
-}
-
-final class _EpisodesState extends State<_Episodes> {
-  List<EpisodeRef> episodes = const [];
-  bool loading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    load();
-  }
-
-  Future<void> load() async {
-    final content = widget.flow.state.content;
-    if (content == null) {
-      if (mounted) setState(() => loading = false);
-      return;
-    }
-    final items = await widget.discovery.episodes(
-      content,
-      locators: widget.flow.state.contentLocators,
-    );
-    if (!mounted) return;
-    setState(() {
-      episodes = items;
-      loading = false;
-    });
-  }
-
-  Future<void> play(EpisodeRef episode) async {
-    final content = widget.flow.state.content;
-    if (content == null) return;
-    widget.flow.selectEpisode(content, episode);
-    widget.refresh();
-    await widget.flow.play(
-      content: content,
-      episode: episode,
-      attempt: widget.nativePlayback.attempt,
-    );
-    widget.refresh();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (loading) return const Center(child: CircularProgressIndicator());
-    if (episodes.isEmpty) {
-      return const Center(child: Text('لا توجد حلقات متاحة'));
-    }
-    return ListView.builder(
-      itemCount: episodes.length,
-      itemBuilder: (context, index) {
-        final episode = episodes[index];
-        final title = episode.title ?? 'الحلقة ${episode.episode}';
-        return ListTile(
-          title: Text(title),
-          subtitle: Text('الموسم ${episode.season}'),
-          onTap: () => play(episode),
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => ListView.builder(
+        itemCount: flow.state.episodes.length,
+        itemBuilder: (context, index) {
+          final episode = flow.state.episodes[index];
+          return ListTile(
+            title: Text(
+              episode.title ??
+                  'الموسم ${episode.season} • الحلقة ${episode.episode}',
+            ),
+            onTap: () async {
+              final result = await flow.play(
+                episode,
+                providerLocators: flow.state.providerLocators,
+              );
+              if (result != null) {
+                await nativePlayback.play(result);
+              }
+              refresh();
+            },
+          );
+        },
+      );
 }
 
 final class _PlayerSurface extends StatefulWidget {
@@ -438,95 +375,84 @@ final class _PlayerSurface extends StatefulWidget {
   State<_PlayerSurface> createState() => _PlayerSurfaceState();
 }
 
-final class _PlayerSurfaceState extends State<_PlayerSurface>
-    with WidgetsBindingObserver {
+final class _PlayerSurfaceState extends State<_PlayerSurface> {
+  VideoPlayerController? get controller => widget.nativePlayback.controller;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    widget.nativePlayback.activeController?.addListener(_refreshPlayer);
+    controller?.addListener(_onPlaybackChanged);
     _restoreProgress();
   }
 
-  Duration _lastSaved = Duration.zero;
+  @override
+  void dispose() {
+    controller?.removeListener(_onPlaybackChanged);
+    _persistProgress();
+    super.dispose();
+  }
 
   Future<void> _restoreProgress() async {
     final raw = await widget.localData.keyValueStore.read(
       LocalDataScope.playbackProgress,
       widget.progressKey,
     );
-    final milliseconds = int.tryParse(raw ?? '');
-    if (milliseconds != null && milliseconds > 0) {
-      await widget.nativePlayback.seekTo(Duration(milliseconds: milliseconds));
+    final milliseconds = int.tryParse(raw ?? '') ?? 0;
+    if (milliseconds > 0) {
+      await widget.nativePlayback.seek(Duration(milliseconds: milliseconds));
     }
   }
 
-  void _refreshPlayer() {
-    final controller = widget.nativePlayback.activeController;
-    if (controller != null) {
-      final position = controller.value.position;
-      if ((position - _lastSaved).abs() >= const Duration(seconds: 5)) {
-        _lastSaved = position;
-        widget.localData.keyValueStore.write(
-          LocalDataScope.playbackProgress,
-          widget.progressKey,
-          position.inMilliseconds.toString(),
-        );
-      }
-    }
+  void _onPlaybackChanged() {
+    _persistProgress();
     if (mounted) setState(() {});
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.inactive ||
-        state == AppLifecycleState.paused ||
-        state == AppLifecycleState.detached) {
-      widget.nativePlayback.pause();
-    }
-  }
-
-  @override
-  void dispose() {
-    widget.nativePlayback.activeController?.removeListener(_refreshPlayer);
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
+  Future<void> _persistProgress() async {
+    final position = controller?.value.position;
+    if (position == null) return;
+    await widget.localData.keyValueStore.write(
+      LocalDataScope.playbackProgress,
+      widget.progressKey,
+      position.inMilliseconds.toString(),
+    );
   }
 
   Future<void> seekBy(Duration delta) async {
-    final controller = widget.nativePlayback.activeController;
-    if (controller == null) return;
-    final duration = controller.value.duration;
-    var target = controller.value.position + delta;
+    final value = controller?.value;
+    if (value == null) return;
+    var target = value.position + delta;
     if (target < Duration.zero) target = Duration.zero;
-    if (duration > Duration.zero && target > duration) target = duration;
-    await widget.nativePlayback.seekTo(target);
+    if (target > value.duration) target = value.duration;
+    await widget.nativePlayback.seek(target);
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = widget.nativePlayback.activeController;
-    if (controller == null || !controller.value.isInitialized) {
-      return const Center(child: Text('تعذر فتح جلسة التشغيل'));
+    final player = controller;
+    if (player == null) {
+      return const Center(child: Text('المشغل غير جاهز'));
     }
-    final value = controller.value;
+    final value = player.value;
     if (value.hasError) {
       return Center(
-        child: Text('خطأ في التشغيل: ${value.errorDescription ?? 'غير معروف'}'),
+        child: Text(value.errorDescription ?? 'تعذر تشغيل المصدر'),
       );
     }
     return Column(
       children: [
         Expanded(
           child: Center(
-            child: AspectRatio(
-              aspectRatio: value.aspectRatio == 0 ? 16 / 9 : value.aspectRatio,
-              child: VideoPlayer(controller),
-            ),
+            child: value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: value.aspectRatio,
+                    child: VideoPlayer(player),
+                  )
+                : const CircularProgressIndicator(),
           ),
         ),
         if (value.isBuffering) const LinearProgressIndicator(),
-        VideoProgressIndicator(controller, allowScrubbing: true),
+        VideoProgressIndicator(player, allowScrubbing: true),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
