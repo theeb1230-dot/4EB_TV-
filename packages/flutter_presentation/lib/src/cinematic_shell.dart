@@ -48,6 +48,7 @@ final class FourBaCinematicShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final adapter = FourBaPresentationAdapter(contextModel);
     final rtl = contextModel.direction == FourBaTextDirection.rtl;
+    final baseTextTheme = _textTheme();
     final theme = ThemeData(
       brightness: Brightness.dark,
       scaffoldBackgroundColor: _color(FourBaColorTokens.canvas),
@@ -57,7 +58,11 @@ final class FourBaCinematicShell extends StatelessWidget {
         error: _color(FourBaColorTokens.error),
       ),
       focusColor: _color(FourBaColorTokens.focusRing),
-      textTheme: _textTheme(),
+      splashFactory: contextModel.reduceMotion
+          ? NoSplash.splashFactory
+          : InkSparkle.splashFactory,
+      textTheme: baseTextTheme,
+      primaryTextTheme: baseTextTheme,
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: _color(FourBaColorTokens.base),
         indicatorColor: _color(FourBaColorTokens.raised),
