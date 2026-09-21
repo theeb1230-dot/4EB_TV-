@@ -23,7 +23,8 @@ final class _DiscoveryProvider implements Provider, ContentDiscoveryProvider {
       ];
 
   @override
-  Future<CanonicalContent?> details(String canonicalId) async => const CanonicalContent(
+  Future<CanonicalContent?> details(String canonicalId) async =>
+      const CanonicalContent(
         canonicalId: 'test-result',
         type: ContentType.series,
         titles: [LocalizedTitle(languageTag: 'ar', value: 'نتيجة حقيقية')],
