@@ -98,7 +98,11 @@ final class _FlowScreen extends StatelessWidget {
             discovery: discovery,
             refresh: refresh,
           ),
-        AppFlowStage.details => _Details(flow: flow, refresh: refresh),
+        AppFlowStage.details => _Details(
+            flow: flow,
+            discovery: discovery,
+            refresh: refresh,
+          ),
         AppFlowStage.episodes => _Episodes(
             flow: flow,
             nativePlayback: nativePlayback,
@@ -207,29 +211,72 @@ final class _SearchState extends State<_Search> {
       );
 }
 
-final class _Details extends StatelessWidget {
-  const _Details({required this.flow, required this.refresh});
+final class _Details extends StatefulWidget {
+  const _Details({
+    required this.flow,
+    required this.discovery,
+    required this.refresh,
+  });
+
   final AppFlowController flow;
+  final DiscoveryCoordinator discovery;
   final VoidCallback refresh;
 
   @override
-  Widget build(BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            flow.state.content!.titles.first.value,
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const SizedBox(height: 16),
-          FilledButton(
-            onPressed: () {
-              flow.openEpisodes(flow.state.content!);
-              refresh();
-            },
-            child: const Text('الحلقات'),
-          ),
-        ],
-      );
+  State<_Details> createState() => _DetailsState();
+}
+
+final class _DetailsState extends State<_Details> {
+  CanonicalContent? content;
+  bool loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    load();
+  }
+
+  Future<void> load() async {
+    final selected = widget.flow.state.content;
+    if (selected == null) {
+      if (mounted) setState(() => loading = false);
+      return;
+    }
+    final detailed = await widget.discovery.details(selected.canonicalId);
+    if (!mounted) return;
+    setState(() {
+      content = detailed ?? selected;
+      loading = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (loading) return const Center(child: CircularProgressIndicator());
+    final selected = content;
+    if (selected == null) {
+      return const Center(child: Text('تعذر تحميل التفاصيل'));
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          selected.titles.first.value,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        if (selected.year != null) Text('${selected.year}'),
+        if (selected.genres.isNotEmpty) Text(selected.genres.join(' • ')),
+        const SizedBox(height: 16),
+        FilledButton(
+          onPressed: () {
+            widget.flow.openEpisodes(selected);
+            widget.refresh();
+          },
+          child: const Text('الحلقات'),
+        ),
+      ],
+    );
+  }
 }
 
 final class _Episodes extends StatefulWidget {
