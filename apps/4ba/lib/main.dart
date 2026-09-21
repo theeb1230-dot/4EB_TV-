@@ -33,7 +33,8 @@ final class FourBaAppShell extends StatefulWidget {
 final class _FourBaAppShellState extends State<FourBaAppShell> {
   final NativePlaybackAdapter nativePlayback = NativePlaybackAdapter();
   late final ProviderRegistry registry = widget.registry ?? ProviderRegistry();
-  late final DiscoveryCoordinator discovery = DiscoveryCoordinator(registry: registry);
+  late final DiscoveryCoordinator discovery =
+      DiscoveryCoordinator(registry: registry);
   late final AppFlowController flow = AppFlowController(
     playback: PlaybackOrchestrator(registry),
   );
@@ -43,7 +44,6 @@ final class _FourBaAppShellState extends State<FourBaAppShell> {
     nativePlayback.stop();
     super.dispose();
   }
-
 
   void refresh() => setState(() {});
 
@@ -94,10 +94,10 @@ final class _FlowScreen extends StatelessWidget {
       child: switch (state.stage) {
         AppFlowStage.home => _Home(flow: flow, refresh: refresh),
         AppFlowStage.search => _Search(
-          flow: flow,
-          discovery: discovery,
-          refresh: refresh,
-        ),
+            flow: flow,
+            discovery: discovery,
+            refresh: refresh,
+          ),
         AppFlowStage.details => _Details(flow: flow, refresh: refresh),
         AppFlowStage.episodes => _Episodes(
             flow: flow,
@@ -132,7 +132,6 @@ final class _Home extends StatelessWidget {
             },
             child: const Text('البحث'),
           ),
-
         ],
       );
 }
