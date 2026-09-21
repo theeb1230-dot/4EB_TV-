@@ -10,6 +10,7 @@ final class AppFlowState {
     this.content,
     this.episode,
     this.failureClass,
+    this.contentLocators = const <ProviderContentLocator>[],
   });
 
   final AppFlowStage stage;
@@ -17,6 +18,7 @@ final class AppFlowState {
   final CanonicalContent? content;
   final EpisodeRef? episode;
   final ResolveFailureClass? failureClass;
+  final List<ProviderContentLocator> contentLocators;
 }
 
 final class AppFlowController {
@@ -31,14 +33,20 @@ final class AppFlowController {
   void openSearch([String query = '']) =>
       _state = AppFlowState(stage: AppFlowStage.search, query: query);
 
-  void openDetails(CanonicalContent content) => _state = AppFlowState(
+  void openDetails(
+    CanonicalContent content, {
+    List<ProviderContentLocator> locators = const <ProviderContentLocator>[],
+  }) =>
+      _state = AppFlowState(
         stage: AppFlowStage.details,
         content: content,
+        contentLocators: List.unmodifiable(locators),
       );
 
   void openEpisodes(CanonicalContent content) => _state = AppFlowState(
         stage: AppFlowStage.episodes,
         content: content,
+        contentLocators: _state.contentLocators,
       );
 
   void selectEpisode(CanonicalContent content, EpisodeRef episode) =>
@@ -46,6 +54,7 @@ final class AppFlowController {
         stage: AppFlowStage.episodes,
         content: content,
         episode: episode,
+        contentLocators: _state.contentLocators,
       );
 
   Future<PlaybackOrchestrationResult> play({
@@ -59,6 +68,7 @@ final class AppFlowController {
       stage: AppFlowStage.resolving,
       content: content,
       episode: episode,
+      contentLocators: _state.contentLocators,
     );
     final result = await _playback.resolveAndPlay(
       request: ResolveRequest(
@@ -75,6 +85,7 @@ final class AppFlowController {
       content: content,
       episode: episode,
       failureClass: result.failureClass,
+      contentLocators: _state.contentLocators,
     );
     return result;
   }
