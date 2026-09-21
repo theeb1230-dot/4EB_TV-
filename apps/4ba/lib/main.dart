@@ -7,6 +7,7 @@ import 'package:local_data_flutter/local_data_flutter.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 import 'package:provider_sdk/provider_sdk.dart';
+import 'package:tvmaze_provider/tvmaze_provider.dart';
 import 'package:video_player/video_player.dart';
 
 void main() => runApp(const FourBaApp());
@@ -37,7 +38,8 @@ final class _FourBaAppShellState extends State<FourBaAppShell> {
   final NativePlaybackAdapter nativePlayback = NativePlaybackAdapter();
   late final FlutterLocalDataRuntime localData =
       widget.localData ?? FlutterLocalDataRuntime();
-  late final ProviderRegistry registry = widget.registry ?? ProviderRegistry();
+  late final ProviderRegistry registry = widget.registry ??
+      (ProviderRegistry()..register(TvMazeProvider()));
   late final DiscoveryCoordinator discovery =
       DiscoveryCoordinator(registry: registry);
   late final AppFlowController flow = AppFlowController(
