@@ -6,6 +6,7 @@ import 'package:native_player_flutter/native_player_flutter.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 import 'package:provider_sdk/provider_sdk.dart';
+import 'package:video_player/video_player.dart';
 
 void main() => runApp(const FourBaApp());
 
