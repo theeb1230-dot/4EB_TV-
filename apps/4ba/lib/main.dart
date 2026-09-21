@@ -131,8 +131,11 @@ final class _FlowScreen extends StatelessWidget {
               children: [
                 const Text('لا يتوفر مصدر تشغيل حاليًا'),
                 const SizedBox(height: 12),
-                FilledButton.icon(
+                FourBaCinematicButton(
+                  label: 'إعادة المحاولة',
+                  icon: Icons.refresh,
                   autofocus: true,
+                  isTenFoot: MediaQuery.sizeOf(context).width >= 1200,
                   onPressed: () async {
                     final raw = await localData.keyValueStore.read(
                       LocalDataScope.playbackProgress,
@@ -144,8 +147,6 @@ final class _FlowScreen extends StatelessWidget {
                     );
                     refresh();
                   },
-                  icon: const Icon(Icons.refresh),
-                  label: const Text('إعادة المحاولة'),
                 ),
               ],
             ),
@@ -173,12 +174,15 @@ final class _Home extends StatelessWidget {
         children: [
           Text('4BA', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 24),
-          FilledButton(
+          FourBaCinematicButton(
+            label: 'البحث',
+            icon: Icons.search,
+            autofocus: true,
+            isTenFoot: MediaQuery.sizeOf(context).width >= 1200,
             onPressed: () {
               flow.openSearch();
               refresh();
             },
-            child: const Text('البحث'),
           ),
         ],
       );
