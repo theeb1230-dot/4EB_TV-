@@ -104,6 +104,7 @@ final class _FlowScreen extends StatelessWidget {
         AppFlowStage.search => _Search(
             flow: flow,
             discovery: discovery,
+            hasDiscoveryProviders: discovery.hasDiscoveryProviders,
             refresh: refresh,
           ),
         AppFlowStage.details => _Details(
@@ -164,11 +165,13 @@ final class _Search extends StatefulWidget {
   const _Search({
     required this.flow,
     required this.discovery,
+    required this.hasDiscoveryProviders,
     required this.refresh,
   });
 
   final AppFlowController flow;
   final DiscoveryCoordinator discovery;
+  final bool hasDiscoveryProviders;
   final VoidCallback refresh;
 
   @override
@@ -199,8 +202,16 @@ final class _SearchState extends State<_Search> {
         children: [
           Text('البحث', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 16),
+          if (!widget.hasDiscoveryProviders)
+            const Padding(
+              padding: EdgeInsets.only(bottom: 16),
+              child: Text(
+                'لا يوجد مزود محتوى مفعّل حاليًا. البحث متوقف حتى يتم تفعيل مصدر مصرح به.',
+              ),
+            ),
           TextField(
-            autofocus: true,
+            enabled: widget.hasDiscoveryProviders,
+            autofocus: widget.hasDiscoveryProviders,
             decoration: const InputDecoration(
               hintText: 'ابحث عن فيلم أو مسلسل',
               border: OutlineInputBorder(),
@@ -208,7 +219,10 @@ final class _SearchState extends State<_Search> {
             onSubmitted: search,
           ),
           if (loading) const LinearProgressIndicator(),
-          if (!loading && widget.flow.state.query.isNotEmpty && results.isEmpty)
+          if (widget.hasDiscoveryProviders &&
+              !loading &&
+              widget.flow.state.query.isNotEmpty &&
+              results.isEmpty)
             const Padding(
               padding: EdgeInsets.only(top: 16),
               child: Text('لا توجد نتائج'),
