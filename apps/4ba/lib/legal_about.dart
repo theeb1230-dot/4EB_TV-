@@ -5,8 +5,7 @@ final class LegalAboutSurface extends StatelessWidget {
   const LegalAboutSurface({super.key});
 
   static const tvMazeUrl = 'https://www.tvmaze.com/';
-  static const licenseUrl =
-      'https://creativecommons.org/licenses/by-sa/4.0/';
+  static const licenseUrl = 'https://creativecommons.org/licenses/by-sa/4.0/';
 
   @override
   Widget build(BuildContext context) => Scaffold(
