@@ -5,7 +5,7 @@ GitHub is the source of truth. This handoff never overrides newer repository sta
 ## Current source truth
 - Exact start `main`: `6b0b8faf1773468319d3c9a9c4cb8162204decec`.
 - Exact end `main` for this run: `6b0b8faf1773468319d3c9a9c4cb8162204decec` (unchanged while PR #89 is under exact-head CI).
-- PR #89 branch: `provider/tvmaze-discovery`. Pre-handoff exact head: `931687c699352008fb64970bc7584f49979c569c`; the handoff commit itself advances the branch head and must be re-read from GitHub before merge.
+- PR #89 branch: `provider/tvmaze-discovery`. Pre-handoff exact head: `931687c699352008fb64970bc7584f49979c569c`; the handoff commits advance the branch head and must be re-read from GitHub before merge.
 - PR #89 was reopened because there was no open PR and production discovery remains the highest executable P0 blocker. It is the only active work slice.
 - No Golden release is claimed. Same-SHA Android Mobile, Android TV, unsigned iOS and Web artifacts plus device/runtime evidence remain unverified.
 
@@ -72,7 +72,7 @@ The previous handoff's 68% aggregate is retired because it did not follow the fi
 | CI/CD/releases | 2 | 20% | 0.4 |
 | Beta/Golden hardening | 1 | 0% | 0.0 |
 
-- **Overall Product Completion: 48.1%** by the fixed weighted calculation above. This is not Beta/Golden readiness.
+- **Overall Product Completion: 48.3%** by the fixed weighted calculation above. This is not Beta/Golden readiness.
 - **Current Phase Completion: 91%** for Phase 3 Design System execution; runtime tokens/theme/focus/reduced-motion are integrated, while final contrast/device captures, complete navigation/player-control treatment and platform evidence remain open.
 - **Verified Functional Completion: 40%**. This intentionally trails code/contract presence because runtime/platform evidence and an authorized playback vertical slice are not yet complete.
 - Reason for recalculation: the fixed weighting exposes substantial unfinished Live/Offline/platform/release work that the older 68% handoff obscured. PR #89 is not counted as merged production capability until exact-head CI is green and it reaches `main`.
