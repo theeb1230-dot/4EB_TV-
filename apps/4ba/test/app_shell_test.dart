@@ -1,6 +1,8 @@
 import 'package:core_domain/core_domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:local_data_flutter/local_data_flutter.dart';
+import 'package:local_data_persistent/local_data_persistent.dart';
 import 'package:four_ba_app/main.dart';
 import 'package:provider_sdk/provider_sdk.dart';
 
@@ -55,7 +57,14 @@ void main() {
       (tester) async {
     final registry = ProviderRegistry()..register(_DiscoveryProvider());
     await tester.pumpWidget(
-      MaterialApp(home: FourBaAppShell(registry: registry)),
+      MaterialApp(
+        home: FourBaAppShell(
+          registry: registry,
+          localData: FlutterLocalDataRuntime(
+            backend: MemoryPersistentStringBackend(),
+          ),
+        ),
+      ),
     );
 
     await tester.tap(find.text('البحث'));
