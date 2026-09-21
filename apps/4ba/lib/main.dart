@@ -592,6 +592,14 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
           ],
         ),
       ],
+          ),
+        ),
+      ),
     );
   }
+}
+
+final class _SeekIntent extends Intent {
+  const _SeekIntent(this.delta);
+  final Duration delta;
 }
