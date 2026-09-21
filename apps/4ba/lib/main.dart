@@ -24,9 +24,10 @@ final class FourBaApp extends StatelessWidget {
 }
 
 final class FourBaAppShell extends StatefulWidget {
-  const FourBaAppShell({super.key, this.registry});
+  const FourBaAppShell({super.key, this.registry, this.localData});
 
   final ProviderRegistry? registry;
+  final FlutterLocalDataRuntime? localData;
 
   @override
   State<FourBaAppShell> createState() => _FourBaAppShellState();
@@ -34,7 +35,8 @@ final class FourBaAppShell extends StatefulWidget {
 
 final class _FourBaAppShellState extends State<FourBaAppShell> {
   final NativePlaybackAdapter nativePlayback = NativePlaybackAdapter();
-  final FlutterLocalDataRuntime localData = FlutterLocalDataRuntime();
+  late final FlutterLocalDataRuntime localData =
+      widget.localData ?? FlutterLocalDataRuntime();
   late final ProviderRegistry registry = widget.registry ?? ProviderRegistry();
   late final DiscoveryCoordinator discovery =
       DiscoveryCoordinator(registry: registry);
