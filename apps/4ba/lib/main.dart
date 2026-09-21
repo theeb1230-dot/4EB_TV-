@@ -3,6 +3,7 @@ import 'package:core_domain/core_domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_presentation/flutter_presentation.dart';
 import 'package:native_player_flutter/native_player_flutter.dart';
+import 'package:local_data_flutter/local_data_flutter.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 import 'package:provider_sdk/provider_sdk.dart';
@@ -23,9 +24,10 @@ final class FourBaApp extends StatelessWidget {
 }
 
 final class FourBaAppShell extends StatefulWidget {
-  const FourBaAppShell({super.key, this.registry});
+  const FourBaAppShell({super.key, this.registry, this.localData});
 
   final ProviderRegistry? registry;
+  final FlutterLocalDataRuntime? localData;
 
   @override
   State<FourBaAppShell> createState() => _FourBaAppShellState();
@@ -33,6 +35,8 @@ final class FourBaAppShell extends StatefulWidget {
 
 final class _FourBaAppShellState extends State<FourBaAppShell> {
   final NativePlaybackAdapter nativePlayback = NativePlaybackAdapter();
+  late final FlutterLocalDataRuntime localData =
+      widget.localData ?? FlutterLocalDataRuntime();
   late final ProviderRegistry registry = widget.registry ?? ProviderRegistry();
   late final DiscoveryCoordinator discovery =
       DiscoveryCoordinator(registry: registry);
@@ -65,6 +69,7 @@ final class _FourBaAppShellState extends State<FourBaAppShell> {
               child: _FlowScreen(
                 flow: flow,
                 nativePlayback: nativePlayback,
+                localData: localData,
                 discovery: discovery,
                 refresh: refresh,
               ),
@@ -78,12 +83,14 @@ final class _FlowScreen extends StatelessWidget {
   const _FlowScreen({
     required this.flow,
     required this.nativePlayback,
+    required this.localData,
     required this.discovery,
     required this.refresh,
   });
 
   final AppFlowController flow;
   final NativePlaybackAdapter nativePlayback;
+  final FlutterLocalDataRuntime localData;
   final DiscoveryCoordinator discovery;
   final VoidCallback refresh;
 
@@ -112,12 +119,23 @@ final class _FlowScreen extends StatelessWidget {
           ),
         AppFlowStage.resolving =>
           const Center(child: CircularProgressIndicator()),
-        AppFlowStage.playing => _PlayerSurface(nativePlayback: nativePlayback),
+        AppFlowStage.playing => _PlayerSurface(
+            nativePlayback: nativePlayback,
+            localData: localData,
+            progressKey: _progressKey(state),
+          ),
         AppFlowStage.error =>
           const Center(child: Text('لا يتوفر مصدر تشغيل حاليًا')),
       },
     );
   }
+}
+
+String _progressKey(AppFlowState state) {
+  final contentId = state.content?.canonicalId ?? 'unknown';
+  final episode = state.episode;
+  if (episode == null) return contentId;
+  return '$contentId:s${episode.season}:e${episode.episode}';
 }
 
 final class _Home extends StatelessWidget {
@@ -367,9 +385,15 @@ final class _EpisodesState extends State<_Episodes> {
 }
 
 final class _PlayerSurface extends StatefulWidget {
-  const _PlayerSurface({required this.nativePlayback});
+  const _PlayerSurface({
+    required this.nativePlayback,
+    required this.localData,
+    required this.progressKey,
+  });
 
   final NativePlaybackAdapter nativePlayback;
+  final FlutterLocalDataRuntime localData;
+  final String progressKey;
 
   @override
   State<_PlayerSurface> createState() => _PlayerSurfaceState();
@@ -382,9 +406,35 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     widget.nativePlayback.activeController?.addListener(_refreshPlayer);
+    _restoreProgress();
+  }
+
+  Duration _lastSaved = Duration.zero;
+
+  Future<void> _restoreProgress() async {
+    final raw = await widget.localData.keyValueStore.read(
+      LocalDataScope.playbackProgress,
+      widget.progressKey,
+    );
+    final milliseconds = int.tryParse(raw ?? '');
+    if (milliseconds != null && milliseconds > 0) {
+      await widget.nativePlayback.seekTo(Duration(milliseconds: milliseconds));
+    }
   }
 
   void _refreshPlayer() {
+    final controller = widget.nativePlayback.activeController;
+    if (controller != null) {
+      final position = controller.value.position;
+      if ((position - _lastSaved).abs() >= const Duration(seconds: 5)) {
+        _lastSaved = position;
+        widget.localData.keyValueStore.write(
+          LocalDataScope.playbackProgress,
+          widget.progressKey,
+          position.inMilliseconds.toString(),
+        );
+      }
+    }
     if (mounted) setState(() {});
   }
 
