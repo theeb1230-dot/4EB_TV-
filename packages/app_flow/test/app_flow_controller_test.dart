@@ -60,7 +60,8 @@ void main() {
     expect(flow.state.stage, AppFlowStage.playing);
   });
 
-  test('preserves provider-local locators through the playback journey', () async {
+  test('preserves provider-local locators through the playback journey',
+      () async {
     final registry = ProviderRegistry()..register(DemoProvider());
     final flow = AppFlowController(playback: PlaybackOrchestrator(registry));
     const locator = ProviderContentLocator(
