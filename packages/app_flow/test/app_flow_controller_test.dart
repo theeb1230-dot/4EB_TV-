@@ -59,4 +59,36 @@ void main() {
     expect(result.completed, isTrue);
     expect(flow.state.stage, AppFlowStage.playing);
   });
+
+  test('preserves provider-local locators through the playback journey',
+      () async {
+    final registry = ProviderRegistry()..register(DemoProvider());
+    final flow = AppFlowController(playback: PlaybackOrchestrator(registry));
+    const locator = ProviderContentLocator(
+      providerId: 'demo',
+      providerContentId: 'provider-series-42',
+    );
+    final episode = EpisodeRef(
+      canonicalContentId: content.canonicalId,
+      season: 1,
+      episode: 2,
+    );
+
+    flow.openDetails(content, locators: const [locator]);
+    expect(flow.state.contentLocators, const [locator]);
+
+    flow.openEpisodes(content);
+    expect(flow.state.contentLocators, const [locator]);
+
+    flow.selectEpisode(content, episode);
+    expect(flow.state.contentLocators, const [locator]);
+
+    await flow.play(
+      content: content,
+      episode: episode,
+      attempt: (_, __) async => const AttemptResult.success(),
+    );
+    expect(flow.state.stage, AppFlowStage.playing);
+    expect(flow.state.contentLocators, const [locator]);
+  });
 }

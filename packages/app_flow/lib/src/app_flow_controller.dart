@@ -1,3 +1,4 @@
+import 'package:app_flow/src/discovery_coordinator.dart';
 import 'package:core_domain/core_domain.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
 
@@ -10,6 +11,7 @@ final class AppFlowState {
     this.content,
     this.episode,
     this.failureClass,
+    this.contentLocators = const <ProviderContentLocator>[],
   });
 
   final AppFlowStage stage;
@@ -17,6 +19,7 @@ final class AppFlowState {
   final CanonicalContent? content;
   final EpisodeRef? episode;
   final ResolveFailureClass? failureClass;
+  final List<ProviderContentLocator> contentLocators;
 }
 
 final class AppFlowController {
@@ -25,28 +28,30 @@ final class AppFlowController {
 
   final PlaybackOrchestrator _playback;
   AppFlowState _state = const AppFlowState();
-
   AppFlowState get state => _state;
 
   void openSearch([String query = '']) =>
       _state = AppFlowState(stage: AppFlowStage.search, query: query);
 
-  void openDetails(CanonicalContent content) => _state = AppFlowState(
-        stage: AppFlowStage.details,
-        content: content,
-      );
+  void openDetails(CanonicalContent content,
+          {List<ProviderContentLocator> locators =
+              const <ProviderContentLocator>[]}) =>
+      _state = AppFlowState(
+          stage: AppFlowStage.details,
+          content: content,
+          contentLocators: List.unmodifiable(locators));
 
   void openEpisodes(CanonicalContent content) => _state = AppFlowState(
-        stage: AppFlowStage.episodes,
-        content: content,
-      );
+      stage: AppFlowStage.episodes,
+      content: content,
+      contentLocators: _state.contentLocators);
 
   void selectEpisode(CanonicalContent content, EpisodeRef episode) =>
       _state = AppFlowState(
-        stage: AppFlowStage.episodes,
-        content: content,
-        episode: episode,
-      );
+          stage: AppFlowStage.episodes,
+          content: content,
+          episode: episode,
+          contentLocators: _state.contentLocators);
 
   Future<PlaybackOrchestrationResult> play({
     required CanonicalContent content,
@@ -59,13 +64,11 @@ final class AppFlowController {
       stage: AppFlowStage.resolving,
       content: content,
       episode: episode,
+      contentLocators: _state.contentLocators,
     );
     final result = await _playback.resolveAndPlay(
       request: ResolveRequest(
-        content: content,
-        episode: episode,
-        dataSaver: dataSaver,
-      ),
+          content: content, episode: episode, dataSaver: dataSaver),
       capability: Capability.stream,
       attempt: attempt,
       resumePosition: resumePosition,
@@ -75,6 +78,7 @@ final class AppFlowController {
       content: content,
       episode: episode,
       failureClass: result.failureClass,
+      contentLocators: _state.contentLocators,
     );
     return result;
   }
