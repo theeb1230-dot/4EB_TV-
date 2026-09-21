@@ -19,6 +19,8 @@ dependencies:
     path: ../../packages/playback_orchestrator
   provider_sdk:
     path: ../../packages/provider_sdk
+  tvmaze_provider:
+    path: ../../packages/tvmaze_provider
   flutter:
     sdk: flutter
   flutter_presentation:
