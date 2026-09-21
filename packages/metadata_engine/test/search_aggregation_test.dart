@@ -9,14 +9,15 @@ CanonicalContent item(
   List<ExternalId> ids = const [],
   List<String> genres = const [],
   String language = 'ar',
-}) => CanonicalContent(
-  canonicalId: id,
-  type: ContentType.movie,
-  titles: [LocalizedTitle(languageTag: language, value: title)],
-  year: year,
-  externalIds: ids,
-  genres: genres,
-);
+}) =>
+    CanonicalContent(
+      canonicalId: id,
+      type: ContentType.movie,
+      titles: [LocalizedTitle(languageTag: language, value: title)],
+      year: year,
+      externalIds: ids,
+      genres: genres,
+    );
 
 void main() {
   const aggregator = MetadataSearchAggregator();
