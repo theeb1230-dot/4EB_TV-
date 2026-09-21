@@ -402,6 +402,7 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
     if (duration > Duration.zero && target > duration) target = duration;
     await widget.nativePlayback.seekTo(target);
   }
+
   @override
   Widget build(BuildContext context) {
     final controller = widget.nativePlayback.activeController;
@@ -437,19 +438,19 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
             ),
             const SizedBox(width: 12),
             FilledButton.icon(
-          autofocus: true,
-          onPressed: () async {
-            if (controller.value.isPlaying) {
-              await widget.nativePlayback.pause();
-            } else {
-              await widget.nativePlayback.resume();
-            }
-            if (mounted) setState(() {});
-          },
-          icon: Icon(
-            controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-          ),
-          label: Text(controller.value.isPlaying ? 'إيقاف مؤقت' : 'تشغيل'),
+              autofocus: true,
+              onPressed: () async {
+                if (controller.value.isPlaying) {
+                  await widget.nativePlayback.pause();
+                } else {
+                  await widget.nativePlayback.resume();
+                }
+                if (mounted) setState(() {});
+              },
+              icon: Icon(
+                controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+              ),
+              label: Text(controller.value.isPlaying ? 'إيقاف مؤقت' : 'تشغيل'),
             ),
             const SizedBox(width: 12),
             IconButton(
