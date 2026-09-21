@@ -131,5 +131,4 @@ void main() {
     final theme = Theme.of(tester.element(find.text('هادئ')));
     expect(theme.splashFactory, isA<NoSplashFactory>());
   });
-
 }
