@@ -27,6 +27,8 @@ final class AppFlowController {
       : _playback = playback;
 
   final PlaybackOrchestrator _playback;
+  PlaybackAttempt? _lastAttempt;
+  Duration _lastResumePosition = Duration.zero;
   AppFlowState _state = const AppFlowState();
   AppFlowState get state => _state;
 
@@ -60,6 +62,8 @@ final class AppFlowController {
     Duration resumePosition = Duration.zero,
     bool dataSaver = false,
   }) async {
+    _lastAttempt = attempt;
+    _lastResumePosition = resumePosition;
     _state = AppFlowState(
       stage: AppFlowStage.resolving,
       content: content,
@@ -81,5 +85,19 @@ final class AppFlowController {
       contentLocators: _state.contentLocators,
     );
     return result;
+  }
+
+  Future<PlaybackOrchestrationResult?> retry({
+    Duration? resumePosition,
+  }) async {
+    final content = _state.content;
+    final attempt = _lastAttempt;
+    if (content == null || attempt == null) return null;
+    return play(
+      content: content,
+      episode: _state.episode,
+      attempt: attempt,
+      resumePosition: resumePosition ?? _lastResumePosition,
+    );
   }
 }
