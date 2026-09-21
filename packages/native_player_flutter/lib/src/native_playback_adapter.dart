@@ -53,6 +53,9 @@ final class NativePlaybackAdapter {
 
   Future<void> pause() async => _activeSession?.pause();
 
+  Future<void> seekTo(Duration position) async =>
+      _activeSession?.seekTo(position);
+
   Future<void> resume() async => _activeSession?.play();
 
   PlaybackAttempt get attempt => playCandidate;
