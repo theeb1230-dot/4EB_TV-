@@ -40,7 +40,8 @@ final class DiscoveryProvider implements Provider, ContentDiscoveryProvider {
 }
 
 void main() {
-  test('aggregates discovery providers and isolates provider failure', () async {
+  test('aggregates discovery providers and isolates provider failure',
+      () async {
     const item = CanonicalContent(
       canonicalId: 'one',
       type: ContentType.movie,
@@ -50,7 +51,8 @@ void main() {
       ..register(DiscoveryProvider('good', const [item]))
       ..register(DiscoveryProvider('bad', const [], fail: true));
 
-    final result = await DiscoveryCoordinator(registry: registry).search(' واحد ');
+    final result =
+        await DiscoveryCoordinator(registry: registry).search(' واحد ');
 
     expect(result.items, hasLength(1));
     expect(result.failedProviders, ['bad']);
