@@ -113,7 +113,7 @@ void main() {
     expect(theme.textTheme.bodyLarge?.fontSize, 16);
     expect(theme.inputDecorationTheme.filled, isTrue);
     expect(theme.primaryTextTheme.headlineMedium?.fontSize, 28);
-    expect(theme.splashFactory, isA<InkSparkleFactory>());
+    expect(theme.splashFactory, same(InkSparkle.splashFactory));
   });
   testWidgets('reduced motion disables splash feedback', (tester) async {
     await tester.pumpWidget(
@@ -129,6 +129,6 @@ void main() {
       ),
     );
     final theme = Theme.of(tester.element(find.text('هادئ')));
-    expect(theme.splashFactory, isA<NoSplashFactory>());
+    expect(theme.splashFactory, same(NoSplash.splashFactory));
   });
 }
