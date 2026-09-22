@@ -87,6 +87,25 @@ void main() {
     expect(session.played, isTrue);
   });
 
+  test('activePosition exposes a resume checkpoint only while active', () async {
+    final session = FakeSession();
+    final adapter = NativePlaybackAdapter(sessionFactory: (_) => session);
+
+    expect(await adapter.activePosition(), isNull);
+    await adapter.playCandidate(
+      candidate('https://media.example/stream.m3u8'),
+      Duration.zero,
+    );
+    session.currentPosition = const Duration(minutes: 4, seconds: 21);
+
+    expect(
+      await adapter.activePosition(),
+      const Duration(minutes: 4, seconds: 21),
+    );
+    await adapter.stop();
+    expect(await adapter.activePosition(), isNull);
+  });
+
   test('disposes failed session and returns retryable failure', () async {
     final session = FakeSession(failInitialize: true);
     final adapter = NativePlaybackAdapter(sessionFactory: (_) => session);
