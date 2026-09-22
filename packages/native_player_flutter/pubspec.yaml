@@ -9,8 +9,6 @@ dependencies:
     sdk: flutter
   core_domain:
     path: ../core_domain
-  local_data_persistent:
-    path: ../local_data_persistent
   playback_orchestrator:
     path: ../playback_orchestrator
   video_player: ^2.9.2
