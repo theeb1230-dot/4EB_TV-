@@ -5,9 +5,13 @@ import 'package:playback_orchestrator/playback_orchestrator.dart'
     show AttemptDisposition;
 
 final class FakeSession implements NativeVideoSession {
-  FakeSession({this.failInitialize = false});
+  FakeSession({
+    this.failInitialize = false,
+    this.currentPosition = Duration.zero,
+  });
 
   final bool failInitialize;
+  Duration currentPosition;
   bool initialized = false;
   bool played = false;
   bool paused = false;
@@ -23,7 +27,13 @@ final class FakeSession implements NativeVideoSession {
   }
 
   @override
-  Future<void> seekTo(Duration position) async => seekPosition = position;
+  Future<Duration> position() async => currentPosition;
+
+  @override
+  Future<void> seekTo(Duration position) async {
+    seekPosition = position;
+    currentPosition = position;
+  }
 
   @override
   Future<void> play() async => played = true;
@@ -126,6 +136,34 @@ void main() {
 
     expect(sessions, hasLength(2));
     expect(sessions.first.disposed, isTrue);
+    expect(sessions.last.played, isTrue);
+  });
+
+  test('switchCandidate preserves playback position across sources', () async {
+    final sessions = <FakeSession>[];
+    final adapter = NativePlaybackAdapter(sessionFactory: (_) {
+      final session = FakeSession();
+      sessions.add(session);
+      return session;
+    });
+
+    await adapter.playCandidate(
+      candidate('https://media.example/primary.m3u8'),
+      Duration.zero,
+    );
+    sessions.first.currentPosition = const Duration(minutes: 12, seconds: 34);
+
+    final result = await adapter.switchCandidate(
+      candidate('https://media.example/fallback.m3u8'),
+    );
+
+    expect(result.disposition, AttemptDisposition.success);
+    expect(sessions, hasLength(2));
+    expect(sessions.first.disposed, isTrue);
+    expect(
+      sessions.last.seekPosition,
+      const Duration(minutes: 12, seconds: 34),
+    );
     expect(sessions.last.played, isTrue);
   });
 }
