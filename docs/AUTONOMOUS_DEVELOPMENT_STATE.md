@@ -3,15 +3,11 @@
 GitHub is the source of truth. This handoff never overrides newer repository state.
 
 ## Current source truth
-- Exact start `main`: `6b0b8faf1773468319d3c9a9c4cb8162204decec`.
-- Exact end `main`: `6b0b8faf1773468319d3c9a9c4cb8162204decec` (unchanged; PR #89 is not merged).
-- PR #89 branch: `provider/tvmaze-discovery`.
-- Start PR head: `d89df9cea333207e0e691000ddb9be6247487388`.
-- Exact-head run `35670502035` executed for `d89df9cea333207e0e691000ddb9be6247487388`: Audit hygiene succeeded; Core contracts failed only in `flutter-app-shell` during `flutter test`. Formatting and `flutter analyze` in that job succeeded, while local-data, presentation, architecture, native-player and the provider/package matrix shown by the run were green.
-- The likely app-shell regression was isolated to legal attribution assertions using `find.text(...)` against `SelectableText`. The legal surface now renders the two attribution URLs as ordinary `Text`, preserving visible attribution while making the existing widget/navigation assertions deterministic.
-- Functional fix commit before this handoff update: `8afa6e7b9ad22aa8d3beeaac12ce5be92f51c1d1`.
-- This documentation commit advances the branch head again; re-read the exact head and exact-head CI before any merge.
-- PR #89 was `mergeable=true` before the functional fix; mergeability must be re-read for the new exact head.
+- Exact start/end `main`: `6b0b8faf1773468319d3c9a9c4cb8162204decec` (unchanged; PR #89 is not merged).
+- PR #89: `provider/tvmaze-discovery`; start head `d3c47eea9ae999056e7cc52920c2ec23ee86ee03`.
+- Exact-head runs for `d3c47ee...`: Audit hygiene succeeded; Core contracts failed only in `flutter-app-shell`. Architecture, native-player, local-data and TVmaze provider checks shown by GitHub were green. GitHub reports PR #89 mergeable=true.
+- The legal navigation regression test was the only new app-shell-specific test introduced by #89. It constructed `FourBaAppShell` without the in-memory local-data backend used by the established app-shell tests, coupling a navigation assertion to persistent storage initialization. The test now injects `FlutterLocalDataRuntime(backend: MemoryPersistentStringBackend())`, isolating the legal navigation assertion from storage and matching the deterministic app-shell test harness.
+- Functional fix commit: `aaec2d87df97757bcac9153b9b39f5cfcfae210b`. This state update advances the branch head again; re-read exact head and exact-head CI before merge.
 - No Beta usable, Golden, or Production claim is made.
 
 ## Product invariants
@@ -20,42 +16,38 @@ ZERO_COST core, ZERO_ADS/zero ad tracking, Privacy First/Zero-PII, Local-first, 
 ## Run decision and acceptance
 ### P0 selected: close PR #89 production discovery
 Acceptance criteria:
-1. Default executable registry has at least one lawful, zero-secret metadata discovery source.
+1. Default executable registry has a lawful, zero-secret metadata discovery source.
 2. Provider remains behind `ProviderRegistry` / `ContentDiscoveryProvider`; presentation remains provider-blind.
 3. Provider advertises metadata/catalog/search only and fails closed for stream/download resolution.
-4. Search, details and episodes mapping have deterministic tests.
-5. Architecture policy admits the concrete adapter boundary and CI runs its tests.
-6. TVmaze CC BY-SA attribution/share-alike obligations are recorded and exposed through a reachable in-product legal/about surface.
+4. Search/details/episodes mapping has deterministic tests.
+5. Architecture policy admits the adapter boundary and CI runs its tests.
+6. TVmaze CC BY-SA obligations are recorded and exposed through a reachable in-product legal/about surface.
 7. PR exact head is CI green and mergeable before merge.
 
 Closed/evidenced in PR #89:
 - TVmaze adapter implements search/details/episodes and intentionally returns no playback/download source.
 - Default app registry registers it without credentials or paid backend.
 - Architecture policy and Core-contract matrix include `tvmaze_provider`.
-- `docs/legal/TVMAZE_ATTRIBUTION.md` records attribution/share-alike obligations.
-- Reachable `حول وحقوق البيانات` UI exposes TVmaze and CC BY-SA evidence with widget/navigation coverage.
-- Branch divergence from `main` was removed structurally by a two-parent synchronization commit; current `main` presentation files were preserved.
-- Exact-head CI now runs after synchronization; the first synchronized exact-head run isolated a single app-shell widget-test failure rather than an analyze/compile or provider failure.
+- `docs/legal/TVMAZE_ATTRIBUTION.md` plus reachable `حول وحقوق البيانات` UI expose attribution/share-alike evidence with widget/navigation coverage.
+- Branch is synchronized with current `main`; PR is mergeable.
+- Exact-head CI isolates the remaining failure to the app-shell job; provider, architecture, native-player and local-data evidence is green.
 
 Open acceptance:
-- Exact-head Audit hygiene + Core contracts must be green on the current PR head after the legal-surface testability fix. No blind rerun and no merge without this evidence.
+- Exact-head Audit hygiene + Core contracts must be green on the current PR head after deterministic local-data injection in the legal navigation test. No blind rerun and no merge without this evidence.
 
 ## Blockers
 ### P0
-1. PR #89 exact-head CI evidence after commit `8afa6e7b9ad22aa8d3beeaac12ce5be92f51c1d1` and this handoff update; merge only when exact-head green and mergeable.
-2. After #89 merges, prove an authorized Search -> Details -> Episodes -> Resolve -> Native Play path. TVmaze remains metadata-only and cannot satisfy playback.
-3. Complete native player HLS/DASH/MP4 quality/audio/subtitles, local SRT/VTT, buffering/error/retry, resume, same-position source switching, next/countdown, PiP and platform-supported Cast/AirPlay with regression evidence.
+1. PR #89 exact-head CI after `aaec2d87...` plus this state update; merge only when exact-head green and mergeable.
+2. After merge, prove an authorized Search -> Details -> Episodes -> Resolve -> Native Play path. TVmaze remains metadata-only.
+3. Complete native player HLS/DASH/MP4 quality/audio/subtitles, local SRT/VTT, buffering/error/retry, resume, same-position source switching, next/countdown, PiP and platform-supported Cast/AirPlay.
 4. Complete local Favorites + History + Continue Watching.
-5. Produce same-SHA/version Android Mobile APK + Android TV APK + unsigned IPA where permitted + Web artifact, inspect artifacts, and collect platform/device smoke evidence.
+5. Produce and inspect same-SHA/version Android Mobile APK + Android TV APK + unsigned IPA where permitted + Web artifact, then collect platform/device smoke evidence.
 
 ### P1
-- Downloads/offline queue, quality/audio/subtitles, season queue, quota/cleanup and cached library metadata.
-- Authorized Live/Sports/EPG and mini-player.
-- Experience Engine Preview/Apply while preserving local state.
-- Single local profile, recommendations, feedback, Incognito, Collections, backup export/import and optional Zero-PII sync.
+Downloads/offline; authorized Live/Sports/EPG; Experience Engine Preview/Apply; local profile/recommendations/feedback/Incognito/Collections/backup and optional Zero-PII sync.
 
 ### P2
-- Stable/Beta update discovery, Developer Mode, privacy-safe optional diagnostics, performance/accessibility hardening and Golden gates.
+Stable/Beta update discovery, Developer Mode, privacy-safe diagnostics, performance/accessibility hardening and Golden gates.
 
 ## Evidence-weighted progress using fixed product weights
 | Product area | Weight | Verified item completion | Weighted points |
@@ -81,20 +73,19 @@ Open acceptance:
 | CI/CD/releases | 2 | 20% | 0.4 |
 | Beta/Golden hardening | 1 | 0% | 0.0 |
 
-- **Overall Product Completion: 48.3%**. PR #89 remains excluded from merged production capability until exact-head CI is green and it reaches `main`.
-- **Current Phase Completion: 91%** for Phase 3 Design System execution.
-- **Verified Functional Completion: 40%** because runtime/platform evidence and authorized playback remain incomplete.
-- **Beta Readiness: 52%**. This is not a Beta usable claim; authorized Resolve -> Native Play and same-SHA platform artifacts/smoke are still mandatory.
-- Percentages remain unchanged because `main` did not change. This run converted the synchronized PR from an unknown CI gate into a concrete single app-shell widget-test defect and applied a targeted fix.
+- **Overall Product Completion: 48.3%**.
+- **Current Phase Completion: 91%**.
+- **Verified Functional Completion: 40%**.
+- **Beta Readiness: 52%**; this is not a Beta usable claim.
+- Percentages remain unchanged because `main` did not change.
 
 ## What does not work / is not proven
-- PR #89 is not yet exact-head green after the targeted app-shell test fix.
-- No authorized production playback provider/path is proven.
-- No end-to-end authorized Search -> Details -> Episodes -> Resolve -> Native Play evidence exists yet.
+- PR #89 is not yet exact-head green after the deterministic app-shell test-harness fix.
+- No authorized production playback provider/path or E2E Search -> Details -> Episodes -> Resolve -> Native Play evidence is proven.
 - No same-SHA four-platform Beta artifact/device matrix is proven.
 
 ## Next targets
-1. Re-read PR #89 exact head after this docs commit and inspect exact-head Actions/checks/logs. If Core contracts and Audit hygiene are green and the PR is mergeable, merge using expected-head protection.
+1. Re-read PR #89 exact head and exact-head Actions. If Audit hygiene and Core contracts are green and mergeable, merge with expected-head protection.
 2. Re-read `main` after merge and recalculate all four percentages from repository evidence.
-3. Move immediately to the highest executable prerequisite for authorized Resolve -> Native Play; do not invent or bypass a playback source.
+3. Move immediately to the highest executable prerequisite for authorized Resolve -> Native Play; never invent or bypass a playback source.
 4. Continue native-player and local product-loop blockers while no authorized playback source can legally be integrated.
