@@ -20,7 +20,10 @@ final class ResumeCheckpointStore {
   final LocalKeyValueStore _store;
 
   Future<ResumeCheckpoint?> read(String contentId) async {
-    final encoded = await _store.read(LocalDataScope.playbackProgress, contentId);
+    final encoded = await _store.read(
+      LocalDataScope.playbackProgress,
+      contentId,
+    );
     if (encoded == null) return null;
     try {
       final json = jsonDecode(encoded) as Map<String, dynamic>;
