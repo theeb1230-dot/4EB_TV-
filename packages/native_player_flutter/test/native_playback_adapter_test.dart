@@ -53,22 +53,24 @@ PlaybackCandidate candidate(String url) => PlaybackCandidate(
     );
 
 void main() {
-  test('initializes, restores resume position and starts native session',
-      () async {
-    final session = FakeSession();
-    final adapter = NativePlaybackAdapter(sessionFactory: (_) => session);
+  test(
+    'initializes, restores resume position and starts native session',
+    () async {
+      final session = FakeSession();
+      final adapter = NativePlaybackAdapter(sessionFactory: (_) => session);
 
-    final result = await adapter.playCandidate(
-      candidate('https://media.example/stream.m3u8'),
-      const Duration(seconds: 37),
-    );
+      final result = await adapter.playCandidate(
+        candidate('https://media.example/stream.m3u8'),
+        const Duration(seconds: 37),
+      );
 
-    expect(result.disposition, AttemptDisposition.success);
-    expect(session.initialized, isTrue);
-    expect(session.seekPosition, const Duration(seconds: 37));
-    expect(session.played, isTrue);
-    expect(adapter.activeSession, same(session));
-  });
+      expect(result.disposition, AttemptDisposition.success);
+      expect(session.initialized, isTrue);
+      expect(session.seekPosition, const Duration(seconds: 37));
+      expect(session.played, isTrue);
+      expect(adapter.activeSession, same(session));
+    },
+  );
 
   test('pause and resume delegate to active native session', () async {
     final session = FakeSession();
