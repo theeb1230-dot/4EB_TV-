@@ -46,11 +46,11 @@ final class FakeSession implements NativeVideoSession {
 }
 
 PlaybackCandidate candidate(String url) => PlaybackCandidate(
-      candidateId: url,
-      protocol: PlaybackProtocol.hls,
-      uri: Uri.parse(url),
-      downloadable: false,
-    );
+  candidateId: url,
+  protocol: PlaybackProtocol.hls,
+  uri: Uri.parse(url),
+  downloadable: false,
+);
 
 void main() {
   test(
