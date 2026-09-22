@@ -66,9 +66,8 @@ final class NativePlaybackAdapter {
 
   Future<AttemptResult> switchCandidate(PlaybackCandidate candidate) async {
     final current = _activeSession;
-    final resumePosition = current == null
-        ? Duration.zero
-        : await current.position();
+    final resumePosition =
+        current == null ? Duration.zero : await current.position();
     return playCandidate(candidate, resumePosition);
   }
 
