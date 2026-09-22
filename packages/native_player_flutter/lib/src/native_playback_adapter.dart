@@ -4,6 +4,7 @@ import 'package:video_player/video_player.dart';
 
 abstract interface class NativeVideoSession {
   Future<void> initialize();
+  Future<Duration> position();
   Future<void> seekTo(Duration position);
   Future<void> play();
   Future<void> pause();
@@ -22,6 +23,9 @@ final class VideoPlayerNativeSession implements NativeVideoSession {
 
   @override
   Future<void> initialize() => _controller.initialize();
+
+  @override
+  Future<Duration> position() async => _controller.value.position;
 
   @override
   Future<void> seekTo(Duration position) => _controller.seekTo(position);
@@ -59,6 +63,13 @@ final class NativePlaybackAdapter {
   Future<void> resume() async => _activeSession?.play();
 
   PlaybackAttempt get attempt => playCandidate;
+
+  Future<AttemptResult> switchCandidate(PlaybackCandidate candidate) async {
+    final current = _activeSession;
+    final resumePosition =
+        current == null ? Duration.zero : await current.position();
+    return playCandidate(candidate, resumePosition);
+  }
 
   Future<AttemptResult> playCandidate(
     PlaybackCandidate candidate,
