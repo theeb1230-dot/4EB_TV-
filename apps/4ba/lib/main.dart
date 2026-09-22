@@ -2,12 +2,15 @@ import 'package:app_flow/app_flow.dart';
 import 'package:core_domain/core_domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_presentation/flutter_presentation.dart';
-import 'package:native_player_flutter/native_player_flutter.dart';
 import 'package:local_data_flutter/local_data_flutter.dart';
+import 'package:native_player_flutter/native_player_flutter.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 import 'package:provider_sdk/provider_sdk.dart';
+import 'package:tvmaze_provider/tvmaze_provider.dart';
 import 'package:video_player/video_player.dart';
+
+import 'legal_about.dart';
 
 void main() => runApp(const FourBaApp());
 
@@ -37,7 +40,8 @@ final class _FourBaAppShellState extends State<FourBaAppShell> {
   final NativePlaybackAdapter nativePlayback = NativePlaybackAdapter();
   late final FlutterLocalDataRuntime localData =
       widget.localData ?? FlutterLocalDataRuntime();
-  late final ProviderRegistry registry = widget.registry ?? ProviderRegistry();
+  late final ProviderRegistry registry =
+      widget.registry ?? (ProviderRegistry()..register(TvMazeProvider()));
   late final DiscoveryCoordinator discovery =
       DiscoveryCoordinator(registry: registry);
   late final AppFlowController flow = AppFlowController(
@@ -183,6 +187,16 @@ final class _Home extends StatelessWidget {
               flow.openSearch();
               refresh();
             },
+          ),
+          const SizedBox(height: 12),
+          TextButton.icon(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const LegalAboutSurface(),
+              ),
+            ),
+            icon: const Icon(Icons.info_outline),
+            label: const Text('حول وحقوق البيانات'),
           ),
         ],
       );
@@ -450,86 +464,97 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
     _restoreProgress();
   }
 
-  Duration _lastSaved = Duration.zero;
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    widget.nativePlayback.activeController?.removeListener(_refreshPlayer);
+    _persistProgress();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.detached) {
+      _persistProgress();
+    }
+  }
+
+  void _refreshPlayer() {
+    _persistProgress();
+    if (mounted) setState(() {});
+  }
 
   Future<void> _restoreProgress() async {
     final raw = await widget.localData.keyValueStore.read(
       LocalDataScope.playbackProgress,
       widget.progressKey,
     );
-    final milliseconds = int.tryParse(raw ?? '');
-    if (milliseconds != null && milliseconds > 0) {
-      await widget.nativePlayback.seekTo(Duration(milliseconds: milliseconds));
+    final milliseconds = int.tryParse(raw ?? '') ?? 0;
+    if (milliseconds > 0) {
+      await widget.nativePlayback.seekTo(
+        Duration(milliseconds: milliseconds),
+      );
     }
   }
 
-  void _refreshPlayer() {
-    final controller = widget.nativePlayback.activeController;
-    if (controller != null) {
-      final position = controller.value.position;
-      if ((position - _lastSaved).abs() >= const Duration(seconds: 5)) {
-        _lastSaved = position;
-        widget.localData.keyValueStore.write(
-          LocalDataScope.playbackProgress,
-          widget.progressKey,
-          position.inMilliseconds.toString(),
-        );
-      }
-    }
-    if (mounted) setState(() {});
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.inactive ||
-        state == AppLifecycleState.paused ||
-        state == AppLifecycleState.detached) {
-      widget.nativePlayback.pause();
-    }
-  }
-
-  @override
-  void dispose() {
-    widget.nativePlayback.activeController?.removeListener(_refreshPlayer);
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
+  Future<void> _persistProgress() async {
+    final position = widget.nativePlayback.activeController?.value.position;
+    if (position == null) return;
+    await widget.localData.keyValueStore.write(
+      LocalDataScope.playbackProgress,
+      widget.progressKey,
+      position.inMilliseconds.toString(),
+    );
   }
 
   Future<void> seekBy(Duration delta) async {
-    final controller = widget.nativePlayback.activeController;
-    if (controller == null) return;
-    final duration = controller.value.duration;
-    var target = controller.value.position + delta;
+    final value = widget.nativePlayback.activeController?.value;
+    if (value == null) return;
+    var target = value.position + delta;
     if (target < Duration.zero) target = Duration.zero;
-    if (duration > Duration.zero && target > duration) target = duration;
+    if (target > value.duration) target = value.duration;
     await widget.nativePlayback.seekTo(target);
   }
 
   @override
   Widget build(BuildContext context) {
     final controller = widget.nativePlayback.activeController;
-    if (controller == null || !controller.value.isInitialized) {
-      return const Center(child: Text('تعذر فتح جلسة التشغيل'));
+    if (controller == null) {
+      return const Center(child: Text('المشغل غير جاهز'));
     }
     final value = controller.value;
     if (value.hasError) {
       return Center(
-        child: Text('خطأ في التشغيل: ${value.errorDescription ?? 'غير معروف'}'),
+        child: Text(value.errorDescription ?? 'تعذر تشغيل المصدر'),
       );
     }
     return Column(
       children: [
         Expanded(
           child: Center(
-            child: AspectRatio(
-              aspectRatio: value.aspectRatio == 0 ? 16 / 9 : value.aspectRatio,
-              child: VideoPlayer(controller),
-            ),
+            child: value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: value.aspectRatio,
+                    child: VideoPlayer(controller),
+                  )
+                : const CircularProgressIndicator(),
           ),
         ),
         if (value.isBuffering) const LinearProgressIndicator(),
-        VideoProgressIndicator(controller, allowScrubbing: true),
-        const SizedBox(height: 8),
+        if (value.isInitialized)
+          Slider(
+            value: value.position.inMilliseconds
+                .clamp(0, value.duration.inMilliseconds)
+                .toDouble(),
+            max: value.duration.inMilliseconds == 0
+                ? 1
+                : value.duration.inMilliseconds.toDouble(),
+            onChanged: (milliseconds) => widget.nativePlayback.seekTo(
+              Duration(milliseconds: milliseconds.round()),
+            ),
+          ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -538,23 +563,13 @@ final class _PlayerSurfaceState extends State<_PlayerSurface>
               onPressed: () => seekBy(const Duration(seconds: -10)),
               icon: const Icon(Icons.replay_10),
             ),
-            const SizedBox(width: 12),
-            FilledButton.icon(
-              autofocus: true,
-              onPressed: () async {
-                if (controller.value.isPlaying) {
-                  await widget.nativePlayback.pause();
-                } else {
-                  await widget.nativePlayback.resume();
-                }
-                if (mounted) setState(() {});
-              },
-              icon: Icon(
-                controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-              ),
-              label: Text(controller.value.isPlaying ? 'إيقاف مؤقت' : 'تشغيل'),
+            IconButton(
+              tooltip: value.isPlaying ? 'إيقاف مؤقت' : 'تشغيل',
+              onPressed: value.isPlaying
+                  ? widget.nativePlayback.pause
+                  : widget.nativePlayback.resume,
+              icon: Icon(value.isPlaying ? Icons.pause : Icons.play_arrow),
             ),
-            const SizedBox(width: 12),
             IconButton(
               tooltip: 'تقديم 10 ثوانٍ',
               onPressed: () => seekBy(const Duration(seconds: 10)),
