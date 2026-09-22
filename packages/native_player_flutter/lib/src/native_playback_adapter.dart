@@ -47,8 +47,10 @@ final class NativePlaybackAdapter {
 
   final NativeVideoSessionFactory _sessionFactory;
   NativeVideoSession? _activeSession;
+  PlaybackCandidate? _activeCandidate;
 
   NativeVideoSession? get activeSession => _activeSession;
+  PlaybackCandidate? get activeCandidate => _activeCandidate;
 
   VideoPlayerController? get activeController {
     final session = _activeSession;
@@ -63,6 +65,16 @@ final class NativePlaybackAdapter {
   Future<void> resume() async => _activeSession?.play();
 
   PlaybackAttempt get attempt => playCandidate;
+
+  Future<AttemptResult> retryActiveCandidate() async {
+    final current = _activeSession;
+    final candidate = _activeCandidate;
+    if (current == null || candidate == null) {
+      return const AttemptResult.retry(ResolveFailureClass.unavailable);
+    }
+    final resumePosition = await current.position();
+    return playCandidate(candidate, resumePosition);
+  }
 
   Future<AttemptResult> switchCandidate(PlaybackCandidate candidate) async {
     final current = _activeSession;
@@ -83,6 +95,7 @@ final class NativePlaybackAdapter {
     await stop();
     final session = _sessionFactory(candidate.uri);
     _activeSession = session;
+    _activeCandidate = candidate;
     try {
       await session.initialize();
       if (resumePosition > Duration.zero) {
@@ -94,6 +107,7 @@ final class NativePlaybackAdapter {
       await session.dispose();
       if (identical(_activeSession, session)) {
         _activeSession = null;
+        _activeCandidate = null;
       }
       return const AttemptResult.retry(ResolveFailureClass.network);
     }
@@ -102,6 +116,7 @@ final class NativePlaybackAdapter {
   Future<void> stop() async {
     final session = _activeSession;
     _activeSession = null;
+    _activeCandidate = null;
     if (session != null) {
       await session.dispose();
     }

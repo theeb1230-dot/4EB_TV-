@@ -99,6 +99,7 @@ void main() {
     expect(result.disposition, AttemptDisposition.retryNext);
     expect(session.disposed, isTrue);
     expect(adapter.activeSession, isNull);
+    expect(adapter.activeCandidate, isNull);
   });
 
   test('rejects non-http media before creating a platform session', () async {
@@ -166,4 +167,46 @@ void main() {
     );
     expect(sessions.last.played, isTrue);
   });
+
+  test(
+    'retryActiveCandidate reopens same source at current position',
+    () async {
+      final sessions = <FakeSession>[];
+      final uris = <Uri>[];
+      final adapter = NativePlaybackAdapter(sessionFactory: (uri) {
+        uris.add(uri);
+        final session = FakeSession();
+        sessions.add(session);
+        return session;
+      });
+      final source = candidate('https://media.example/primary.m3u8');
+
+      await adapter.playCandidate(source, Duration.zero);
+      sessions.first.currentPosition = const Duration(minutes: 8, seconds: 9);
+
+      final result = await adapter.retryActiveCandidate();
+
+      expect(result.disposition, AttemptDisposition.success);
+      expect(uris, [source.uri, source.uri]);
+      expect(sessions.first.disposed, isTrue);
+      expect(
+        sessions.last.seekPosition,
+        const Duration(minutes: 8, seconds: 9),
+      );
+      expect(sessions.last.played, isTrue);
+    },
+  );
+
+  test(
+    'retryActiveCandidate fails closed without an active source',
+    () async {
+      final adapter = NativePlaybackAdapter(
+        sessionFactory: (_) => FakeSession(),
+      );
+
+      final result = await adapter.retryActiveCandidate();
+
+      expect(result.disposition, AttemptDisposition.retryNext);
+    },
+  );
 }
