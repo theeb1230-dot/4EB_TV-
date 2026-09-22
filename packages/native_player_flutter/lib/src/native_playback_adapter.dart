@@ -64,6 +64,11 @@ final class NativePlaybackAdapter {
 
   Future<void> resume() async => _activeSession?.play();
 
+  Future<Duration?> activePosition() async {
+    final session = _activeSession;
+    return session == null ? null : session.position();
+  }
+
   PlaybackAttempt get attempt => playCandidate;
 
   Future<AttemptResult> retryActiveCandidate() async {
