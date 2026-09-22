@@ -1,6 +1,5 @@
 import 'package:core_domain/core_domain.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:native_player_flutter/native_player_flutter.dart';
 
 void main() {
   test('writes and restores playback progress', () async {
