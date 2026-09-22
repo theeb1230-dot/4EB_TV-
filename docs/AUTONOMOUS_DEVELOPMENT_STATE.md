@@ -4,51 +4,59 @@ GitHub is the source of truth. This handoff never overrides newer repository sta
 
 ## Current source truth
 - Exact start `main`: `6b0b8faf1773468319d3c9a9c4cb8162204decec`.
-- Exact end `main` for this run: `6b0b8faf1773468319d3c9a9c4cb8162204decec` (unchanged while PR #89 is under exact-head CI).
-- PR #89 branch: `provider/tvmaze-discovery`. Pre-handoff exact head: `931687c699352008fb64970bc7584f49979c569c`; the handoff commits advance the branch head and must be re-read from GitHub before merge.
-- PR #89 was reopened because there was no open PR and production discovery remains the highest executable P0 blocker. It is the only active work slice.
-- No Golden release is claimed. Same-SHA Android Mobile, Android TV, unsigned iOS and Web artifacts plus device/runtime evidence remain unverified.
+- Exact end `main`: `6b0b8faf1773468319d3c9a9c4cb8162204decec` (unchanged; PR #89 is not merged).
+- PR #89 branch: `provider/tvmaze-discovery`.
+- Start PR head: `b2c3273e5cc8441b7cab004b11a9030f46a9ceab`.
+- Synchronization merge commit created in this run: `cf510b9189277bd08852dd54b35e578f7faf8179`, with parents `b2c3273e5cc8441b7cab004b11a9030f46a9ceab` and `main@6b0b8faf1773468319d3c9a9c4cb8162204decec`.
+- The synchronization preserves the current `main` Cinematic Gold presentation implementation/tests while retaining the TVmaze discovery slice.
+- GitHub reports PR #89 `mergeable=true`, `rebaseable=true`, `mergeable_state=unstable` after synchronization.
+- Exact-head workflow runs had not appeared for `cf510b9189277bd08852dd54b35e578f7faf8179` at verification time, so the PR was not merged.
+- This documentation commit advances the branch head again; re-read the exact head and exact-head CI before any merge.
+- No Beta usable, Golden, or Production claim is made.
 
 ## Product invariants
-ZERO_COST core, ZERO_ADS/zero ad tracking, Privacy First/Zero-PII, Local-first, Native Playback First, internal WebView last fallback only, no external-browser playback, no DRM/paywall/access-control bypass, no secrets, no mandatory paid backend, no GitHub/4BA media proxy, Metadata != Streams, Watch != Download, provider/UI separation, Arabic RTL default plus English/Turkish, evidence-backed completion only.
+ZERO_COST core, ZERO_ADS/zero ad tracking, Privacy First/Zero-PII, Local-first, Native Playback First, internal WebView last fallback only, no external-browser playback, no DRM/paywall/access-control bypass, no secrets, no mandatory paid backend, no GitHub/4BA media proxy, Metadata != Streams, Watch != Download, provider/UI separation, Arabic RTL default plus English/Turkish, Cinematic Gold dark-only V1, evidence-backed completion only.
 
 ## Run decision and acceptance
-### P0 selected: production discovery
+### P0 selected: close PR #89 production discovery
 Acceptance criteria:
 1. Default executable registry has at least one lawful, zero-secret metadata discovery source.
 2. Provider remains behind `ProviderRegistry` / `ContentDiscoveryProvider`; presentation remains provider-blind.
 3. Provider advertises metadata/catalog/search only and fails closed for stream/download resolution.
 4. Search, details and episodes mapping have deterministic tests.
-5. Architecture policy explicitly admits the concrete adapter boundary and CI runs its tests.
-6. No release may ship until CC BY-SA attribution/share-alike obligations are exposed appropriately in-product and recorded in release/legal evidence.
+5. Architecture policy admits the concrete adapter boundary and CI runs its tests.
+6. TVmaze CC BY-SA attribution/share-alike obligations are recorded and exposed through a reachable in-product legal/about surface.
+7. PR exact head is CI green and mergeable before merge.
 
-Evidence in PR #89:
+Closed/evidenced in PR #89:
 - TVmaze adapter implements search/details/episodes and intentionally returns no playback/download source.
-- Default app registry registers the adapter without credentials or paid backend.
-- `tools/check_architecture.py` now admits `tvmaze_provider` only with Core + Provider SDK dependencies.
-- Core-contract matrix now includes `tvmaze_provider` so its formatting/analyze/tests cannot silently escape CI.
-- TVmaze public API is free and CC BY-SA; attribution/share-alike remains a release gate, not something to hand-wave away.
+- Default app registry registers it without credentials or paid backend.
+- Architecture policy and Core-contract matrix include `tvmaze_provider`.
+- `docs/legal/TVMAZE_ATTRIBUTION.md` records attribution/share-alike obligations.
+- Reachable `حول وحقوق البيانات` UI exposes TVmaze and CC BY-SA evidence with widget/navigation coverage.
+- Branch divergence from `main` was removed structurally by a two-parent synchronization commit; current `main` presentation files were preserved.
+
+Open acceptance:
+- Exact-head Audit hygiene + Core contracts must run and be green on the current PR head. No blind rerun and no merge without this evidence.
 
 ## Blockers
 ### P0
-1. Get PR #89 exact-head Audit hygiene + Core contracts green and mergeable, then merge with expected-head protection.
-2. Add in-product TVmaze attribution/link and license evidence before any distributable release using its data.
-3. Prove an authorized Search -> Details -> Episodes -> Resolve -> Native Play path. TVmaze is metadata-only and is not a playback provider.
-4. Complete native player quality/audio/subtitles, local SRT/VTT, resume, same-position source switching, next/countdown, PiP and platform-supported Cast/AirPlay with regression evidence.
+1. PR #89 exact-head CI evidence. After the synchronization, GitHub reports the PR mergeable, but no exact-head workflow run was visible yet.
+2. After #89 merges, prove an authorized Search -> Details -> Episodes -> Resolve -> Native Play path. TVmaze remains metadata-only and cannot satisfy playback.
+3. Complete native player HLS/DASH/MP4 quality/audio/subtitles, local SRT/VTT, buffering/error/retry, resume, same-position source switching, next/countdown, PiP and platform-supported Cast/AirPlay with regression evidence.
+4. Complete local Favorites + History + Continue Watching.
 5. Produce same-SHA/version Android Mobile APK + Android TV APK + unsigned IPA where permitted + Web artifact, inspect artifacts, and collect platform/device smoke evidence.
 
 ### P1
-- Favorites/history/continue-watching and single local profile.
-- Downloads/offline queue, quota/cleanup and cached library metadata.
+- Downloads/offline queue, quality/audio/subtitles, season queue, quota/cleanup and cached library metadata.
 - Authorized Live/Sports/EPG and mini-player.
-- Android adaptive, TV 10-foot D-pad/focus, iOS integration and complete Web/PWA.
+- Experience Engine Preview/Apply while preserving local state.
+- Single local profile, recommendations, feedback, Incognito, Collections, backup export/import and optional Zero-PII sync.
 
 ### P2
 - Stable/Beta update discovery, Developer Mode, privacy-safe optional diagnostics, performance/accessibility hardening and Golden gates.
 
 ## Evidence-weighted progress using fixed product weights
-The previous handoff's 68% aggregate is retired because it did not follow the fixed 100-point weighting requested for autonomous runs.
-
 | Product area | Weight | Verified item completion | Weighted points |
 |---|---:|---:|---:|
 | Governance + 30-source audit | 10 | 78% | 7.8 |
@@ -72,13 +80,20 @@ The previous handoff's 68% aggregate is retired because it did not follow the fi
 | CI/CD/releases | 2 | 20% | 0.4 |
 | Beta/Golden hardening | 1 | 0% | 0.0 |
 
-- **Overall Product Completion: 48.3%** by the fixed weighted calculation above. This is not Beta/Golden readiness.
-- **Current Phase Completion: 91%** for Phase 3 Design System execution; runtime tokens/theme/focus/reduced-motion are integrated, while final contrast/device captures, complete navigation/player-control treatment and platform evidence remain open.
-- **Verified Functional Completion: 40%**. This intentionally trails code/contract presence because runtime/platform evidence and an authorized playback vertical slice are not yet complete.
-- Reason for recalculation: the fixed weighting exposes substantial unfinished Live/Offline/platform/release work that the older 68% handoff obscured. PR #89 is not counted as merged production capability until exact-head CI is green and it reaches `main`.
+- **Overall Product Completion: 48.3%**. PR #89 remains excluded from merged production capability until exact-head CI is green and it reaches `main`.
+- **Current Phase Completion: 91%** for Phase 3 Design System execution.
+- **Verified Functional Completion: 40%** because runtime/platform evidence and authorized playback remain incomplete.
+- **Beta Readiness: 52%**. This is not a Beta usable claim; authorized Resolve -> Native Play and same-SHA platform artifacts/smoke are still mandatory.
+- Percentages remain unchanged this run because `main` did not change. The material progress was removal of the PR divergence/mergeability blocker.
+
+## What does not work / is not proven
+- No authorized production playback provider/path is proven.
+- No end-to-end authorized Search -> Details -> Episodes -> Resolve -> Native Play evidence exists yet.
+- No same-SHA four-platform Beta artifact/device matrix is proven.
+- PR #89 still lacks exact-head green CI evidence after synchronization.
 
 ## Next targets
-1. Finish PR #89 from CI logs, not blind reruns; merge only exact-head green and mergeable.
-2. Re-read `main` after merge and add in-product attribution/legal evidence before a release can consume TVmaze data.
-3. Continue the highest P0 vertical slice toward authorized Resolve -> Native Play and player failure/source-switch regression tests.
-4. Do not spend the next slice on cosmetic refactoring while these functional blockers remain.
+1. Re-read PR #89 exact head after this docs commit and inspect exact-head Actions/checks/logs. Merge only when green and mergeable, using expected-head protection.
+2. Re-read `main` after merge and recalculate all four percentages from repository evidence.
+3. Move immediately to the highest executable prerequisite for authorized Resolve -> Native Play; do not invent or bypass a playback source.
+4. Continue native-player and local product-loop blockers while no authorized playback source can legally be integrated.
