@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:four_ba_app/legal_about.dart';
 import 'package:four_ba_app/main.dart';
+import 'package:local_data_flutter/local_data_flutter.dart';
+import 'package:local_data_persistent/local_data_persistent.dart';
 import 'package:provider_sdk/provider_sdk.dart';
 
 void main() {
@@ -26,7 +28,14 @@ void main() {
 
   testWidgets('home exposes a reachable attribution surface', (tester) async {
     await tester.pumpWidget(
-      MaterialApp(home: FourBaAppShell(registry: ProviderRegistry())),
+      MaterialApp(
+        home: FourBaAppShell(
+          registry: ProviderRegistry(),
+          localData: FlutterLocalDataRuntime(
+            backend: MemoryPersistentStringBackend(),
+          ),
+        ),
+      ),
     );
 
     expect(find.text('حول وحقوق البيانات'), findsOneWidget);
