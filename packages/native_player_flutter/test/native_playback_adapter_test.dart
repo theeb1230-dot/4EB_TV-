@@ -46,11 +46,11 @@ final class FakeSession implements NativeVideoSession {
 }
 
 PlaybackCandidate candidate(String url) => PlaybackCandidate(
-  candidateId: url,
-  protocol: PlaybackProtocol.hls,
-  uri: Uri.parse(url),
-  downloadable: false,
-);
+      candidateId: url,
+      protocol: PlaybackProtocol.hls,
+      uri: Uri.parse(url),
+      downloadable: false,
+    );
 
 void main() {
   test(
@@ -89,7 +89,8 @@ void main() {
     expect(session.played, isTrue);
   });
 
-  test('activePosition exposes a resume checkpoint only while active', () async {
+  test('activePosition exposes a resume checkpoint only while active',
+      () async {
     final session = FakeSession();
     final adapter = NativePlaybackAdapter(sessionFactory: (_) => session);
 
