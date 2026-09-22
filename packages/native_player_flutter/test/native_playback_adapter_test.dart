@@ -187,7 +187,10 @@ void main() {
     expect(result.disposition, AttemptDisposition.success);
     expect(uris, [source.uri, source.uri]);
     expect(sessions.first.disposed, isTrue);
-    expect(sessions.last.seekPosition, const Duration(minutes: 8, seconds: 9));
+    expect(
+      sessions.last.seekPosition,
+      const Duration(minutes: 8, seconds: 9),
+    );
     expect(sessions.last.played, isTrue);
   });
 
