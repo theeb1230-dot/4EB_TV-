@@ -1,7 +1,6 @@
 import 'package:core_domain/core_domain.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:native_player_flutter/native_player_flutter.dart';
-import 'package:playback_orchestrator/playback_orchestrator.dart';
 
 final class RuntimeStore implements LocalKeyValueStore {
   final values = <String, String>{};
@@ -100,9 +99,9 @@ void main() {
     final store = RuntimeStore();
     final watchStore = WatchProgressStore(store);
     await watchStore.write(
-      const WatchProgress(
+      WatchProgress(
         contentId: 'episode-8',
-        position: Duration(seconds: 42),
+        position: const Duration(seconds: 42),
         duration: null,
         updatedAt: DateTime(2026, 1, 1),
       ),
