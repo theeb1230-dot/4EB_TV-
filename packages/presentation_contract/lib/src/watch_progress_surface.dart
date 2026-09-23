@@ -1,5 +1,3 @@
-import 'package:core_domain/core_domain.dart';
-
 /// Presentation-safe projection of local watch state.
 ///
 /// This keeps provider streams and storage concerns out of UI-facing models.
@@ -12,16 +10,6 @@ final class WatchProgressSurfaceItem {
     this.seasonNumber,
     this.episodeNumber,
   });
-
-  factory WatchProgressSurfaceItem.fromDomain(WatchProgress progress) =>
-      WatchProgressSurfaceItem(
-        contentId: progress.contentId,
-        position: progress.position,
-        duration: progress.duration,
-        updatedAt: progress.updatedAt,
-        seasonNumber: progress.seasonNumber,
-        episodeNumber: progress.episodeNumber,
-      );
 
   final String contentId;
   final Duration position;
@@ -41,17 +29,9 @@ final class WatchProgressSurfaceItem {
   }
 }
 
-/// Reads the local History/Continue Watching source without exposing storage
-/// or provider implementation details to presentation code.
-final class WatchProgressSurfaceReader {
-  const WatchProgressSurfaceReader(this._store);
-
-  final WatchProgressStore _store;
-
-  Future<WatchProgressSurfaceItem?> read(String contentId) async {
-    final progress = await _store.read(contentId);
-    return progress == null
-        ? null
-        : WatchProgressSurfaceItem.fromDomain(progress);
-  }
+/// Presentation-side reader contract. Infrastructure adapters can implement
+/// this without making the presentation package depend on storage or domain
+/// packages.
+abstract interface class WatchProgressSurfaceReader {
+  Future<WatchProgressSurfaceItem?> read(String contentId);
 }
