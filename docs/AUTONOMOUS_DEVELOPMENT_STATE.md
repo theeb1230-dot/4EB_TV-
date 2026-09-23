@@ -8,8 +8,8 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 - Working branch: `presentation/watch-progress-collections`.
 - Product change commit: `1ffd7dc5de6882090ea23579d9f53f3811bda25c`.
 - CI repair commit: `c187f16975da381b45a10e0fe788a7280749f7aa`.
-- Current branch head before this state refresh: `c187f16975da381b45a10e0fe788a7280749f7aa`.
-- State refresh commit: recorded by this file update.
+- Root-cause fix commit: `92c683a3476ef63a2b161ec25fa1b4be4c81257b`.
+- Current branch head before this state refresh: `92c683a3476ef63a2b161ec25fa1b4be4c81257b`.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -24,18 +24,21 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 - Kept sorting newest-first by `updatedAt`.
 - Added tests for ordering, completion filtering, and defensive snapshots.
 - Exported the new contract through `presentation_contract`.
-- Fixed the observed `presentation_contract` formatting failure on the same PR branch.
-- Confirmed the repaired head started fresh CI; Audit hygiene passed, while Core contracts failed in `flutter-app-shell` during `flutter test`.
+- Read the actual logs for Core contracts run `278`.
+- Confirmed the root cause: `WatchProgressSurfaceCollection` used a `const` constructor while initializing `_items` with the non-const `List.unmodifiable` factory, producing `invalid_constant` at `lib/src/watch_progress_surface_collection.dart:9:18` and causing downstream Flutter test compilation failures.
+- Fixed that root cause on the same PR branch by removing the invalid `const` constructor modifier while preserving the immutable defensive copy.
 
 ## Acceptance evidence
 - Code and tests are committed on the working branch.
-- Exact-head CI for `361311a53a72b35469b7623e59772b8462c6f1e9` produced Audit hygiene run `422` = success and Core contracts run `277` = failure.
-- Completed green jobs in Core contracts included architecture, flutter-local-data, and flutter-native-player; `flutter-app-shell` failed in its `flutter test` step. This is the next concrete blocker; no claim is made about the failure's root cause without the job log output.
-- No runtime/platform E2E evidence is claimed by this change.
+- Core contracts run `278` failed in `test (presentation_contract)` during `dart analyze --fatal-infos` with the exact error above.
+- `flutter-app-shell` and `flutter-presentation` failed during `flutter test` only because the same package compilation error prevented app tests from loading.
+- Architecture, local-data, native-player, resolver, provider, metadata, core-domain, design-token, and other completed jobs passed their own analyze/test stages before downstream cancellation.
+- The root-cause fix is now committed as `92c683a3476ef63a2b161ec25fa1b4be4c81257b`.
+- Fresh exact-head CI is required before merge; no runtime/platform E2E evidence is claimed by this change.
 
 ## Open acceptance / blockers
 ### P0
-1. Fix the observed `flutter-app-shell` test failure on PR #101 only, using the actual job log rather than an unrelated or blind rerun.
+1. Verify fresh exact-head CI for `92c683a3476ef63a2b161ec25fa1b4be4c81257b` is fully green and `mergeable=true`.
 2. No authorized production playback path is proven.
 3. Prove `Search -> Details -> Episodes -> Resolve -> Native Play` with authorized data and provenance separation.
 4. Complete History + Continue Watching UI/runtime lifecycle around the merged presentation surface contract and this collection policy.
@@ -60,12 +63,11 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Obtain and read the `flutter-app-shell` job log for run `277`; do not rerun blindly.
-2. Fix only the observed root cause on PR #101.
-3. Verify a fresh exact-head run is fully green and `mergeable=true`.
-4. Merge only after green required checks, then re-read `main` and refresh this file with the exact merge SHA.
-5. Wire the collection into real History and Continue Watching UI/runtime with integration evidence.
-6. Continue lawful playback-path audit without inventing a provider or converting TVmaze into a stream provider.
-7. Add Native Player lifecycle coverage for buffering/error/retry and next/countdown.
-8. Build and inspect same-SHA platform artifacts and provenance.
-9. Recompute the four percentages from the next verified merged evidence only.
+1. Read fresh exact-head CI for `92c683a3476ef63a2b161ec25fa1b4be4c81257b`; do not merge before green.
+2. Merge PR #101 only after all required checks are green and `mergeable=true`.
+3. Re-read `main` after merge and refresh this file with the exact merge SHA.
+4. Wire the collection into real History and Continue Watching UI/runtime with integration evidence.
+5. Continue lawful playback-path audit without inventing a provider or converting TVmaze into a stream provider.
+6. Add Native Player lifecycle coverage for buffering/error/retry and next/countdown.
+7. Build and inspect same-SHA platform artifacts and provenance.
+8. Recompute the four percentages from the next verified merged evidence only.
