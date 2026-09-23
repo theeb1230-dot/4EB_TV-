@@ -5,7 +5,7 @@ import 'watch_progress_surface.dart';
 /// The collection keeps presentation policy in one place: completed items are
 /// excluded from Continue Watching, while History remains a full recent list.
 final class WatchProgressSurfaceCollection {
-  const WatchProgressSurfaceCollection(Iterable<WatchProgressSurfaceItem> items)
+  WatchProgressSurfaceCollection(Iterable<WatchProgressSurfaceItem> items)
       : _items = List<WatchProgressSurfaceItem>.unmodifiable(items);
 
   final List<WatchProgressSurfaceItem> _items;
