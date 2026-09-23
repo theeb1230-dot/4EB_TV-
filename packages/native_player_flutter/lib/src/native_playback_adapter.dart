@@ -116,7 +116,8 @@ final class NativePlaybackAdapter {
 
     final effectiveContentId = contentId ?? _activeContentId;
     var effectiveResumePosition = resumePosition;
-    if (effectiveResumePosition <= Duration.zero && effectiveContentId != null) {
+    if (effectiveResumePosition <= Duration.zero &&
+        effectiveContentId != null) {
       effectiveResumePosition =
           (await _resumeStore?.read(effectiveContentId))?.position ??
               Duration.zero;
