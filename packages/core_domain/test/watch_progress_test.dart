@@ -2,7 +2,8 @@ import 'package:core_domain/core_domain.dart';
 import 'package:test/test.dart';
 
 final class _MemoryStore implements LocalKeyValueStore {
-  final Map<LocalDataScope, Map<String, String>> data = <LocalDataScope, Map<String, String>>{};
+  final Map<LocalDataScope, Map<String, String>> data =
+      <LocalDataScope, Map<String, String>>{};
 
   Map<String, String> _bucket(LocalDataScope scope) =>
       data.putIfAbsent(scope, () => <String, String>{});

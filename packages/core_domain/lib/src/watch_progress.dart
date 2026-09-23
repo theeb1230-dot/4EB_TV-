@@ -24,9 +24,7 @@ final class WatchProgress {
   final int? episodeNumber;
 
   bool get isCompleted =>
-      duration != null &&
-      duration! > Duration.zero &&
-      position >= duration!;
+      duration != null && duration! > Duration.zero && position >= duration!;
 }
 
 final class WatchProgressStore {
@@ -43,7 +41,8 @@ final class WatchProgressStore {
       return WatchProgress(
         contentId: contentId,
         position: Duration(milliseconds: json['positionMs'] as int),
-        duration: durationMs == null ? null : Duration(milliseconds: durationMs),
+        duration:
+            durationMs == null ? null : Duration(milliseconds: durationMs),
         updatedAt: DateTime.parse(json['updatedAt'] as String).toUtc(),
         seasonNumber: json['seasonNumber'] as int?,
         episodeNumber: json['episodeNumber'] as int?,
