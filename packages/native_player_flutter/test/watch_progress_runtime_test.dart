@@ -64,34 +64,37 @@ PlaybackCandidate runtimeCandidate() => PlaybackCandidate(
     );
 
 void main() {
-  test('pause persists the same local position for resume and history', () async {
-    final store = RuntimeStore();
-    final resumeStore = ResumeCheckpointStore(store);
-    final watchStore = WatchProgressStore(store);
-    final session = RuntimeSession();
-    final adapter = NativePlaybackAdapter(
-      sessionFactory: (_) => session,
-      resumeStore: resumeStore,
-      watchProgressStore: watchStore,
-    );
+  test(
+    'pause persists the same local position for resume and history',
+    () async {
+      final store = RuntimeStore();
+      final resumeStore = ResumeCheckpointStore(store);
+      final watchStore = WatchProgressStore(store);
+      final session = RuntimeSession();
+      final adapter = NativePlaybackAdapter(
+        sessionFactory: (_) => session,
+        resumeStore: resumeStore,
+        watchProgressStore: watchStore,
+      );
 
-    await adapter.playCandidate(
-      runtimeCandidate(),
-      Duration.zero,
-      contentId: 'episode-7',
-    );
-    session.currentPosition = const Duration(minutes: 3, seconds: 14);
-    await adapter.pause();
+      await adapter.playCandidate(
+        runtimeCandidate(),
+        Duration.zero,
+        contentId: 'episode-7',
+      );
+      session.currentPosition = const Duration(minutes: 3, seconds: 14);
+      await adapter.pause();
 
-    expect(
-      (await resumeStore.read('episode-7'))?.position,
-      const Duration(minutes: 3, seconds: 14),
-    );
-    expect(
-      (await watchStore.read('episode-7'))?.position,
-      const Duration(minutes: 3, seconds: 14),
-    );
-  });
+      expect(
+        (await resumeStore.read('episode-7'))?.position,
+        const Duration(minutes: 3, seconds: 14),
+      );
+      expect(
+        (await watchStore.read('episode-7'))?.position,
+        const Duration(minutes: 3, seconds: 14),
+      );
+    },
+  );
 
   test('watch history restores when resume checkpoint is absent', () async {
     final store = RuntimeStore();
