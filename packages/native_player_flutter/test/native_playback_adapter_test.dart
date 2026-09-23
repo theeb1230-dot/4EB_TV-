@@ -4,6 +4,35 @@ import 'package:native_player_flutter/native_player_flutter.dart';
 import 'package:playback_orchestrator/playback_orchestrator.dart'
     show AttemptDisposition;
 
+final class FakeStore implements LocalKeyValueStore {
+  final values = <String, String>{};
+
+  String _key(LocalDataScope scope, String key) => '$scope:$key';
+
+  @override
+  Future<void> clear(LocalDataScope scope) async {
+    values.removeWhere((key, _) => key.startsWith('$scope:'));
+  }
+
+  @override
+  Future<void> delete(LocalDataScope scope, String key) async {
+    values.remove(_key(scope, key));
+  }
+
+  @override
+  Future<String?> read(LocalDataScope scope, String key) async =>
+      values[_key(scope, key)];
+
+  @override
+  Future<void> write(
+    LocalDataScope scope,
+    String key,
+    String value,
+  ) async {
+    values[_key(scope, key)] = value;
+  }
+}
+
 final class FakeSession implements NativeVideoSession {
   FakeSession({
     this.failInitialize = false,
@@ -71,6 +100,62 @@ void main() {
       expect(adapter.activeSession, same(session));
     },
   );
+
+  test('restores and persists a local checkpoint across sessions', () async {
+    final store = FakeStore();
+    final resumeStore = ResumeCheckpointStore(store);
+    final firstSession = FakeSession();
+    final firstAdapter = NativePlaybackAdapter(
+      sessionFactory: (_) => firstSession,
+      resumeStore: resumeStore,
+    );
+
+    await firstAdapter.playCandidate(
+      candidate('https://media.example/stream.m3u8'),
+      Duration.zero,
+      contentId: 'movie-42',
+    );
+    firstSession.currentPosition = const Duration(minutes: 6, seconds: 12);
+    await firstAdapter.pause();
+
+    final secondSession = FakeSession();
+    final secondAdapter = NativePlaybackAdapter(
+      sessionFactory: (_) => secondSession,
+      resumeStore: resumeStore,
+    );
+    await secondAdapter.playCandidate(
+      candidate('https://media.example/stream.m3u8'),
+      Duration.zero,
+      contentId: 'movie-42',
+    );
+
+    expect(secondSession.seekPosition, const Duration(minutes: 6, seconds: 12));
+  });
+
+  test('zero position clears the persisted checkpoint on stop', () async {
+    final store = FakeStore();
+    final resumeStore = ResumeCheckpointStore(store);
+    final session = FakeSession();
+    final adapter = NativePlaybackAdapter(
+      sessionFactory: (_) => session,
+      resumeStore: resumeStore,
+    );
+
+    await resumeStore.write(
+      contentId: 'movie-42',
+      position: const Duration(seconds: 9),
+      updatedAt: DateTime.utc(2026, 1, 1),
+    );
+    await adapter.playCandidate(
+      candidate('https://media.example/stream.m3u8'),
+      Duration.zero,
+      contentId: 'movie-42',
+    );
+    session.currentPosition = Duration.zero;
+    await adapter.stop();
+
+    expect(await resumeStore.read('movie-42'), isNull);
+  });
 
   test('pause and resume delegate to active native session', () async {
     final session = FakeSession();
