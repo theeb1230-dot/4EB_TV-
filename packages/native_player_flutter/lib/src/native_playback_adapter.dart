@@ -41,13 +41,18 @@ final class VideoPlayerNativeSession implements NativeVideoSession {
 }
 
 final class NativePlaybackAdapter {
-  NativePlaybackAdapter({NativeVideoSessionFactory? sessionFactory})
-      : _sessionFactory =
-            sessionFactory ?? ((uri) => VideoPlayerNativeSession(uri));
+  NativePlaybackAdapter({
+    NativeVideoSessionFactory? sessionFactory,
+    ResumeCheckpointStore? resumeStore,
+  })  : _sessionFactory =
+            sessionFactory ?? ((uri) => VideoPlayerNativeSession(uri)),
+        _resumeStore = resumeStore;
 
   final NativeVideoSessionFactory _sessionFactory;
+  final ResumeCheckpointStore? _resumeStore;
   NativeVideoSession? _activeSession;
   PlaybackCandidate? _activeCandidate;
+  String? _activeContentId;
 
   NativeVideoSession? get activeSession => _activeSession;
   PlaybackCandidate? get activeCandidate => _activeCandidate;
@@ -57,7 +62,10 @@ final class NativePlaybackAdapter {
     return session is VideoPlayerNativeSession ? session.controller : null;
   }
 
-  Future<void> pause() async => _activeSession?.pause();
+  Future<void> pause() async {
+    await _persistActivePosition();
+    await _activeSession?.pause();
+  }
 
   Future<void> seekTo(Duration position) async =>
       _activeSession?.seekTo(position);
@@ -78,33 +86,52 @@ final class NativePlaybackAdapter {
       return const AttemptResult.retry(ResolveFailureClass.unavailable);
     }
     final resumePosition = await current.position();
-    return playCandidate(candidate, resumePosition);
+    return playCandidate(
+      candidate,
+      resumePosition,
+      contentId: _activeContentId,
+    );
   }
 
   Future<AttemptResult> switchCandidate(PlaybackCandidate candidate) async {
     final current = _activeSession;
     final resumePosition =
         current == null ? Duration.zero : await current.position();
-    return playCandidate(candidate, resumePosition);
+    return playCandidate(
+      candidate,
+      resumePosition,
+      contentId: _activeContentId,
+    );
   }
 
   Future<AttemptResult> playCandidate(
     PlaybackCandidate candidate,
-    Duration resumePosition,
-  ) async {
+    Duration resumePosition, {
+    String? contentId,
+  }) async {
     final scheme = candidate.uri.scheme.toLowerCase();
     if (scheme != 'https' && scheme != 'http') {
       return const AttemptResult.retry(ResolveFailureClass.unavailable);
+    }
+
+    final effectiveContentId = contentId ?? _activeContentId;
+    var effectiveResumePosition = resumePosition;
+    if (effectiveResumePosition <= Duration.zero &&
+        effectiveContentId != null) {
+      effectiveResumePosition =
+          (await _resumeStore?.read(effectiveContentId))?.position ??
+              Duration.zero;
     }
 
     await stop();
     final session = _sessionFactory(candidate.uri);
     _activeSession = session;
     _activeCandidate = candidate;
+    _activeContentId = effectiveContentId;
     try {
       await session.initialize();
-      if (resumePosition > Duration.zero) {
-        await session.seekTo(resumePosition);
+      if (effectiveResumePosition > Duration.zero) {
+        await session.seekTo(effectiveResumePosition);
       }
       await session.play();
       return const AttemptResult.success();
@@ -113,17 +140,32 @@ final class NativePlaybackAdapter {
       if (identical(_activeSession, session)) {
         _activeSession = null;
         _activeCandidate = null;
+        _activeContentId = null;
       }
       return const AttemptResult.retry(ResolveFailureClass.network);
     }
   }
 
   Future<void> stop() async {
+    await _persistActivePosition();
     final session = _activeSession;
     _activeSession = null;
     _activeCandidate = null;
+    _activeContentId = null;
     if (session != null) {
       await session.dispose();
     }
+  }
+
+  Future<void> _persistActivePosition() async {
+    final store = _resumeStore;
+    final contentId = _activeContentId;
+    final session = _activeSession;
+    if (store == null || contentId == null || session == null) return;
+    await store.write(
+      contentId: contentId,
+      position: await session.position(),
+      updatedAt: DateTime.now().toUtc(),
+    );
   }
 }
