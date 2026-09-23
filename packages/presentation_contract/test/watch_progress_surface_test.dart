@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('projects history metadata without provider or storage fields', () {
-    const item = WatchProgressSurfaceItem(
+    final item = WatchProgressSurfaceItem(
       contentId: 'show-1',
       position: Duration(minutes: 12),
       duration: Duration(minutes: 48),
@@ -20,7 +20,7 @@ void main() {
   });
 
   test('clamps progress fraction to a UI-safe range', () {
-    const item = WatchProgressSurfaceItem(
+    final item = WatchProgressSurfaceItem(
       contentId: 'show-2',
       position: Duration(minutes: 60),
       duration: Duration(minutes: 48),
