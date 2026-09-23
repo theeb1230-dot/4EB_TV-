@@ -10,9 +10,9 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 - Verified job families for PR #99: `architecture`, `flutter-app-shell`, `flutter-local-data`, `flutter-native-player`, `flutter-presentation`, `presentation_contract`, `experience_contract`, `provider_sdk`, `resolver_engine`, `capability_kernel`, `tvmaze_provider`, `local_data_codec`, `local_data_memory`, `local_data_persistent`, `playback_orchestrator`, `core_domain`, `design_tokens`, `metadata_engine`, and `app_flow` all passed.
 - Merge result: PR #99 merged with exact merge SHA `8e38c56ef42ad7f9f86b9c6a4917502610e51f23`.
 - Governance refresh branch: `governance/refresh-main-truth`.
-- Exact governance branch head before this correction: `ccdc0b398fd50f4b426698f998912d9128e79102`.
+- Exact governance branch head after this correction: `fbfd91619e16a07a3b56c2111b7cf3350a4b64fb`.
 - Open PR at this run start: #100, the only active change.
-- Exact-head workflow evidence for #100 branch head: Audit hygiene run `415` = success; no Core contracts run was observed; combined commit status had no checks.
+- Exact-head workflow evidence for the earlier #100 branch head: Audit hygiene run `415` = success; no Core contracts run was observed; combined commit status had no checks.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
