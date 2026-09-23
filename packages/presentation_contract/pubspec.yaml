@@ -7,6 +7,8 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
+  core_domain:
+    path: ../core_domain
   design_tokens:
     path: ../design_tokens
 
