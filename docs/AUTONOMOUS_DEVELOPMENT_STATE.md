@@ -5,12 +5,13 @@ GitHub is the source of truth. This handoff never overrides newer repository sta
 ## Current source truth
 - Exact start `main` for this run: `815d428205d045003b3a097aa5d48b34b8be854e`.
 - Open PR: #98 `Player: wire runtime history and continue watching persistence`.
-- Initial PR head: `e0785fd8523e5963a5dc1a23bc6f7052e45f5178`.
-- Exact-head `Audit hygiene` run 400 = success.
-- Exact-head `Core contracts` run 263 = failure in `flutter-native-player` only because formatter changed `test/watch_progress_runtime_test.dart`.
-- Failure evidence: `dart format .` changed the first test declaration, then `git diff --exit-code` failed; analyze/test steps were skipped for that job. Other completed jobs and architecture checks passed.
-- Formatter repair commit on the same PR branch: `0fa02d09094a940eaba69381100900c27fcf3117`.
-- Current PR #98 head after repair: `0fa02d09094a940eaba69381100900c27fcf3117`.
+- Initial PR head inspected: `0e03e745e66ed84c6306177b5e95b1dca3e53050`.
+- Exact-head `Audit hygiene` run 402 = success.
+- Exact-head `Core contracts` run 265 = failure in `flutter-native-player` during `flutter analyze`.
+- Failure evidence: unused import of `playback_orchestrator` and a non-const `WatchProgress` constructor used with `const` in `test/watch_progress_runtime_test.dart`; formatter was already clean and all other completed jobs/architecture checks passed.
+- Same-branch repair commit: `57411f8fc1afacfe5586dc14064decccb14ea189`.
+- Repair changed only the failing test: removed the unused import and removed the invalid `const` constructor invocation without changing product behavior.
+- Current PR #98 head after repair: `57411f8fc1afacfe5586dc14064decccb14ea189`.
 - Exact-head workflows for the repaired head were not yet visible at the end of this run; PR remains open and not merged.
 - TVmaze remains discovery/metadata-only. No playback/download capability is inferred or added.
 - No Beta usable, Golden, or Production claim is made.
@@ -20,11 +21,11 @@ ZERO_COST core, ZERO_ADS/zero ad tracking, Privacy First/Zero-PII, Local-first, 
 
 ## Closed acceptance in this run
 1. PR #98 runtime wiring changes were inspected against the actual diff and logs.
-2. The formatter failure was fixed on the same PR branch without changing product behavior.
-3. The repaired branch preserves local-only watch metadata and provider/UI separation.
+2. The native player analyzer failure was fixed on the same PR branch without changing product behavior.
+3. The repaired test preserves local-only watch metadata and provider/UI separation.
 
 ## Open acceptance
-1. Exact-head CI for `0fa02d09094a940eaba69381100900c27fcf3117` must be green.
+1. Exact-head CI for `57411f8...` must be green.
 2. PR #98 must be mergeable and then merged with expected-head protection.
 3. Wire the merged History + Continue Watching contract into runtime/UI lifecycle with integration evidence.
 4. Prove authorized Search -> Details -> Episodes -> Resolve -> Native Play with provider-local provenance and canonical metadata/stream separation.
@@ -77,8 +78,8 @@ Stable/Beta update discovery, Developer Mode, privacy-safe diagnostics, performa
 
 ## What changed in this run
 - Re-read current main, PR state, exact-head workflow jobs, and failure logs.
-- Found a real formatter-only failure in `flutter-native-player` for PR #98.
-- Fixed the exact formatter drift on the same branch in commit `0fa02d09094a940eaba69381100900c27fcf3117`.
+- Found an analyzer-only failure in `flutter-native-player` for PR #98.
+- Fixed the unused import and invalid `const` constructor invocation on the same branch in commit `57411f8...`.
 - Updated this state document on the same branch; merge is intentionally pending until repaired-head CI is visible and green.
 
 ## What does not work / is not proven
@@ -88,7 +89,7 @@ Stable/Beta update discovery, Developer Mode, privacy-safe diagnostics, performa
 - Beta/Golden/Production are not usable claims.
 
 ## Next targets
-1. Verify exact-head CI for `0fa02d09094a940eaba69381100900c27fcf3117`.
+1. Verify exact-head CI for `57411f8...`.
 2. Fix any new failure on PR #98 only; merge only after green and mergeable.
 3. Re-read `main` after merge and refresh this document with the real merge SHA.
 4. Continue runtime/UI integration and lawful playback-path audit.
