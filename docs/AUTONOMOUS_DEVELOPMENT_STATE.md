@@ -4,11 +4,11 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 
 ## Current source truth
 - Exact `main` at run start: `885cf054e472897bbec491b7c6b2bda119ed709c`.
-- Open PRs at run start: none verified.
+- Open PRs at run start: PR #101 only.
 - Working branch: `presentation/watch-progress-collections`.
 - Product change commit: `1ffd7dc5de6882090ea23579d9f53f3811bda25c`.
-- State refresh commit: recorded by the current branch head.
-- Current branch head after state refresh: to be re-read from GitHub after this commit.
+- CI repair commit: `c187f16975da381b45a10e0fe788a7280749f7aa`.
+- Current branch head after CI repair: `c187f16975da381b45a10e0fe788a7280749f7aa`.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -23,10 +23,12 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 - Kept sorting newest-first by `updatedAt`.
 - Added tests for ordering, completion filtering, and defensive snapshots.
 - Exported the new contract through `presentation_contract`.
+- Fixed the observed `presentation_contract` CI failure by formatting the new test file to the repository's formatter output.
 
 ## Acceptance evidence
 - Code and tests are committed on the working branch.
-- Exact-head CI has not yet produced a run for the new head; no merge is claimed.
+- Core contracts run 275 failed only at `test (presentation_contract)` before the repair; architecture, local-data, and native-player jobs that completed were green, while dependent jobs were cancelled after the early failure.
+- A new exact-head run is required for `c187f16975da381b45a10e0fe788a7280749f7aa`; no merge is claimed yet.
 - No runtime/platform E2E evidence is claimed by this change.
 
 ## Open acceptance / blockers
@@ -55,7 +57,7 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Verify exact-head CI for the working branch and fix only observed failures.
+1. Verify exact-head CI for `c187f16975da381b45a10e0fe788a7280749f7aa` and fix only observed failures.
 2. Merge only after green required checks and `mergeable=true`.
 3. Re-read `main` after merge and refresh this file with the exact merge SHA.
 4. Wire the collection into real History and Continue Watching UI/runtime with integration evidence.
