@@ -4,15 +4,13 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 
 ## Current source truth
 - Exact `main` at run start: `0523d3d1a53f51564eb52e38c19a1748f28f8eb8`.
-- PR #99: `Presentation: expose History and Continue Watching surface contract`.
-- Exact PR head before merge: `d6eb9bf23df8de8368c16b2bb0056fe976c3c340`.
-- Exact-head CI for PR #99: Audit hygiene run `412` = success; Core contracts run `273` = success.
-- Verified job families for PR #99: `architecture`, `flutter-app-shell`, `flutter-local-data`, `flutter-native-player`, `flutter-presentation`, `presentation_contract`, `experience_contract`, `provider_sdk`, `resolver_engine`, `capability_kernel`, `tvmaze_provider`, `local_data_codec`, `local_data_memory`, `local_data_persistent`, `playback_orchestrator`, `core_domain`, `design_tokens`, `metadata_engine`, and `app_flow` all passed.
-- Merge result: PR #99 merged with exact merge SHA `8e38c56ef42ad7f9f86b9c6a4917502610e51f23`.
-- Governance refresh branch: `governance/refresh-main-truth`.
-- Exact governance branch head after this correction: `fbfd91619e16a07a3b56c2111b7cf3350a4b64fb`.
-- Open PR at this run start: #100, the only active change.
-- Exact-head workflow evidence for the earlier #100 branch head: Audit hygiene run `415` = success; no Core contracts run was observed; combined commit status had no checks.
+- PR #100: `Governance: refresh autonomous state to exact main truth`.
+- Exact PR head before merge: `0b1b425af0afac1e795666bd0fcd16b6334b57dc`.
+- Exact-head CI for PR #100: Audit hygiene run `417` = success; repository-hygiene job = success; no Core contracts workflow was observed for this docs-only change.
+- Merge result: PR #100 merged with exact merge SHA `82abcee5e16d6ff2bb24b6c433722ff48fe83ec3`.
+- Exact current `main` after merge: `82abcee5e16d6ff2bb24b6c433722ff48fe83ec3` before this state refresh.
+- State refresh commit after merge: recorded by this commit.
+- Open PRs after merge: none verified in the repository search.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -21,10 +19,11 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal WebView last fallback; no external-browser playback; no DRM/paywall bypass; no secrets; no paid-backend requirement; no GitHub/4BA media proxy; Metadata != Streams; Watch != Download; provider/UI separation; Arabic RTL default plus English/Turkish; Cinematic Gold dark-only V1.
 
 ## Closed this run
-- Re-read repository metadata, exact `main`, open PRs, branches, exact PR head, workflow runs, jobs, and status checks.
-- Confirmed `main` is `0523d3d1a53f51564eb52e38c19a1748f28f8eb8`.
-- Confirmed the previous state file was stale and incorrectly reported `8e38c56ef42ad7f9f86b9c6a4917502610e51f23` as current `main`.
-- Corrected the state file on the dedicated governance branch without changing product behavior.
+- Re-read repository metadata, exact `main`, branches, open PRs, exact PR head, workflow runs, jobs, and status checks.
+- Corrected the stale autonomous state on PR #100 without changing product behavior.
+- Verified Audit hygiene run `417` and repository-hygiene job success for the PR #100 head.
+- Merged PR #100 with expected-head protection.
+- Re-read `main` after merge and refreshed this state file to record the merge truth.
 
 ## Open acceptance / blockers
 ### P0
@@ -33,7 +32,6 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 3. Complete History + Continue Watching UI/runtime lifecycle around the merged presentation surface contract.
 4. Complete Native Player runtime evidence for buffering/error/retry, quality, audio/subtitles, local SRT/VTT, next/countdown, PiP, and Cast/AirPlay where supported.
 5. Produce and inspect same-SHA Android Mobile, Android TV, unsigned IPA where permitted, and Web artifacts plus device smoke.
-6. Complete exact-head CI for PR #100 and merge only after all required checks are green and the PR is mergeable.
 ### P1
 Downloads/offline; authorized Live/Sports/EPG; Experience Engine; local profile/recommendations/backup/sync.
 ### P2
@@ -53,9 +51,8 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Verify whether a Core contracts workflow can be produced for the PR #100 head; do not merge on Audit hygiene alone.
-2. After merge, wire the merged `WatchProgressSurfaceReader` into real History and Continue Watching UI/runtime with integration evidence.
-3. Continue lawful playback-path audit without inventing a provider or converting TVmaze into a stream provider.
-4. Add Native Player lifecycle coverage for buffering/error/retry and next/countdown.
-5. Build and inspect same-SHA platform artifacts and provenance.
-6. Recompute the four percentages from the next verified merged evidence only.
+1. Wire the merged `WatchProgressSurfaceReader` into real History and Continue Watching UI/runtime with integration evidence.
+2. Continue lawful playback-path audit without inventing a provider or converting TVmaze into a stream provider.
+3. Add Native Player lifecycle coverage for buffering/error/retry and next/countdown.
+4. Build and inspect same-SHA platform artifacts and provenance.
+5. Recompute the four percentages from the next verified merged evidence only.
