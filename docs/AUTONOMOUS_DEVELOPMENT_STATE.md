@@ -5,8 +5,11 @@ GitHub is the source of truth.
 ## Current source truth
 - Exact start main: `53e0b0935fc2db020601476e94484660929340d7`
 - PR #99: `Presentation: expose History and Continue Watching surface contract`
-- PR #99 exact head: `3fb187b8b285d6811acb90ecc88d536f64f6e8d4`
-- Exact-head workflow runs: not yet visible for the current head at this refresh.
+- Previous exact head: `069da41f94b5c5dcfd3f3b896154f2d89406ab06`
+- Current exact head after architecture repair: `418c46c080a8ffc25c4af258c9113a5e6a040622`
+- Core contracts run 270: failed only because architecture checker rejected `presentation_contract -> core_domain`.
+- Architecture repair removed the forbidden dependency and replaced domain/storage coupling with a presentation-side reader interface.
+- New exact-head workflow runs are not yet visible for `418c46c080a8ffc25c4af258c9113a5e6a040622` at this refresh.
 - PR #99 is open and not merged.
 - TVmaze is metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -15,11 +18,11 @@ GitHub is the source of truth.
 ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal WebView last fallback; no external-browser playback; no DRM/paywall bypass; no secrets; no paid-backend requirement; no GitHub/4BA media proxy; Metadata != Streams; Watch != Download; provider/UI separation; Arabic RTL default plus English/Turkish; Cinematic Gold dark-only V1.
 
 ## Closed this run
-- Added `WatchProgressSurfaceItem` as a presentation-safe projection of the local `WatchProgress` domain contract.
-- Added `WatchProgressSurfaceReader` over `WatchProgressStore`.
-- Added progress fraction clamping and completion semantics for UI consumers.
-- Added unit coverage for episode context, fraction calculation, clamping, and completion.
-- Kept provider streams, credentials, and storage implementation details out of the surface model.
+- Diagnosed the exact architecture failure from job logs.
+- Removed `core_domain` from `presentation_contract` dependencies.
+- Replaced the domain-coupled factory/reader with a platform-neutral projection and presentation-side reader interface.
+- Updated tests to construct the surface contract from primitives only.
+- Preserved provider streams, credentials, storage implementation details, and Zero-PII boundaries out of the surface model.
 
 ## Open acceptance / blockers
 ### P0
@@ -42,9 +45,9 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 These remain merged-evidence figures only. The current branch does not change them until CI passes and PR #99 is merged.
 
 ## What changed
-- Re-read current main, open PRs, and current repository structure.
-- Added a platform-neutral presentation boundary for local History/Continue Watching.
-- Added tests and updated this state file on the active PR branch.
+- Re-read current main, open PRs, exact-head workflows/jobs/logs, and repository structure.
+- Fixed the concrete architecture failure on the same PR branch.
+- Updated this state file with the exact repair SHA and current blockers.
 
 ## Next targets
 1. Read exact-head CI for PR #99 and fix only concrete failures on the same branch.
