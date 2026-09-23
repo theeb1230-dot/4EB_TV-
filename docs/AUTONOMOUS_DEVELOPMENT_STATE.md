@@ -8,7 +8,8 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 - Working branch: `presentation/watch-progress-collections`.
 - Product change commit: `1ffd7dc5de6882090ea23579d9f53f3811bda25c`.
 - CI repair commit: `c187f16975da381b45a10e0fe788a7280749f7aa`.
-- Current branch head after CI repair: `c187f16975da381b45a10e0fe788a7280749f7aa`.
+- Current branch head before this state refresh: `c187f16975da381b45a10e0fe788a7280749f7aa`.
+- State refresh commit: recorded by this file update.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -17,27 +18,29 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal WebView last fallback; no external-browser playback; no DRM/paywall bypass; no secrets; no paid-backend requirement; no GitHub/4BA media proxy; Metadata != Streams; Watch != Download; provider/UI separation; Arabic RTL default plus English/Turkish; Cinematic Gold dark-only V1.
 
 ## Closed this run
-- Re-read repository metadata, exact `main`, open PRs, and workflow presence.
+- Re-read repository metadata, exact `main`, open PRs, exact PR head, workflow runs, jobs, and status evidence.
 - Added a deterministic presentation collection for History and Continue Watching.
 - Kept completed items in History and excluded them from Continue Watching.
 - Kept sorting newest-first by `updatedAt`.
 - Added tests for ordering, completion filtering, and defensive snapshots.
 - Exported the new contract through `presentation_contract`.
-- Fixed the observed `presentation_contract` CI failure by formatting the new test file to the repository's formatter output.
+- Fixed the observed `presentation_contract` formatting failure on the same PR branch.
+- Confirmed the repaired head started fresh CI; Audit hygiene passed, while Core contracts failed in `flutter-app-shell` during `flutter test`.
 
 ## Acceptance evidence
 - Code and tests are committed on the working branch.
-- Core contracts run 275 failed only at `test (presentation_contract)` before the repair; architecture, local-data, and native-player jobs that completed were green, while dependent jobs were cancelled after the early failure.
-- A new exact-head run is required for `c187f16975da381b45a10e0fe788a7280749f7aa`; no merge is claimed yet.
+- Exact-head CI for `361311a53a72b35469b7623e59772b8462c6f1e9` produced Audit hygiene run `422` = success and Core contracts run `277` = failure.
+- Completed green jobs in Core contracts included architecture, flutter-local-data, and flutter-native-player; `flutter-app-shell` failed in its `flutter test` step. This is the next concrete blocker; no claim is made about the failure's root cause without the job log output.
 - No runtime/platform E2E evidence is claimed by this change.
 
 ## Open acceptance / blockers
 ### P0
-1. No authorized production playback path is proven.
-2. Prove `Search -> Details -> Episodes -> Resolve -> Native Play` with authorized data and provenance separation.
-3. Complete History + Continue Watching UI/runtime lifecycle around the merged presentation surface contract and this collection policy.
-4. Complete Native Player runtime evidence for buffering/error/retry, quality, audio/subtitles, local SRT/VTT, next/countdown, PiP, and Cast/AirPlay where supported.
-5. Produce and inspect same-SHA Android Mobile, Android TV, unsigned IPA where permitted, and Web artifacts plus device smoke.
+1. Fix the observed `flutter-app-shell` test failure on PR #101 only, using the actual job log rather than an unrelated or blind rerun.
+2. No authorized production playback path is proven.
+3. Prove `Search -> Details -> Episodes -> Resolve -> Native Play` with authorized data and provenance separation.
+4. Complete History + Continue Watching UI/runtime lifecycle around the merged presentation surface contract and this collection policy.
+5. Complete Native Player runtime evidence for buffering/error/retry, quality, audio/subtitles, local SRT/VTT, next/countdown, PiP, and Cast/AirPlay where supported.
+6. Produce and inspect same-SHA Android Mobile, Android TV, unsigned IPA where permitted, and Web artifacts plus device smoke.
 ### P1
 Downloads/offline; authorized Live/Sports/EPG; Experience Engine; local profile/recommendations/backup/sync.
 ### P2
@@ -57,11 +60,12 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Verify exact-head CI for `c187f16975da381b45a10e0fe788a7280749f7aa` and fix only observed failures.
-2. Merge only after green required checks and `mergeable=true`.
-3. Re-read `main` after merge and refresh this file with the exact merge SHA.
-4. Wire the collection into real History and Continue Watching UI/runtime with integration evidence.
-5. Continue lawful playback-path audit without inventing a provider or converting TVmaze into a stream provider.
-6. Add Native Player lifecycle coverage for buffering/error/retry and next/countdown.
-7. Build and inspect same-SHA platform artifacts and provenance.
-8. Recompute the four percentages from the next verified merged evidence only.
+1. Obtain and read the `flutter-app-shell` job log for run `277`; do not rerun blindly.
+2. Fix only the observed root cause on PR #101.
+3. Verify a fresh exact-head run is fully green and `mergeable=true`.
+4. Merge only after green required checks, then re-read `main` and refresh this file with the exact merge SHA.
+5. Wire the collection into real History and Continue Watching UI/runtime with integration evidence.
+6. Continue lawful playback-path audit without inventing a provider or converting TVmaze into a stream provider.
+7. Add Native Player lifecycle coverage for buffering/error/retry and next/countdown.
+8. Build and inspect same-SHA platform artifacts and provenance.
+9. Recompute the four percentages from the next verified merged evidence only.
