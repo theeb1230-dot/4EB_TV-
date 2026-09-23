@@ -44,12 +44,15 @@ final class NativePlaybackAdapter {
   NativePlaybackAdapter({
     NativeVideoSessionFactory? sessionFactory,
     ResumeCheckpointStore? resumeStore,
+    WatchProgressStore? watchProgressStore,
   })  : _sessionFactory =
             sessionFactory ?? ((uri) => VideoPlayerNativeSession(uri)),
-        _resumeStore = resumeStore;
+        _resumeStore = resumeStore,
+        _watchProgressStore = watchProgressStore;
 
   final NativeVideoSessionFactory _sessionFactory;
   final ResumeCheckpointStore? _resumeStore;
+  final WatchProgressStore? _watchProgressStore;
   NativeVideoSession? _activeSession;
   PlaybackCandidate? _activeCandidate;
   String? _activeContentId;
@@ -121,6 +124,11 @@ final class NativePlaybackAdapter {
       effectiveResumePosition =
           (await _resumeStore?.read(effectiveContentId))?.position ??
               Duration.zero;
+      if (effectiveResumePosition <= Duration.zero) {
+        effectiveResumePosition =
+            (await _watchProgressStore?.read(effectiveContentId))?.position ??
+                Duration.zero;
+      }
     }
 
     await stop();
@@ -158,14 +166,24 @@ final class NativePlaybackAdapter {
   }
 
   Future<void> _persistActivePosition() async {
-    final store = _resumeStore;
     final contentId = _activeContentId;
     final session = _activeSession;
-    if (store == null || contentId == null || session == null) return;
-    await store.write(
+    if (contentId == null || session == null) return;
+
+    final position = await session.position();
+    final updatedAt = DateTime.now().toUtc();
+    await _resumeStore?.write(
       contentId: contentId,
-      position: await session.position(),
-      updatedAt: DateTime.now().toUtc(),
+      position: position,
+      updatedAt: updatedAt,
+    );
+    await _watchProgressStore?.write(
+      WatchProgress(
+        contentId: contentId,
+        position: position,
+        duration: null,
+        updatedAt: updatedAt,
+      ),
     );
   }
 }
