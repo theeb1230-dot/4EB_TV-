@@ -7,3 +7,4 @@ export 'src/playback.dart';
 export 'src/resolver.dart';
 export 'src/resume_checkpoint.dart';
 export 'src/runtime_config.dart';
+export 'src/watch_progress.dart';
