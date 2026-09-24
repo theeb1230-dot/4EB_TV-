@@ -74,7 +74,9 @@ class _Section extends StatelessWidget {
           ...items.map(
             (item) => Card(
               child: ListTile(
-                key: ValueKey('watch-progress-item-$sectionKey-${item.contentId}'),
+                key: ValueKey(
+                  'watch-progress-item-$sectionKey-${item.contentId}',
+                ),
                 title: Text(item.contentId),
                 subtitle: Text(_subtitle(item)),
                 trailing: item.progressFraction == null
