@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:core_domain/core_domain.dart';
-import 'package:local_data_persistent/local_data_persistent.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 
 const _watchProgressKey = 'watch-progress-v1';
