@@ -1,5 +1,7 @@
 library local_data_flutter;
 
+export 'watch_progress_local_runtime.dart';
+
 import 'package:local_data_persistent/local_data_persistent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
