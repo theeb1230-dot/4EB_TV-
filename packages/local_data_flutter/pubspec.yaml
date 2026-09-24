@@ -12,12 +12,14 @@ flutter:
 dependencies:
   flutter:
     sdk: flutter
+  core_domain:
+    path: ../core_domain
   local_data_persistent:
     path: ../local_data_persistent
+  presentation_contract:
+    path: ../presentation_contract
   shared_preferences: ^2.5.3
 
 dev_dependencies:
-  core_domain:
-    path: ../core_domain
   flutter_test:
     sdk: flutter
