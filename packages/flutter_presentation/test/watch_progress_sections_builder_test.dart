@@ -36,6 +36,8 @@ void main() {
     ]);
     await tester.pump();
 
+    expect(find.byKey(const ValueKey('watch-progress-item-continue-watching-runtime-title')), findsOneWidget);
+    expect(find.byKey(const ValueKey('watch-progress-item-history-runtime-title')), findsOneWidget);
     expect(find.text('runtime-title'), findsNWidgets(2));
     expect(find.text('S1 E2 • 25%'), findsNWidgets(2));
 
