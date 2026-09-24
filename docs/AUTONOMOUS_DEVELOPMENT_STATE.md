@@ -4,11 +4,12 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 
 ## Current source truth
 - Exact `main` at run start: `d76e1948b7418f6b1578581fc19ba6f2373d1e4c`.
-- PR worked this run: pending creation from `presentation/watch-progress-integration`.
+- PR worked this run: `#103` (`Test: verify History and Continue Watching widget integration`).
 - Base for this slice: `d76e1948b7418f6b1578581fc19ba6f2373d1e4c`.
 - Product commit: `4852c5bbbc1e7f8101b7d64ddcb318366c1cffa0`.
+- CI-fix commit: `3d1fcaa952a9b1117456de263eef38c0f9a588bd`.
 - State refresh commit: pending.
-- Open PRs at run start: none verified.
+- Open PRs at run start: `#103` only.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -17,22 +18,25 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal WebView last fallback; no external-browser playback; no DRM/paywall bypass; no secrets; no paid-backend requirement; no GitHub/4BA media proxy; Metadata != Streams; Watch != Download; provider/UI separation; Arabic RTL default plus English/Turkish; Cinematic Gold dark-only V1.
 
 ## Work in this run
-- Re-read repository metadata, exact `main`, branches, open PRs, and current source files.
-- Added `packages/flutter_presentation/test/watch_progress_sections_test.dart`.
-- Added widget integration coverage for deterministic History and Continue Watching rendering.
-- Verified both completed and in-progress items render in the expected sections.
-- Verified progress labels, episode context, item tap forwarding, and independent empty states.
-- The test uses `WatchProgressSurfaceCollection` and `WatchProgressSections`; it does not couple UI to storage, provider SDKs, stream URLs, or credentials.
+- Re-read repository metadata, exact `main`, branches, open PRs, exact PR head, workflow runs, jobs, and logs.
+- Added `packages/flutter_presentation/test/watch_progress_sections_test.dart` for deterministic History and Continue Watching rendering.
+- Exact-head Core contracts run `284` failed only in `flutter-presentation` because `find.text('continue-title')` matched two rendered labels; the failure was at test line 43, not a product/runtime defect.
+- `flutter-app-shell`, `flutter-native-player`, `flutter-local-data`, architecture, design tokens, metadata, resolver, provider SDK, TVmaze, and other package jobs succeeded.
+- Audit hygiene run `431` succeeded.
+- Fixed the test on the same PR by asserting `findsNWidgets(2)` and tapping the keyed item finder.
+- No external-browser playback, proxy/relay, DRM/paywall bypass, or secrets introduced.
 
 ## Acceptance criteria
 - Completed items remain visible in History and are not treated as Continue Watching by the collection contract.
 - In-progress items render in Continue Watching with progress and episode context.
 - Tap callbacks receive the presentation-safe item only.
 - Empty History and Continue Watching states render independently.
-- No external-browser playback, proxy/relay, DRM/paywall bypass, or secrets introduced.
+- The integration test uses presentation-safe models and remains independent of storage, provider SDKs, stream URLs, and credentials.
 
 ## CI / artifacts
-- Exact-head CI for this new slice is pending PR creation and workflow execution.
+- Audit hygiene run `431`: success.
+- Core contracts run `284`: failure caused by duplicate text finder in the new test; fixed in commit `3d1fcaa952a9b1117456de263eef38c0f9a588bd`.
+- New exact-head CI for the fix is pending workflow execution.
 - No release artifact evidence exists for this slice.
 - Runtime/device E2E is not claimed by this test alone.
 
@@ -62,7 +66,7 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Run exact-head CI for this slice and repair failures from logs on the same PR only.
+1. Run exact-head CI for fix commit `3d1fcaa952a9b1117456de263eef38c0f9a588bd` and repair any further failures from logs on the same PR only.
 2. Merge only after exact-head CI is green and `mergeable=true`.
 3. Re-read `main` and refresh this document with the real merge SHA.
 4. Connect the widget to actual runtime data flow and add integration/device evidence.
