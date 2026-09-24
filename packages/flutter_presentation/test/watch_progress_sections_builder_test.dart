@@ -8,8 +8,9 @@ void main() {
     tester,
   ) async {
     final notifier = ValueNotifier<WatchProgressSurfaceCollection>(
-      WatchProgressSurfaceCollection(const []),
+      WatchProgressSurfaceCollection(<WatchProgressSurfaceItem>[]),
     );
+    addTearDown(notifier.dispose);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -48,7 +49,5 @@ void main() {
     );
     expect(find.text('runtime-title'), findsNWidgets(2));
     expect(find.text('S1 E2 • 25%'), findsNWidgets(2));
-
-    notifier.dispose();
   });
 }
