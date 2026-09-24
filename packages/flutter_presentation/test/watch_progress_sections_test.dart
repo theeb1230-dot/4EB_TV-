@@ -40,12 +40,12 @@ void main() {
 
     expect(find.text('Continue Watching'), findsOneWidget);
     expect(find.text('History'), findsOneWidget);
-    expect(find.text('continue-title'), findsOneWidget);
+    expect(find.text('continue-title'), findsNWidgets(2));
     expect(find.text('completed-title'), findsOneWidget);
     expect(find.text('S2 E3 • 30%'), findsOneWidget);
     expect(find.text('S1 E1 • 100%'), findsOneWidget);
 
-    await tester.tap(find.byKey(const ValueKey('continue-title')));
+    await tester.tap(find.byKey(const ValueKey('continue-title')).first);
     await tester.pump();
 
     expect(tapped?.contentId, 'continue-title');
