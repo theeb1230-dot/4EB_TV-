@@ -7,7 +7,8 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 - PR worked this run: `#103` (`Test: verify History and Continue Watching widget integration`).
 - Base for this slice: `d76e1948b7418f6b1578581fc19ba6f2373d1e4c`.
 - Product commit: `4852c5bbbc1e7f8101b7d64ddcb318366c1cffa0`.
-- CI-fix commit: `3d1fcaa952a9b1117456de263eef38c0f9a588bd`.
+- Previous CI-fix commit: `3d1fcaa952a9b1117456de263eef38c0f9a588bd`.
+- Latest test-fix commit: `debdf42a91978bb897c765edaabe1ead1ec75342`.
 - State refresh commit: pending.
 - Open PRs at run start: `#103` only.
 - Releases: none verified.
@@ -23,7 +24,8 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 - Exact-head Core contracts run `284` failed only in `flutter-presentation` because `find.text('continue-title')` matched two rendered labels; the failure was at test line 43, not a product/runtime defect.
 - `flutter-app-shell`, `flutter-native-player`, `flutter-local-data`, architecture, design tokens, metadata, resolver, provider SDK, TVmaze, and other package jobs succeeded.
 - Audit hygiene run `431` succeeded.
-- Fixed the test on the same PR by asserting `findsNWidgets(2)` and tapping the keyed item finder.
+- Fixed the first test issue on the same PR by asserting `findsNWidgets(2)` for the repeated content label and tapping the keyed item finder.
+- The next exact-head run exposed a second duplicate rendered progress label (`S2 E3 • 30%`); fixed that assertion on the same PR in `debdf42a91978bb897c765edaabe1ead1ec75342` by asserting `findsNWidgets(2)`.
 - No external-browser playback, proxy/relay, DRM/paywall bypass, or secrets introduced.
 
 ## Acceptance criteria
@@ -36,7 +38,7 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 ## CI / artifacts
 - Audit hygiene run `431`: success.
 - Core contracts run `284`: failure caused by duplicate text finder in the new test; fixed in commit `3d1fcaa952a9b1117456de263eef38c0f9a588bd`.
-- New exact-head CI for the fix is pending workflow execution.
+- The follow-up test fix is committed at `debdf42a91978bb897c765edaabe1ead1ec75342`; workflow execution for this exact head is pending.
 - No release artifact evidence exists for this slice.
 - Runtime/device E2E is not claimed by this test alone.
 
@@ -66,7 +68,7 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Run exact-head CI for fix commit `3d1fcaa952a9b1117456de263eef38c0f9a588bd` and repair any further failures from logs on the same PR only.
+1. Run exact-head CI for fix commit `debdf42a91978bb897c765edaabe1ead1ec75342` and repair any further failures from logs on the same PR only.
 2. Merge only after exact-head CI is green and `mergeable=true`.
 3. Re-read `main` and refresh this document with the real merge SHA.
 4. Connect the widget to actual runtime data flow and add integration/device evidence.
