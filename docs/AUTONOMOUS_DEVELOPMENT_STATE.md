@@ -4,9 +4,12 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 
 ## Current source truth
 - Exact `main` at run start: `8e7c84f6450674aa150988f3cbddf90093c8896c`.
-- PR worked this run: pending creation from `presentation/watch-progress-runtime-bridge`.
+- PR worked this run: `#104` (`presentation/watch-progress-runtime-bridge`).
 - Base for this slice: `8e7c84f6450674aa150988f3cbddf90093c8896c`.
-- Open PRs at run start: none verified.
+- PR head before repair: `9263ac2656b935f59c4218e6380fe6bbc401af6f`.
+- Repair commits pushed to the same PR branch: `d03cb9ddd9d44beaa938c78bb04f5ab76f161d75`, `23965d6325e1c0254f49524bb8fdad40a0c28999`.
+- Current branch head after repair: `23965d6325e1c0254f49524bb8fdad40a0c28999`.
+- Open PRs at run start: `#104` only.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -15,20 +18,23 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal WebView last fallback; no external-browser playback; no DRM/paywall bypass; no secrets; no paid-backend requirement; no GitHub/4BA media proxy; Metadata != Streams; Watch != Download; provider/UI separation; Arabic RTL default plus English/Turkish; Cinematic Gold dark-only V1.
 
 ## Work in this run
-- Re-read repository metadata, exact `main`, branches, open PRs, and current code.
-- Added `WatchProgressSectionsBuilder` as a presentation-safe bridge from a local `ValueListenable<WatchProgressSurfaceCollection>` into the existing History and Continue Watching widget.
-- Kept storage, provider SDKs, stream URLs, credentials, and backend dependencies outside the widget tree.
-- Added a Flutter widget test proving the sections rebuild when the local projection changes.
+- Re-read repository metadata, exact `main`, branches, open PRs, exact PR head, workflow runs/jobs, and changed code.
+- Diagnosed `flutter-app-shell` failure in Core contracts run 290: the widget test relied on duplicate text expectations while both sections render the same item.
+- Added stable section-scoped keys to the History and Continue Watching item tiles.
+- Updated the widget test to assert those stable keys while retaining duplicate-text coverage.
+- Pushed both repairs to PR #104; no competing PR was opened.
 - No external-browser playback, proxy/relay, DRM/paywall bypass, or secrets introduced.
 
 ## Acceptance criteria
 - A local presentation projection can update the widget without recreating the widget tree.
 - History and Continue Watching remain derived from `WatchProgressSurfaceCollection`.
 - The bridge exposes only presentation-safe models and remains independent of storage/provider implementations.
-- The rebuild behavior is covered by a widget test.
+- The widget test proves rebuild behavior and uses stable section-scoped item identity.
+- Exact-head CI must be rerun by GitHub for head `23965d6325e1c0254f49524bb8fdad40a0c28999`; no green claim is made yet.
 
 ## CI / artifacts
-- Exact-head CI is pending for the new branch/PR.
+- Previous exact-head evidence for `9263ac2656b935f59c4218e6380fe6bbc401af6f`: Audit hygiene run 438 succeeded; Core contracts run 290 failed only in `flutter-app-shell` test execution.
+- The repair head `23965d6325e1c0254f49524bb8fdad40a0c28999` is awaiting fresh exact-head workflow runs.
 - No release artifact evidence exists for this slice.
 - Runtime/device E2E is not claimed by this bridge alone.
 
@@ -39,6 +45,7 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 3. Connect the presentation bridge to a real runtime data source and verify lifecycle behavior on supported platforms.
 4. Complete Native Player runtime evidence and same-SHA platform artifacts plus device smoke.
 5. Build and inspect Android Mobile APK, Android TV APK, unsigned IPA where permitted, and Web artifact from one exact SHA.
+6. Obtain fresh exact-head CI for PR #104 and merge only when green and `mergeable=true`.
 ### P1
 Downloads/offline; authorized Live/Sports/EPG; Experience Engine; local profile/recommendations/backup/sync.
 ### P2
@@ -58,7 +65,7 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Run exact-head CI for this slice and repair failures from logs on the same PR only.
+1. Read fresh exact-head CI for head `23965d6325e1c0254f49524bb8fdad40a0c28999` and repair failures from logs on PR #104 only.
 2. Merge only after exact-head CI is green and `mergeable=true`.
 3. Re-read `main` and refresh this document with the real merge SHA.
 4. Connect the bridge to an actual runtime data source and add device evidence.
