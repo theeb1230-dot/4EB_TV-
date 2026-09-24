@@ -3,13 +3,12 @@
 GitHub is the source of truth. This file is refreshed after each verified merge.
 
 ## Current source truth
-- Exact `main` at run start: `8e7c84f6450674aa150988f3cbddf90093c8896c`.
-- PR worked this run: `#104` (`presentation/watch-progress-runtime-bridge`).
-- Base for this slice: `8e7c84f6450674aa150988f3cbddf90093c8896c`.
-- Exact PR head merged: `38355ee8e910e4edfb98e41306aa3642a4840108`.
-- Exact `main` after merge: `962a61d35ebc9cccf2712ba1ae6b960b82cf7df2`.
-- Merge method: squash merge with expected-head protection.
-- Open PRs after merge: none verified.
+- Exact `main` at run start: `57a14f4ea1af8d8a79befeb0eec6433148ac981f`.
+- No PR was open at run start.
+- Working branch: `core/watch-progress-runtime-controller`.
+- Base for this slice: `57a14f4ea1af8d8a79befeb0eec6433148ac981f`.
+- Current branch head before PR creation: `66062de51d8116a5df4a182bc858de43a1423ee3`.
+- Open PR after this run: pending creation; no merge is claimed.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -17,40 +16,42 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 ## Invariants
 ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal WebView last fallback; no external-browser playback; no DRM/paywall bypass; no secrets; no paid-backend requirement; no GitHub/4BA media proxy; Metadata != Streams; Watch != Download; provider/UI separation; Arabic RTL default plus English/Turkish; Cinematic Gold dark-only V1.
 
-## Work in this run
-- Re-read repository metadata, exact `main`, open PRs, exact PR head, workflow runs/jobs, changed files, and relevant code.
-- Confirmed exact-head Core contracts run `302` for head `38355ee8e910e4edfb98e41306aa3642a4840108` succeeded; Audit hygiene run `450` also succeeded.
-- Confirmed all observed Core contracts jobs succeeded, including `flutter-presentation`, `flutter-app-shell`, `flutter-local-data`, `flutter-native-player`, architecture, metadata, resolver, provider SDK, TVmaze provider, and playback orchestrator.
-- Merged PR #104 with expected-head protection; merge SHA `962a61d35ebc9cccf2712ba1ae6b960b82cf7df2`.
-- The merged slice adds a presentation/runtime bridge backed by a presentation-safe `ValueListenable<WatchProgressSurfaceCollection>`, section-scoped stable keys, and widget rebuild coverage for History and Continue Watching.
-- No competing PR was opened.
-- No external-browser playback, proxy/relay, DRM/paywall bypass, or secrets introduced.
-
-## Acceptance criteria closed
-- A local presentation projection can update the widget without recreating the widget tree.
-- History and Continue Watching remain derived from `WatchProgressSurfaceCollection`.
-- The bridge exposes only presentation-safe models and remains independent of storage/provider implementations.
-- The widget test proves rebuild behavior and uses stable section-scoped item identity.
-- Exact-head CI is green for the merged head: Audit hygiene `450`; Core contracts `302`.
-
-## CI / artifacts
-- Exact-head Audit hygiene run `450`: success.
-- Exact-head Core contracts run `302`: success.
-- No release artifact evidence exists for this slice.
-- Runtime/device E2E is not claimed by this bridge alone.
-- No Releases were verified.
-
-## Open acceptance / blockers
+## Blockers selected this run
 ### P0
-1. Prove an authorized production playback path; none is currently verified.
-2. Prove `Search -> Details -> Episodes -> Resolve -> Native Play` with authorized data and provenance separation.
-3. Connect the presentation bridge to a real runtime data source and verify lifecycle behavior on supported platforms.
-4. Complete Native Player runtime evidence and same-SHA platform artifacts plus device smoke.
-5. Build and inspect Android Mobile APK, Android TV APK, unsigned IPA where permitted, and Web artifact from one exact SHA.
+1. Connect the merged History + Continue Watching presentation bridge to a real local runtime source without provider/UI coupling.
+2. Prove the authorized Search -> Details -> Episodes -> Resolve -> Native Play path; none is currently verified.
+3. Build and inspect same-SHA Android Mobile, Android TV, unsigned IPA where permitted, and Web artifacts plus device smoke.
 ### P1
 Downloads/offline; authorized Live/Sports/EPG; Experience Engine; local profile/recommendations/backup/sync.
 ### P2
 Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessibility hardening; Golden gates; security/license/dependency audits.
+
+## Work in this run
+- Re-read repository metadata, exact `main`, branches, open PRs, current state documentation, and the presentation/runtime code.
+- Added `WatchProgressRuntimeController` in `packages/flutter_presentation/lib/src/watch_progress_runtime_controller.dart`.
+- The controller owns only `WatchProgressSurfaceCollection` projections and exposes a `ValueListenable` for the UI.
+- Added `replaceAll`, `upsert`, `remove`, `value`, and `dispose` lifecycle operations.
+- Exported the controller from `flutter_presentation.dart`.
+- Added focused tests for replacement, completed-item filtering through the existing contract, removal, and listenable notifications.
+- No provider SDK, stream URL, credential, proxy/relay, DRM/paywall bypass, or external-browser playback behavior was added.
+
+## Acceptance criteria
+### Closed on branch
+- Presentation can consume a local runtime controller without depending on storage or provider packages.
+- Upsert replaces the same `contentId` deterministically.
+- Remove updates the listenable projection and lifecycle can be disposed.
+- Tests cover the controller's core state transitions.
+### Open
+- Exact-head CI for the eventual PR head must be green.
+- PR must be mergeable and then merged with expected-head protection.
+- Runtime source must be wired from actual local persistence/composition, not just the controller.
+- Authorized playback E2E, platform artifacts, and device smoke remain unproven.
+
+## CI / artifacts
+- No new exact-head workflow result is available yet for this branch head.
+- No release artifact evidence exists for this slice.
+- Runtime/device E2E is not claimed by this controller alone.
+- No Releases were verified.
 
 ## Evidence-weighted progress (merged main only)
 - Overall Product Completion: **52.4%**
@@ -58,7 +59,7 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 - Verified Functional Completion: **56%**
 - Beta Readiness: **64%**
 
-These remain unchanged because this slice adds presentation/runtime integration evidence only; no authorized playback, device/platform, or release-artifact proof exists.
+These remain unchanged because this controller is branch-only and does not yet prove merged runtime/platform behavior.
 
 ## Overall weighting table
 Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 10%; Provider SDK/config 6%; Metadata 5%; Search/Resolver 6%; Native Player 10%; Experience/content UI 8%; Live/Sports 5%; Offline 5%; Profile/local features 3%; Android 4%; Android TV 4%; iOS 4%; Web/PWA 3%; Accessibility/updates 2%; Security/performance/tests 3%; CI/CD/releases 2%; Beta/Golden hardening 1%.
@@ -66,9 +67,10 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Connect the bridge to an actual runtime data source and add lifecycle/device evidence.
-2. Continue lawful playback-path audit without inventing a provider or turning TVmaze into a stream provider.
-3. Add Native Player lifecycle evidence: buffering, retry, source switching, resume, subtitle/audio handling, next episode, PiP, Cast/AirPlay where platform permits.
-4. Build and inspect same-SHA platform artifacts with provenance, manifests, signing state, and SHA256.
-5. Run device smoke for Android Mobile, Android TV, iOS, and Web/PWA.
-6. Recompute the four percentages from newly verified merged evidence only.
+1. Verify exact-head CI for the new PR.
+2. Fix any real failure from logs on the same PR only; do not rerun blindly.
+3. Merge only after green and mergeable with expected-head protection.
+4. Re-read `main` after merge and refresh this file with the real merge SHA.
+5. Wire the controller to actual local persistence/composition and add lifecycle evidence.
+6. Continue lawful playback-path audit without inventing a provider or turning TVmaze into a stream provider.
+7. Build and inspect same-SHA artifacts and collect Android Mobile, Android TV, iOS, and Web/PWA smoke evidence.
