@@ -22,7 +22,7 @@ final class WatchProgressLocalRuntime {
       _watchProgressKey,
     );
     if (encoded == null || encoded.isEmpty) {
-      return const WatchProgressSurfaceCollection(
+      return WatchProgressSurfaceCollection(
         <WatchProgressSurfaceItem>[],
       );
     }
@@ -30,7 +30,7 @@ final class WatchProgressLocalRuntime {
     try {
       final decoded = jsonDecode(encoded);
       if (decoded is! List<Object?>) {
-        return const WatchProgressSurfaceCollection(
+        return WatchProgressSurfaceCollection(
           <WatchProgressSurfaceItem>[],
         );
       }
@@ -38,7 +38,7 @@ final class WatchProgressLocalRuntime {
         decoded.whereType<Map<String, Object?>>().map(_decodeItem),
       );
     } on FormatException {
-      return const WatchProgressSurfaceCollection(
+      return WatchProgressSurfaceCollection(
         <WatchProgressSurfaceItem>[],
       );
     }
