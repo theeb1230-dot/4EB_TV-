@@ -6,9 +6,9 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 - Exact `main` at run start: `8e7c84f6450674aa150988f3cbddf90093c8896c`.
 - PR worked this run: `#104` (`presentation/watch-progress-runtime-bridge`).
 - Base for this slice: `8e7c84f6450674aa150988f3cbddf90093c8896c`.
-- PR head before this repair: `39cf2b7e96866d4b8dec58ce1ae979fc2a258e6e`.
-- CI-fix commit pushed this run: `a53d2054c97675b2aa8609979ada5b816e5d740f`.
-- Current branch head after this repair: `a53d2054c97675b2aa8609979ada5b816e5d740f`.
+- PR head before this repair: `00bf51c5127754456fcc0fa393ac7d0c28c8be23`.
+- CI-fix commit pushed this run: `dd06a422c98c24c0fa613a3b2dbcd6ec356197e2`.
+- Current branch head after this repair: `dd06a422c98c24c0fa613a3b2dbcd6ec356197e2`.
 - Open PRs at run start: `#104` only.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
@@ -19,8 +19,9 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 
 ## Work in this run
 - Re-read repository metadata, exact `main`, open PRs, exact PR head, workflow runs/jobs/logs, changed files, and relevant code.
-- Confirmed exact-head Core contracts run `298` for head `39cf2b7e96866d4b8dec58ce1ae979fc2a258e6e` failed because `ValueListenable` was not imported in `watch_progress_sections_builder.dart`; `flutter-app-shell` failed on the same compile error.
-- Repaired PR #104 only by adding `package:flutter/foundation.dart` for `ValueListenable`.
+- Confirmed exact-head Core contracts run `300` for head `00bf51c5127754456fcc0fa393ac7d0c28c8be23` failed only in `flutter-presentation` test: `Bad state: No element` at `watch_progress_sections_test.dart:48` because the test searched for `ValueKey('continue-title')` while the widget renders the stable key `watch-progress-item-continue-watching-continue-title`.
+- Confirmed `flutter analyze` passed, 11 tests passed and 1 failed; `flutter-app-shell` and all other package jobs were successful.
+- Repaired PR #104 only by changing the tap finder to the rendered stable key.
 - No competing PR was opened.
 - No external-browser playback, proxy/relay, DRM/paywall bypass, or secrets introduced.
 
@@ -29,11 +30,11 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 - History and Continue Watching remain derived from `WatchProgressSurfaceCollection`.
 - The bridge exposes only presentation-safe models and remains independent of storage/provider implementations.
 - The widget test proves rebuild behavior and uses stable section-scoped item identity.
-- Fresh exact-head CI must run for head `a53d2054c97675b2aa8609979ada5b816e5d740f`; no green claim is made yet.
+- Fresh exact-head CI must run for head `dd06a422c98c24c0fa613a3b2dbcd6ec356197e2`; no green claim is made yet.
 
 ## CI / artifacts
-- Exact-head run for `39cf2b7e96866d4b8dec58ce1ae979fc2a258e6e`: Audit hygiene run `446` succeeded; Core contracts run `298` failed in `flutter-presentation` analyze and `flutter-app-shell` test due to missing `ValueListenable` import. Other package jobs were successful.
-- Current repair head `a53d2054c97675b2aa8609979ada5b816e5d740f` is awaiting fresh exact-head workflow runs.
+- Exact-head run for `00bf51c5127754456fcc0fa393ac7d0c28c8be23`: Audit hygiene run `448` succeeded; Core contracts run `300` failed in `flutter-presentation` test due to the stale key finder. All other observed jobs were successful.
+- Current repair head `dd06a422c98c24c0fa613a3b2dbcd6ec356197e2` is awaiting fresh exact-head workflow runs.
 - No release artifact evidence exists for this slice.
 - Runtime/device E2E is not claimed by this bridge alone.
 
@@ -64,7 +65,7 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Read fresh exact-head CI for head `a53d2054c97675b2aa8609979ada5b816e5d740f` and repair failures from logs on PR #104 only.
+1. Read fresh exact-head CI for head `dd06a422c98c24c0fa613a3b2dbcd6ec356197e2` and repair failures from logs on PR #104 only.
 2. Merge only after exact-head CI is green and `mergeable=true`.
 3. Re-read `main` and refresh this document with the real merge SHA.
 4. Connect the bridge to an actual runtime data source and add device evidence.
