@@ -26,6 +26,7 @@ class WatchProgressSections extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         _Section(
+          sectionKey: 'continue-watching',
           title: 'Continue Watching',
           emptyLabel: emptyContinueWatchingLabel,
           items: continueWatching,
@@ -33,6 +34,7 @@ class WatchProgressSections extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         _Section(
+          sectionKey: 'history',
           title: 'History',
           emptyLabel: emptyHistoryLabel,
           items: history,
@@ -45,12 +47,14 @@ class WatchProgressSections extends StatelessWidget {
 
 class _Section extends StatelessWidget {
   const _Section({
+    required this.sectionKey,
     required this.title,
     required this.emptyLabel,
     required this.items,
     required this.onItemTap,
   });
 
+  final String sectionKey;
   final String title;
   final String emptyLabel;
   final List<WatchProgressSurfaceItem> items;
@@ -59,6 +63,7 @@ class _Section extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: ValueKey('watch-progress-section-$sectionKey'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: Theme.of(context).textTheme.titleLarge),
@@ -69,7 +74,9 @@ class _Section extends StatelessWidget {
           ...items.map(
             (item) => Card(
               child: ListTile(
-                key: ValueKey(item.contentId),
+                key: ValueKey(
+                  'watch-progress-item-$sectionKey-${item.contentId}',
+                ),
                 title: Text(item.contentId),
                 subtitle: Text(_subtitle(item)),
                 trailing: item.progressFraction == null
