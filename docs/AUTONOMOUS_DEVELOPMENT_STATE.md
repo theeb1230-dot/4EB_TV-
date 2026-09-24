@@ -7,8 +7,9 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 - Open PRs at run start: none verified.
 - Current branch: `core/watch-progress-local-runtime`.
 - Branch base: `eb23a46fa807a1e29bc8a7ae168d79bb46d1ef2e`.
-- Current branch head after implementation: `0ab6cf61f4c71681af5a1429935e7b3f1c45aa89`.
-- PR for this slice: not yet opened because exact-head CI has not run.
+- Current PR: `#106`.
+- Current PR head after latest fix: `23aaa5796da33b571680723ef66b339aaffcdd47`.
+- PR URL: https://github.com/theeb1230-dot/4EB_TV-/pull/106
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -36,6 +37,8 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 - Exported the adapter from `local_data_flutter.dart`.
 - Added direct dependencies on `core_domain` and `presentation_contract`.
 - Added focused tests for round-trip, invalid payload handling, and clear behavior.
+- Corrected invalid const collection construction before CI submission.
+- Opened PR #106 against `main`.
 - No provider SDK, stream URL, credential, proxy/relay, DRM/paywall bypass, external-browser playback, or secret was added.
 
 ## Acceptance criteria
@@ -45,12 +48,12 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 - Provider and stream concerns remain outside the adapter.
 - Round-trip, invalid-payload, and clear tests are authored.
 ### Open
-- Exact-head CI has not yet run for this branch.
+- Exact-head CI has not yet run for PR #106 head `23aaa5796da33b571680723ef66b339aaffcdd47`.
 - Runtime adapter is not yet merged or wired into the application composition root.
 - Authorized playback E2E, platform artifacts, and device smoke remain unproven.
 
 ## CI / artifacts
-- No exact-head workflow run exists yet for `0ab6cf61f4c71681af5a1429935e7b3f1c45aa89`.
+- No exact-head workflow run exists yet for `23aaa5796da33b571680723ef66b339aaffcdd47`.
 - No release artifact evidence exists for this slice.
 - No Releases were verified.
 - Runtime/device E2E is not claimed by this adapter alone.
@@ -61,7 +64,7 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 - Verified Functional Completion: **56%**
 - Beta Readiness: **64%**
 
-These remain unchanged because this branch-only slice is not merged and does not prove authorized playback, device/platform behavior, or release artifacts.
+These remain unchanged because this PR is not merged and does not prove authorized playback, device/platform behavior, or release artifacts.
 
 ## Overall weighting table
 Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 10%; Provider SDK/config 6%; Metadata 5%; Search/Resolver 6%; Native Player 10%; Experience/content UI 8%; Live/Sports 5%; Offline 5%; Profile/local features 3%; Android 4%; Android TV 4%; iOS 4%; Web/PWA 3%; Accessibility/updates 2%; Security/performance/tests 3%; CI/CD/releases 2%; Beta/Golden hardening 1%.
@@ -69,8 +72,8 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Open a PR from `core/watch-progress-local-runtime` only after validating the exact head and CI.
-2. Fix any failure from logs on that PR branch only, then merge only after exact-head CI is green and the PR is mergeable.
+1. Wait for fresh exact-head CI for PR #106.
+2. Fix any failure from logs on PR #106 branch only, then merge only after exact-head CI is green and the PR is mergeable.
 3. Wire the adapter into the actual application composition root after merge.
 4. Continue lawful playback-path audit without inventing a provider or turning TVmaze into a stream provider.
 5. Build and inspect same-SHA platform artifacts with provenance, manifests, signing state, and SHA256.
