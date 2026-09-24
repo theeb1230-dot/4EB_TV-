@@ -18,7 +18,13 @@ ALLOWED: dict[str, set[str]] = {
     "local_data_memory": {"core_domain"},
     "local_data_codec": {"core_domain"},
     "local_data_persistent": {"core_domain", "local_data_codec"},
-    "local_data_flutter": {"local_data_persistent"},
+    # Flutter is the local composition edge, so it may translate the
+    # persistence boundary into presentation-safe watch-progress models.
+    "local_data_flutter": {
+        "core_domain",
+        "local_data_persistent",
+        "presentation_contract",
+    },
     "playback_orchestrator": {"core_domain", "provider_sdk", "resolver_engine"},
     "app_flow": {"core_domain", "metadata_engine", "playback_orchestrator", "provider_sdk"},
     "native_player_flutter": {"core_domain", "playback_orchestrator"},
