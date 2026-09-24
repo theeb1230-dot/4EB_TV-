@@ -9,8 +9,10 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 - Product commit: `4852c5bbbc1e7f8101b7d64ddcb318366c1cffa0`.
 - Previous CI-fix commit: `3d1fcaa952a9b1117456de263eef38c0f9a588bd`.
 - Latest test-fix commit: `debdf42a91978bb897c765edaabe1ead1ec75342`.
-- State refresh commit: pending.
-- Open PRs at run start: `#103` only.
+- Exact PR #103 head before merge: `542b91c5a5a69111dd1f7b9e3ff588f0a3c42cfc`.
+- PR #103 merge SHA: `4a127717317cd85616eaa5f019adf9aa2d01b330`.
+- Current `main` after the state refresh commit: pending.
+- Open PRs at run start: `#103` only; no open PR verified after merge.
 - Releases: none verified.
 - TVmaze remains metadata/discovery only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -18,17 +20,15 @@ GitHub is the source of truth. This file is refreshed after each verified merge.
 ## Invariants
 ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal WebView last fallback; no external-browser playback; no DRM/paywall bypass; no secrets; no paid-backend requirement; no GitHub/4BA media proxy; Metadata != Streams; Watch != Download; provider/UI separation; Arabic RTL default plus English/Turkish; Cinematic Gold dark-only V1.
 
-## Work in this run
-- Re-read repository metadata, exact `main`, branches, open PRs, exact PR head, workflow runs, jobs, and logs.
-- Added `packages/flutter_presentation/test/watch_progress_sections_test.dart` for deterministic History and Continue Watching rendering.
-- Exact-head Core contracts run `284` failed only in `flutter-presentation` because `find.text('continue-title')` matched two rendered labels; the failure was at test line 43, not a product/runtime defect.
-- `flutter-app-shell`, `flutter-native-player`, `flutter-local-data`, architecture, design tokens, metadata, resolver, provider SDK, TVmaze, and other package jobs succeeded.
-- Audit hygiene run `431` succeeded.
-- Fixed the first test issue on the same PR by asserting `findsNWidgets(2)` for the repeated content label and tapping the keyed item finder.
-- The next exact-head run exposed a second duplicate rendered progress label (`S2 E3 • 30%`); fixed that assertion on the same PR in `debdf42a91978bb897c765edaabe1ead1ec75342` by asserting `findsNWidgets(2)`.
+## Closed this run
+- Re-read repository metadata, exact `main`, open PRs, exact PR head, workflow runs, jobs, and logs.
+- Continued work on PR #103 only.
+- Verified exact-head workflow runs for `542b91c5a5a69111dd1f7b9e3ff588f0a3c42cfc`: Audit hygiene run `435` succeeded; Core contracts run `288` succeeded.
+- Merged PR #103 with expected-head protection using squash merge; merge SHA `4a127717317cd85616eaa5f019adf9aa2d01b330`.
+- The merged slice adds deterministic Flutter widget integration coverage for History and Continue Watching, including progress labels, episode context, tap forwarding, and independent empty states.
 - No external-browser playback, proxy/relay, DRM/paywall bypass, or secrets introduced.
 
-## Acceptance criteria
+## Acceptance criteria closed
 - Completed items remain visible in History and are not treated as Continue Watching by the collection contract.
 - In-progress items render in Continue Watching with progress and episode context.
 - Tap callbacks receive the presentation-safe item only.
@@ -36,9 +36,8 @@ ZERO_COST core; ZERO_ADS; Zero-PII; local-first; native playback first; internal
 - The integration test uses presentation-safe models and remains independent of storage, provider SDKs, stream URLs, and credentials.
 
 ## CI / artifacts
-- Audit hygiene run `431`: success.
-- Core contracts run `284`: failure caused by duplicate text finder in the new test; fixed in commit `3d1fcaa952a9b1117456de263eef38c0f9a588bd`.
-- The follow-up test fix is committed at `debdf42a91978bb897c765edaabe1ead1ec75342`; workflow execution for this exact head is pending.
+- Audit hygiene run `435`: success.
+- Core contracts run `288`: success.
 - No release artifact evidence exists for this slice.
 - Runtime/device E2E is not claimed by this test alone.
 
@@ -60,7 +59,7 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 - Verified Functional Completion: **56%**
 - Beta Readiness: **64%**
 
-These remain unchanged because this slice is not merged and adds package-level integration evidence only; no authorized playback, device/platform, or release-artifact proof exists.
+These remain unchanged because this slice adds package-level integration evidence but no authorized playback, device/platform, or release-artifact proof exists.
 
 ## Overall weighting table
 Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 10%; Provider SDK/config 6%; Metadata 5%; Search/Resolver 6%; Native Player 10%; Experience/content UI 8%; Live/Sports 5%; Offline 5%; Profile/local features 3%; Android 4%; Android TV 4%; iOS 4%; Web/PWA 3%; Accessibility/updates 2%; Security/performance/tests 3%; CI/CD/releases 2%; Beta/Golden hardening 1%.
@@ -68,9 +67,10 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Run exact-head CI for fix commit `debdf42a91978bb897c765edaabe1ead1ec75342` and repair any further failures from logs on the same PR only.
-2. Merge only after exact-head CI is green and `mergeable=true`.
-3. Re-read `main` and refresh this document with the real merge SHA.
-4. Connect the widget to actual runtime data flow and add integration/device evidence.
-5. Continue lawful playback-path audit without inventing a provider or turning TVmaze into a stream provider.
-6. Recompute the four percentages from newly verified merged evidence only.
+1. Re-read `main` after the PR #103 merge and refresh this document with the real state-file commit SHA.
+2. Connect the widget to actual runtime data flow and add integration/device evidence.
+3. Continue lawful playback-path audit without inventing a provider or turning TVmaze into a stream provider.
+4. Add Native Player lifecycle evidence: buffering, retry, source switching, resume, subtitle/audio handling, next episode, PiP, Cast/AirPlay where platform permits.
+5. Build and inspect same-SHA platform artifacts with provenance, manifests, signing state, and SHA256.
+6. Run device smoke for Android Mobile, Android TV, iOS, and Web/PWA.
+7. Recompute the four percentages from newly verified merged evidence only.
