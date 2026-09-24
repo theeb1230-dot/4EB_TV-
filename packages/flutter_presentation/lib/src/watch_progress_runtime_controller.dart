@@ -7,7 +7,8 @@ import 'package:presentation_contract/presentation_contract.dart';
 /// does not know about providers, stream URLs, credentials, or persistence.
 final class WatchProgressRuntimeController {
   WatchProgressRuntimeController({
-    Iterable<WatchProgressSurfaceItem> initialItems = const <WatchProgressSurfaceItem>[],
+    Iterable<WatchProgressSurfaceItem> initialItems =
+        const <WatchProgressSurfaceItem>[],
   }) : _notifier = ValueNotifier<WatchProgressSurfaceCollection>(
           WatchProgressSurfaceCollection(initialItems),
         );
@@ -24,7 +25,8 @@ final class WatchProgressRuntimeController {
 
   void upsert(WatchProgressSurfaceItem item) {
     final items = <WatchProgressSurfaceItem>[
-      ...value.history.where((existing) => existing.contentId != item.contentId),
+      ...value.history
+          .where((existing) => existing.contentId != item.contentId),
       item,
     ];
     replaceAll(items);
