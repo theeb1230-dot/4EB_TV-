@@ -63,18 +63,15 @@ final class WatchProgressLocalRuntime {
     final positionMs = json['positionMs'];
     final durationMs = json['durationMs'];
     final updatedAt = json['updatedAt'];
-    if (contentId is! String ||
-        positionMs is! num ||
-        updatedAt is! String) {
+    if (contentId is! String || positionMs is! num || updatedAt is! String) {
       throw const FormatException('Invalid watch progress item');
     }
 
     return WatchProgressSurfaceItem(
       contentId: contentId,
       position: Duration(milliseconds: positionMs.toInt()),
-      duration: durationMs is num
-          ? Duration(milliseconds: durationMs.toInt())
-          : null,
+      duration:
+          durationMs is num ? Duration(milliseconds: durationMs.toInt()) : null,
       updatedAt: DateTime.parse(updatedAt).toUtc(),
       seasonNumber: (json['seasonNumber'] as num?)?.toInt(),
       episodeNumber: (json['episodeNumber'] as num?)?.toInt(),

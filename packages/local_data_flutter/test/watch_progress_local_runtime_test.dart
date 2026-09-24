@@ -35,18 +35,21 @@ void main() {
     expect(restored.history.single.episodeNumber, 2);
   });
 
-  test('invalid persisted payload fails closed to an empty collection', () async {
-    final backend = _MemoryBackend();
-    final store = PersistentLocalKeyValueStore(backend);
-    final runtime = WatchProgressLocalRuntime(store);
-    await store.write(
-      LocalDataScope.playbackProgress,
-      'watch-progress-v1',
-      '{"not":"a-list"}',
-    );
+  test(
+    'invalid persisted payload fails closed to an empty collection',
+    () async {
+      final backend = _MemoryBackend();
+      final store = PersistentLocalKeyValueStore(backend);
+      final runtime = WatchProgressLocalRuntime(store);
+      await store.write(
+        LocalDataScope.playbackProgress,
+        'watch-progress-v1',
+        '{"not":"a-list"}',
+      );
 
-    expect((await runtime.load()).history, isEmpty);
-  });
+      expect((await runtime.load()).history, isEmpty);
+    },
+  );
 
   test('clear removes the persisted projection', () async {
     final backend = _MemoryBackend();
