@@ -3,5 +3,6 @@ library flutter_presentation;
 export 'src/brand_mark.dart';
 export 'src/cinematic_shell.dart';
 export 'src/cinematic_splash.dart';
+export 'src/watch_progress_runtime_controller.dart';
 export 'src/watch_progress_sections.dart';
 export 'src/watch_progress_sections_builder.dart';
