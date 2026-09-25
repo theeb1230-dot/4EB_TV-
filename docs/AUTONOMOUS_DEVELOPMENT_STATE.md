@@ -7,8 +7,8 @@ GitHub is the source of truth. This file is refreshed after each verified run.
 - No open PR at run start.
 - New PR: `#107` (`core/watch-progress-composition-runtime`).
 - PR base SHA: `b8fd061d8e9724ed6c2a8d7c1e49f693f481a0e5`.
-- Current exact PR head: `d425f81b3a582fad73b3681dbb34d0feceef5524`.
-- PR is open and not merged; exact-head CI is still running.
+- Current exact PR head after remediation: `adcb727334773d1b26e803e30fdb6abe214f50a0`.
+- PR is open and not merged; exact-head CI is red on formatter drift in `flutter-local-data`.
 - Releases: none verified.
 - TVmaze remains metadata/discovery-only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -29,10 +29,10 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 
 ## Work completed in this run
 - Re-read repository metadata, exact `main`, open PR state, state docs, constitution, local-data code, and application entrypoint.
-- Created branch `core/watch-progress-composition-runtime` from exact `main`.
-- Added `WatchProgressCompositionRuntime` over `WatchProgressLocalRuntime` with idempotent `load`, durable `replace`, and durable/in-memory `clear`.
-- Exported the composition runtime from `local_data_flutter`.
-- Added lifecycle-focused tests for idempotent load, replace persistence, and clear behavior.
+- Read exact-head CI logs for PR `#107` rather than rerunning blindly.
+- Confirmed `Audit hygiene` run `470` passed.
+- Confirmed `Core contracts` run `319` failed only in `flutter-local-data` because `dart format .` changed `test/watch_progress_composition_runtime_test.dart` and the workflow then detected a dirty diff.
+- Applied the formatter output exactly to `packages/local_data_flutter/test/watch_progress_composition_runtime_test.dart` on the same PR branch.
 - No provider SDK, stream URL, credential, proxy/relay, DRM/paywall bypass, external-browser playback, or secret was added.
 
 ## Acceptance criteria
@@ -42,14 +42,16 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 - `clear` resets memory and durable state.
 - Tests cover reload from the same backend and clear semantics.
 - Architecture boundary remains provider/UI and metadata/stream safe.
+- Formatter drift from the exact-head CI log was applied on the same PR branch.
 ### Open
-- Exact-head CI for `d425f81b3a582fad73b3681dbb34d0feceef5524` is not complete yet.
+- Fresh exact-head CI for `adcb727334773d1b26e803e30fdb6abe214f50a0` has not appeared yet.
 - The app shell does not yet consume this runtime; integration and lifecycle/device evidence remain open.
 - Authorized playback E2E, platform artifacts, and device smoke remain unproven.
 
 ## CI / artifacts
-- Audit hygiene run `469`: repository-hygiene job passed; workflow still in progress at snapshot time.
-- Core contracts run `318`: in progress at snapshot time; architecture job passed while Flutter/Dart test jobs were still running.
+- Audit hygiene run `470`: success.
+- Core contracts run `319`: failure in `flutter-local-data` at formatter-diff gate; all other visible jobs passed.
+- Remediation commit: `adcb727334773d1b26e803e30fdb6abe214f50a0`.
 - No release artifact evidence exists for this slice.
 - No Releases were verified.
 
@@ -67,7 +69,7 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Read fresh exact-head CI for PR #107 and repair only failures from logs on that PR.
+1. Read fresh exact-head CI for PR #107 at `adcb727334773d1b26e803e30fdb6abe214f50a0` and repair only failures from logs on that PR.
 2. Merge PR #107 only with green exact-head CI and `mergeable=true` using expected-head protection.
 3. Re-read `main` after merge and refresh this file with the real merge SHA.
 4. Wire `WatchProgressCompositionRuntime` into the app shell and add lifecycle/runtime evidence.
