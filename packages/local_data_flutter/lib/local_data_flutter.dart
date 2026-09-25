@@ -1,5 +1,6 @@
 library local_data_flutter;
 
+export 'watch_progress_composition_runtime.dart';
 export 'watch_progress_local_runtime.dart';
 
 import 'package:local_data_persistent/local_data_persistent.dart';
