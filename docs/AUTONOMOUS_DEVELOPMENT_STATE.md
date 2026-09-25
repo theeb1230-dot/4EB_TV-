@@ -7,8 +7,8 @@ GitHub is the source of truth. This file is refreshed after each verified run.
 - No open PR at run start.
 - New PR: `#107` (`core/watch-progress-composition-runtime`).
 - PR base SHA: `b8fd061d8e9724ed6c2a8d7c1e49f693f481a0e5`.
-- Current exact PR head after remediation: `adcb727334773d1b26e803e30fdb6abe214f50a0`.
-- PR is open and not merged; exact-head CI is red on formatter drift in `flutter-local-data`.
+- Current exact PR head after formatter remediation: `8b50b8fb92645c5873ce0f21e4548a9c08698f0c`.
+- PR is open and not merged; fresh exact-head CI for the remediation head has not appeared yet.
 - Releases: none verified.
 - TVmaze remains metadata/discovery-only, never playback.
 - No Beta usable, Golden, or Production claim.
@@ -28,11 +28,12 @@ Downloads/offline; authorized Live/Sports/EPG; Experience Engine; local profile/
 Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessibility hardening; Golden gates; security/license/dependency audits.
 
 ## Work completed in this run
-- Re-read repository metadata, exact `main`, open PR state, state docs, constitution, local-data code, and application entrypoint.
-- Read exact-head CI logs for PR `#107` rather than rerunning blindly.
+- Re-read repository metadata, exact `main`, open PR state, state docs, constitution, MASTER_ARCHITECTURE, local-data code, and the application entrypoint.
+- Read exact-head CI jobs and logs for PR `#107` rather than rerunning blindly.
 - Confirmed `Audit hygiene` run `470` passed.
 - Confirmed `Core contracts` run `319` failed only in `flutter-local-data` because `dart format .` changed `test/watch_progress_composition_runtime_test.dart` and the workflow then detected a dirty diff.
-- Applied the formatter output exactly to `packages/local_data_flutter/test/watch_progress_composition_runtime_test.dart` on the same PR branch.
+- Applied the formatter output exactly on the same PR branch.
+- Remediation commit: `8b50b8fb92645c5873ce0f21e4548a9c08698f0c`.
 - No provider SDK, stream URL, credential, proxy/relay, DRM/paywall bypass, external-browser playback, or secret was added.
 
 ## Acceptance criteria
@@ -44,14 +45,14 @@ Update discovery; Developer Mode; privacy-safe diagnostics; performance/accessib
 - Architecture boundary remains provider/UI and metadata/stream safe.
 - Formatter drift from the exact-head CI log was applied on the same PR branch.
 ### Open
-- Fresh exact-head CI for `adcb727334773d1b26e803e30fdb6abe214f50a0` has not appeared yet.
+- Fresh exact-head CI for `8b50b8fb92645c5873ce0f21e4548a9c08698f0c` has not appeared yet.
 - The app shell does not yet consume this runtime; integration and lifecycle/device evidence remain open.
 - Authorized playback E2E, platform artifacts, and device smoke remain unproven.
 
 ## CI / artifacts
 - Audit hygiene run `470`: success.
 - Core contracts run `319`: failure in `flutter-local-data` at formatter-diff gate; all other visible jobs passed.
-- Remediation commit: `adcb727334773d1b26e803e30fdb6abe214f50a0`.
+- Remediation commit: `8b50b8fb92645c5873ce0f21e4548a9c08698f0c`.
 - No release artifact evidence exists for this slice.
 - No Releases were verified.
 
@@ -69,7 +70,7 @@ Governance/source audit 10%; Architecture/workspace 7%; Design System 6%; Core 1
 Scoring ceiling per area: docs <=20%; skeleton/contracts <=35%; unit-tested implementation without integration <=60%; integration-tested without runtime/platform evidence <=80%; 100% only with full acceptance criteria and suitable evidence. No double counting and no upward rounding.
 
 ## Next targets
-1. Read fresh exact-head CI for PR #107 at `adcb727334773d1b26e803e30fdb6abe214f50a0` and repair only failures from logs on that PR.
+1. Read fresh exact-head CI for PR #107 at `8b50b8fb92645c5873ce0f21e4548a9c08698f0c` and repair only failures from logs on that PR.
 2. Merge PR #107 only with green exact-head CI and `mergeable=true` using expected-head protection.
 3. Re-read `main` after merge and refresh this file with the real merge SHA.
 4. Wire `WatchProgressCompositionRuntime` into the app shell and add lifecycle/runtime evidence.
