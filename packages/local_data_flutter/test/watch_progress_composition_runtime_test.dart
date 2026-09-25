@@ -4,31 +4,35 @@ import 'package:local_data_persistent/local_data_persistent.dart';
 import 'package:presentation_contract/presentation_contract.dart';
 
 void main() {
-  test('load is idempotent and replace persists the current projection',
-      () async {
-    final backend = _MemoryBackend();
-    final runtime = WatchProgressCompositionRuntime(
-      PersistentLocalKeyValueStore(backend),
-    );
-    final item = WatchProgressSurfaceItem(
-      contentId: 'episode-1',
-      position: const Duration(seconds: 12),
-      duration: const Duration(minutes: 1),
-      updatedAt: DateTime.utc(2026, 9, 25),
-    );
-    final collection =
-        WatchProgressSurfaceCollection(<WatchProgressSurfaceItem>[item]);
+  test(
+    'load is idempotent and replace persists the current projection',
+    () async {
+      final backend = _MemoryBackend();
+      final runtime = WatchProgressCompositionRuntime(
+        PersistentLocalKeyValueStore(backend),
+      );
+      final item = WatchProgressSurfaceItem(
+        contentId: 'episode-1',
+        position: const Duration(seconds: 12),
+        duration: const Duration(minutes: 1),
+        updatedAt: DateTime.utc(2026, 9, 25),
+      );
+      final collection =
+          WatchProgressSurfaceCollection(<WatchProgressSurfaceItem>[item]);
 
-    expect((await runtime.load()).history, isEmpty);
-    await runtime.replace(collection);
-    expect(runtime.current.history.single.contentId, 'episode-1');
+      expect((await runtime.load()).history, isEmpty);
+      await runtime.replace(collection);
+      expect(runtime.current.history.single.contentId, 'episode-1');
 
-    final reloaded = WatchProgressCompositionRuntime(
-      PersistentLocalKeyValueStore(backend),
-    );
-    expect((await reloaded.load()).history.single.position,
-        const Duration(seconds: 12));
-  });
+      final reloaded = WatchProgressCompositionRuntime(
+        PersistentLocalKeyValueStore(backend),
+      );
+      expect(
+        (await reloaded.load()).history.single.position,
+        const Duration(seconds: 12),
+      );
+    },
+  );
 
   test('clear resets the in-memory projection and durable state', () async {
     final backend = _MemoryBackend();
